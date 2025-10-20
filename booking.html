@@ -261,7 +261,9 @@ footer {
     </div>
 
     <div class="form-group">
-      <input type="time" id="appointmentTime" name="appointmentTime" required>
+      <select id="appointmentTime" name="appointmentTime" required>
+        <!-- options populated with JS -->
+      </select>
       <div class="error-message"></div>
     </div>
 
@@ -281,68 +283,78 @@ footer {
 <script>
 const form = document.getElementById('bookingForm');
 const dateInput = document.getElementById('appointmentDate');
-const timeInput = document.getElementById('appointmentTime');
+const timeSelect = document.getElementById('appointmentTime');
 
-// Date restrictions
 const today = new Date();
 const yyyy = today.getFullYear();
-const mm = String(today.getMonth() + 1).padStart(2,'0');
+const mm = String(today.getMonth()+1).padStart(2,'0');
 const dd = String(today.getDate()).padStart(2,'0');
 const todayStr = `${yyyy}-${mm}-${dd}`;
-const nextMonth = new Date(today.getTime() + 30*24*60*60*1000);
-const nextMonthStr = `${nextMonth.getFullYear()}-${String(nextMonth.getMonth()+1).padStart(2,'0')}-${String(nextMonth.getDate()).padStart(2,'0')}`;
+const maxDate = new Date(today.getTime() + 30*24*60*60*1000);
+const maxDateStr = `${maxDate.getFullYear()}-${String(maxDate.getMonth()+1).padStart(2,'0')}-${String(maxDate.getDate()).padStart(2,'0')}`;
 
 dateInput.min = todayStr;
-dateInput.max = nextMonthStr;
+dateInput.max = maxDateStr;
 
-// Adjust time if today selected
-dateInput.addEventListener('change', () => {
+// Populate time options
+function populateTimes() {
   const selectedDate = new Date(dateInput.value);
   const now = new Date();
-  if (selectedDate.toDateString() === now.toDateString()) {
-    const minHour = now.getHours() + 6;
-    const minTime = minHour > 23 ? "23:59" : `${String(minHour).padStart(2,'0')}:00`;
-    timeInput.min = minTime;
-  } else {
-    timeInput.min = "09:00";
+  const options = [];
+  for (let hour = 9; hour <= 18; hour++) {
+    let disabled = false;
+    if (selectedDate.toDateString() === now.toDateString()) {
+      if (hour <= now.getHours() + 5) { // 6-hour rule
+        disabled = true;
+      }
+    }
+    const display = `${hour.toString().padStart(2,'0')}:00`;
+    options.push(`<option value="${display}" ${disabled?'disabled':''}>${display}</option>`);
   }
-  timeInput.value = "";
-});
+  timeSelect.innerHTML = options.join('');
+}
 
-// Form validation & submission
+dateInput.addEventListener('change', populateTimes);
+window.addEventListener('load', populateTimes);
+
+// Form validation
 form.addEventListener('submit', function(e){
   e.preventDefault();
   let valid = true;
-  form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+  form.querySelectorAll('.error-message').forEach(el=>el.textContent='');
 
   const email = form.email.value.trim();
   const service = form.service.value;
+  const appointmentDateVal = dateInput.value;
+  const appointmentTimeVal = timeSelect.value;
 
-  if (!email) {
-    form.email.nextElementSibling.textContent = 'Please enter your email so we can contact you.';
-    valid = false;
-  }
-  if (!service) {
-    form.service.nextElementSibling.textContent = 'Please select a service.';
-    valid = false;
-  }
+  const selectedDate = new Date(appointmentDateVal);
+  const now = new Date();
+  const maxDateCheck = new Date();
+  maxDateCheck.setDate(now.getDate() + 30);
+
+  if(!email){ form.email.nextElementSibling.textContent='Please enter your email.'; valid=false; }
+  if(!service){ form.service.nextElementSibling.textContent='Please select a service.'; valid=false; }
+  if(!appointmentDateVal){ dateInput.nextElementSibling.textContent='Please select a date.'; valid=false; }
+  if(selectedDate > maxDateCheck){ dateInput.nextElementSibling.textContent='Please select a date within 30 days.'; valid=false; }
+  if(!appointmentTimeVal){ timeSelect.nextElementSibling.textContent='Please select a time.'; valid=false; }
 
   if(valid){
     const formData = new FormData(form);
-    fetch(form.action, {
+    fetch(form.action,{
       method:'POST',
       body: formData,
       headers:{'Accept':'application/json'}
     })
-    .then(response => {
+    .then(response=>{
       if(response.ok){
-        alert('Your booking request has been sent! We will contact you to confirm date and time.');
+        alert('Booking request sent! We will contact you to confirm date and time.');
         form.reset();
-      } else {
+        populateTimes(); // refresh time options
+      }else{
         alert('Oops! There was a problem submitting your form.');
       }
-    })
-    .catch(()=> alert('Oops! There was a problem submitting your form.'));
+    }).catch(()=>alert('Oops! There was a problem submitting your form.'));
   }
 });
 </script>
