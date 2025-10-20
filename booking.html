@@ -114,12 +114,20 @@
       font-size: 2.5rem;
       margin-bottom: 1rem;
       color: #111;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.5s;
     }
 
     main p {
       font-size: 1.1rem;
       margin-bottom: 2rem;
       color: #333;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1s;
     }
 
     form {
@@ -127,6 +135,10 @@
       flex-direction: column;
       gap: 1.5rem;
       text-align: left;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1.5s;
     }
 
     input, textarea, select {
@@ -155,11 +167,17 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
       align-self: center;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 2s;
     }
 
     button:hover {
       background-color: #8c703b;
     }
+
+    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
     footer {
       text-align: center;
@@ -181,9 +199,9 @@
       <nav>
         <ul>
           <li>
-            <a href="index.html">Home ▾</a>
+            <a href="booking.html">Booking ▾</a>
             <ul>
-              <li><a href="booking.html">Booking</a></li>
+              <li><a href="index.html">Home</a></li>
               <li><a href="#">Pricing</a></li>
             </ul>
           </li>
@@ -198,8 +216,6 @@
     <form action="#" method="POST"> <!-- Replace # with Formspree URL later -->
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Email Address" required>
-      <input type="date" name="date" required>
-      <input type="time" name="time" required>
       <select name="service" required>
         <option value="">Select Service</option>
         <option value="classic">Classic Manicure</option>
@@ -214,5 +230,8 @@
   <footer>
     <p>© 2025 erin’s elegance. all rights reserved.</p>
   </footer>
+</body>
+</html>
+
 </body>
 </html>
