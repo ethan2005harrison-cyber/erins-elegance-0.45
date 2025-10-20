@@ -74,7 +74,7 @@
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 100%; /* right below parent */
+      top: 100%;
       right: 0;
       background: #f4f6f2;
       border-radius: 8px;
@@ -174,45 +174,6 @@
     .info-box:nth-child(2) { opacity: 0.9; animation-delay: 1s; }
     .info-box:nth-child(3) { opacity: 0.8; animation-delay: 1.5s; }
 
-    /* Pricing section */
-    .pricing-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 4rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-      gap: 2rem;
-    }
-
-    .pricing-box {
-      background: rgba(255,255,255,0.8);
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 1s ease forwards;
-    }
-
-    .pricing-box:nth-child(1) { animation-delay: 0.5s; }
-    .pricing-box:nth-child(2) { animation-delay: 1s; }
-    .pricing-box:nth-child(3) { animation-delay: 1.5s; }
-
-    .pricing-box h3 {
-      margin-top: 0;
-      color: #111;
-      font-weight: 600;
-    }
-
-    .pricing-box p {
-      margin: 0.5rem 0 0;
-      color: #333;
-    }
-
     @keyframes fadeIn { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
     @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
@@ -227,8 +188,6 @@
     @media (max-width: 768px) {
       .header-container { padding: 1.2rem 1.5rem; }
       .hero h1 { font-size: 2.3rem; }
-      .pricing-section { gap: 1.5rem; }
-      nav ul li ul { right: auto; left: 0; min-width: 100px; } /* mobile tweak */
     }
   </style>
 </head>
@@ -258,23 +217,8 @@
 
   <section class="info-section">
     <div class="info-box"><p>Tired of polish that chips before the week is out?</p></div>
-    <div class="info-box"><p>Great nails aren’t just maintenance — they’re a little piece of who you are.</p></div>
+    <div class="info-box"><p>Great nails aren’t just maintenance, they’re a little piece of who you are.</p></div>
     <div class="info-box"><p>erin’s elegance helps you show off your personality, effortlessly.</p></div>
-  </section>
-
-  <section class="pricing-section">
-    <div class="pricing-box">
-      <h3>Classic Manicure</h3>
-      <p>£15</p>
-    </div>
-    <div class="pricing-box">
-      <h3>Gel & Shellac</h3>
-      <p>£25</p>
-    </div>
-    <div class="pricing-box">
-      <h3>Pedicure</h3>
-      <p>£20</p>
-    </div>
   </section>
 
   <footer>
@@ -282,3 +226,4 @@
   </footer>
 </body>
 </html>
+
