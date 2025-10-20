@@ -9,11 +9,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
 body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #D8E3DC;
-  color: #222;
-  overflow-x: hidden;
+  margin:0;
+  font-family:'Open Sans',sans-serif;
+  background-color:#D8E3DC;
+  color:#222;
+  overflow-x:hidden;
 }
 
 header {
@@ -26,184 +26,184 @@ header {
 }
 
 .header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.2rem 2rem;
 }
 
 .logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  color: #111;
-  font-weight: 600;
+  font-family:'Playfair Display', serif;
+  font-size:1.5rem;
+  color:#111;
+  font-weight:600;
 }
 
 nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 1.5rem;
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:1.5rem;
 }
 
 nav ul li {
-  position: relative;
-  display: inline-block;
+  position:relative;
+  display:inline-block;
 }
 
 nav ul li a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-  font-family: 'Open Sans', sans-serif;
+  text-decoration:none;
+  color:#111;
+  font-weight:500;
+  font-family:'Open Sans',sans-serif;
 }
 
 nav ul li a:hover {
-  color: #a18449;
+  color:#a18449;
 }
 
 nav ul li ul {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: #f4f6f2;
-  border-radius: 8px;
-  min-width: 150px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  padding: 0.5rem 0;
-  opacity: 0;
-  transform: translateY(-20px);
-  pointer-events: none;
-  transition: all 0.3s ease;
+  display:flex;
+  flex-direction:column;
+  position:absolute;
+  top:100%;
+  right:0;
+  background:#f4f6f2;
+  border-radius:8px;
+  min-width:150px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+  padding:0.5rem 0;
+  opacity:0;
+  transform:translateY(-20px);
+  pointer-events:none;
+  transition:all 0.3s ease;
 }
 
 nav ul li:hover ul {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
 }
 
 nav ul li ul li a {
-  color: #333;
-  display: block;
-  transition: background-color 0.3s, color 0.3s;
-  font-family: 'Playfair Display', serif;
-  padding: 0.5rem 1rem;
+  color:#333;
+  display:block;
+  transition:background-color 0.3s,color 0.3s;
+  font-family:'Playfair Display', serif;
+  padding:0.5rem 1rem;
 }
 
 nav ul li ul li a:hover {
-  color: #fff;
-  background-color: #a18449;
-  border-radius: 5px;
+  color:#fff;
+  background-color:#a18449;
+  border-radius:5px;
 }
 
 main {
-  max-width: 600px;
-  margin: 12rem auto 4rem;
-  padding: 0 2rem;
-  text-align: center;
+  max-width:600px;
+  margin:12rem auto 4rem;
+  padding:0 2rem;
+  text-align:center;
 }
 
 main h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #111;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-  animation-delay: 0.5s;
+  font-family:'Playfair Display', serif;
+  font-size:2.5rem;
+  margin-bottom:1rem;
+  color:#111;
+  opacity:0;
+  transform:translateY(-20px);
+  animation:fadeUp 1s forwards;
+  animation-delay:0.5s;
 }
 
 main p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: #333;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-  animation-delay: 1s;
+  font-size:1.1rem;
+  margin-bottom:2rem;
+  color:#333;
+  opacity:0;
+  transform:translateY(-20px);
+  animation:fadeUp 1s forwards;
+  animation-delay:1s;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  text-align: left;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-  animation-delay: 1.5s;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+  text-align:left;
+  opacity:0;
+  transform:translateY(-20px);
+  animation:fadeUp 1s forwards;
+  animation-delay:1.5s;
 }
 
 .form-group {
-  position: relative;
+  position:relative;
 }
 
 input, textarea, select {
-  padding: 0.8rem 1rem;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  font-family: 'Open Sans', sans-serif;
-  width: 100%;
-  box-sizing: border-box;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  cursor: pointer;
+  padding:0.8rem 1rem;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-size:1rem;
+  font-family:'Open Sans',sans-serif;
+  width:100%;
+  box-sizing:border-box;
+  transition:border-color 0.3s, box-shadow 0.3s;
+  cursor:pointer;
 }
 
 input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: #a18449;
-  box-shadow: 0 0 8px rgba(161,132,73,0.4);
+  outline:none;
+  border-color:#a18449;
+  box-shadow:0 0 8px rgba(161,132,73,0.4);
 }
 
 .error-message {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.9rem;
-  color: #a18449;
-  margin-top: 0.2rem;
-  min-height: 1.2em;
+  font-family:'Playfair Display', serif;
+  font-size:0.9rem;
+  color:#a18449;
+  margin-top:0.2rem;
+  min-height:1.2em;
 }
 
 button {
-  background-color: #a18449;
-  color: white;
-  border: none;
-  padding: 0.9rem 2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s;
-  align-self: center;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-  animation-delay: 2s;
+  background-color:#a18449;
+  color:white;
+  border:none;
+  padding:0.9rem 2rem;
+  border-radius:50px;
+  font-size:1rem;
+  cursor:pointer;
+  transition:background-color 0.3s ease, box-shadow 0.3s;
+  align-self:center;
+  opacity:0;
+  transform:translateY(-20px);
+  animation:fadeUp 1s forwards;
+  animation-delay:2s;
 }
 
 button:hover {
-  background-color: #8c703b;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  background-color:#8c703b;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
 
 @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
 footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #444;
-  opacity: 0.7;
+  text-align:center;
+  padding:2rem;
+  font-size:0.9rem;
+  color:#444;
+  opacity:0.7;
 }
 
-@media (max-width: 768px) {
-  main h1 { font-size: 2rem; }
+@media (max-width:768px) {
+  main h1 { font-size:2rem; }
 }
 </style>
 </head>
@@ -256,13 +256,15 @@ footer {
     </div>
 
     <div class="form-group">
-      <input type="date" id="appointmentDate" name="appointmentDate" placeholder="Desired Appointment Date" required>
+      <select id="appointmentDate" name="appointmentDate" required>
+        <!-- populated by JS -->
+      </select>
       <div class="error-message"></div>
     </div>
 
     <div class="form-group">
       <select id="appointmentTime" name="appointmentTime" required>
-        <!-- options populated with JS -->
+        <!-- populated by JS -->
       </select>
       <div class="error-message"></div>
     </div>
@@ -282,78 +284,80 @@ footer {
 
 <script>
 const form = document.getElementById('bookingForm');
-const dateInput = document.getElementById('appointmentDate');
+const dateSelect = document.getElementById('appointmentDate');
 const timeSelect = document.getElementById('appointmentTime');
 
-const today = new Date();
-const yyyy = today.getFullYear();
-const mm = String(today.getMonth()+1).padStart(2,'0');
-const dd = String(today.getDate()).padStart(2,'0');
-const todayStr = `${yyyy}-${mm}-${dd}`;
-const maxDate = new Date(today.getTime() + 30*24*60*60*1000);
-const maxDateStr = `${maxDate.getFullYear()}-${String(maxDate.getMonth()+1).padStart(2,'0')}-${String(maxDate.getDate()).padStart(2,'0')}`;
-
-dateInput.min = todayStr;
-dateInput.max = maxDateStr;
-
-// Populate time options
-function populateTimes() {
-  const selectedDate = new Date(dateInput.value);
-  const now = new Date();
-  const options = [];
-  for (let hour = 9; hour <= 18; hour++) {
-    let disabled = false;
-    if (selectedDate.toDateString() === now.toDateString()) {
-      if (hour <= now.getHours() + 5) { // 6-hour rule
-        disabled = true;
-      }
-    }
-    const display = `${hour.toString().padStart(2,'0')}:00`;
-    options.push(`<option value="${display}" ${disabled?'disabled':''}>${display}</option>`);
+function populateDates() {
+  const today = new Date();
+  let options = '';
+  for(let i=0;i<30;i++){
+    const d = new Date();
+    d.setDate(today.getDate()+i);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    const val = `${yyyy}-${mm}-${dd}`;
+    const display = d.toDateString();
+    options += `<option value="${val}">${display}</option>`;
   }
-  timeSelect.innerHTML = options.join('');
+  dateSelect.innerHTML = options;
 }
 
-dateInput.addEventListener('change', populateTimes);
-window.addEventListener('load', populateTimes);
+function populateTimes() {
+  const selectedDate = new Date(dateSelect.value);
+  const now = new Date();
+  let options = '';
+  for(let hour=9; hour<=18; hour++){
+    let disabled = false;
+    if(selectedDate.toDateString() === now.toDateString() && hour <= now.getHours()+5){
+      disabled = true;
+    }
+    const display = `${hour.toString().padStart(2,'0')}:00`;
+    options += `<option value="${display}" ${disabled?'disabled':''}>${display}</option>`;
+  }
+  timeSelect.innerHTML = options;
+}
 
-// Form validation
+populateDates();
+populateTimes();
+dateSelect.addEventListener('change', populateTimes);
+
 form.addEventListener('submit', function(e){
   e.preventDefault();
   let valid = true;
   form.querySelectorAll('.error-message').forEach(el=>el.textContent='');
 
-  const email = form.email.value.trim();
-  const service = form.service.value;
-  const appointmentDateVal = dateInput.value;
-  const appointmentTimeVal = timeSelect.value;
-
-  const selectedDate = new Date(appointmentDateVal);
-  const now = new Date();
-  const maxDateCheck = new Date();
-  maxDateCheck.setDate(now.getDate() + 30);
-
-  if(!email){ form.email.nextElementSibling.textContent='Please enter your email.'; valid=false; }
-  if(!service){ form.service.nextElementSibling.textContent='Please select a service.'; valid=false; }
-  if(!appointmentDateVal){ dateInput.nextElementSibling.textContent='Please select a date.'; valid=false; }
-  if(selectedDate > maxDateCheck){ dateInput.nextElementSibling.textContent='Please select a date within 30 days.'; valid=false; }
-  if(!appointmentTimeVal){ timeSelect.nextElementSibling.textContent='Please select a time.'; valid=false; }
+  if(!form.email.value.trim()){
+    form.email.nextElementSibling.textContent='Please enter your email.';
+    valid=false;
+  }
+  if(!form.service.value){
+    form.service.nextElementSibling.textContent='Please select a service.';
+    valid=false;
+  }
+  if(!dateSelect.value){
+    dateSelect.nextElementSibling.textContent='Please select a date.';
+    valid=false;
+  }
+  if(!timeSelect.value){
+    timeSelect.nextElementSibling.textContent='Please select a time.';
+    valid=false;
+  }
 
   if(valid){
     const formData = new FormData(form);
     fetch(form.action,{
       method:'POST',
-      body: formData,
+      body:formData,
       headers:{'Accept':'application/json'}
     })
-    .then(response=>{
-      if(response.ok){
+    .then(resp=>{
+      if(resp.ok){
         alert('Booking request sent! We will contact you to confirm date and time.');
         form.reset();
-        populateTimes(); // refresh time options
-      }else{
-        alert('Oops! There was a problem submitting your form.');
-      }
+        populateDates();
+        populateTimes();
+      } else alert('Oops! There was a problem submitting your form.');
     }).catch(()=>alert('Oops! There was a problem submitting your form.'));
   }
 });
