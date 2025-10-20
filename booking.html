@@ -141,6 +141,10 @@
       animation-delay: 1.5s;
     }
 
+    .form-group {
+      position: relative;
+    }
+
     input, textarea, select {
       padding: 0.8rem 1rem;
       border-radius: 12px;
@@ -158,8 +162,12 @@
       box-shadow: 0 0 8px rgba(161,132,73,0.4);
     }
 
-    input:invalid, select:invalid {
-      border-color: #a18449;
+    .error-message {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #a18449;
+      margin-top: 0.2rem;
+      min-height: 1.2em;
     }
 
     button {
@@ -219,26 +227,37 @@
   <main>
     <h1>Book Your Appointment</h1>
     <p>Fill out the form below and we’ll contact you to confirm your booking and arrange the date and time.</p>
-    <form id="bookingForm" action="#" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      
-      <input type="email" name="email" placeholder="Email Address" required
-             oninvalid="this.setCustomValidity('Please enter your email so we can contact you.')"
-             oninput="this.setCustomValidity('')">
-      
-      <input type="tel" name="phone" placeholder="Phone Number">
-      
-      <select name="service" required
-              oninvalid="this.setCustomValidity('Please select a service.')"
-              oninput="this.setCustomValidity('')">
-        <option value="">Select Service</option>
-        <option value="classic">Classic Manicure</option>
-        <option value="gel">Gel & Shellac</option>
-        <option value="pedicure">Pedicure</option>
-      </select>
-      
-      <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
-      
+    <form id="bookingForm" novalidate>
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Your Name">
+        <div class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email Address">
+        <div class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <input type="tel" name="phone" placeholder="Phone Number">
+        <div class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <select name="service">
+          <option value="">Select Service</option>
+          <option value="classic">Classic Manicure</option>
+          <option value="gel">Gel & Shellac</option>
+          <option value="pedicure">Pedicure</option>
+        </select>
+        <div class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+        <div class="error-message"></div>
+      </div>
+
       <button type="submit">Submit</button>
     </form>
   </main>
@@ -246,5 +265,34 @@
   <footer>
     <p>© 2025 erin’s elegance. all rights reserved.</p>
   </footer>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      // clear previous messages
+      form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+      const email = form.email.value.trim();
+      const service = form.service.value;
+
+      if (!email) {
+        form.email.nextElementSibling.textContent = 'Please enter your email so we can contact you.';
+        valid = false;
+      }
+
+      if (!service) {
+        form.service.nextElementSibling.textContent = 'Please select a service.';
+        valid = false;
+      }
+
+      if (valid) {
+        form.submit(); // replace with actual submission handler (Formspree, etc.)
+      }
+    });
+  </script>
 </body>
 </html>
