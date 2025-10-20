@@ -154,6 +154,7 @@
       width: 100%;
       box-sizing: border-box;
       transition: border-color 0.3s, box-shadow 0.3s;
+      cursor: pointer;
     }
 
     input:focus, textarea:focus, select:focus {
@@ -213,7 +214,7 @@
       <nav>
         <ul>
           <li>
-            <a href="booking.html">Booking ▾</a>
+            <a href="#">Booking ▾</a>
             <ul>
               <li><a href="index.html">Home</a></li>
               <li><a href="#">Pricing</a></li>
@@ -235,7 +236,7 @@
       </div>
 
       <div class="form-group">
-        <input type="email" name="email" placeholder="Email Address">
+        <input type="email" name="email" placeholder="Email Address" required>
         <div class="error-message"></div>
       </div>
 
@@ -245,7 +246,7 @@
       </div>
 
       <div class="form-group">
-        <select name="service">
+        <select name="service" required>
           <option value="">Select Service</option>
           <option value="classic">Classic Manicure</option>
           <option value="gel">Gel & Shellac</option>
@@ -255,19 +256,18 @@
       </div>
 
       <div class="form-group">
-        <input type="date" id="appointmentDate" name="appointment_date" placeholder="Desired Appointment Date">
+        <input type="date" id="appointmentDate" name="appointmentDate" placeholder="Desired Appointment Date">
         <div class="error-message"></div>
       </div>
 
       <div class="form-group">
-        <select id="appointmentTime" name="appointment_time">
-          <option value="">Select Time</option>
-        </select>
+        <input type="time" id="appointmentTime" name="appointmentTime">
         <div class="error-message"></div>
       </div>
 
       <div class="form-group">
         <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+        <div class="error-message"></div>
       </div>
 
       <button type="submit">Submit</button>
@@ -280,93 +280,83 @@
 
   <script>
     const form = document.getElementById('bookingForm');
-
     const dateInput = document.getElementById('appointmentDate');
-    const timeSelect = document.getElementById('appointmentTime');
+    const timeInput = document.getElementById('appointmentTime');
 
-    // Populate time options 9am-6pm
-    const generateTimeOptions = () => {
-      timeSelect.innerHTML = '<option value="">Select Time</option>';
-      for(let hour=9; hour<=18; hour++){
-        let h = hour.toString().padStart(2,'0') + ":00";
-        const option = document.createElement('option');
-        option.value = h;
-        option.textContent = h;
-        timeSelect.appendChild(option);
-      }
-    };
-
-    generateTimeOptions();
-
-    // Set min/max for date input
+    // Set min/max dates
     const today = new Date();
     const yyyy = today.getFullYear();
-    const mm = String(today.getMonth()+1).padStart(2,'0');
-    const dd = String(today.getDate()).padStart(2,'0');
-    const minDate = `${yyyy}-${mm}-${dd}`;
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+    const nextMonth = new Date(today.getTime() + 30*24*60*60*1000);
+    const nextMonthStr = `${nextMonth.getFullYear()}-${String(nextMonth.getMonth()+1).padStart(2,'0')}-${String(nextMonth.getDate()).padStart(2,'0')}`;
+    dateInput.min = todayStr;
+    dateInput.max = nextMonthStr;
 
-    const maxDateObj = new Date();
-    maxDateObj.setMonth(maxDateObj.getMonth()+1);
-    const maxYYYY = maxDateObj.getFullYear();
-    const maxMM = String(maxDateObj.getMonth()+1).padStart(2,'0');
-    const maxDD = String(maxDateObj.getDate()).padStart(2,'0');
-    const maxDate = `${maxYYYY}-${maxMM}-${maxDD}`;
-
-    dateInput.min = minDate;
-    dateInput.max = maxDate;
-
-    // Disable next 6 hours if today is selected
-    dateInput.addEventListener('change', () => {
-      generateTimeOptions();
+    function updateTimeOptions() {
       const selectedDate = new Date(dateInput.value);
+      const options = [];
       const now = new Date();
-      const ukTime = new Date(now.toLocaleString("en-GB", {timeZone: "Europe/London"}));
+      let hourStart = 9;
+      let hourEnd = 18;
 
-      if(selectedDate.toDateString() === ukTime.toDateString()){
-        const options = timeSelect.querySelectorAll('option');
-        options.forEach(opt => {
-          if(opt.value){
-            const [h,m] = opt.value.split(':');
-            const slotTime = new Date(ukTime);
-            slotTime.setHours(Number(h),0,0,0);
-            if(slotTime - ukTime < 6*60*60*1000){
-              opt.disabled = true;
-            }
-          }
-        });
+      // If today, disable times within 6 hours
+      if (selectedDate.toDateString() === now.toDateString()) {
+        hourStart = Math.max(9, now.getHours() + 6);
       }
-    });
 
-    // Form validation
-    form.addEventListener('submit', function(e){
+      timeInput.innerHTML = '';
+      for (let h = hourStart; h <= hourEnd; h++) {
+        const option = document.createElement('option');
+        option.value = `${String(h).padStart(2,'0')}:00`;
+        option.textContent = `${String(h).padStart(2,'0')}:00`;
+        timeInput.appendChild(option);
+      }
+    }
+
+    dateInput.addEventListener('change', updateTimeOptions);
+    window.addEventListener('load', updateTimeOptions);
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
       let valid = true;
-      form.querySelectorAll('.error-message').forEach(el=>el.textContent='');
 
-      if(!form.email.value.trim()){
-        form.email.nextElementSibling.textContent = 'Please enter your email.';
+      // Clear previous error messages
+      form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+      const email = form.email.value.trim();
+      const service = form.service.value;
+
+      if (!email) {
+        form.email.nextElementSibling.textContent = 'Please enter your email so we can contact you.';
         valid = false;
       }
 
-      if(!form.service.value){
+      if (!service) {
         form.service.nextElementSibling.textContent = 'Please select a service.';
         valid = false;
       }
 
-      if(!form.appointmentDate.value){
-        dateInput.nextElementSibling.textContent = 'Please select a date.';
-        valid = false;
-      }
-
-      if(!form.appointmentTime.value){
-        timeSelect.nextElementSibling.textContent = 'Please select a time.';
-        valid = false;
-      }
-
-      if(!valid){
-        e.preventDefault();
+      if (valid) {
+        const formData = new FormData(form);
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+          if (response.ok) {
+            alert('Your booking request has been sent! Your desired date and time will be confirmed by email.');
+            form.reset();
+            updateTimeOptions();
+          } else {
+            alert("Oops! There was a problem submitting your form.");
+          }
+        })
+        .catch(() => alert("Oops! There was a problem submitting your form."));
       }
     });
-
   </script>
 </body>
 </html>
