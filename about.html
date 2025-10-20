@@ -17,16 +17,18 @@
       position: relative;
     }
 
-    /* GOLD STREAKS */
+    /* GOLD STREAKS FIXED */
     .gold-line {
-      position: absolute;
+      position: fixed;
       width: 200px;
       height: 2px;
       background: linear-gradient(to right, transparent, #a18449, transparent);
       top: 0;
       left: 0;
       opacity: 0.3;
+      pointer-events: none; /* Prevent interaction */
       animation: moveLine 15s linear infinite;
+      z-index: 1;
     }
 
     @keyframes moveLine {
@@ -200,7 +202,7 @@
   </style>
 </head>
 <body>
-  <!-- GOLD LINES -->
+  <!-- GOLD LINES FIXED -->
   <div class="gold-line"></div>
   <div class="gold-line" style="animation-delay:5s; width: 250px;"></div>
   <div class="gold-line" style="animation-delay:10s; width: 150px;"></div>
