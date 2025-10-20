@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>erin’s elegance</title>
+  <title>Booking - erin’s elegance</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
@@ -16,9 +16,8 @@
       overflow-x: hidden;
     }
 
-    /* Header */
     header {
-      background-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255,255,255,0.4);
       backdrop-filter: blur(10px);
       position: fixed;
       width: 100%;
@@ -48,7 +47,6 @@
       padding: 0;
       display: flex;
       gap: 1.5rem;
-      position: relative;
     }
 
     nav ul li {
@@ -60,21 +58,18 @@
       text-decoration: none;
       color: #111;
       font-weight: 500;
-      transition: color 0.3s;
       font-family: 'Open Sans', sans-serif;
-      white-space: nowrap;
     }
 
     nav ul li a:hover {
       color: #a18449;
     }
 
-    /* Dropdown */
     nav ul li ul {
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 100%; /* right below parent */
+      top: 100%;
       right: 0;
       background: #f4f6f2;
       border-radius: 8px;
@@ -93,15 +88,12 @@
       pointer-events: auto;
     }
 
-    nav ul li ul li {
-      padding: 0.5rem 1rem;
-    }
-
     nav ul li ul li a {
       color: #333;
       display: block;
       transition: background-color 0.3s, color 0.3s;
       font-family: 'Playfair Display', serif;
+      padding: 0.5rem 1rem;
     }
 
     nav ul li ul li a:hover {
@@ -110,33 +102,75 @@
       border-radius: 5px;
     }
 
-    /* Hero section */
-    .hero {
+    main {
+      max-width: 600px;
+      margin: 12rem auto 4rem;
+      padding: 0 2rem;
       text-align: center;
-      padding: 10rem 2rem 2rem;
-      animation: fadeIn 1.5s ease;
     }
 
-    .hero h1 {
+    main h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
       color: #111;
-      letter-spacing: 1px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.5s;
     }
 
-    .hero p {
-      font-size: 1.3rem;
-      color: #333;
+    main p {
+      font-size: 1.1rem;
       margin-bottom: 2rem;
+      color: #333;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1s;
     }
 
-    .highlight {
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1.5s;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    input, textarea, select {
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      font-family: 'Open Sans', sans-serif;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #a18449;
+      box-shadow: 0 0 8px rgba(161,132,73,0.4);
+    }
+
+    .error-message {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
       color: #a18449;
-      font-weight: 600;
+      margin-top: 0.2rem;
+      min-height: 1.2em;
     }
 
-    .btn {
+    button {
       background-color: #a18449;
       color: white;
       border: none;
@@ -144,37 +178,39 @@
       border-radius: 50px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn:hover {
-      background-color: #8c703b;
-    }
-
-    /* Info section */
-    .info-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 4rem 2rem 6rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .info-box {
-      text-align: center;
-      line-height: 1.6;
-      margin: 1rem 0;
+      transition: background-color 0.3s ease, box-shadow 0.3s;
+      align-self: center;
       opacity: 0;
-      transform: translateY(-30px);
-      animation: fadeUp 1s ease forwards;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 2s;
     }
 
-    .info-box:nth-child(1) { font-weight: 600; animation-delay: 0.5s; }
-    .info-box:nth-child(2) { opacity: 0.9; animation-delay: 1s; }
-    .info-box:nth-child(3) { opacity: 0.8; animation-delay: 1.5s; }
+    button:hover {
+      background-color: #8c703b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
 
-    @keyframes fadeIn { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+    #thankYouMessage {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #D8E3DC;
+      color: #111;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      z-index: 9999;
+      box-sizing: border-box;
+    }
+
     @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
     footer {
@@ -186,8 +222,8 @@
     }
 
     @media (max-width: 768px) {
-      .header-container { padding: 1.2rem 1.5rem; }
-      .hero h1 { font-size: 2.3rem; }
+      main h1 { font-size: 2rem; }
+      #thankYouMessage { font-size: 1.5rem; padding: 1rem; }
     }
   </style>
 </head>
@@ -198,9 +234,9 @@
       <nav>
         <ul>
           <li>
-            <a href="index.html">Home ▾</a>
+            <a href="booking.html">Booking ▾</a>
             <ul>
-              <li><a href="booking.html">Booking</a></li>
+              <li><a href="index.html">Home</a></li>
               <li><a href="#">Pricing</a></li>
             </ul>
           </li>
@@ -209,20 +245,103 @@
     </div>
   </header>
 
-  <section class="hero">
-    <h1>Elegant Nails, <span class="highlight">Effortless Beauty</span></h1>
-    <p>Because your nails deserve to feel as beautiful as you do.</p>
-    <button class="btn" onclick="window.location.href='booking.html'">Book Now</button>
-  </section>
+  <main>
+    <h1>Book Your Appointment</h1>
+    <p>Fill out the form below and we’ll contact you to confirm your booking and arrange the date and time.</p>
 
-  <section class="info-section">
-    <div class="info-box"><p>Tired of polish that chips before the week is out?</p></div>
-    <div class="info-box"><p>Great nails aren’t just maintenance, they’re a little piece of who you are.</p></div>
-    <div class="info-box"><p>erin’s elegance helps you show off your personality, effortlessly.</p></div>
-  </section>
+    <form id="bookingForm" action="https://formspree.io/f/xdkwjqyl" method="POST" novalidate>
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Your Name">
+        <div class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email Address">
+        <div class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <input type="tel" name="phone" placeholder="Phone Number">
+        <div class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <select name="service">
+          <option value="">Select Service</option>
+          <option value="classic">Classic Manicure</option>
+          <option value="gel">Gel & Shellac</option>
+          <option value="pedicure">Pedicure</option>
+        </select>
+        <div class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+        <div class="error-message"></div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="thankYouMessage">
+      Thank you! Your booking request has been sent.<br>
+      We’ll contact you soon to arrange the date and time.
+    </div>
+  </main>
 
   <footer>
     <p>© 2025 erin’s elegance. all rights reserved.</p>
   </footer>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+    const thankYou = document.getElementById('thankYouMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // stop default submission
+      e.stopPropagation(); // prevent any default behavior
+
+      let valid = true;
+
+      // Clear previous error messages
+      form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+      const email = form.email.value.trim();
+      const service = form.service.value;
+
+      if (!email) {
+        form.email.nextElementSibling.textContent = 'Please enter your email so we can contact you.';
+        valid = false;
+      }
+
+      if (!service) {
+        form.service.nextElementSibling.textContent = 'Please select a service.';
+        valid = false;
+      }
+
+      if (valid) {
+        const formData = new FormData(form);
+
+        // Send using fetch, stays on page
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+          if (response.ok) {
+            form.style.display = 'none'; // hide form
+            thankYou.style.display = 'flex'; // show full-screen thank-you
+          } else {
+            alert("Oops! There was a problem submitting your form.");
+          }
+        })
+        .catch(() => alert("Oops! There was a problem submitting your form."));
+      }
+    });
+  </script>
+</body>
+</html>
+
 </body>
 </html>
