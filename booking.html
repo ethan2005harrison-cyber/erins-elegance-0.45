@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking - erin’s elegance</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #D8E3DC;
+      color: #222;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #111;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li {
+      position: relative;
+      display: inline-block;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    nav ul li a:hover {
+      color: #a18449;
+    }
+
+    nav ul li ul {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #f4f6f2;
+      border-radius: 8px;
+      min-width: 150px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      padding: 0.5rem 0;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li:hover ul {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    nav ul li ul li a {
+      color: #333;
+      display: block;
+      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Playfair Display', serif;
+      padding: 0.5rem 1rem;
+    }
+
+    nav ul li ul li a:hover {
+      color: #fff;
+      background-color: #a18449;
+      border-radius: 5px;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 12rem auto 4rem;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    main h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #111;
+    }
+
+    main p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    input, textarea, select {
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      font-family: 'Open Sans', sans-serif;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #a18449;
+    }
+
+    button {
+      background-color: #a18449;
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      align-self: center;
+    }
+
+    button:hover {
+      background-color: #8c703b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #444;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      main h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">erin’s elegance</div>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html">Home ▾</a>
+            <ul>
+              <li><a href="booking.html">Booking</a></li>
+              <li><a href="#">Pricing</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Book Your Appointment</h1>
+    <p>Fill out the form below and we’ll get back to you to confirm your booking.</p>
+    <form action="#" method="POST"> <!-- Replace # with Formspree URL later -->
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="date" name="date" required>
+      <input type="time" name="time" required>
+      <select name="service" required>
+        <option value="">Select Service</option>
+        <option value="classic">Classic Manicure</option>
+        <option value="gel">Gel & Shellac</option>
+        <option value="pedicure">Pedicure</option>
+      </select>
+      <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 erin’s elegance. all rights reserved.</p>
+  </footer>
+</body>
+</html>
