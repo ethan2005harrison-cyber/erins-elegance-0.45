@@ -16,9 +16,8 @@
       overflow-x: hidden;
     }
 
-    /* Header */
     header {
-      background-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255,255,255,0.4);
       backdrop-filter: blur(10px);
       position: fixed;
       width: 100%;
@@ -48,7 +47,6 @@
       padding: 0;
       display: flex;
       gap: 1.5rem;
-      position: relative;
     }
 
     nav ul li {
@@ -60,21 +58,18 @@
       text-decoration: none;
       color: #111;
       font-weight: 500;
-      transition: color 0.3s;
       font-family: 'Open Sans', sans-serif;
-      white-space: nowrap;
     }
 
     nav ul li a:hover {
       color: #a18449;
     }
 
-    /* Dropdown */
     nav ul li ul {
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 100%; /* right below parent */
+      top: 100%;
       right: 0;
       background: #f4f6f2;
       border-radius: 8px;
@@ -93,15 +88,12 @@
       pointer-events: auto;
     }
 
-    nav ul li ul li {
-      padding: 0.5rem 1rem;
-    }
-
     nav ul li ul li a {
       color: #333;
       display: block;
       transition: background-color 0.3s, color 0.3s;
       font-family: 'Playfair Display', serif;
+      padding: 0.5rem 1rem;
     }
 
     nav ul li ul li a:hover {
@@ -110,71 +102,73 @@
       border-radius: 5px;
     }
 
-    /* Hero section */
-    .hero {
+    main {
+      max-width: 800px;
+      margin: 12rem auto 4rem;
+      padding: 0 2rem;
       text-align: center;
-      padding: 10rem 2rem 2rem;
-      animation: fadeIn 1.5s ease;
     }
 
-    .hero h1 {
+    main h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
       color: #111;
-      letter-spacing: 1px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.5s;
     }
 
-    .hero p {
+    main p {
       font-size: 1.3rem;
+      margin-bottom: 3rem;
       color: #333;
-      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1s;
     }
 
-    .highlight {
-      color: #a18449;
-      font-weight: 600;
-    }
-
-    .btn {
+    .book-now {
       background-color: #a18449;
       color: white;
       border: none;
-      padding: 0.9rem 2rem;
+      padding: 1rem 3rem;
       border-radius: 50px;
-      font-size: 1rem;
+      font-size: 1.2rem;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1.5s;
     }
 
-    .btn:hover {
+    .book-now:hover {
       background-color: #8c703b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* Info section */
-    .info-section {
+    .paragraphs {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 4rem 2rem 6rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .info-box {
+      gap: 1rem;
       text-align: center;
-      line-height: 1.6;
-      margin: 1rem 0;
-      opacity: 0;
-      transform: translateY(-30px);
-      animation: fadeUp 1s ease forwards;
+      max-width: 700px;
+      margin: 2rem auto 0;
     }
 
-    .info-box:nth-child(1) { font-weight: 600; animation-delay: 0.5s; }
-    .info-box:nth-child(2) { opacity: 0.9; animation-delay: 1s; }
-    .info-box:nth-child(3) { opacity: 0.8; animation-delay: 1.5s; }
+    .paragraphs p {
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+    }
 
-    @keyframes fadeIn { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+    .paragraphs p:nth-child(1) { animation-delay: 2s; font-weight: 600; }
+    .paragraphs p:nth-child(2) { animation-delay: 2.3s; font-weight: 500; }
+    .paragraphs p:nth-child(3) { animation-delay: 2.6s; font-weight: 400; }
+
     @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
     footer {
@@ -186,8 +180,8 @@
     }
 
     @media (max-width: 768px) {
-      .header-container { padding: 1.2rem 1.5rem; }
-      .hero h1 { font-size: 2.3rem; }
+      main h1 { font-size: 2rem; }
+      .paragraphs { padding: 0 1rem; }
     }
   </style>
 </head>
@@ -198,7 +192,7 @@
       <nav>
         <ul>
           <li>
-            <a href="index.html">Home ▾</a>
+            <a href="#">Home ▾</a>
             <ul>
               <li><a href="booking.html">Booking</a></li>
               <li><a href="#">Pricing</a></li>
@@ -209,17 +203,18 @@
     </div>
   </header>
 
-  <section class="hero">
-    <h1>Elegant Nails, <span class="highlight">Effortless Beauty</span></h1>
-    <p>Because your nails deserve to feel as beautiful as you do.</p>
-    <button class="btn" onclick="window.location.href='booking.html'">Book Now</button>
-  </section>
+  <main>
+    <h1>Elegant Nails, Effortless Beauty</h1>
+    <p>Your nails, your style — treated with care in a cozy and personal environment.</p>
 
-  <section class="info-section">
-    <div class="info-box"><p>Tired of polish that chips before the week is out?</p></div>
-    <div class="info-box"><p>Great nails aren’t just maintenance, they’re a little piece of who you are.</p></div>
-    <div class="info-box"><p>erin’s elegance helps you show off your personality, effortlessly.</p></div>
-  </section>
+    <button class="book-now" onclick="location.href='booking.html'">Book Now</button>
+
+    <div class="paragraphs">
+      <p>Ever feel like your nails don’t match your personality? Let us help you express yourself effortlessly.</p>
+      <p>Choosing the right look can be overwhelming — we guide you to the perfect style that suits you.</p>
+      <p>Relax, enjoy a cozy experience, and leave with nails that are elegant, chic, and uniquely yours.</p>
+    </div>
+  </main>
 
   <footer>
     <p>© 2025 erin’s elegance. all rights reserved.</p>
