@@ -227,7 +227,7 @@
   <main>
     <h1>Book Your Appointment</h1>
     <p>Fill out the form below and we’ll contact you to confirm your booking and arrange the date and time.</p>
-    <form id="bookingForm" novalidate>
+    <form id="bookingForm" action="https://formspree.io/f/xdkwjqyl" method="POST" novalidate>
       <div class="form-group">
         <input type="text" name="name" placeholder="Your Name">
         <div class="error-message"></div>
@@ -290,7 +290,7 @@
       }
 
       if (valid) {
-        form.submit(); // replace with actual submission handler (Formspree, etc.)
+        form.submit(); // sends to your Formspree test URL
       }
     });
   </script>
