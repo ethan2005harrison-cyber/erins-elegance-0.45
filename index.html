@@ -1,283 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>erin’s elegance</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>erin’s elegance</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-    /* ----- BODY & BACKGROUND ----- */
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background-color: #D8E3DC;
-      color: #222;
-      overflow-x: hidden;
-      position: relative;
-    }
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #D8E3DC;
+  background-image: url('https://www.transparenttextures.com/patterns/linen.png');
+  background-repeat: repeat;
+  background-size: auto;
+  color: #222;
+  overflow-x: hidden;
+  position: relative;
+}
 
-    /* ----- GOLD STREAKS ANIMATION ----- */
-    .gold-line {
-      position: absolute;
-      width: 200px;
-      height: 2px;
-      background: linear-gradient(to right, transparent, #a18449, transparent);
-      top: 0;
-      left: 0;
-      opacity: 0.3;
-      animation: moveLine 15s linear infinite;
-    }
+/* HEADER */
+header {
+  background-color: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
 
-    @keyframes moveLine {
-      0% { transform: translate(0,0) rotate(0deg); }
-      50% { transform: translate(80vw, 80vh) rotate(45deg); }
-      100% { transform: translate(0,0) rotate(0deg); }
-    }
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+}
 
-    /* ----- HEADER ----- */
-    header {
-      background-color: rgba(255,255,255,0.4);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 10;
-    }
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #111;
+  font-weight: 600;
+}
 
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-    }
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
 
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #111;
-      font-weight: 600;
-    }
+nav ul li a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  font-family: 'Open Sans', sans-serif;
+}
 
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 1.5rem;
-    }
+nav ul li a:hover {
+  color: #a18449;
+}
 
-    nav ul li {
-      position: relative;
-      display: inline-block;
-    }
+/* MAIN */
+main {
+  max-width: 800px;
+  margin: 12rem auto 4rem;
+  padding: 0 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
 
-    nav ul li a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      font-family: 'Open Sans', sans-serif;
-    }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #111;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeUp 1s forwards;
+  animation-delay: 0.5s;
+}
 
-    nav ul li a:hover {
-      color: #a18449;
-    }
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #111;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeUp 1s forwards;
+  animation-delay: 1s;
+}
 
-    nav ul li ul {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: #f4f6f2;
-      border-radius: 8px;
-      min-width: 150px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-      padding: 0.5rem 0;
-      opacity: 0;
-      transform: translateY(-20px);
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
+p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #333;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeUp 1s forwards;
+}
 
-    nav ul li:hover ul {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+.paragraph-bold { font-weight: 600; animation-delay: 1.5s; }
+.paragraph-medium { font-weight: 400; animation-delay: 2s; }
+.paragraph-light { font-weight: 300; animation-delay: 2.5s; }
 
-    nav ul li ul li a {
-      color: #333;
-      display: block;
-      transition: background-color 0.3s, color 0.3s;
-      font-family: 'Playfair Display', serif;
-      padding: 0.5rem 1rem;
-    }
+button {
+  background-color: #a18449;
+  color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s;
+  margin: 1rem 0.5rem;
+}
 
-    nav ul li ul li a:hover {
-      color: #fff;
-      background-color: #a18449;
-      border-radius: 5px;
-    }
+button:hover {
+  background-color: #8c703b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
-    /* ----- MAIN CONTENT ----- */
-    main {
-      max-width: 800px;
-      margin: 12rem auto 4rem;
-      padding: 0 2rem;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
+@keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
-    main h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      color: #111;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 0.5s;
-    }
+/* Gold streak animation */
+.gold-line {
+  position: absolute;
+  width: 2px;
+  height: 150px;
+  background: linear-gradient(180deg, #d4af37, transparent);
+  opacity: 0.3;
+  top: -200px;
+  left: 50%;
+  animation: moveLine 10s linear infinite;
+}
 
-    main p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      color: #333;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1s;
-    }
+@keyframes moveLine {
+  0% { transform: translateX(0) translateY(0) rotate(0deg); }
+  50% { transform: translateX(200px) translateY(400px) rotate(45deg); }
+  100% { transform: translateX(-200px) translateY(800px) rotate(90deg); }
+}
 
-    /* ----- BUTTONS ----- */
-    a button {
-      border: none;
-      padding: 0.9rem 2rem;
-      border-radius: 50px;
-      font-family: 'Playfair Display', serif;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s;
-      margin-top: 1rem;
-      font-size: 1rem;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-    }
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: #444;
+  opacity: 0.7;
+}
 
-    #bookNowBtn {
-      background-color: #a18449;
-      color: white;
-      animation-delay: 1.5s;
-    }
-
-    #bookNowBtn:hover {
-      background-color: #8c703b;
-      transform: translateY(-2px);
-    }
-
-    #aboutBtn {
-      background-color: #8c703b;
-      color: white;
-      animation-delay: 1.7s;
-    }
-
-    #aboutBtn:hover {
-      background-color: #a18449;
-      transform: translateY(-2px);
-    }
-
-    /* ----- PARAGRAPHS BELOW BUTTONS ----- */
-    .paragraphs {
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 1s forwards;
-      animation-delay: 2s;
-    }
-
-    .paragraphs p {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: 1.1rem;
-      color: #333;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .paragraphs .para1 { font-weight: 600; font-size: 1.2rem; }
-    .paragraphs .para2 { font-weight: 500; }
-    .paragraphs .para3 { font-weight: 400; }
-
-    /* ----- FADE UP ANIMATION ----- */
-    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
-
-    /* ----- FOOTER ----- */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #444;
-      opacity: 0.7;
-    }
-
-    /* ----- MEDIA QUERIES ----- */
-    @media (max-width: 768px) {
-      main h1 { font-size: 2rem; }
-    }
-  </style>
+</style>
 </head>
 <body>
-  <!-- GOLD LINES -->
-  <div class="gold-line"></div>
-  <div class="gold-line" style="animation-delay:5s; width: 250px;"></div>
-  <div class="gold-line" style="animation-delay:10s; width: 150px;"></div>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-container">
-      <div class="logo">erin’s elegance</div>
-      <nav>
-        <ul>
-          <li>
-            <a href="#">Home ▾</a>
-            <ul>
-              <li><a href="booking.html">Booking</a></li>
-              <li><a href="#">Pricing</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<header>
+  <div class="header-container">
+    <div class="logo">erin’s elegance</div>
+    <nav>
+      <ul>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="about.html">About Our Service</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <h1>Elegant Nails, Effortless Beauty</h1>
-    <p>Experience a cozy, personal touch with every appointment.</p>
+<!-- Gold streaks -->
+<div class="gold-line"></div>
+<div class="gold-line" style="animation-delay: 3s; left: 30%; height:200px;"></div>
+<div class="gold-line" style="animation-delay: 5s; left: 70%; height:180px;"></div>
 
-    <!-- Buttons -->
-    <a href="booking.html"><button id="bookNowBtn">Book Now</button></a>
-    <a href="about.html"><button id="aboutBtn">About Our Service</button></a>
+<main>
+  <h1>erin’s elegance</h1>
+  <p>Elegant Nails, Effortless Beauty</p>
 
-    <!-- Paragraphs -->
-    <div class="paragraphs">
-      <p class="para1">We understand the hassle of finding the perfect nail care, from timing to style.</p>
-      <p class="para2">Our cozy, comfortable salon is designed to make you feel relaxed and pampered.</p>
-      <p class="para3">Your nails can reflect your personality, and we bring your style to life in every appointment.</p>
-    </div>
-  </main>
+  <button onclick="location.href='booking.html'">Book Now</button>
+  <button onclick="location.href='about.html'">About Our Service</button>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 erin’s elegance. all rights reserved.</p>
-  </footer>
+  <div>
+    <p class="paragraph-bold">Express your personality with every manicure.</p>
+    <p class="paragraph-medium">Relax in a cozy, professional environment in Callington, Cornwall.</p>
+    <p class="paragraph-light">Choose from a variety of elegant nail treatments, all tailored to you.</p>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 erin’s elegance. all rights reserved.</p>
+  <p>📍 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
+</footer>
+
 </body>
 </html>
