@@ -16,14 +16,12 @@
       overflow-x: hidden;
     }
 
-    /* Header fix */
+    /* Header */
     header {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between; /* logo left, nav right */
       align-items: center;
-      padding: 1.2rem 1rem; /* reduced padding */
-      max-width: 1200px;
-      margin: 0 auto;
+      padding: 1.2rem 2rem; /* spacing on sides */
       background-color: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(10px);
       position: fixed;
@@ -67,6 +65,7 @@
       color: #a18449;
     }
 
+    /* Dropdown */
     nav ul li ul {
       display: none;
       position: absolute;
@@ -95,7 +94,7 @@
       color: #a18449;
     }
 
-    /* Hero section */
+    /* Hero */
     .hero {
       text-align: center;
       padding: 10rem 2rem 2rem;
@@ -136,7 +135,7 @@
       background-color: #8c703b;
     }
 
-    /* Info section */
+    /* Info section - vertical fade */
     .info-section {
       display: flex;
       flex-direction: column;
@@ -198,6 +197,7 @@
       color: #333;
     }
 
+    /* Animations */
     @keyframes fadeIn { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
     @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
@@ -265,9 +265,3 @@
 </body>
 </html>
 
-
-  <footer>
-    <p>© 2025 erin’s elegance. all rights reserved.</p>
-  </footer>
-</body>
-</html>
