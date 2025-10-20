@@ -200,6 +200,7 @@ footer {
   font-size:0.9rem;
   color:#444;
   opacity:0.7;
+  margin-top:2rem;
 }
 
 @media (max-width:768px) {
@@ -353,10 +354,7 @@ form.addEventListener('submit', function(e){
     })
     .then(resp=>{
       if(resp.ok){
-        alert('Booking request sent! We will contact you to confirm date and time.');
-        form.reset();
-        populateDates();
-        populateTimes();
+        window.location.href = "thankspage.html"; // Redirect to the new thank-you page
       } else alert('Oops! There was a problem submitting your form.');
     }).catch(()=>alert('Oops! There was a problem submitting your form.'));
   }
