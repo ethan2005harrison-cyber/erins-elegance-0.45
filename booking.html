@@ -6,241 +6,196 @@
 <title>Booking - erin’s elegance</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-  body {
-    margin:0;
-    font-family:'Open Sans', sans-serif;
-    background-color:#D8E3DC;
-    color:#222;
-    overflow-x:hidden;
-  }
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #D8E3DC;
+  color: #222;
+  overflow-x: hidden;
+}
 
-  header {
-    background-color: rgba(255,255,255,0.4);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 10;
-  }
+header {
+  background-color: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
 
-  .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:1.2rem 2rem;
-  }
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+}
 
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size:1.5rem;
-    color:#111;
-    font-weight:600;
-  }
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #111;
+  font-weight: 600;
+}
 
-  nav ul {
-    list-style:none;
-    margin:0;
-    padding:0;
-    display:flex;
-    gap:1.5rem;
-  }
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
 
-  nav ul li {
-    position:relative;
-    display:inline-block;
-  }
+nav ul li {
+  position: relative;
+  display: inline-block;
+}
 
-  nav ul li a {
-    text-decoration:none;
-    color:#111;
-    font-weight:500;
-    font-family:'Open Sans', sans-serif;
-  }
+nav ul li a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  font-family: 'Open Sans', sans-serif;
+}
 
-  nav ul li a:hover {
-    color:#a18449;
-  }
+nav ul li a:hover {
+  color: #a18449;
+}
 
-  nav ul li ul {
-    display:flex;
-    flex-direction:column;
-    position:absolute;
-    top:100%;
-    right:0;
-    background:#f4f6f2;
-    border-radius:8px;
-    min-width:150px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.15);
-    padding:0.5rem 0;
-    opacity:0;
-    transform:translateY(-20px);
-    pointer-events:none;
-    transition:all 0.3s ease;
-  }
+main {
+  max-width: 800px;
+  margin: 12rem auto 4rem;
+  padding: 0 2rem;
+  text-align: center;
+  animation: fadeUp 1s forwards;
+}
 
-  nav ul li:hover ul {
-    opacity:1;
-    transform:translateY(0);
-    pointer-events:auto;
-  }
+main h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #111;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeUp 1s forwards;
+  animation-delay: 0.5s;
+}
 
-  nav ul li ul li a {
-    color:#333;
-    display:block;
-    transition:background-color 0.3s, color 0.3s;
-    font-family:'Playfair Display', serif;
-    padding:0.5rem 1rem;
-  }
+main p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #333;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeUp 1s forwards;
+  animation-delay: 1s;
+}
 
-  nav ul li ul li a:hover {
-    color:#fff;
-    background-color:#a18449;
-    border-radius:5px;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeUp 1s forwards;
+  animation-delay: 1.5s;
+}
 
-  main {
-    max-width: 700px;
-    margin:12rem auto 4rem;
-    padding:0 2rem;
-    text-align:center;
-  }
+.form-group {
+  position: relative;
+}
 
-  main h1 {
-    font-family:'Playfair Display', serif;
-    font-size:2.5rem;
-    margin-bottom:1rem;
-    color:#111;
-    opacity:0;
-    transform:translateY(-20px);
-    animation:fadeUp 1s forwards;
-    animation-delay:0.5s;
-  }
+input, textarea, select {
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
 
-  main p {
-    font-size:1.1rem;
-    margin-bottom:2rem;
-    color:#333;
-    opacity:0;
-    transform:translateY(-20px);
-    animation:fadeUp 1s forwards;
-    animation-delay:1s;
-  }
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #a18449;
+  box-shadow: 0 0 8px rgba(161,132,73,0.4);
+}
 
-  form {
-    display:flex;
-    flex-direction:column;
-    gap:1.5rem;
-    text-align:left;
-    opacity:0;
-    transform:translateY(-20px);
-    animation:fadeUp 1s forwards;
-    animation-delay:1.5s;
-  }
+button {
+  background-color: #a18449;
+  color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s;
+  align-self: center;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeUp 1s forwards;
+  animation-delay: 2s;
+}
 
-  .form-group {
-    position:relative;
-  }
+button:hover {
+  background-color: #8c703b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
-  input, textarea, select {
-    padding:0.8rem 1rem;
-    border-radius:12px;
-    border:1px solid #ccc;
-    font-size:1rem;
-    font-family:'Open Sans', sans-serif;
-    width:100%;
-    box-sizing:border-box;
-    transition:border-color 0.3s, box-shadow 0.3s;
-  }
+#totalPrice {
+  text-align:center; 
+  font-family:'Playfair Display', serif; 
+  font-weight:600; 
+  margin-bottom:1rem; 
+  font-size:1.1rem;
+}
 
-  input:focus, textarea:focus, select:focus {
-    outline:none;
-    border-color:#a18449;
-    box-shadow:0 0 8px rgba(161,132,73,0.4);
-  }
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
 
-  .error-message {
-    font-family:'Playfair Display', serif;
-    font-size:0.9rem;
-    color:#a18449;
-    margin-top:0.2rem;
-    min-height:1.2em;
-  }
+.service-card {
+  background: #f4f6f2;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+  font-family: 'Playfair Display', serif;
+}
 
-  .services-container {
-    display:flex;
-    flex-wrap:wrap;
-    gap:1rem;
-    justify-content:center;
-    margin-bottom:1rem;
-    opacity:0;
-    transform:translateY(-20px);
-    animation:fadeUp 1s forwards;
-    animation-delay:2s;
-  }
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
 
-  .service-card {
-    background:#f4f6f2;
-    border:2px solid #ccc;
-    border-radius:12px;
-    padding:0.8rem 1rem;
-    cursor:pointer;
-    transition: all 0.3s;
-    min-width:150px;
-    text-align:center;
-    font-family:'Playfair Display', serif;
-    font-weight:500;
-  }
+.service-card.selected {
+  background-color: #a18449;
+  color: white;
+}
 
-  .service-card:hover {
-    border-color:#a18449;
-    background:#e7f0e8;
-  }
+@keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
-  .service-card.selected {
-    border-color:#a18449;
-    background:#d8e3dc;
-    font-weight:600;
-  }
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: #444;
+  opacity: 0.7;
+}
 
-  button {
-    background-color:#a18449;
-    color:white;
-    border:none;
-    padding:0.9rem 2rem;
-    border-radius:50px;
-    font-size:1rem;
-    cursor:pointer;
-    transition:background-color 0.3s ease, box-shadow 0.3s;
-    align-self:center;
-    opacity:0;
-    transform:translateY(-20px);
-    animation:fadeUp 1s forwards;
-    animation-delay:2.5s;
-  }
-
-  button:hover {
-    background-color:#8c703b;
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
-
-  footer {
-    text-align:center;
-    padding:2rem;
-    font-size:0.9rem;
-    color:#444;
-    opacity:0.7;
-  }
-
-  @media (max-width:768px) {
-    main h1 { font-size:2rem; }
-    .services-container { flex-direction:column; }
-  }
+@media (max-width: 768px) {
+  main h1 { font-size: 2rem; }
+  .services-container { flex-direction: column; }
+}
 </style>
 </head>
 <body>
@@ -250,9 +205,10 @@
     <nav>
       <ul>
         <li>
-          <a href="index.html">Home</a>
+          <a href="booking.html">Booking ▾</a>
           <ul>
-            <li><a href="payment.html">Payment</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Pricing</a></li>
           </ul>
         </li>
       </ul>
@@ -261,145 +217,147 @@
 </header>
 
 <main>
-  <h1>Book Your Appointment</h1>
-  <p>Fill out the form below and select your desired services, date, and time. We’ll contact you to confirm your booking.</p>
+<h1>Book Your Appointment</h1>
+<p>Fill out the form below and we’ll contact you to confirm your booking and arrange the date and time.</p>
 
-  <form id="bookingForm" action="https://formspree.io/f/xdkwjqyl" method="POST" novalidate>
-    <div class="form-group">
-      <input type="text" name="name" placeholder="Your Name">
-      <div class="error-message"></div>
-    </div>
+<form id="bookingForm" action="https://formspree.io/f/xdkwjqyl" method="POST" novalidate>
+  <div class="services-container">
+    <div class="service-card" data-service="Basic Manicure" data-price="15">Basic Manicure £15</div>
+    <div class="service-card" data-service="Manicure with Polish" data-price="30">Manicure with Polish £30</div>
+    <div class="service-card" data-service="Manicure Luxury" data-price="40">Manicure Luxury £40</div>
+    <div class="service-card" data-service="Basic Pedicure" data-price="30">Basic Pedicure £30</div>
+    <div class="service-card" data-service="Pedicure with Polish" data-price="35">Pedicure with Polish £35</div>
+    <div class="service-card" data-service="Pedicure Luxury" data-price="40">Pedicure Luxury £40</div>
+    <div class="service-card" data-service="Full Set Acrylics" data-price="40">Full Set Acrylics £40</div>
+    <div class="service-card" data-service="Acrylic Infills" data-price="30">Acrylic Infills £30</div>
+    <div class="service-card" data-service="Acrylic Removal" data-price="25">Acrylic Removal £25</div>
+    <div class="service-card" data-service="Builder Gel Full Set" data-price="40">Builder Gel Full Set £40</div>
+    <div class="service-card" data-service="Builder Gel Infills" data-price="30">Builder Gel Infills £30</div>
+    <div class="service-card" data-service="Builder Gel Removal" data-price="25">Builder Gel Removal £25</div>
+  </div>
 
-    <div class="form-group">
-      <input type="email" name="email" placeholder="Email Address">
-      <div class="error-message"></div>
-    </div>
+  <div id="totalPrice">Total: £0</div>
 
-    <div class="form-group">
-      <input type="tel" name="phone" placeholder="Phone Number">
-      <div class="error-message"></div>
-    </div>
+  <div class="form-group">
+    <input type="text" name="name" placeholder="Your Name">
+    <div class="error-message"></div>
+  </div>
 
-    <div class="form-group services-container">
-      <div class="service-card" data-service="Basic Manicure" data-price="15">Basic Manicure - £15</div>
-      <div class="service-card" data-service="Manicure with Polish" data-price="30">Manicure with Polish - £30</div>
-      <div class="service-card" data-service="Manicure Luxury" data-price="40">Manicure Luxury - £40</div>
-      <div class="service-card" data-service="Basic Pedicure" data-price="30">Basic Pedicure - £30</div>
-      <div class="service-card" data-service="Pedicure with Polish" data-price="35">Pedicure with Polish - £35</div>
-      <div class="service-card" data-service="Pedicure Luxury" data-price="40">Pedicure Luxury - £40</div>
-      <div class="service-card" data-service="Full Set Acrylics" data-price="40">Full Set Acrylics - £40</div>
-      <div class="service-card" data-service="Acrylic Infills" data-price="30">Acrylic Infills - £30</div>
-      <div class="service-card" data-service="Acrylic Removal" data-price="25">Acrylic Removal - £25</div>
-      <div class="service-card" data-service="Builder Gel Full Set" data-price="40">Builder Gel Full Set - £40</div>
-      <div class="service-card" data-service="Builder Gel Infills" data-price="30">Builder Gel Infills - £30</div>
-      <div class="service-card" data-service="Builder Gel Removal" data-price="25">Builder Gel Removal - £25</div>
-    </div>
+  <div class="form-group">
+    <input type="email" name="email" placeholder="Email Address">
+    <div class="error-message"></div>
+  </div>
 
-    <div class="form-group">
-      <input type="date" name="date" id="datePicker" min="" max="">
-      <div class="error-message"></div>
-    </div>
+  <div class="form-group">
+    <input type="tel" name="phone" placeholder="Phone Number">
+    <div class="error-message"></div>
+  </div>
 
-    <div class="form-group">
-      <select name="time" id="timePicker">
-        <option value="">Select Time</option>
-        <option>09:00</option>
-        <option>10:00</option>
-        <option>11:00</option>
-        <option>12:00</option>
-        <option>13:00</option>
-        <option>14:00</option>
-        <option>15:00</option>
-        <option>16:00</option>
-        <option>17:00</option>
-        <option>18:00</option>
-      </select>
-      <div class="error-message"></div>
-    </div>
+  <div class="form-group">
+    <input type="date" name="date" id="datePicker">
+    <div class="error-message"></div>
+  </div>
 
-    <div class="form-group">
-      <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
-      <div class="error-message"></div>
-    </div>
+  <div class="form-group">
+    <select name="time" id="timePicker">
+      <option value="">Select Time</option>
+      <option>09:00</option>
+      <option>10:00</option>
+      <option>11:00</option>
+      <option>12:00</option>
+      <option>13:00</option>
+      <option>14:00</option>
+      <option>15:00</option>
+      <option>16:00</option>
+      <option>17:00</option>
+      <option>18:00</option>
+    </select>
+    <div class="error-message"></div>
+  </div>
 
-    <input type="hidden" name="services" id="selectedServices">
+  <div class="form-group">
+    <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+    <div class="error-message"></div>
+  </div>
 
-    <button type="submit">Submit</button>
-  </form>
+  <input type="hidden" name="services" id="selectedServices">
+
+  <button type="submit">Submit</button>
+</form>
 </main>
 
 <footer>
-  <p>© 2025 erin’s elegance. all rights reserved.</p>
+<p>© 2025 erin’s elegance. all rights reserved.</p>
 </footer>
 
 <script>
-  // Set min and max date
-  const datePicker = document.getElementById('datePicker');
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setMonth(maxDate.getMonth() + 1);
+const datePicker = document.getElementById('datePicker');
+const today = new Date();
+const maxDate = new Date();
+maxDate.setMonth(maxDate.getMonth() + 1);
+datePicker.min = today.toISOString().split('T')[0];
+datePicker.max = maxDate.toISOString().split('T')[0];
 
-  datePicker.min = today.toISOString().split('T')[0];
-  datePicker.max = maxDate.toISOString().split('T')[0];
-
-  // Disable past 6 hours for same day
-  const timePicker = document.getElementById('timePicker');
-  function updateTimeOptions() {
-    const selectedDate = new Date(datePicker.value);
-    const currentTime = new Date();
-    for (let option of timePicker.options) {
-      const hour = parseInt(option.value.split(':')[0]);
-      if (selectedDate.toDateString() === currentTime.toDateString() && hour <= currentTime.getHours() + 5) {
-        option.disabled = true;
-      } else {
-        option.disabled = false;
-      }
+const timePicker = document.getElementById('timePicker');
+function updateTimeOptions() {
+  const selectedDate = new Date(datePicker.value);
+  const currentTime = new Date();
+  for (let option of timePicker.options) {
+    const hour = parseInt(option.value.split(':')[0]);
+    if (selectedDate.toDateString() === currentTime.toDateString() && hour <= currentTime.getHours() + 5) {
+      option.disabled = true;
+    } else {
+      option.disabled = false;
     }
   }
+}
 
-  datePicker.addEventListener('change', updateTimeOptions);
-  updateTimeOptions();
+datePicker.addEventListener('change', updateTimeOptions);
+updateTimeOptions();
 
-  // Handle service selection
-  const serviceCards = document.querySelectorAll('.service-card');
-  const selectedServicesInput = document.getElementById('selectedServices');
-  serviceCards.forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('selected');
-      const selected = Array.from(serviceCards)
-        .filter(c => c.classList.contains('selected'))
-        .map(c => c.dataset.service)
-        .join(', ');
-      selectedServicesInput.value = selected;
-    });
+const serviceCards = document.querySelectorAll('.service-card');
+const selectedServicesInput = document.getElementById('selectedServices');
+const totalPriceDisplay = document.getElementById('totalPrice');
+
+serviceCards.forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('selected');
+    const selected = Array.from(serviceCards)
+      .filter(c => c.classList.contains('selected'))
+      .map(c => c.dataset.service)
+      .join(', ');
+    selectedServicesInput.value = selected;
+
+    const total = Array.from(serviceCards)
+      .filter(c => c.classList.contains('selected'))
+      .reduce((sum, c) => sum + parseInt(c.dataset.price), 0);
+    totalPriceDisplay.textContent = `Total: £${total}`;
   });
+});
 
-  // Form submission with validation
-  const form = document.getElementById('bookingForm');
+const form = document.getElementById('bookingForm');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  let valid = true;
+  form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    let valid = true;
-    form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const phone = form.phone.value.trim();
+  const services = selectedServicesInput.value;
+  const date = form.date.value;
+  const time = form.time.value;
 
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const phone = form.phone.value.trim();
-    const services = selectedServicesInput.value;
-    const date = form.date.value;
-    const time = form.time.value;
+  if(!name){ form.name.nextElementSibling.textContent = 'Please enter your name.'; valid=false; }
+  if(!email){ form.email.nextElementSibling.textContent = 'Please enter your email.'; valid=false; }
+  if(!services){ document.querySelector('.services-container').nextElementSibling.textContent='Please select at least one service.'; valid=false; }
+  if(!date){ form.date.nextElementSibling.textContent='Please select a date.'; valid=false; }
+  if(!time){ form.time.nextElementSibling.textContent='Please select a time.'; valid=false; }
 
-    if(!name){ form.name.nextElementSibling.textContent = 'Please enter your name.'; valid=false; }
-    if(!email){ form.email.nextElementSibling.textContent = 'Please enter your email.'; valid=false; }
-    if(!services){ document.querySelector('.services-container').nextElementSibling.textContent='Please select at least one service.'; valid=false; }
-    if(!date){ form.date.nextElementSibling.textContent='Please select a date.'; valid=false; }
-    if(!time){ form.time.nextElementSibling.textContent='Please select a time.'; valid=false; }
-
-    if(valid){
-      form.submit();
-    }
-  });
+  if(valid){
+    form.submit();
+  }
+});
 </script>
 </body>
 </html>
-
