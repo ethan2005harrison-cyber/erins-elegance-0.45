@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Our Service - erin’s elegance</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #D8E3DC;
+      color: #222;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* GOLD STREAKS */
+    .gold-line {
+      position: absolute;
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #a18449, transparent);
+      top: 0;
+      left: 0;
+      opacity: 0.3;
+      animation: moveLine 15s linear infinite;
+    }
+
+    @keyframes moveLine {
+      0% { transform: translate(0,0) rotate(0deg); }
+      50% { transform: translate(80vw, 80vh) rotate(45deg); }
+      100% { transform: translate(0,0) rotate(0deg); }
+    }
+
+    /* HEADER */
+    header {
+      background-color: rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #111;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li {
+      position: relative;
+      display: inline-block;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    nav ul li a:hover {
+      color: #a18449;
+    }
+
+    nav ul li ul {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #f4f6f2;
+      border-radius: 8px;
+      min-width: 150px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      padding: 0.5rem 0;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li:hover ul {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    nav ul li ul li a {
+      color: #333;
+      display: block;
+      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Playfair Display', serif;
+      padding: 0.5rem 1rem;
+    }
+
+    nav ul li ul li a:hover {
+      color: #fff;
+      background-color: #a18449;
+      border-radius: 5px;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 800px;
+      margin: 12rem auto 4rem;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    main h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #111;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.5s;
+    }
+
+    main p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #333;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+    }
+
+    /* Fade delay for multiple paragraphs */
+    .fade1 { animation-delay: 1s; }
+    .fade2 { animation-delay: 1.5s; }
+    .fade3 { animation-delay: 2s; }
+
+    /* BUTTON */
+    a button {
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s;
+      margin-top: 1rem;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+    }
+
+    #backBtn {
+      background-color: #a18449;
+      color: white;
+      animation-delay: 2.5s;
+    }
+
+    #backBtn:hover {
+      background-color: #8c703b;
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #444;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      main h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- GOLD LINES -->
+  <div class="gold-line"></div>
+  <div class="gold-line" style="animation-delay:5s; width: 250px;"></div>
+  <div class="gold-line" style="animation-delay:10s; width: 150px;"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <div class="logo">erin’s elegance</div>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">Home ▾</a>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="booking.html">Booking</a></li>
+              <li><a href="#">Pricing</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <h1>About Our Service</h1>
+    <p class="fade1">Located in beautiful Callington, Cornwall, Erin’s Elegance brings a cozy and personal touch to every appointment.</p>
+    <p class="fade2">Erin is passionate about all things nails, providing classic manicures, pedicures, acrylics, and bespoke treatments with care and style.</p>
+    <p class="fade3">Contact us at <strong>erins.elegance1@gmail.com</strong> for any questions or to schedule your next appointment.</p>
+
+    <a href="index.html"><button id="backBtn">Back to Home</button></a>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 erin’s elegance. all rights reserved.</p>
+  </footer>
+</body>
+</html>
