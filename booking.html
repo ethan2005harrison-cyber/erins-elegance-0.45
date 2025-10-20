@@ -175,4 +175,47 @@
     }
 
     button:hover {
-      background-color: #8c703b
+      background-color: #8c703b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">erin’s elegance</div>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">Booking ▾</a>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Pricing</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Book Your Appointment</h1>
+    <p>Fill out the form below and we’ll get back to you to confirm your booking and discuss time and date.</p>
+
+    <form action="https://formspree.io/f/xdkwjqyl" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="tel" name="phone" placeholder="Phone Number">
+      <select name="service" required>
+        <option value="">Select a Service</option>
+        <option value="manicure">Manicure</option>
+        <option value="pedicure">Pedicure</option>
+      </select>
+      <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+</body>
+</html>
