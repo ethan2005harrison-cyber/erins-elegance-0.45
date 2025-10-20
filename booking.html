@@ -149,11 +149,16 @@
       font-family: 'Open Sans', sans-serif;
       width: 100%;
       box-sizing: border-box;
-      transition: border-color 0.3s;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
 
     input:focus, textarea:focus, select:focus {
       outline: none;
+      border-color: #a18449;
+      box-shadow: 0 0 8px rgba(161,132,73,0.4);
+    }
+
+    input:invalid, select:invalid {
       border-color: #a18449;
     }
 
@@ -165,7 +170,7 @@
       border-radius: 50px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, box-shadow 0.3s;
       align-self: center;
       opacity: 0;
       transform: translateY(-20px);
@@ -175,6 +180,7 @@
 
     button:hover {
       background-color: #8c703b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
@@ -213,17 +219,26 @@
   <main>
     <h1>Book Your Appointment</h1>
     <p>Fill out the form below and we’ll contact you to confirm your booking and arrange the date and time.</p>
-    <form action="#" method="POST">
+    <form id="bookingForm" action="#" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Email Address" required>
+      
+      <input type="email" name="email" placeholder="Email Address" required
+             oninvalid="this.setCustomValidity('Please enter your email so we can contact you.')"
+             oninput="this.setCustomValidity('')">
+      
       <input type="tel" name="phone" placeholder="Phone Number">
-      <select name="service" required>
+      
+      <select name="service" required
+              oninvalid="this.setCustomValidity('Please select a service.')"
+              oninput="this.setCustomValidity('')">
         <option value="">Select Service</option>
         <option value="classic">Classic Manicure</option>
         <option value="gel">Gel & Shellac</option>
         <option value="pedicure">Pedicure</option>
       </select>
+      
       <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+      
       <button type="submit">Submit</button>
     </form>
   </main>
