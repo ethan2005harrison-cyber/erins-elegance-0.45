@@ -53,6 +53,7 @@
 
     nav ul li {
       position: relative;
+      display: inline-block;
     }
 
     nav ul li a {
@@ -60,6 +61,7 @@
       color: #111;
       font-weight: 500;
       transition: color 0.3s;
+      font-family: 'Open Sans', sans-serif;
       white-space: nowrap;
     }
 
@@ -67,21 +69,28 @@
       color: #a18449;
     }
 
+    /* Dropdown */
     nav ul li ul {
-      display: none;
-      position: absolute;
-      right: 0; /* aligns dropdown to the right edge of parent li */
-      top: 2.5rem;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 8px;
+      display: flex;
       flex-direction: column;
-      min-width: 140px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 20;
+      position: absolute;
+      top: 100%; /* right below parent */
+      right: 0;
+      background: #f4f6f2;
+      border-radius: 8px;
+      min-width: 150px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      padding: 0.5rem 0;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      transition: all 0.3s ease;
     }
 
     nav ul li:hover ul {
-      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     nav ul li ul li {
@@ -90,10 +99,15 @@
 
     nav ul li ul li a {
       color: #333;
+      display: block;
+      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Playfair Display', serif;
     }
 
     nav ul li ul li a:hover {
-      color: #a18449;
+      color: #fff;
+      background-color: #a18449;
+      border-radius: 5px;
     }
 
     /* Hero section */
@@ -214,6 +228,7 @@
       .header-container { padding: 1.2rem 1.5rem; }
       .hero h1 { font-size: 2.3rem; }
       .pricing-section { gap: 1.5rem; }
+      nav ul li ul { right: auto; left: 0; min-width: 100px; } /* mobile tweak */
     }
   </style>
 </head>
@@ -267,5 +282,3 @@
   </footer>
 </body>
 </html>
-
-
