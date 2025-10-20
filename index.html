@@ -16,11 +16,12 @@
       overflow-x: hidden;
     }
 
+    /* Fixed header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 4rem;
+      padding: 1.2rem 2rem; /* reduced padding so dropdown fits */
       background-color: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(10px);
       position: fixed;
@@ -34,6 +35,10 @@
       font-size: 1.5rem;
       color: #111;
       font-weight: 600;
+    }
+
+    nav {
+      flex-shrink: 0; /* prevent overflow */
     }
 
     nav ul {
@@ -205,7 +210,7 @@
     }
 
     @media (max-width: 768px) {
-      header { padding: 1.2rem 2rem; }
+      header { padding: 1.2rem 1.5rem; }
       .hero h1 { font-size: 2.3rem; }
       .pricing-section { gap: 1.5rem; }
     }
