@@ -6,117 +6,241 @@
 <title>Booking - erin’s elegance</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-body {
-  margin:0;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #D8E3DC;
-  color: #222;
-  overflow-x: hidden;
-}
-header {
-  background-color: rgba(255,255,255,0.4);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-}
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:1.2rem 2rem;
-}
-.logo { font-family: 'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
-nav ul { list-style:none; margin:0; padding:0; display:flex; gap:1.5rem; }
-nav ul li { position:relative; display:inline-block; }
-nav ul li a { text-decoration:none; color:#111; font-weight:500; font-family:'Open Sans', sans-serif; }
-nav ul li a:hover { color:#a18449; }
+  body {
+    margin:0;
+    font-family:'Open Sans', sans-serif;
+    background-color:#D8E3DC;
+    color:#222;
+    overflow-x:hidden;
+  }
 
-main {
-  max-width:700px;
-  margin:12rem auto 4rem;
-  padding:0 2rem;
-  text-align:center;
-}
+  header {
+    background-color: rgba(255,255,255,0.4);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+  }
 
-main h1 {
-  font-family: 'Playfair Display', serif;
-  font-size:2.5rem;
-  margin-bottom:1rem;
-  color:#111;
-}
-main p { font-size:1.1rem; margin-bottom:2rem; color:#333; }
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.2rem 2rem;
+  }
 
-form { display:flex; flex-direction:column; gap:1.5rem; text-align:left; }
-.form-group { position:relative; }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size:1.5rem;
+    color:#111;
+    font-weight:600;
+  }
 
-input, textarea, select {
-  padding:0.8rem 1rem;
-  border-radius:12px;
-  border:1px solid #ccc;
-  font-size:1rem;
-  font-family:'Open Sans', sans-serif;
-  width:100%;
-  box-sizing:border-box;
-  transition:border-color 0.3s, box-shadow 0.3s;
-}
+  nav ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    gap:1.5rem;
+  }
 
-input:focus, textarea:focus, select:focus {
-  outline:none;
-  border-color:#a18449;
-  box-shadow:0 0 8px rgba(161,132,73,0.4);
-}
+  nav ul li {
+    position:relative;
+    display:inline-block;
+  }
 
-.services-container {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1rem;
-}
+  nav ul li a {
+    text-decoration:none;
+    color:#111;
+    font-weight:500;
+    font-family:'Open Sans', sans-serif;
+  }
 
-.service-option {
-  background:#f4f6f2;
-  border-radius:12px;
-  padding:0.8rem;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  transition: background 0.3s, box-shadow 0.3s;
-}
+  nav ul li a:hover {
+    color:#a18449;
+  }
 
-.service-option input {
-  margin-right:0.5rem;
-}
+  nav ul li ul {
+    display:flex;
+    flex-direction:column;
+    position:absolute;
+    top:100%;
+    right:0;
+    background:#f4f6f2;
+    border-radius:8px;
+    min-width:150px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    padding:0.5rem 0;
+    opacity:0;
+    transform:translateY(-20px);
+    pointer-events:none;
+    transition:all 0.3s ease;
+  }
 
-.service-option:hover { background:#e0e4dd; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+  nav ul li:hover ul {
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
 
-.total { font-weight:600; font-size:1.2rem; margin-top:1rem; text-align:right; }
+  nav ul li ul li a {
+    color:#333;
+    display:block;
+    transition:background-color 0.3s, color 0.3s;
+    font-family:'Playfair Display', serif;
+    padding:0.5rem 1rem;
+  }
 
-button {
-  background-color: #a18449;
-  color:white;
-  border:none;
-  padding:0.9rem 2rem;
-  border-radius:50px;
-  font-size:1rem;
-  cursor:pointer;
-  align-self:center;
-  margin-top:1rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s;
-}
+  nav ul li ul li a:hover {
+    color:#fff;
+    background-color:#a18449;
+    border-radius:5px;
+  }
 
-button:hover {
-  background-color:#8c703b;
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
-}
+  main {
+    max-width: 700px;
+    margin:12rem auto 4rem;
+    padding:0 2rem;
+    text-align:center;
+  }
 
-footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; }
+  main h1 {
+    font-family:'Playfair Display', serif;
+    font-size:2.5rem;
+    margin-bottom:1rem;
+    color:#111;
+    opacity:0;
+    transform:translateY(-20px);
+    animation:fadeUp 1s forwards;
+    animation-delay:0.5s;
+  }
 
-@media (max-width:768px) { .services-container { grid-template-columns:1fr; } main h1 { font-size:2rem; } }
+  main p {
+    font-size:1.1rem;
+    margin-bottom:2rem;
+    color:#333;
+    opacity:0;
+    transform:translateY(-20px);
+    animation:fadeUp 1s forwards;
+    animation-delay:1s;
+  }
+
+  form {
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+    text-align:left;
+    opacity:0;
+    transform:translateY(-20px);
+    animation:fadeUp 1s forwards;
+    animation-delay:1.5s;
+  }
+
+  .form-group {
+    position:relative;
+  }
+
+  input, textarea, select {
+    padding:0.8rem 1rem;
+    border-radius:12px;
+    border:1px solid #ccc;
+    font-size:1rem;
+    font-family:'Open Sans', sans-serif;
+    width:100%;
+    box-sizing:border-box;
+    transition:border-color 0.3s, box-shadow 0.3s;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline:none;
+    border-color:#a18449;
+    box-shadow:0 0 8px rgba(161,132,73,0.4);
+  }
+
+  .error-message {
+    font-family:'Playfair Display', serif;
+    font-size:0.9rem;
+    color:#a18449;
+    margin-top:0.2rem;
+    min-height:1.2em;
+  }
+
+  .services-container {
+    display:flex;
+    flex-wrap:wrap;
+    gap:1rem;
+    justify-content:center;
+    margin-bottom:1rem;
+    opacity:0;
+    transform:translateY(-20px);
+    animation:fadeUp 1s forwards;
+    animation-delay:2s;
+  }
+
+  .service-card {
+    background:#f4f6f2;
+    border:2px solid #ccc;
+    border-radius:12px;
+    padding:0.8rem 1rem;
+    cursor:pointer;
+    transition: all 0.3s;
+    min-width:150px;
+    text-align:center;
+    font-family:'Playfair Display', serif;
+    font-weight:500;
+  }
+
+  .service-card:hover {
+    border-color:#a18449;
+    background:#e7f0e8;
+  }
+
+  .service-card.selected {
+    border-color:#a18449;
+    background:#d8e3dc;
+    font-weight:600;
+  }
+
+  button {
+    background-color:#a18449;
+    color:white;
+    border:none;
+    padding:0.9rem 2rem;
+    border-radius:50px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:background-color 0.3s ease, box-shadow 0.3s;
+    align-self:center;
+    opacity:0;
+    transform:translateY(-20px);
+    animation:fadeUp 1s forwards;
+    animation-delay:2.5s;
+  }
+
+  button:hover {
+    background-color:#8c703b;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+  footer {
+    text-align:center;
+    padding:2rem;
+    font-size:0.9rem;
+    color:#444;
+    opacity:0.7;
+  }
+
+  @media (max-width:768px) {
+    main h1 { font-size:2rem; }
+    .services-container { flex-direction:column; }
+  }
 </style>
 </head>
 <body>
@@ -125,7 +249,12 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
     <div class="logo">erin’s elegance</div>
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="index.html">Home</a>
+          <ul>
+            <li><a href="payment.html">Payment</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
   </div>
@@ -133,145 +262,144 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
 
 <main>
   <h1>Book Your Appointment</h1>
-  <p>Fill out the form below, select your services, and continue to payment.</p>
+  <p>Fill out the form below and select your desired services, date, and time. We’ll contact you to confirm your booking.</p>
 
-  <form id="bookingForm">
+  <form id="bookingForm" action="https://formspree.io/f/xdkwjqyl" method="POST" novalidate>
     <div class="form-group">
-      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="text" name="name" placeholder="Your Name">
+      <div class="error-message"></div>
     </div>
+
     <div class="form-group">
-      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="email" name="email" placeholder="Email Address">
+      <div class="error-message"></div>
     </div>
+
     <div class="form-group">
-      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <input type="tel" name="phone" placeholder="Phone Number">
+      <div class="error-message"></div>
     </div>
-    <div class="form-group">
-      <label for="date">Desired Appointment Date:</label>
-      <input type="date" id="date" name="date" required min="" max="">
+
+    <div class="form-group services-container">
+      <div class="service-card" data-service="Basic Manicure" data-price="15">Basic Manicure - £15</div>
+      <div class="service-card" data-service="Manicure with Polish" data-price="30">Manicure with Polish - £30</div>
+      <div class="service-card" data-service="Manicure Luxury" data-price="40">Manicure Luxury - £40</div>
+      <div class="service-card" data-service="Basic Pedicure" data-price="30">Basic Pedicure - £30</div>
+      <div class="service-card" data-service="Pedicure with Polish" data-price="35">Pedicure with Polish - £35</div>
+      <div class="service-card" data-service="Pedicure Luxury" data-price="40">Pedicure Luxury - £40</div>
+      <div class="service-card" data-service="Full Set Acrylics" data-price="40">Full Set Acrylics - £40</div>
+      <div class="service-card" data-service="Acrylic Infills" data-price="30">Acrylic Infills - £30</div>
+      <div class="service-card" data-service="Acrylic Removal" data-price="25">Acrylic Removal - £25</div>
+      <div class="service-card" data-service="Builder Gel Full Set" data-price="40">Builder Gel Full Set - £40</div>
+      <div class="service-card" data-service="Builder Gel Infills" data-price="30">Builder Gel Infills - £30</div>
+      <div class="service-card" data-service="Builder Gel Removal" data-price="25">Builder Gel Removal - £25</div>
     </div>
+
     <div class="form-group">
-      <label for="time">Desired Time:</label>
-      <select id="time" name="time" required>
-        <!-- times populated by JS -->
+      <input type="date" name="date" id="datePicker" min="" max="">
+      <div class="error-message"></div>
+    </div>
+
+    <div class="form-group">
+      <select name="time" id="timePicker">
+        <option value="">Select Time</option>
+        <option>09:00</option>
+        <option>10:00</option>
+        <option>11:00</option>
+        <option>12:00</option>
+        <option>13:00</option>
+        <option>14:00</option>
+        <option>15:00</option>
+        <option>16:00</option>
+        <option>17:00</option>
+        <option>18:00</option>
       </select>
+      <div class="error-message"></div>
     </div>
 
     <div class="form-group">
-      <p>Select Services:</p>
-      <div class="services-container" id="servicesContainer">
-        <!-- JS will populate checkboxes -->
-      </div>
-      <div class="total" id="total">Total: £0</div>
+      <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+      <div class="error-message"></div>
     </div>
 
-    <button type="submit">Continue to Payment</button>
+    <input type="hidden" name="services" id="selectedServices">
+
+    <button type="submit">Submit</button>
   </form>
 </main>
 
 <footer>
-<p>© 2025 erin’s elegance. all rights reserved.</p>
+  <p>© 2025 erin’s elegance. all rights reserved.</p>
 </footer>
 
 <script>
-// Services
-const services = [
-  {name:"Basic manicure", price:15},
-  {name:"Manicure with polish", price:30},
-  {name:"Manicure luxury", price:40},
-  {name:"Basic pedicure", price:30},
-  {name:"Pedicure with polish", price:35},
-  {name:"Pedicure luxury", price:40},
-  {name:"Full set acrylics", price:40},
-  {name:"Acrylic infills", price:30},
-  {name:"Acrylic removal", price:25},
-  {name:"Builder - gel full set", price:40},
-  {name:"Builder - gel infills", price:30},
-  {name:"Builder - gel removal", price:25}
-];
+  // Set min and max date
+  const datePicker = document.getElementById('datePicker');
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setMonth(maxDate.getMonth() + 1);
 
-const container = document.getElementById('servicesContainer');
-services.forEach((service,index)=>{
-  const div = document.createElement('div');
-  div.classList.add('service-option');
-  div.innerHTML = `<input type="checkbox" name="service" value="${service.name}" data-price="${service.price}"> ${service.name} (£${service.price})`;
-  container.appendChild(div);
-});
+  datePicker.min = today.toISOString().split('T')[0];
+  datePicker.max = maxDate.toISOString().split('T')[0];
 
-// Update total
-const totalEl = document.getElementById('total');
-function updateTotal(){
-  let total = 0;
-  document.querySelectorAll('input[name="service"]:checked').forEach(c=>{
-    total += parseInt(c.dataset.price);
-  });
-  totalEl.textContent = `Total: £${total}`;
-}
-document.querySelectorAll('input[name="service"]').forEach(c=>{
-  c.addEventListener('change', updateTotal);
-});
-
-// Date and Time logic
-const dateInput = document.getElementById('date');
-const timeSelect = document.getElementById('time');
-
-function pad(n){return n<10?'0'+n:n;}
-const now = new Date();
-const minDate = now.toISOString().split('T')[0];
-const maxDate = new Date();
-maxDate.setMonth(maxDate.getMonth()+1);
-const maxDateStr = maxDate.toISOString().split('T')[0];
-dateInput.min = minDate;
-dateInput.max = maxDateStr;
-
-// Populate time slots
-function populateTimes(){
-  timeSelect.innerHTML='';
-  let selectedDate = new Date(dateInput.value);
-  let today = new Date();
-  let startHour=9;
-  let endHour=18;
-  for(let h=startHour;h<=endHour;h++){
-    let slotTime = new Date(selectedDate);
-    slotTime.setHours(h,0,0,0);
-    let disabled=false;
-    if(selectedDate.toDateString()===today.toDateString()){
-      let diff = (slotTime-now)/36e5; // hours
-      if(diff<6) disabled=true;
+  // Disable past 6 hours for same day
+  const timePicker = document.getElementById('timePicker');
+  function updateTimeOptions() {
+    const selectedDate = new Date(datePicker.value);
+    const currentTime = new Date();
+    for (let option of timePicker.options) {
+      const hour = parseInt(option.value.split(':')[0]);
+      if (selectedDate.toDateString() === currentTime.toDateString() && hour <= currentTime.getHours() + 5) {
+        option.disabled = true;
+      } else {
+        option.disabled = false;
+      }
     }
-    const opt = document.createElement('option');
-    opt.value = h+":00";
-    opt.textContent = pad(h)+":00";
-    if(disabled) opt.disabled=true;
-    timeSelect.appendChild(opt);
   }
-}
-dateInput.addEventListener('change',populateTimes);
-populateTimes();
 
-// Submit
-document.getElementById('bookingForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const selectedServices = [];
-  document.querySelectorAll('input[name="service"]:checked').forEach(c=>{
-    selectedServices.push(c.value);
+  datePicker.addEventListener('change', updateTimeOptions);
+  updateTimeOptions();
+
+  // Handle service selection
+  const serviceCards = document.querySelectorAll('.service-card');
+  const selectedServicesInput = document.getElementById('selectedServices');
+  serviceCards.forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('selected');
+      const selected = Array.from(serviceCards)
+        .filter(c => c.classList.contains('selected'))
+        .map(c => c.dataset.service)
+        .join(', ');
+      selectedServicesInput.value = selected;
+    });
   });
-  if(selectedServices.length===0){ alert('Please select at least one service'); return; }
-  const total = Array.from(document.querySelectorAll('input[name="service"]:checked')).reduce((a,c)=>a+parseInt(c.dataset.price),0);
-  const formData = new URLSearchParams();
-  formData.append('name',document.querySelector('input[name="name"]').value);
-  formData.append('email',document.querySelector('input[name="email"]').value);
-  formData.append('phone',document.querySelector('input[name="phone"]').value);
-  formData.append('date',document.querySelector('input[name="date"]').value);
-  formData.append('time',document.querySelector('select[name="time"]').value);
-  formData.append('services',selectedServices.join(', '));
-  formData.append('total','£'+total);
 
-  // Redirect to payment page with URL params
-  window.location.href = `payment.html?${formData.toString()}`;
-});
+  // Form submission with validation
+  const form = document.getElementById('bookingForm');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    let valid = true;
+    form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+    const services = selectedServicesInput.value;
+    const date = form.date.value;
+    const time = form.time.value;
+
+    if(!name){ form.name.nextElementSibling.textContent = 'Please enter your name.'; valid=false; }
+    if(!email){ form.email.nextElementSibling.textContent = 'Please enter your email.'; valid=false; }
+    if(!services){ document.querySelector('.services-container').nextElementSibling.textContent='Please select at least one service.'; valid=false; }
+    if(!date){ form.date.nextElementSibling.textContent='Please select a date.'; valid=false; }
+    if(!time){ form.time.nextElementSibling.textContent='Please select a time.'; valid=false; }
+
+    if(valid){
+      form.submit();
+    }
+  });
 </script>
 </body>
 </html>
-</script>
-</body>
-</html>
+
