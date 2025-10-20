@@ -1,225 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>erin’s elegance</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background-color: #D8E3DC;
-      color: #222;
-      overflow-x: hidden;
-    }
-
-    header {
-      background-color: rgba(255,255,255,0.4);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 10;
-    }
-
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-    }
-
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #111;
-      font-weight: 600;
-    }
-
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    nav ul li {
-      position: relative;
-      display: inline-block;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      font-family: 'Open Sans', sans-serif;
-    }
-
-    nav ul li a:hover {
-      color: #a18449;
-    }
-
-    nav ul li ul {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: #f4f6f2;
-      border-radius: 8px;
-      min-width: 150px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-      padding: 0.5rem 0;
-      opacity: 0;
-      transform: translateY(-20px);
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-
-    nav ul li:hover ul {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    nav ul li ul li a {
-      color: #333;
-      display: block;
-      transition: background-color 0.3s, color 0.3s;
-      font-family: 'Playfair Display', serif;
-      padding: 0.5rem 1rem;
-    }
-
-    nav ul li ul li a:hover {
-      color: #fff;
-      background-color: #a18449;
-      border-radius: 5px;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 12rem auto 4rem;
-      padding: 0 2rem;
-      text-align: center;
-    }
-
-    main h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #111;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 0.5s;
-    }
-
-    main p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      color: #333;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1s;
-    }
-
-    a.book-now {
-      display: inline-block;
-      text-decoration: none;
-      margin-bottom: 3rem;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1.5s;
-    }
-
-    a.book-now button {
-      background-color: #a18449;
-      color: white;
-      border: none;
-      padding: 1rem 2.5rem;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease, box-shadow 0.3s;
-    }
-
-    a.book-now button:hover {
-      background-color: #8c703b;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    .paragraphs {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-    }
-
-    .paragraphs p {
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-    }
-
-    .paragraphs p:nth-child(1) { animation-delay: 2s; font-weight: 600; }
-    .paragraphs p:nth-child(2) { animation-delay: 2.5s; font-weight: 400; }
-    .paragraphs p:nth-child(3) { animation-delay: 3s; font-weight: 300; }
-
-    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #444;
-      opacity: 0.7;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>erin’s elegance</title>
+<style>
+  body { margin:0; font-family: 'Open Sans', sans-serif; background:#D8E3DC; color:#222; }
+  header { background:rgba(255,255,255,0.4); backdrop-filter:blur(10px); position:fixed; width:100%; top:0; z-index:10; }
+  .header-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
+  .logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
+  nav ul { list-style:none; margin:0; padding:0; display:flex; gap:1.5rem; }
+  nav ul li { position:relative; display:inline-block; }
+  nav ul li a { text-decoration:none; color:#111; font-weight:500; }
+  nav ul li a:hover { color:#a18449; }
+  nav ul li ul { display:flex; flex-direction:column; position:absolute; top:100%; right:0; background:#f4f6f2; border-radius:8px; min-width:150px; padding:0.5rem 0; opacity:0; transform:translateY(-20px); pointer-events:none; transition:all 0.3s; }
+  nav ul li:hover ul { opacity:1; transform:translateY(0); pointer-events:auto; }
+  nav ul li ul li a { color:#333; display:block; padding:0.5rem 1rem; font-family:'Playfair Display', serif; }
+  nav ul li ul li a:hover { color:#fff; background:#a18449; border-radius:5px; }
+  main { max-width:800px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; }
+  h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; color:#111; }
+  p { font-size:1.2rem; margin-bottom:2rem; color:#333; }
+  a.book-now button { background:#a18449; color:#fff; border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1.1rem; cursor:pointer; }
+  a.book-now button:hover { background:#8c703b; }
+  .paragraphs { display:flex; flex-direction:column; gap:1rem; text-align:center; }
+  .paragraphs p:nth-child(1) { font-weight:600; }
+  .paragraphs p:nth-child(2) { font-weight:400; }
+  .paragraphs p:nth-child(3) { font-weight:300; }
+  footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; }
+</style>
 </head>
 <body>
-  <header>
-    <div class="header-container">
-      <div class="logo">erin’s elegance</div>
-      <nav>
-        <ul>
-          <li>
-            <a href="#">Home ▾</a>
-            <ul>
-              <li><a href="booking.html">Booking</a></li>
-              <li><a href="#">Pricing</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <h1>Elegant Nails, Effortless Beauty</h1>
-    <p>Your nails, your style — make a statement every day with a touch of sophistication.</p>
-
-    <a class="book-now" href="booking.html">
-      <button type="button">Book Now</button>
-    </a>
-
-    <div class="paragraphs">
-      <p>Feel confident and pampered with nails that show off your personality.</p>
-      <p>Our simple process ensures you get exactly the look you want.</p>
-      <p>We’ll take care of the details, so you can relax and enjoy your experience.</p>
-    </div>
-  </main>
-
-  <footer>
-    <p>© 2025 erin’s elegance. all rights reserved.</p>
-  </footer>
+<header>
+  <div class="header-container">
+    <div class="logo">erin’s elegance</div>
+    <nav>
+      <ul>
+        <li>
+          <a href="#">Home ▾</a>
+          <ul>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+  <h1>Elegant Nails, Effortless Beauty</h1>
+  <p>Your nails, your style — make a statement every day with a touch of sophistication.</p>
+  <a class="book-now" href="booking.html"><button type="button">Book Now</button></a>
+  <div class="paragraphs">
+    <p>Feel confident and pampered with nails that show off your personality.</p>
+    <p>Our simple process ensures you get exactly the look you want.</p>
+    <p>We’ll take care of the details, so you can relax and enjoy your experience.</p>
+  </div>
+</main>
+<footer>
+  <p>© 2025 erin’s elegance. all rights reserved.</p>
+</footer>
 </body>
 </html>
 
