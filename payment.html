@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment - erin’s elegance</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+
+body {
+  margin:0;
+  font-family: 'Open Sans', sans-serif;
+  background-color:#D8E3DC;
+  color:#222;
+  overflow-x:hidden;
+}
+
+header {
+  background-color: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  top:0;
+  z-index:10;
+}
+
+.header-container {
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.2rem 2rem;
+}
+
+.logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
+nav ul { list-style:none; margin:0; padding:0; display:flex; gap:1.5rem; }
+nav ul li a { text-decoration:none; color:#111; font-weight:500; font-family:'Open Sans', sans-serif; }
+nav ul li a:hover { color:#a18449; }
+
+main { max-width:700px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; }
+h1 { font-family:'Playfair Display', serif; font-size:2.5rem; color:#111; margin-bottom:1rem; }
+.summary { background:#f4f6f2; padding:1rem 1.5rem; border-radius:12px; text-align:left; margin-bottom:1rem; }
+.summary p { margin:0.5rem 0; }
+.terms { background:#fff6dc; padding:1rem; border-radius:12px; margin:1rem 0; font-size:0.95rem; }
+button {
+  background-color:#a18449;
+  color:white;
+  border:none;
+  padding:0.9rem 2rem;
+  border-radius:50px;
+  font-size:1rem;
+  cursor:pointer;
+  margin:0.5rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+button:hover { background-color:#8c703b; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+
+footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; }
+
+@media(max-width:768px){ main h1{ font-size:2rem; } }
+</style>
+</head>
+<body>
+<header>
+<div class="header-container">
+<div class="logo">erin’s elegance</div>
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="booking.html">Booking</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<main>
+<h1>Confirm Your Booking & Payment</h1>
+<div class="summary" id="summary"></div>
+<div class="terms">
+  <p><strong>Terms:</strong></p>
+  <p>Appointments must be cancelled or rescheduled at least 24 hours in advance. Cancellations with less than 24 hours notice will incur a 50% charge. Repeated no-shows may require a deposit.</p>
+</div>
+<p>Choose a payment method:</p>
+<button id="paypalBtn">Pay with PayPal (Test)</button>
+<button id="inPersonBtn">Pay at Appointment</button>
+</main>
+
+<footer>
+<p>© 2025 erin’s elegance. all rights reserved.</p>
+</footer>
+
+<script>
+const summaryDiv = document.getElementById('summary');
+
+// Parse URL params from booking.html
+const params = new URLSearchParams(window.location.search);
+let bookingData = {};
+params.forEach((value,key)=>{ bookingData[key]=value; });
+
+// Display summary
+let html = `<p><strong>Name:</strong> ${bookingData.name}</p>
+<p><strong>Email:</strong> ${bookingData.email}</p>
+<p><strong>Phone:</strong> ${bookingData.phone}</p>
+<p><strong>Appointment:</strong> ${bookingData.date} at ${bookingData.time}</p>
+<p><strong>Services:</strong> ${bookingData.services}</p>
+<p><strong>Total:</strong> ${bookingData.total}</p>`;
+summaryDiv.innerHTML = html;
+
+// Send to Formspree function
+function sendToFormspree(paymentMethod){
+  const formData = new FormData();
+  formData.append('name', bookingData.name);
+  formData.append('email', bookingData.email);
+  formData.append('phone', bookingData.phone);
+  formData.append('date', bookingData.date);
+  formData.append('time', bookingData.time);
+  formData.append('services', bookingData.services);
+  formData.append('total', bookingData.total);
+  formData.append('Payment Method', paymentMethod);
+
+  fetch('https://formspree.io/f/xdkwjqyl',{
+    method:'POST',
+    body: formData,
+    headers:{'Accept':'application/json'}
+  }).then(response=>{
+    if(response.ok){
+      // redirect to thank you
+      window.location.href='thankspage.html';
+    } else {
+      alert('Oops! Problem submitting your booking.');
+    }
+  }).catch(()=>alert('Oops! Problem submitting your booking.'));
+}
+
+// PayPal Test (sandbox)
+document.getElementById('paypalBtn').addEventListener('click', ()=>{
+  // Here you can integrate PayPal sandbox, for now we just mark as paid
+  sendToFormspree('Paid with PayPal');
+});
+
+// Pay at Appointment
+document.getElementById('inPersonBtn').addEventListener('click', ()=>{
+  sendToFormspree('Pay on Appointment Day');
+});
+</script>
+</body>
+</html>
