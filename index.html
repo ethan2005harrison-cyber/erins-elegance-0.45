@@ -74,7 +74,7 @@
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 100%;
+      top: 100%; /* right below parent */
       right: 0;
       background: #f4f6f2;
       border-radius: 8px;
@@ -198,9 +198,9 @@
       <nav>
         <ul>
           <li>
-            <a href="#">Home ▾</a>
+            <a href="index.html">Home ▾</a>
             <ul>
-              <li><a href="#">Booking</a></li>
+              <li><a href="booking.html">Booking</a></li>
               <li><a href="#">Pricing</a></li>
             </ul>
           </li>
@@ -212,7 +212,7 @@
   <section class="hero">
     <h1>Elegant Nails, <span class="highlight">Effortless Beauty</span></h1>
     <p>Because your nails deserve to feel as beautiful as you do.</p>
-    <button class="btn">Book Now</button>
+    <button class="btn" onclick="window.location.href='booking.html'">Book Now</button>
   </section>
 
   <section class="info-section">
@@ -226,4 +226,3 @@
   </footer>
 </body>
 </html>
-
