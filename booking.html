@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Booking - erin’s elegance</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
   <style>
@@ -191,26 +191,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    #thankYouMessage {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #D8E3DC;
-      color: #111;
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      z-index: 9999;
-      box-sizing: border-box;
-    }
-
     @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
     footer {
@@ -223,7 +203,6 @@
 
     @media (max-width: 768px) {
       main h1 { font-size: 2rem; }
-      #thankYouMessage { font-size: 1.5rem; padding: 1rem; }
     }
   </style>
 </head>
@@ -234,7 +213,7 @@
       <nav>
         <ul>
           <li>
-            <a href="booking.html">Booking ▾</a>
+            <a href="#">Booking ▾</a>
             <ul>
               <li><a href="index.html">Home</a></li>
               <li><a href="#">Pricing</a></li>
@@ -249,97 +228,38 @@
     <h1>Book Your Appointment</h1>
     <p>Fill out the form below and we’ll contact you to confirm your booking and arrange the date and time.</p>
 
-    <form id="bookingForm" action="https://formspree.io/f/xdkwjqyl" method="POST" novalidate>
+    <form action="https://formspree.io/f/xdkwjqyl" method="POST">
       <div class="form-group">
         <input type="text" name="name" placeholder="Your Name">
-        <div class="error-message"></div>
       </div>
 
       <div class="form-group">
-        <input type="email" name="email" placeholder="Email Address">
-        <div class="error-message"></div>
+        <input type="email" name="email" placeholder="Email Address" required>
       </div>
 
       <div class="form-group">
         <input type="tel" name="phone" placeholder="Phone Number">
-        <div class="error-message"></div>
       </div>
 
       <div class="form-group">
-        <select name="service">
+        <select name="service" required>
           <option value="">Select Service</option>
           <option value="classic">Classic Manicure</option>
           <option value="gel">Gel & Shellac</option>
           <option value="pedicure">Pedicure</option>
         </select>
-        <div class="error-message"></div>
       </div>
 
       <div class="form-group">
         <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
-        <div class="error-message"></div>
       </div>
 
       <button type="submit">Submit</button>
     </form>
-
-    <div id="thankYouMessage">
-      Thank you! Your booking request has been sent.<br>
-      We’ll contact you soon to arrange the date and time.
-    </div>
   </main>
 
   <footer>
     <p>© 2025 erin’s elegance. all rights reserved.</p>
   </footer>
-
-  <script>
-    const form = document.getElementById('bookingForm');
-    const thankYou = document.getElementById('thankYouMessage');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault(); // stop default submission
-      e.stopPropagation(); // prevent any default behavior
-
-      let valid = true;
-
-      // Clear previous error messages
-      form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-      const email = form.email.value.trim();
-      const service = form.service.value;
-
-      if (!email) {
-        form.email.nextElementSibling.textContent = 'Please enter your email so we can contact you.';
-        valid = false;
-      }
-
-      if (!service) {
-        form.service.nextElementSibling.textContent = 'Please select a service.';
-        valid = false;
-      }
-
-      if (valid) {
-        const formData = new FormData(form);
-
-        // Send using fetch, stays on page
-        fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        })
-        .then(response => {
-          if (response.ok) {
-            form.style.display = 'none'; // hide form
-            thankYou.style.display = 'flex'; // show full-screen thank-you
-          } else {
-            alert("Oops! There was a problem submitting your form.");
-          }
-        })
-        .catch(() => alert("Oops! There was a problem submitting your form."));
-      }
-    });
-  </script>
 </body>
 </html>
-
