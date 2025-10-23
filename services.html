@@ -27,30 +27,62 @@ nav ul li a:hover { color:#a18449; }
 /* MAIN */
 main { max-width: 900px; margin: 12rem auto 4rem; padding:0 2rem; text-align:center; }
 
-h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; }
+h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; color:#111; }
 h2 { font-family:'Playfair Display', serif; font-size:2rem; margin-top:2rem; margin-bottom:1rem; color:#111; }
 
 .services-container { display:grid; gap:1rem; grid-template-columns: repeat(auto-fill,minmax(250px,1fr)); }
 
-.service-card { background:#fff; border-radius:16px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); position:relative; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.3s; }
+.service-card { background:#fff; border-radius:16px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.3s; }
 .service-card:hover { transform:translateY(-5px); }
 
 .service-card p { margin:0.5rem 0; }
 
-button.add-btn { background:#a18449; color:#fff; border:none; padding:0.6rem 1.5rem; border-radius:50px; cursor:pointer; transition: background 0.3s; margin-top:0.5rem; }
-button.add-btn:hover { background:#8c703b; }
+button.add-btn {
+  background:#a18449; color:#fff; border:none; padding:0.6rem 1.5rem;
+  border-radius:50px; cursor:pointer; transition: background 0.3s, transform 0.2s;
+  margin-top:0.5rem;
+}
+button.add-btn:hover { background:#8c703b; transform:translateY(-2px); }
 
-#basket { background:#fff; border-radius:16px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-top:2rem; text-align:left; }
+/* Basket */
+#basket { background:#fff; border-radius:16px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-top:3rem; text-align:left; }
 #basket h3 { margin-top:0; color:#111; font-family:'Playfair Display', serif; }
 #basket ul { list-style:none; padding:0; margin:0.5rem 0; }
 #basket li { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; border-bottom:1px solid #eee; }
 .remove-btn { background:none; border:none; color:#a18449; font-weight:bold; cursor:pointer; font-size:1.1rem; margin-left:0.5rem; }
 #total { font-weight:600; margin-top:0.5rem; text-align:right; color:#a18449; font-family:'Playfair Display', serif; }
 
-button.continue { background:#a18449; color:#fff; border:none; padding:1rem 2rem; border-radius:50px; cursor:pointer; margin-top:1rem; transition: background 0.3s; }
-button.continue:hover { background:#8c703b; }
+button.continue { background:#a18449; color:#fff; border:none; padding:1rem 2rem; border-radius:50px; cursor:pointer; margin-top:1rem; transition: background 0.3s, transform 0.2s; }
+button.continue:hover { background:#8c703b; transform:translateY(-2px); }
 
-@media(max-width:768px){.services-container{grid-template-columns:1fr;}}
+/* Added popup */
+#addedPopup {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #a18449;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  z-index: 1000;
+}
+
+/* Fade animation */
+#addedPopup.show {
+  opacity: 1;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .services-container{grid-template-columns:1fr;}
+  #addedPopup { right: 1rem; bottom: 1rem; font-size: 0.9rem; }
+}
 </style>
 </head>
 <body>
@@ -71,7 +103,7 @@ button.continue:hover { background:#8c703b; }
 <h1>Our Services</h1>
 
 <h2>Manicures</h2>
-<div class="services-container" id="manicures">
+<div class="services-container">
   <div class="service-card" data-name="Basic Manicure" data-price="15">
     <p><strong>Basic Manicure</strong></p>
     <p>Simple pampering for your hands.</p>
@@ -84,16 +116,16 @@ button.continue:hover { background:#8c703b; }
     <p>£30</p>
     <button class="add-btn">Add to Basket</button>
   </div>
-  <div class="service-card" data-name="Manicure Luxury" data-price="40">
+  <div class="service-card" data-name="Luxury Manicure" data-price="40">
     <p><strong>Luxury Manicure</strong></p>
-    <p>The full pampering experience</p>
+    <p>The full pampering experience.</p>
     <p>£40</p>
     <button class="add-btn">Add to Basket</button>
   </div>
 </div>
 
 <h2>Pedicures</h2>
-<div class="services-container" id="pedicures">
+<div class="services-container">
   <div class="service-card" data-name="Basic Pedicure" data-price="30">
     <p><strong>Basic Pedicure</strong></p>
     <p>Simple pampering for your feet.</p>
@@ -108,14 +140,14 @@ button.continue:hover { background:#8c703b; }
   </div>
   <div class="service-card" data-name="Luxury Pedicure" data-price="40">
     <p><strong>Luxury Pedicure</strong></p>
-    <p>Ultimate spa treatment for your feet</p>
+    <p>Ultimate spa treatment for your feet.</p>
     <p>£40</p>
     <button class="add-btn">Add to Basket</button>
   </div>
 </div>
 
 <h2>Acrylics & Builder Gel</h2>
-<div class="services-container" id="acrylics">
+<div class="services-container">
   <div class="service-card" data-name="Full Set Acrylics" data-price="40">
     <p><strong>Full Set Acrylics</strong></p>
     <p>Long-lasting elegant nails.</p>
@@ -142,14 +174,18 @@ button.continue:hover { background:#8c703b; }
   <div id="total">Total: £0</div>
   <button class="continue" id="continueBtn">Continue to Booking</button>
 </div>
+
+<div id="addedPopup">Added to basket ✓</div>
 </main>
 
 <script>
 const basketList = document.getElementById("basketList");
 const totalCost = document.getElementById("total");
+const addedPopup = document.getElementById("addedPopup");
 let total = 0;
 let basketItems = [];
 
+// Update basket display
 function updateBasket() {
   basketList.innerHTML = "";
   total = 0;
@@ -160,7 +196,7 @@ function updateBasket() {
     removeBtn.textContent = "×";
     removeBtn.className = "remove-btn";
     removeBtn.onclick = () => {
-      basketItems.splice(index,1);
+      basketItems.splice(index, 1);
       updateBasket();
     };
     li.appendChild(removeBtn);
@@ -170,20 +206,27 @@ function updateBasket() {
   totalCost.textContent = `Total: £${total}`;
 }
 
-// Add event listeners
+// Popup animation
+function showPopup() {
+  addedPopup.classList.add("show");
+  setTimeout(() => addedPopup.classList.remove("show"), 1800);
+}
+
+// Add service to basket
 document.querySelectorAll(".add-btn").forEach(btn => {
   btn.addEventListener("click", e => {
     const card = e.target.closest(".service-card");
     const name = card.dataset.name;
     const price = parseInt(card.dataset.price);
-    basketItems.push({name, price});
+    basketItems.push({ name, price });
     updateBasket();
+    showPopup();
   });
 });
 
 // Continue to booking
 document.getElementById("continueBtn").addEventListener("click", () => {
-  if(basketItems.length === 0){
+  if (basketItems.length === 0) {
     alert("Your basket is empty!");
     return;
   }
