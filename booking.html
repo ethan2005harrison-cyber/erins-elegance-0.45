@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Booking - Erin’s Elegance</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
@@ -14,274 +13,180 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #D8E3DC;
   color: #222;
+  overflow-x: hidden;
 }
 
-header {
-  background-color: rgba(255,255,255,0.4);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-}
+/* HEADER */
+header { background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 10; }
+.header-container { max-width: 1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
+.logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
+nav ul { list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
+nav ul li a { text-decoration:none; color:#111; font-weight:500; transition: color 0.3s; }
+nav ul li a:hover { color:#a18449; }
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-}
+/* MAIN */
+main { max-width: 600px; margin: 12rem auto 4rem; padding:0 2rem; text-align:center; }
 
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  color: #111;
-  font-weight: 700;
-}
+h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; color:#111; }
+p { font-size:1.1rem; color:#333; margin-bottom:1.5rem; }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-}
+form { display:flex; flex-direction:column; gap:1rem; text-align:left; }
 
-nav ul li a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
+input, textarea { padding:0.8rem 1rem; border-radius:12px; border:1px solid #ccc; font-size:1rem; font-family:'Open Sans', sans-serif; width:100%; box-sizing:border-box; }
+input:focus, textarea:focus { outline:none; border-color:#a18449; box-shadow:0 0 8px rgba(161,132,73,0.4); }
 
-nav ul li a:hover {
-  color: #a18449;
-}
+label { font-weight:600; margin-top:0.5rem; }
 
-main {
-  max-width: 600px;
-  margin: 10rem auto 4rem;
-  padding: 0 2rem;
-}
+button { background-color:#a18449; color:white; border:none; padding:1rem 2rem; border-radius:50px; font-size:1rem; cursor:pointer; transition:background-color 0.3s; margin-top:1rem; }
+button:hover { background-color:#8c703b; }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 1rem;
-}
+#basket { background:#fff; border-radius:16px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:2rem; }
+#basket h3 { font-family:'Playfair Display', serif; margin-top:0; color:#111; }
+#basket ul { list-style:none; padding:0; margin:0.5rem 0; }
+#basket li { padding:0.3rem 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between; }
+#basket .total { font-weight:600; text-align:right; margin-top:0.5rem; font-family:'Playfair Display', serif; color:#a18449; }
 
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-}
+.warning { color:#a18449; font-size:0.9rem; display:none; margin-top:-0.5rem; margin-bottom:0.5rem; }
 
-/* Basket overview */
-#basketOverview {
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 1rem 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
-}
-
-.basket-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-#basketTotal {
-  font-weight: 600;
-  margin-top: 0.5rem;
-  font-family: 'Playfair Display', serif;
-}
-
-/* Booking form */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-input, textarea {
-  padding: 0.8rem 1rem;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  font-family: 'Open Sans', sans-serif;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: #a18449;
-  box-shadow: 0 0 8px rgba(161,132,73,0.3);
-}
-
-/* Error messages */
-.error-message {
-  color: #d4af37;
-  font-size: 0.9rem;
-  display: none;
-  margin-top: -0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-button {
-  background-color: #a18449;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s;
-}
-
-button:hover {
-  background-color: #8c703b;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #444;
-  opacity: 0.7;
-}
+footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; margin-top:2rem; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-container">
-    <div class="logo">erin’s elegance</div>
-    <nav>
-      <ul>
-        <li><a href="about.html">About Our Service</a></li>
-        <li><a href="services.html">View Services</a></li>
-      </ul>
-    </nav>
-  </div>
+<div class="header-container">
+  <div class="logo">erin’s elegance</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</div>
 </header>
 
 <main>
-  <h1>Confirm Your Booking</h1>
+<h1>Book Your Appointment</h1>
+<p>Review your basket and fill in your details. Email & phone are required.</p>
 
-  <!-- Basket overview -->
-  <div id="basketOverview">
-    <h2>Selected Services</h2>
-    <div id="basketItems"></div>
-    <div id="basketTotal">Total: £0</div>
-  </div>
+<div id="basket">
+  <h3>Your Basket</h3>
+  <ul id="basketList"></ul>
+  <div class="total" id="totalCost">Total: £0</div>
+</div>
 
-  <!-- Booking form -->
-  <form id="bookingForm">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Your Name">
-    <div class="error-message" id="nameError">Please fill in this space</div>
+<form id="bookingForm">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" placeholder="Your Name">
 
-    <label for="email">Email *</label>
-    <input type="email" id="email" name="email" placeholder="Email Address">
-    <div class="error-message" id="emailError">Please fill in this space</div>
+  <label for="email">Email <span style="color:#a18449">*</span></label>
+  <input type="email" id="email" name="email" placeholder="Email Address">
+  <div id="emailWarning" class="warning">Please fill in this space</div>
 
-    <label for="phone">Phone *</label>
-    <input type="tel" id="phone" name="phone" placeholder="Phone Number">
-    <div class="error-message" id="phoneError">Please fill in this space</div>
+  <label for="phone">Phone <span style="color:#a18449">*</span></label>
+  <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+  <div id="phoneWarning" class="warning">Please fill in this space</div>
 
-    <label for="desiredDate">Desired Appointment Date</label>
-    <input type="date" id="desiredDate" name="desiredDate">
+  <label for="desiredDate">Desired Appointment Date</label>
+  <input type="date" id="desiredDate" name="desiredDate" required>
+  <div id="dateWarning" class="warning">Appointments must be booked at least 24 hours in advance.</div>
 
-    <label for="notes">Additional Notes</label>
-    <textarea id="notes" name="notes" rows="4" placeholder="Additional notes"></textarea>
+  <label for="notes">Additional Notes</label>
+  <textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea>
 
-    <button type="submit">Continue to Payment</button>
-  </form>
+  <button type="submit">Continue to Payment</button>
+</form>
 </main>
 
 <footer>
-  <p>© 2025 erin’s elegance. all rights reserved.</p>
+<p>© 2025 erin’s elegance. all rights reserved.</p>
 </footer>
 
 <script>
-// --- Read basket from URL ---
+// ===== Basket from URL =====
 const params = new URLSearchParams(window.location.search);
-const basketItemsEl = document.getElementById('basketItems');
-const basketTotalEl = document.getElementById('basketTotal');
-
+const basketListElem = document.getElementById("basketList");
+const totalCostElem = document.getElementById("totalCost");
+let basketItems = [];
 let total = 0;
-for(let i=1; params.has(`service${i}`); i++){
-  const name = params.get(`service${i}`);
-  const price = parseFloat(params.get(`price${i}`));
-  total += price;
 
-  const div = document.createElement('div');
-  div.className = 'basket-item';
-  div.innerHTML = `<span>${name}</span><span>£${price}</span>`;
-  basketItemsEl.appendChild(div);
+params.getAll("service").forEach(s => {
+  const [name, price] = s.split(" - ");
+  basketItems.push({name: name.trim(), price: parseInt(price.trim())});
+});
+
+function updateBasket() {
+  basketListElem.innerHTML = "";
+  total = 0;
+  basketItems.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.name} - £${item.price}`;
+    basketListElem.appendChild(li);
+    total += item.price;
+  });
+  totalCostElem.textContent = `Total: £${total}`;
 }
-basketTotalEl.textContent = `Total: £${total}`;
 
-// --- Restrict date input to 24+ hours ahead ---
-const dateInput = document.getElementById('desiredDate');
+updateBasket();
+
+// ===== 24-hour booking restriction =====
+const dateInput = document.getElementById("desiredDate");
 const today = new Date();
-const minDate = new Date(today);
-minDate.setDate(today.getDate() + 1); // tomorrow
-const maxDate = new Date(today);
-maxDate.setDate(today.getDate() + 30);
+today.setHours(today.getHours() + 24); // 24 hours from now
+const minDate = today.toISOString().split("T")[0];
+dateInput.min = minDate;
 
-const toDateInputValue = date => date.toISOString().split('T')[0];
-dateInput.min = toDateInputValue(minDate);
-dateInput.max = toDateInputValue(maxDate);
-dateInput.addEventListener('keydown', e => e.preventDefault());
+// Prevent typing past min date
+dateInput.addEventListener("keydown", e => e.preventDefault());
 
-// --- Form validation ---
-const form = document.getElementById('bookingForm');
-const emailInput = document.getElementById('email');
-const phoneInput = document.getElementById('phone');
-const nameInput = document.getElementById('name');
-
-form.addEventListener('submit', e => {
+// ===== Form Validation =====
+const form = document.getElementById("bookingForm");
+form.addEventListener("submit", e => {
   e.preventDefault();
   let valid = true;
 
-  // Reset error messages
-  document.getElementById('emailError').style.display = 'none';
-  document.getElementById('phoneError').style.display = 'none';
-  document.getElementById('nameError').style.display = 'none';
+  const email = document.getElementById("email");
+  const phone = document.getElementById("phone");
+  const date = document.getElementById("desiredDate");
+  const emailWarning = document.getElementById("emailWarning");
+  const phoneWarning = document.getElementById("phoneWarning");
+  const dateWarning = document.getElementById("dateWarning");
 
-  if(nameInput.value.trim() === '') { document.getElementById('nameError').style.display = 'block'; valid = false; }
-  if(emailInput.value.trim() === '') { document.getElementById('emailError').style.display = 'block'; valid = false; }
-  if(phoneInput.value.trim() === '') { document.getElementById('phoneError').style.display = 'block'; valid = false; }
+  emailWarning.style.display = "none";
+  phoneWarning.style.display = "none";
+  dateWarning.style.display = "none";
 
-  if(valid){
-    // Pass data to payment.html
-    const paymentParams = new URLSearchParams();
-    paymentParams.append('name', nameInput.value);
-    paymentParams.append('email', emailInput.value);
-    paymentParams.append('phone', phoneInput.value);
-    paymentParams.append('desiredDate', dateInput.value);
-    paymentParams.append('notes', document.getElementById('notes').value);
-    paymentParams.append('total', total);
+  if(!email.value.trim()){ emailWarning.style.display = "block"; valid = false; }
+  if(!phone.value.trim()){ phoneWarning.style.display = "block"; valid = false; }
+  const selectedDate = new Date(date.value);
+  const minBookingDate = new Date();
+  minBookingDate.setHours(minBookingDate.getHours() + 24);
+  if(selectedDate < minBookingDate){ dateWarning.style.display = "block"; valid = false; }
 
-    // Include basket items
-    for(let i=1; params.has(`service${i}`); i++){
-      paymentParams.append(`service${i}`, params.get(`service${i}`));
-      paymentParams.append(`price${i}`, params.get(`price${i}`));
-    }
+  if(!valid) return;
 
-    window.location.href = `payment.html?${paymentParams.toString()}`;
-  }
+  // Pass all info to payment page
+  const formData = {
+    name: document.getElementById("name").value,
+    email: email.value,
+    phone: phone.value,
+    desiredDate: date.value,
+    notes: document.getElementById("notes").value,
+    basket: basketItems
+  };
+
+  const query = new URLSearchParams();
+  basketItems.forEach(i => query.append("service", `${i.name} - ${i.price}`));
+  query.append("name", formData.name);
+  query.append("email", formData.email);
+  query.append("phone", formData.phone);
+  query.append("desiredDate", formData.desiredDate);
+  query.append("notes", formData.notes);
+
+  window.location.href = `payment.html?${query.toString()}`;
 });
 </script>
 
 </body>
 </html>
+
