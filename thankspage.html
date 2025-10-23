@@ -1,144 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Thank You - erin’s elegance</title>
-<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You - erin’s elegance</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #D8E3DC;
-  background-image: url('https://www.transparenttextures.com/patterns/linen.png');
-  background-repeat: repeat;
-  background-size: auto;
-  color: #222;
-  overflow-x: hidden;
-}
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #D8E3DC;
+      background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 40%), 
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.3) 0%, transparent 40%);
+      color: #222;
+      overflow-x: hidden;
+    }
 
-/* HEADER */
-header {
-  background-color: rgba(255,255,255,0.4);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-}
+    header {
+      background-color: rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-}
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+    }
 
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  color: #111;
-  font-weight: 600;
-}
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #111;
+      font-weight: 600;
+    }
 
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 1.5rem;
-}
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
 
-nav ul li a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-  font-family: 'Open Sans', sans-serif;
-}
+    nav ul li a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
 
-nav ul li a:hover {
-  color: #a18449;
-}
+    nav ul li a:hover {
+      color: #a18449;
+    }
 
-/* MAIN */
-main {
-  max-width: 700px;
-  margin: 12rem auto 4rem;
-  padding: 0 2rem;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
+    main {
+      max-width: 700px;
+      margin: 12rem auto 5rem;
+      text-align: center;
+      padding: 0 2rem;
+    }
 
-main h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #111;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-  animation-delay: 0.5s;
-}
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: #111;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.3s;
+    }
 
-main p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: #333;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-}
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7rem;
+      color: #333;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.6s;
+    }
 
-.fade1 { animation-delay: 1s; }
-.fade2 { animation-delay: 1.5s; }
-.fade3 { animation-delay: 2s; }
+    .important {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: left;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.9s;
+    }
 
-@keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
+    .important h2 {
+      font-family: 'Playfair Display', serif;
+      color: #a18449;
+      margin-bottom: 1rem;
+    }
 
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #444;
-  opacity: 0.7;
-}
+    .address {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #333;
+      opacity: 0.9;
+      font-family: 'Open Sans', sans-serif;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1.2s;
+    }
 
-footer p + p {
-  margin-top: 0.3rem;
-}
+    a.home-btn {
+      display: inline-block;
+      margin-top: 3rem;
+      background-color: #a18449;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background-color 0.3s ease, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1.5s;
+    }
 
-</style>
+    a.home-btn:hover {
+      background-color: #8c703b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #444;
+      opacity: 0.7;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div class="header-container">
-    <div class="logo">erin’s elegance</div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  <header>
+    <div class="header-container">
+      <div class="logo">erin’s elegance</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="booking.html">Booking</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<main>
-  <h1>Thank You!</h1>
-  <p class="fade1">Your booking request has been sent successfully.</p>
-  <p class="fade2">We will contact you to confirm your appointment date and time.</p>
-  <p class="fade3"><strong>If you need to cancel or amend your booking, please contact:</strong> erins.elegance1@gmail.com</p>
-  <p class="fade3"><strong>Address:</strong> 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
-  <p class="fade3">Please note that your booking time may need to be adjusted, and we will notify you by email if any changes are required.</p>
-</main>
+  <main>
+    <h1>Thank You for Booking!</h1>
+    <p>Your appointment request has been sent successfully. You’ll receive a confirmation email shortly.</p>
 
-<footer>
-  <p>© 2025 erin’s elegance. all rights reserved.</p>
-  <p>📍 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
-</footer>
+    <div class="important">
+      <h2>Important Information:</h2>
+      <p>
+        Your requested time and date may need to be adjusted.  
+        If any changes are required, you’ll be contacted directly using the email address you provided.
+      </p>
+      <p>
+        If you need to <strong>cancel</strong> or <strong>amend</strong> your appointment,  
+        please email us at <a href="mailto:erins.elegance1@gmail.com">erins.elegance1@gmail.com</a>.
+      </p>
+    </div>
+
+    <div class="address">
+      <p><strong>Location:</strong> 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
+    </div>
+
+    <a class="home-btn" href="index.html">Return Home</a>
+  </main>
+
+  <footer>
+    <p>© 2025 erin’s elegance. all rights reserved.</p>
+  </footer>
 </body>
 </html>
-
