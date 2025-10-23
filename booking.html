@@ -17,8 +17,22 @@ body {
 }
 
 /* HEADER */
-header { background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 10; }
-.header-container { max-width: 1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
+header {
+  background-color: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+.header-container {
+  max-width: 1200px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.2rem 2rem;
+}
 .logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
 nav ul { list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
 nav ul li a { text-decoration:none; color:#111; font-weight:500; transition: color 0.3s; }
@@ -32,74 +46,120 @@ p { font-size:1.1rem; color:#333; margin-bottom:1.5rem; }
 
 form { display:flex; flex-direction:column; gap:1rem; text-align:left; }
 
-input, textarea { padding:0.8rem 1rem; border-radius:12px; border:1px solid #ccc; font-size:1rem; font-family:'Open Sans', sans-serif; width:100%; box-sizing:border-box; }
-input:focus, textarea:focus { outline:none; border-color:#a18449; box-shadow:0 0 8px rgba(161,132,73,0.4); }
+input, textarea, select {
+  padding:0.8rem 1rem;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-size:1rem;
+  font-family:'Open Sans', sans-serif;
+  width:100%;
+  box-sizing:border-box;
+}
+input:focus, textarea:focus, select:focus {
+  outline:none;
+  border-color:#a18449;
+  box-shadow:0 0 8px rgba(161,132,73,0.4);
+}
 
 label { font-weight:600; margin-top:0.5rem; }
 
-button { background-color:#a18449; color:white; border:none; padding:1rem 2rem; border-radius:50px; font-size:1rem; cursor:pointer; transition:background-color 0.3s; margin-top:1rem; }
-button:hover { background-color:#8c703b; }
+button {
+  background-color:#a18449;
+  color:white;
+  border:none;
+  padding:1rem 2rem;
+  border-radius:50px;
+  font-size:1rem;
+  cursor:pointer;
+  transition:background-color 0.3s, transform 0.2s;
+  margin-top:1rem;
+}
+button:hover { background-color:#8c703b; transform:translateY(-2px); }
 
-#basket { background:#fff; border-radius:16px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:2rem; }
+#basket {
+  background:#fff;
+  border-radius:16px;
+  padding:1rem;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom:2rem;
+}
 #basket h3 { font-family:'Playfair Display', serif; margin-top:0; color:#111; }
 #basket ul { list-style:none; padding:0; margin:0.5rem 0; }
 #basket li { padding:0.3rem 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between; }
 #basket .total { font-weight:600; text-align:right; margin-top:0.5rem; font-family:'Playfair Display', serif; color:#a18449; }
 
-.warning { color:#a18449; font-size:0.9rem; display:none; margin-top:-0.5rem; margin-bottom:0.5rem; }
+.warning {
+  color:#a18449;
+  font-size:0.9rem;
+  display:none;
+  margin-top:-0.5rem;
+  margin-bottom:0.5rem;
+}
 
-footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; margin-top:2rem; }
+footer {
+  text-align:center;
+  padding:2rem;
+  font-size:0.9rem;
+  color:#444;
+  opacity:0.7;
+  margin-top:2rem;
+}
 </style>
 </head>
 <body>
 
 <header>
-<div class="header-container">
-  <div class="logo">erin’s elegance</div>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
-</div>
+  <div class="header-container">
+    <div class="logo">erin’s elegance</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <main>
-<h1>Book Your Appointment</h1>
-<p>Review your basket and fill in your details. Email & phone are required.</p>
+  <h1>Book Your Appointment</h1>
+  <p>Review your basket and fill in your details. Email & phone are required.</p>
 
-<div id="basket">
-  <h3>Your Basket</h3>
-  <ul id="basketList"></ul>
-  <div class="total" id="totalCost">Total: £0</div>
-</div>
+  <div id="basket">
+    <h3>Your Basket</h3>
+    <ul id="basketList"></ul>
+    <div class="total" id="totalCost">Total: £0</div>
+  </div>
 
-<form id="bookingForm">
-  <label for="name">Name</label>
-  <input type="text" id="name" name="name" placeholder="Your Name">
+  <form id="bookingForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your Name">
 
-  <label for="email">Email <span style="color:#a18449">*</span></label>
-  <input type="email" id="email" name="email" placeholder="Email Address">
-  <div id="emailWarning" class="warning">Please fill in this space</div>
+    <label for="email">Email <span style="color:#a18449">*</span></label>
+    <input type="email" id="email" name="email" placeholder="Email Address">
+    <div id="emailWarning" class="warning">Please fill in this space</div>
 
-  <label for="phone">Phone <span style="color:#a18449">*</span></label>
-  <input type="tel" id="phone" name="phone" placeholder="Phone Number">
-  <div id="phoneWarning" class="warning">Please fill in this space</div>
+    <label for="phone">Phone <span style="color:#a18449">*</span></label>
+    <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+    <div id="phoneWarning" class="warning">Please fill in this space</div>
 
-  <label for="desiredDate">Desired Appointment Date</label>
-  <input type="date" id="desiredDate" name="desiredDate" required>
-  <div id="dateWarning" class="warning">Appointments must be booked at least 24 hours in advance.</div>
+    <label for="desiredDate">Desired Appointment Date</label>
+    <input type="date" id="desiredDate" name="desiredDate" required>
+    <div id="dateWarning" class="warning">Appointments must be booked at least 24 hours in advance.</div>
 
-  <label for="notes">Additional Notes</label>
-  <textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea>
+    <label for="desiredTime">Preferred Time</label>
+    <select id="desiredTime" name="desiredTime" required>
+      <option value="">Select a time</option>
+    </select>
 
-  <button type="submit">Continue to Payment</button>
-</form>
+    <label for="notes">Additional Notes</label>
+    <textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea>
+
+    <button type="submit">Continue to Payment</button>
+  </form>
 </main>
 
 <footer>
-<p>© 2025 erin’s elegance. all rights reserved.</p>
+  <p>© 2025 erin’s elegance. all rights reserved.</p>
 </footer>
 
 <script>
@@ -126,8 +186,18 @@ function updateBasket() {
   });
   totalCostElem.textContent = `Total: £${total}`;
 }
-
 updateBasket();
+
+// ===== Time slots 9am - 6pm =====
+const timeSelect = document.getElementById("desiredTime");
+for (let hour = 9; hour <= 18; hour++) {
+  const ampm = hour < 12 ? "AM" : "PM";
+  const displayHour = hour <= 12 ? hour : hour - 12;
+  const option = document.createElement("option");
+  option.value = `${displayHour}:00 ${ampm}`;
+  option.textContent = `${displayHour}:00 ${ampm}`;
+  timeSelect.appendChild(option);
+}
 
 // ===== 24-hour booking restriction =====
 const dateInput = document.getElementById("desiredDate");
@@ -136,7 +206,7 @@ today.setHours(today.getHours() + 24); // 24 hours from now
 const minDate = today.toISOString().split("T")[0];
 dateInput.min = minDate;
 
-// Prevent typing past min date
+// Prevent typing
 dateInput.addEventListener("keydown", e => e.preventDefault());
 
 // ===== Form Validation =====
@@ -148,6 +218,7 @@ form.addEventListener("submit", e => {
   const email = document.getElementById("email");
   const phone = document.getElementById("phone");
   const date = document.getElementById("desiredDate");
+  const time = document.getElementById("desiredTime");
   const emailWarning = document.getElementById("emailWarning");
   const phoneWarning = document.getElementById("phoneWarning");
   const dateWarning = document.getElementById("dateWarning");
@@ -158,6 +229,7 @@ form.addEventListener("submit", e => {
 
   if(!email.value.trim()){ emailWarning.style.display = "block"; valid = false; }
   if(!phone.value.trim()){ phoneWarning.style.display = "block"; valid = false; }
+
   const selectedDate = new Date(date.value);
   const minBookingDate = new Date();
   minBookingDate.setHours(minBookingDate.getHours() + 24);
@@ -166,27 +238,6 @@ form.addEventListener("submit", e => {
   if(!valid) return;
 
   // Pass all info to payment page
-  const formData = {
-    name: document.getElementById("name").value,
-    email: email.value,
-    phone: phone.value,
-    desiredDate: date.value,
-    notes: document.getElementById("notes").value,
-    basket: basketItems
-  };
-
   const query = new URLSearchParams();
   basketItems.forEach(i => query.append("service", `${i.name} - ${i.price}`));
-  query.append("name", formData.name);
-  query.append("email", formData.email);
-  query.append("phone", formData.phone);
-  query.append("desiredDate", formData.desiredDate);
-  query.append("notes", formData.notes);
-
-  window.location.href = `payment.html?${query.toString()}`;
-});
-</script>
-
-</body>
-</html>
-
+  query.append("name", document.getElemen
