@@ -1,363 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Booking - erin’s elegance</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Booking - Erin’s Elegance</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background-color: #D8E3DC;
-      background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 40%), 
-                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.3) 0%, transparent 40%);
-      color: #222;
-      overflow-x: hidden;
-    }
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #D8E3DC;
+  color: #222;
+}
 
-    header {
-      background-color: rgba(255,255,255,0.4);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 10;
-    }
+header {
+  background-color: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
 
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-    }
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+}
 
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #111;
-      font-weight: 600;
-    }
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #111;
+  font-weight: 700;
+}
 
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 1.5rem;
-    }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
 
-    nav ul li a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-    }
+nav ul li a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
 
-    nav ul li a:hover {
-      color: #a18449;
-    }
+nav ul li a:hover {
+  color: #a18449;
+}
 
-    main {
-      max-width: 600px;
-      margin: 12rem auto 4rem;
-      padding: 0 2rem;
-      text-align: center;
-    }
+main {
+  max-width: 600px;
+  margin: 10rem auto 4rem;
+  padding: 0 2rem;
+}
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #111;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 0.3s;
-    }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      color: #333;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 0.6s;
-    }
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1s;
-    }
+/* Basket overview */
+#basketOverview {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
 
-    input, textarea, select {
-      padding: 0.8rem 1rem;
-      border-radius: 12px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      font-family: 'Open Sans', sans-serif;
-      width: 100%;
-      box-sizing: border-box;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
+.basket-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
 
-    input:focus, textarea:focus, select:focus {
-      outline: none;
-      border-color: #a18449;
-      box-shadow: 0 0 8px rgba(161,132,73,0.4);
-    }
+#basketTotal {
+  font-weight: 600;
+  margin-top: 0.5rem;
+  font-family: 'Playfair Display', serif;
+}
 
-    .services {
-      background-color: #fff;
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1.2s;
-    }
+/* Booking form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
 
-    .service-option {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
-      background-color: #f9f9f9;
-      transition: background-color 0.3s, transform 0.3s;
-    }
+input, textarea {
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-    .service-option:hover {
-      background-color: #f1eee9;
-      transform: translateY(-2px);
-    }
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #a18449;
+  box-shadow: 0 0 8px rgba(161,132,73,0.3);
+}
 
-    .service-option.selected {
-      background-color: #a18449;
-      color: white;
-    }
+/* Error messages */
+.error-message {
+  color: #d4af37;
+  font-size: 0.9rem;
+  display: none;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
 
-    .service-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-    }
+button {
+  background-color: #a18449;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s;
+}
 
-    .service-price {
-      font-weight: 600;
-    }
+button:hover {
+  background-color: #8c703b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
-    #totalPrice {
-      text-align: right;
-      font-weight: 600;
-      margin-top: 1rem;
-      font-family: 'Playfair Display', serif;
-      color: #111;
-    }
-
-    button {
-      background-color: #a18449;
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease, box-shadow 0.3s;
-      align-self: center;
-      margin-top: 1.5rem;
-      animation: fadeUp 1s forwards;
-      animation-delay: 1.5s;
-    }
-
-    button:hover {
-      background-color: #8c703b;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #444;
-      opacity: 0.7;
-    }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-    }
-  </style>
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: #444;
+  opacity: 0.7;
+}
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="header-container">
-      <div class="logo">erin’s elegance</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <h1>Book Your Appointment</h1>
-    <p>Fill out the form below to request your appointment. We’ll confirm via email soon.</p>
+<header>
+  <div class="header-container">
+    <div class="logo">erin’s elegance</div>
+    <nav>
+      <ul>
+        <li><a href="about.html">About Our Service</a></li>
+        <li><a href="services.html">View Services</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-    <form id="bookingForm" action="payment.html" method="GET">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Email Address" required>
-      <input type="tel" name="phone" placeholder="Phone Number">
+<main>
+  <h1>Confirm Your Booking</h1>
 
-      <label for="desiredDate">Desired Appointment Date:</label>
-      <input type="date" id="desiredDate" name="desiredDate" required>
+  <!-- Basket overview -->
+  <div id="basketOverview">
+    <h2>Selected Services</h2>
+    <div id="basketItems"></div>
+    <div id="basketTotal">Total: £0</div>
+  </div>
 
-      <label for="desiredTime">Desired Appointment Time:</label>
-      <select id="desiredTime" name="desiredTime" required>
-        <option value="">Select a Time</option>
-      </select>
+  <!-- Booking form -->
+  <form id="bookingForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your Name">
+    <div class="error-message" id="nameError">Please fill in this space</div>
 
-      <div class="services">
-        <div class="service-option" data-price="15" data-name="Basic Manicure">
-          <span class="service-name">Basic Manicure</span>
-          <span class="service-price">£15</span>
-        </div>
-        <div class="service-option" data-price="30" data-name="Manicure with Polish">
-          <span class="service-name">Manicure with Polish</span>
-          <span class="service-price">£30</span>
-        </div>
-        <div class="service-option" data-price="40" data-name="Manicure Luxury">
-          <span class="service-name">Manicure Luxury</span>
-          <span class="service-price">£40</span>
-        </div>
-        <div class="service-option" data-price="30" data-name="Basic Pedicure">
-          <span class="service-name">Basic Pedicure</span>
-          <span class="service-price">£30</span>
-        </div>
-        <div class="service-option" data-price="35" data-name="Pedicure with Polish">
-          <span class="service-name">Pedicure with Polish</span>
-          <span class="service-price">£35</span>
-        </div>
-        <div class="service-option" data-price="40" data-name="Pedicure Luxury">
-          <span class="service-name">Pedicure Luxury</span>
-          <span class="service-price">£40</span>
-        </div>
-        <div class="service-option" data-price="40" data-name="Full Set Acrylics">
-          <span class="service-name">Full Set Acrylics</span>
-          <span class="service-price">£40</span>
-        </div>
-        <div class="service-option" data-price="30" data-name="Acrylic Infills">
-          <span class="service-name">Acrylic Infills</span>
-          <span class="service-price">£30</span>
-        </div>
-        <div class="service-option" data-price="25" data-name="Acrylic Removal">
-          <span class="service-name">Acrylic Removal</span>
-          <span class="service-price">£25</span>
-        </div>
-        <div class="service-option" data-price="40" data-name="Builder Gel Full Set">
-          <span class="service-name">Builder Gel Full Set</span>
-          <span class="service-price">£40</span>
-        </div>
-        <div class="service-option" data-price="30" data-name="Builder Gel Infills">
-          <span class="service-name">Builder Gel Infills</span>
-          <span class="service-price">£30</span>
-        </div>
-        <div class="service-option" data-price="25" data-name="Builder Gel Removal">
-          <span class="service-name">Builder Gel Removal</span>
-          <span class="service-price">£25</span>
-        </div>
-        <div id="totalPrice">Total: £0</div>
-      </div>
+    <label for="email">Email *</label>
+    <input type="email" id="email" name="email" placeholder="Email Address">
+    <div class="error-message" id="emailError">Please fill in this space</div>
 
-      <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
+    <label for="phone">Phone *</label>
+    <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+    <div class="error-message" id="phoneError">Please fill in this space</div>
 
-      <button type="submit">Proceed to Payment</button>
-    </form>
-  </main>
+    <label for="desiredDate">Desired Appointment Date</label>
+    <input type="date" id="desiredDate" name="desiredDate">
 
-  <footer>
-    <p>© 2025 erin’s elegance. all rights reserved.</p>
-  </footer>
+    <label for="notes">Additional Notes</label>
+    <textarea id="notes" name="notes" rows="4" placeholder="Additional notes"></textarea>
 
-  <script>
-    // Service selection + total calculation
-    const serviceOptions = document.querySelectorAll('.service-option');
-    const totalPriceDisplay = document.getElementById('totalPrice');
-    const form = document.getElementById('bookingForm');
+    <button type="submit">Continue to Payment</button>
+  </form>
+</main>
 
-    let total = 0;
+<footer>
+  <p>© 2025 erin’s elegance. all rights reserved.</p>
+</footer>
 
-    serviceOptions.forEach(option => {
-      option.addEventListener('click', () => {
-        option.classList.toggle('selected');
-        const price = parseFloat(option.dataset.price);
-        total += option.classList.contains('selected') ? price : -price;
-        totalPriceDisplay.textContent = `Total: £${total}`;
-      });
-    });
+<script>
+// --- Read basket from URL ---
+const params = new URLSearchParams(window.location.search);
+const basketItemsEl = document.getElementById('basketItems');
+const basketTotalEl = document.getElementById('basketTotal');
 
-    // Generate time slots (9am - 6pm)
-    const timeSelect = document.getElementById('desiredTime');
-    for (let hour = 9; hour <= 18; hour++) {
-      const time = `${hour}:00`;
-      const option = document.createElement('option');
-      option.value = time;
-      option.textContent = time;
-      timeSelect.appendChild(option);
+let total = 0;
+for(let i=1; params.has(`service${i}`); i++){
+  const name = params.get(`service${i}`);
+  const price = parseFloat(params.get(`price${i}`));
+  total += price;
+
+  const div = document.createElement('div');
+  div.className = 'basket-item';
+  div.innerHTML = `<span>${name}</span><span>£${price}</span>`;
+  basketItemsEl.appendChild(div);
+}
+basketTotalEl.textContent = `Total: £${total}`;
+
+// --- Restrict date input to 24+ hours ahead ---
+const dateInput = document.getElementById('desiredDate');
+const today = new Date();
+const minDate = new Date(today);
+minDate.setDate(today.getDate() + 1); // tomorrow
+const maxDate = new Date(today);
+maxDate.setDate(today.getDate() + 30);
+
+const toDateInputValue = date => date.toISOString().split('T')[0];
+dateInput.min = toDateInputValue(minDate);
+dateInput.max = toDateInputValue(maxDate);
+dateInput.addEventListener('keydown', e => e.preventDefault());
+
+// --- Form validation ---
+const form = document.getElementById('bookingForm');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const nameInput = document.getElementById('name');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let valid = true;
+
+  // Reset error messages
+  document.getElementById('emailError').style.display = 'none';
+  document.getElementById('phoneError').style.display = 'none';
+  document.getElementById('nameError').style.display = 'none';
+
+  if(nameInput.value.trim() === '') { document.getElementById('nameError').style.display = 'block'; valid = false; }
+  if(emailInput.value.trim() === '') { document.getElementById('emailError').style.display = 'block'; valid = false; }
+  if(phoneInput.value.trim() === '') { document.getElementById('phoneError').style.display = 'block'; valid = false; }
+
+  if(valid){
+    // Pass data to payment.html
+    const paymentParams = new URLSearchParams();
+    paymentParams.append('name', nameInput.value);
+    paymentParams.append('email', emailInput.value);
+    paymentParams.append('phone', phoneInput.value);
+    paymentParams.append('desiredDate', dateInput.value);
+    paymentParams.append('notes', document.getElementById('notes').value);
+    paymentParams.append('total', total);
+
+    // Include basket items
+    for(let i=1; params.has(`service${i}`); i++){
+      paymentParams.append(`service${i}`, params.get(`service${i}`));
+      paymentParams.append(`price${i}`, params.get(`price${i}`));
     }
 
-    // Restrict date to next 30 days + disable typing past limit
-    const dateInput = document.getElementById('desiredDate');
-    const today = new Date();
-    const maxDate = new Date(today);
-    maxDate.setDate(today.getDate() + 30);
+    window.location.href = `payment.html?${paymentParams.toString()}`;
+  }
+});
+</script>
 
-    const toDateInputValue = date =>
-      date.toISOString().split('T')[0];
-
-    dateInput.min = toDateInputValue(today);
-    dateInput.max = toDateInputValue(maxDate);
-
-    dateInput.addEventListener('keydown', e => e.preventDefault());
-
-    // Pass selected data to payment page
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-
-      const selectedServices = Array.from(document.querySelectorAll('.service-option.selected'))
-        .map(opt => opt.dataset.name)
-        .join(', ');
-
-      const params = new URLSearchParams({
-        name: form.name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        desiredDate: form.desiredDate.value,
-        desiredTime: form.desiredTime.value,
-        notes: form.notes.value,
-        total: total,
-        services: selectedServices
-      });
-
-      window.location.href = `payment.html?${params.toString()}`;
-    });
-  </script>
 </body>
 </html>
