@@ -15,6 +15,7 @@ body {
   color:#222;
 }
 
+/* HEADER */
 header { background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); position: fixed; width: 100%; top:0; z-index:10; }
 .header-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
 .logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
@@ -22,6 +23,7 @@ nav ul { list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
 nav ul li a { text-decoration:none; color:#111; font-weight:500; transition: color 0.3s; }
 nav ul li a:hover { color:#a18449; }
 
+/* MAIN */
 main { max-width:600px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; }
 h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; color:#111; }
 p { font-size:1.1rem; color:#333; margin-bottom:2rem; }
@@ -38,8 +40,18 @@ p { font-size:1.1rem; color:#333; margin-bottom:2rem; }
 .payment-option.disabled { opacity:0.5; cursor:not-allowed; }
 .payment-option.disabled::after { content:"Currently Unavailable"; font-size:0.9rem; color:#a18449; font-weight:600; margin-left:10px; }
 
-button { background-color:#a18449; color:white; border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1rem; cursor:pointer; margin-top:2rem; transition:background-color 0.3s; }
-button:hover { background-color:#8c703b; }
+button { background-color:#a18449; color:white; border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1rem; cursor:pointer; margin-top:2rem; transition:background-color 0.3s, transform 0.2s; }
+button:hover { background-color:#8c703b; transform: translateY(-2px); }
+button:disabled { opacity:0.6; cursor:not-allowed; }
+
+#statusMessage {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #a18449;
+  display: none;
+  text-align: center;
+}
 
 footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; margin-top:2rem; }
 </style>
@@ -82,6 +94,7 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
 </div>
 
 <button id="confirmBtn">Confirm Booking</button>
+<div id="statusMessage">Submitting your booking...</div>
 </main>
 
 <footer>
@@ -94,6 +107,8 @@ const params = new URLSearchParams(window.location.search);
 const serviceListElem = document.getElementById("serviceList");
 const totalCostElem = document.getElementById("totalCost");
 const customerDetailsElem = document.getElementById("customerDetails");
+const statusMessage = document.getElementById("statusMessage");
+const confirmBtn = document.getElementById("confirmBtn");
 
 let total = 0;
 let services = [];
@@ -124,32 +139,38 @@ customerDetailsElem.innerHTML = `
 `;
 
 // Handle confirm booking
-document.getElementById("confirmBtn").addEventListener("click", () => {
+confirmBtn.addEventListener("click", () => {
+  confirmBtn.disabled = true;
+  statusMessage.style.display = "block";
+  statusMessage.textContent = "Submitting your booking...";
+
   // Construct Formspree form data
   const formData = new FormData();
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("phone", phone);
-  formData.append("desiredDate", desiredDate);
-  formData.append("notes", notes);
-  services.forEach(s => formData.append("service", `${s.name} - £${s.price}`));
+  formData.append("Name", name);
+  formData.append("Email", email);
+  formData.append("Phone", phone);
+  formData.append("Desired Date", desiredDate);
+  formData.append("Notes", notes);
+  services.forEach(s => formData.append("Service", `${s.name} - £${s.price}`));
+  formData.append("Total", `£${total}`);
 
-  // Submit via fetch to Formspree
-  fetch("https://formspree.io/f/YOUR_FORM_ID", {
+  fetch("https://formspree.io/f/xdkwjqyl", {
     method: "POST",
     body: formData,
     headers: { 'Accept': 'application/json' }
   })
   .then(response => {
-    if(response.ok){
-      window.location.href = "thankspage.html";
+    if (response.ok) {
+      statusMessage.textContent = "Booking confirmed! Redirecting...";
+      setTimeout(() => window.location.href = "thankspage.html", 1500);
     } else {
-      alert("Something went wrong. Please try again.");
+      throw new Error("Formspree submission failed.");
     }
   })
-  .catch(err => {
-    alert("Error submitting form. Please try again.");
-    console.error(err);
+  .catch(error => {
+    statusMessage.textContent = "There was a problem submitting your booking. Please try again.";
+    confirmBtn.disabled = false;
+    console.error(error);
   });
 });
 </script>
