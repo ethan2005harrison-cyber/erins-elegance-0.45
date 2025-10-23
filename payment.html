@@ -79,6 +79,7 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
   <h3>Your Booking:</h3>
   <ul id="serviceList"></ul>
   <div class="total" id="totalCost">Total: £0</div>
+
   <h3>Customer Details:</h3>
   <p id="customerDetails"></p>
 </div>
@@ -128,6 +129,7 @@ const name = params.get("name") || "";
 const email = params.get("email") || "";
 const phone = params.get("phone") || "";
 const desiredDate = params.get("desiredDate") || "";
+const desiredTime = params.get("desiredTime") || "";
 const notes = params.get("notes") || "";
 
 customerDetailsElem.innerHTML = `
@@ -135,6 +137,7 @@ customerDetailsElem.innerHTML = `
 <strong>Email:</strong> ${email}<br>
 <strong>Phone:</strong> ${phone}<br>
 <strong>Date:</strong> ${desiredDate}<br>
+<strong>Time:</strong> ${desiredTime || "Not specified"}<br>
 <strong>Notes:</strong> ${notes || "None"}
 `;
 
@@ -144,12 +147,12 @@ confirmBtn.addEventListener("click", () => {
   statusMessage.style.display = "block";
   statusMessage.textContent = "Submitting your booking...";
 
-  // Construct Formspree form data
   const formData = new FormData();
   formData.append("Name", name);
   formData.append("Email", email);
   formData.append("Phone", phone);
   formData.append("Desired Date", desiredDate);
+  formData.append("Desired Time", desiredTime);
   formData.append("Notes", notes);
   services.forEach(s => formData.append("Service", `${s.name} - £${s.price}`));
   formData.append("Total", `£${total}`);
