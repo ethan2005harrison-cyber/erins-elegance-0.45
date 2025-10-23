@@ -9,281 +9,148 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
 body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #D8E3DC;
-  color: #222;
-  overflow-x: hidden;
+  margin:0;
+  font-family:'Open Sans',sans-serif;
+  background-color:#D8E3DC;
+  color:#222;
 }
 
-/* HEADER */
-header {
-  background-color: rgba(255,255,255,0.4);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-}
+header { background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); position: fixed; width: 100%; top:0; z-index:10; }
+.header-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
+.logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
+nav ul { list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
+nav ul li a { text-decoration:none; color:#111; font-weight:500; transition: color 0.3s; }
+nav ul li a:hover { color:#a18449; }
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-}
+main { max-width:600px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; }
+h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; color:#111; }
+p { font-size:1.1rem; color:#333; margin-bottom:2rem; }
 
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  color: #111;
-  font-weight: 600;
-}
+#summary { background:#fff; border-radius:16px; padding:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:2rem; text-align:left; }
+#summary h3 { font-family:'Playfair Display', serif; margin-top:0; color:#111; }
+#summary ul { list-style:none; padding:0; margin:0.5rem 0 1rem; }
+#summary ul li { padding:0.3rem 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between; }
+#summary .total { font-weight:600; text-align:right; font-family:'Playfair Display', serif; color:#a18449; }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-}
+.payment-options { display:flex; flex-direction:column; gap:1rem; }
+.payment-option { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.2rem; border-radius:12px; border:1px solid #ccc; background:#fff; transition:background 0.3s, border-color 0.3s; }
+.payment-option.active { border-color:#a18449; background:#f7f3ec; }
+.payment-option.disabled { opacity:0.5; cursor:not-allowed; }
+.payment-option.disabled::after { content:"Currently Unavailable"; font-size:0.9rem; color:#a18449; font-weight:600; margin-left:10px; }
 
-nav ul li a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-  transition: color 0.3s;
-}
+button { background-color:#a18449; color:white; border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1rem; cursor:pointer; margin-top:2rem; transition:background-color 0.3s; }
+button:hover { background-color:#8c703b; }
 
-nav ul li a:hover { color: #a18449; }
-
-/* MAIN */
-main {
-  max-width: 650px;
-  margin: 12rem auto 4rem;
-  padding: 0 2rem;
-  text-align: center;
-}
-
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-}
-
-h2 { font-family: 'Playfair Display', serif; color: #a18449; margin-bottom:1rem; }
-
-p { font-size: 1.1rem; margin-bottom: 2rem; opacity:0; transform:translateY(-20px); animation:fadeUp 1s forwards; animation-delay:0.5s; }
-
-/* Summary */
-.summary {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  text-align: left;
-  opacity:0;
-  transform:translateY(-20px);
-  animation: fadeUp 0.8s forwards;
-}
-
-.summary h3 {
-  font-family: 'Playfair Display', serif;
-  margin-top: 0;
-  color: #111;
-}
-
-.summary ul {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 1rem;
-}
-
-.summary ul li {
-  padding: 0.3rem 0;
-  border-bottom: 1px solid #eee;
-  font-size: 1rem;
-}
-
-.summary .total {
-  font-weight: 600;
-  text-align: right;
-  font-family: 'Playfair Display', serif;
-  color: #a18449;
-  margin-top: 0.5rem;
-}
-
-/* Payment options */
-.payment-options {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  opacity: 0;
-  transform:translateY(-20px);
-  animation: fadeUp 0.8s forwards;
-  animation-delay:0.5s;
-}
-
-.payment-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  border: 1px solid #ccc;
-  transition: border-color 0.3s, background 0.3s, transform 0.3s;
-}
-
-.payment-option:hover { transform: translateY(-2px); }
-
-.payment-option.active {
-  border-color: #a18449;
-  background: #f7f3ec;
-}
-
-.payment-option.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  position: relative;
-}
-
-.payment-option.disabled::after {
-  content: "Currently Unavailable";
-  font-size: 0.85rem;
-  color: #a18449;
-  font-weight: 600;
-  margin-left: 10px;
-}
-
-/* Button */
-button {
-  background-color: #a18449;
-  color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 2rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s, transform 0.3s;
-  opacity:0;
-  transform: translateY(-20px);
-  animation: fadeUp 0.8s forwards;
-  animation-delay:0.8s;
-}
-
-button:hover { background-color: #8c703b; box-shadow:0 4px 12px rgba(0,0,0,0.2); transform:translateY(-2px); }
-
-/* Address */
-.address {
-  margin-top: 2.5rem;
-  font-size: 0.95rem;
-  color: #333;
-  opacity: 0.8;
-  font-family: 'Open Sans', sans-serif;
-}
-
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #444;
-  opacity: 0.7;
-}
-
-/* Animations */
-@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
-
-@media (max-width: 768px) {
-  main { margin: 10rem 1rem 4rem; }
-}
+footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; margin-top:2rem; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-container">
-    <div class="logo">erin’s elegance</div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="booking.html">Booking</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </nav>
-  </div>
+<div class="header-container">
+  <div class="logo">erin’s elegance</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="booking.html">Booking</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</div>
 </header>
 
 <main>
-  <h1>Review & Payment</h1>
-  <p>Please review your booking details and choose your payment option below.</p>
+<h1>Review & Payment</h1>
+<p>Please review your booking details below and confirm your appointment.</p>
 
-  <div class="summary" id="summaryBox">
-    <h3>Your Information</h3>
-    <p id="customerInfo"></p>
+<div id="summary">
+  <h3>Your Booking:</h3>
+  <ul id="serviceList"></ul>
+  <div class="total" id="totalCost">Total: £0</div>
+  <h3>Customer Details:</h3>
+  <p id="customerDetails"></p>
+</div>
 
-    <h3>Selected Services:</h3>
-    <ul id="serviceList"></ul>
-    <div class="total" id="totalCost">Total: £0</div>
+<div class="payment-options">
+  <div class="payment-option active" id="payInPerson">
+    <span>💳 Pay in person</span>
+    <small>Please bring a method of payment with you.</small>
   </div>
-
-  <div class="payment-options">
-    <div class="payment-option active" id="payInPerson">
-      <span>💳 Pay in person</span>
-      <small>Please bring a method of payment with you.</small>
-    </div>
-    <div class="payment-option disabled">
-      <span>🅿️ Pay with PayPal</span>
-    </div>
+  <div class="payment-option disabled">
+    <span>🅿️ Pay with PayPal</span>
   </div>
+</div>
 
-  <button id="confirmBtn">Confirm Booking</button>
-
-  <div class="address">
-    <p><strong>Address:</strong> 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
-  </div>
+<button id="confirmBtn">Confirm Booking</button>
 </main>
 
 <footer>
-  <p>© 2025 erin’s elegance. all rights reserved.</p>
+<p>© 2025 erin’s elegance. all rights reserved.</p>
 </footer>
 
 <script>
-// Grab query parameters
+// Grab URL parameters
 const params = new URLSearchParams(window.location.search);
+const serviceListElem = document.getElementById("serviceList");
+const totalCostElem = document.getElementById("totalCost");
+const customerDetailsElem = document.getElementById("customerDetails");
 
-// Display customer info
-const customerInfoEl = document.getElementById("customerInfo");
-customerInfoEl.innerHTML = `
-  <strong>Name:</strong> ${params.get("name") || "-"}<br>
-  <strong>Email:</strong> ${params.get("email") || "-"}<br>
-  <strong>Phone:</strong> ${params.get("phone") || "-"}<br>
-  <strong>Desired Date:</strong> ${params.get("desiredDate") || "-"}
+let total = 0;
+let services = [];
+
+params.getAll("service").forEach(s => {
+  const [name, price] = s.split(" - ");
+  const li = document.createElement("li");
+  li.textContent = `${name.trim()} - £${price.trim()}`;
+  serviceListElem.appendChild(li);
+  total += parseInt(price.trim());
+  services.push({name: name.trim(), price: parseInt(price.trim())});
+});
+totalCostElem.textContent = `Total: £${total}`;
+
+// Customer info
+const name = params.get("name") || "";
+const email = params.get("email") || "";
+const phone = params.get("phone") || "";
+const desiredDate = params.get("desiredDate") || "";
+const notes = params.get("notes") || "";
+
+customerDetailsElem.innerHTML = `
+<strong>Name:</strong> ${name}<br>
+<strong>Email:</strong> ${email}<br>
+<strong>Phone:</strong> ${phone}<br>
+<strong>Date:</strong> ${desiredDate}<br>
+<strong>Notes:</strong> ${notes || "None"}
 `;
 
-// Display basket
-const serviceListEl = document.getElementById("serviceList");
-let total = 0;
-for(let i=1; params.has(`service${i}`); i++){
-  const name = params.get(`service${i}`);
-  const price = parseFloat(params.get(`price${i}`)) || 0;
-  const li = document.createElement("li");
-  li.textContent = `${name} - £${price}`;
-  serviceListEl.appendChild(li);
-  total += price;
-}
-document.getElementById("totalCost").textContent = `Total: £${total}`;
-
-// Confirm button
+// Handle confirm booking
 document.getElementById("confirmBtn").addEventListener("click", () => {
-  window.location.href = "thankspage.html";
+  // Construct Formspree form data
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("phone", phone);
+  formData.append("desiredDate", desiredDate);
+  formData.append("notes", notes);
+  services.forEach(s => formData.append("service", `${s.name} - £${s.price}`));
+
+  // Submit via fetch to Formspree
+  fetch("https://formspree.io/f/YOUR_FORM_ID", {
+    method: "POST",
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(response => {
+    if(response.ok){
+      window.location.href = "thankspage.html";
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  })
+  .catch(err => {
+    alert("Error submitting form. Please try again.");
+    console.error(err);
+  });
 });
 </script>
 
