@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Booking - erin’s elegance</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
@@ -51,57 +52,14 @@
       gap: 1.5rem;
     }
 
-    nav ul li {
-      position: relative;
-      display: inline-block;
-    }
-
     nav ul li a {
       text-decoration: none;
       color: #111;
       font-weight: 500;
-      font-family: 'Open Sans', sans-serif;
     }
 
     nav ul li a:hover {
       color: #a18449;
-    }
-
-    nav ul li ul {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: #f4f6f2;
-      border-radius: 8px;
-      min-width: 150px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-      padding: 0.5rem 0;
-      opacity: 0;
-      transform: translateY(-20px);
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-
-    nav ul li:hover ul {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    nav ul li ul li a {
-      color: #333;
-      display: block;
-      transition: background-color 0.3s, color 0.3s;
-      font-family: 'Playfair Display', serif;
-      padding: 0.5rem 1rem;
-    }
-
-    nav ul li ul li a:hover {
-      color: #fff;
-      background-color: #a18449;
-      border-radius: 5px;
     }
 
     main {
@@ -111,7 +69,7 @@
       text-align: center;
     }
 
-    main h1 {
+    h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       margin-bottom: 1rem;
@@ -119,17 +77,17 @@
       opacity: 0;
       transform: translateY(-20px);
       animation: fadeUp 1s forwards;
-      animation-delay: 0.5s;
+      animation-delay: 0.3s;
     }
 
-    main p {
+    p {
       font-size: 1.1rem;
       margin-bottom: 2rem;
       color: #333;
       opacity: 0;
       transform: translateY(-20px);
       animation: fadeUp 1s forwards;
-      animation-delay: 1s;
+      animation-delay: 0.6s;
     }
 
     form {
@@ -140,11 +98,7 @@
       opacity: 0;
       transform: translateY(-20px);
       animation: fadeUp 1s forwards;
-      animation-delay: 1.5s;
-    }
-
-    .form-group {
-      position: relative;
+      animation-delay: 1s;
     }
 
     input, textarea, select {
@@ -164,53 +118,76 @@
       box-shadow: 0 0 8px rgba(161,132,73,0.4);
     }
 
-    .services-container label {
-      display: block;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      padding: 0.8rem;
-      margin-bottom: 0.5rem;
+    .services {
+      background-color: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1.2s;
+    }
+
+    .service-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
       cursor: pointer;
-      transition: all 0.3s ease;
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s, transform 0.3s;
     }
 
-    .services-container input[type="checkbox"] {
-      display: none;
+    .service-option:hover {
+      background-color: #f1eee9;
+      transform: translateY(-2px);
     }
 
-    .services-container input[type="checkbox"]:checked + label {
-      border-color: #a18449;
-      background-color: #f7f3ec;
-      color: #a18449;
+    .service-option.selected {
+      background-color: #a18449;
+      color: white;
     }
 
-    .total {
-      text-align: center;
+    .service-name {
       font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
+      font-size: 1rem;
+    }
+
+    .service-price {
+      font-weight: 600;
+    }
+
+    #totalPrice {
+      text-align: right;
+      font-weight: 600;
       margin-top: 1rem;
+      font-family: 'Playfair Display', serif;
+      color: #111;
     }
 
     button {
       background-color: #a18449;
       color: white;
       border: none;
-      padding: 0.9rem 2rem;
+      padding: 1rem 2rem;
       border-radius: 50px;
       font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s ease, box-shadow 0.3s;
       align-self: center;
-      opacity: 0;
-      transform: translateY(-20px);
+      margin-top: 1.5rem;
       animation: fadeUp 1s forwards;
-      animation-delay: 2s;
+      animation-delay: 1.5s;
     }
 
     button:hover {
       background-color: #8c703b;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     footer {
@@ -221,24 +198,20 @@
       opacity: 0.7;
     }
 
-    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
-
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+    }
   </style>
 </head>
+
 <body>
   <header>
     <div class="header-container">
       <div class="logo">erin’s elegance</div>
       <nav>
         <ul>
-          <li>
-            <a href="booking.html">Booking ▾</a>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="#">Pricing</a></li>
-            </ul>
-          </li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </nav>
     </div>
@@ -246,40 +219,76 @@
 
   <main>
     <h1>Book Your Appointment</h1>
-    <p>Fill out the form below and we’ll contact you to confirm your booking and arrange the date and time.</p>
+    <p>Fill out the form below to request your appointment. We’ll confirm via email soon.</p>
 
     <form id="bookingForm" action="payment.html" method="GET">
-      <div class="form-group">
-        <input type="text" name="name" placeholder="Your Name" required>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="tel" name="phone" placeholder="Phone Number">
+
+      <label for="desiredDate">Desired Appointment Date:</label>
+      <input type="date" id="desiredDate" name="desiredDate" required>
+
+      <label for="desiredTime">Desired Appointment Time:</label>
+      <select id="desiredTime" name="desiredTime" required>
+        <option value="">Select a Time</option>
+      </select>
+
+      <div class="services">
+        <div class="service-option" data-price="15" data-name="Basic Manicure">
+          <span class="service-name">Basic Manicure</span>
+          <span class="service-price">£15</span>
+        </div>
+        <div class="service-option" data-price="30" data-name="Manicure with Polish">
+          <span class="service-name">Manicure with Polish</span>
+          <span class="service-price">£30</span>
+        </div>
+        <div class="service-option" data-price="40" data-name="Manicure Luxury">
+          <span class="service-name">Manicure Luxury</span>
+          <span class="service-price">£40</span>
+        </div>
+        <div class="service-option" data-price="30" data-name="Basic Pedicure">
+          <span class="service-name">Basic Pedicure</span>
+          <span class="service-price">£30</span>
+        </div>
+        <div class="service-option" data-price="35" data-name="Pedicure with Polish">
+          <span class="service-name">Pedicure with Polish</span>
+          <span class="service-price">£35</span>
+        </div>
+        <div class="service-option" data-price="40" data-name="Pedicure Luxury">
+          <span class="service-name">Pedicure Luxury</span>
+          <span class="service-price">£40</span>
+        </div>
+        <div class="service-option" data-price="40" data-name="Full Set Acrylics">
+          <span class="service-name">Full Set Acrylics</span>
+          <span class="service-price">£40</span>
+        </div>
+        <div class="service-option" data-price="30" data-name="Acrylic Infills">
+          <span class="service-name">Acrylic Infills</span>
+          <span class="service-price">£30</span>
+        </div>
+        <div class="service-option" data-price="25" data-name="Acrylic Removal">
+          <span class="service-name">Acrylic Removal</span>
+          <span class="service-price">£25</span>
+        </div>
+        <div class="service-option" data-price="40" data-name="Builder Gel Full Set">
+          <span class="service-name">Builder Gel Full Set</span>
+          <span class="service-price">£40</span>
+        </div>
+        <div class="service-option" data-price="30" data-name="Builder Gel Infills">
+          <span class="service-name">Builder Gel Infills</span>
+          <span class="service-price">£30</span>
+        </div>
+        <div class="service-option" data-price="25" data-name="Builder Gel Removal">
+          <span class="service-name">Builder Gel Removal</span>
+          <span class="service-price">£25</span>
+        </div>
+        <div id="totalPrice">Total: £0</div>
       </div>
 
-      <div class="form-group">
-        <input type="email" name="email" placeholder="Email Address" required>
-      </div>
+      <textarea name="notes" rows="4" placeholder="Additional Notes"></textarea>
 
-      <div class="form-group">
-        <input type="tel" name="phone" placeholder="Phone Number">
-      </div>
-
-      <div class="services-container">
-        <p>Select your services:</p>
-        <input type="checkbox" id="service1" name="service" value="Basic Manicure - 15"><label for="service1">Basic Manicure (£15)</label>
-        <input type="checkbox" id="service2" name="service" value="Manicure with Polish - 30"><label for="service2">Manicure with Polish (£30)</label>
-        <input type="checkbox" id="service3" name="service" value="Luxury Manicure - 40"><label for="service3">Luxury Manicure (£40)</label>
-        <input type="checkbox" id="service4" name="service" value="Basic Pedicure - 30"><label for="service4">Basic Pedicure (£30)</label>
-        <input type="checkbox" id="service5" name="service" value="Pedicure with Polish - 35"><label for="service5">Pedicure with Polish (£35)</label>
-        <input type="checkbox" id="service6" name="service" value="Luxury Pedicure - 40"><label for="service6">Luxury Pedicure (£40)</label>
-        <input type="checkbox" id="service7" name="service" value="Full Set Acrylics - 40"><label for="service7">Full Set Acrylics (£40)</label>
-        <input type="checkbox" id="service8" name="service" value="Acrylic Infills - 30"><label for="service8">Acrylic Infills (£30)</label>
-        <input type="checkbox" id="service9" name="service" value="Acrylic Removal - 25"><label for="service9">Acrylic Removal (£25)</label>
-        <input type="checkbox" id="service10" name="service" value="Builder Gel Full Set - 40"><label for="service10">Builder Gel Full Set (£40)</label>
-        <input type="checkbox" id="service11" name="service" value="Builder Gel Infills - 30"><label for="service11">Builder Gel Infills (£30)</label>
-        <input type="checkbox" id="service12" name="service" value="Builder Gel Removal - 25"><label for="service12">Builder Gel Removal (£25)</label>
-      </div>
-
-      <div class="total" id="totalDisplay">Total: £0</div>
-
-      <button type="submit">Confirm & Continue</button>
+      <button type="submit">Proceed to Payment</button>
     </form>
   </main>
 
@@ -288,17 +297,67 @@
   </footer>
 
   <script>
-    const checkboxes = document.querySelectorAll('input[name="service"]');
-    const totalDisplay = document.getElementById('totalDisplay');
+    // Service selection + total calculation
+    const serviceOptions = document.querySelectorAll('.service-option');
+    const totalPriceDisplay = document.getElementById('totalPrice');
+    const form = document.getElementById('bookingForm');
 
-    checkboxes.forEach(cb => cb.addEventListener('change', () => {
-      let total = 0;
-      checkboxes.forEach(box => {
-        if (box.checked) total += parseInt(box.value.split('-')[1]);
+    let total = 0;
+
+    serviceOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        option.classList.toggle('selected');
+        const price = parseFloat(option.dataset.price);
+        total += option.classList.contains('selected') ? price : -price;
+        totalPriceDisplay.textContent = `Total: £${total}`;
       });
-      totalDisplay.textContent = `Total: £${total}`;
-    }));
+    });
+
+    // Generate time slots (9am - 6pm)
+    const timeSelect = document.getElementById('desiredTime');
+    for (let hour = 9; hour <= 18; hour++) {
+      const time = `${hour}:00`;
+      const option = document.createElement('option');
+      option.value = time;
+      option.textContent = time;
+      timeSelect.appendChild(option);
+    }
+
+    // Restrict date to next 30 days + disable typing past limit
+    const dateInput = document.getElementById('desiredDate');
+    const today = new Date();
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 30);
+
+    const toDateInputValue = date =>
+      date.toISOString().split('T')[0];
+
+    dateInput.min = toDateInputValue(today);
+    dateInput.max = toDateInputValue(maxDate);
+
+    dateInput.addEventListener('keydown', e => e.preventDefault());
+
+    // Pass selected data to payment page
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const selectedServices = Array.from(document.querySelectorAll('.service-option.selected'))
+        .map(opt => opt.dataset.name)
+        .join(', ');
+
+      const params = new URLSearchParams({
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        desiredDate: form.desiredDate.value,
+        desiredTime: form.desiredTime.value,
+        notes: form.notes.value,
+        total: total,
+        services: selectedServices
+      });
+
+      window.location.href = `payment.html?${params.toString()}`;
+    });
   </script>
 </body>
 </html>
-
