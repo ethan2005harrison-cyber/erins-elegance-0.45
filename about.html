@@ -7,22 +7,173 @@
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-:root{ --sage:#D8E3DC; --gold:#a18449; --ink:#111; --text:#333; --card:#fff; }
-body{ margin:0; font-family:'Open Sans',sans-serif; background:var(--sage); color:var(--ink); }
-header{ background:rgba(255,255,255,.4); backdrop-filter:blur(10px); position:fixed; width:100%; top:0; z-index:10; }
-.header-container{ max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
+
+:root{
+  --sage:#D8E3DC;
+  --sage-2:#E7EFEA;
+  --ink:#111;
+  --text:#333;
+  --gold:#a18449;
+  --gold-dark:#8c703b;
+  --card:#fff;
+
+  /* design knobs */
+  --radius:16px;
+  --shadow:0 4px 12px rgba(0,0,0,.10);
+  --shadow-deep:0 10px 30px rgba(0,0,0,.12);
+  --underline-h:2px;
+}
+
+*{ box-sizing:border-box }
+
+body{
+  margin:0;
+  font-family:'Open Sans',sans-serif;
+  background:var(--sage);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+
+/* Optional linen texture (toggled by .has-texture on body) */
+body.has-texture{
+  background-image: url('https://www.transparenttextures.com/patterns/linen.png');
+  background-repeat: repeat;
+}
+
+/* HEADER */
+header{
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(10px);
+  position:fixed; top:0; left:0; right:0; z-index:10;
+}
+.header-container{
+  max-width:1100px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.2rem 2rem;
+}
 .logo{ font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; }
 nav ul{ list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
-nav ul li a{ text-decoration:none; color:var(--ink); font-weight:600; }
-nav ul li a:hover{ color:var(--gold); }
-main{ max-width:800px; margin:11rem auto 4rem; padding:0 1.5rem; }
-h1{ font-family:'Playfair Display',serif; font-size:2.4rem; margin-bottom:.6rem; }
-.card{ background:var(--card); border-radius:16px; padding:1.25rem 1.4rem; box-shadow:0 4px 12px rgba(0,0,0,.1); }
-p{ color:var(--text); line-height:1.7; }
-footer{ text-align:center; padding:2rem; color:#555; opacity:.8; }
+nav ul li a{ text-decoration:none; color:var(--ink); font-weight:600; transition:color .25s }
+nav ul li a:hover{ color:var(--gold) }
+
+/* MAIN */
+main{ max-width:1000px; margin:11rem auto 4rem; padding:0 1.5rem; }
+
+/* HERO */
+.hero{
+  text-align:center; margin-bottom:2rem;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem; margin:.2rem 0 .4rem;
+  animation:fadeUp .6s ease both;
+}
+.hero p{ color:var(--text); margin:0; animation:fadeUp .8s ease both; animation-delay:.08s; }
+
+/* CONTENT */
+.row{
+  display:grid; grid-template-columns: 1.1fr .9fr; gap:1.25rem;
+}
+@media(max-width:900px){ .row{ grid-template-columns:1fr; } }
+
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:1.4rem 1.5rem;
+  animation:fadeUp .7s ease both;
+}
+.card + .card{ margin-top:1rem; }
+
+.photo{
+  background:linear-gradient(160deg,#fff, var(--sage-2));
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  min-height:300px;
+  position:relative; overflow:hidden;
+}
+.photo::after{
+  /* soft gold highlight */
+  content:""; position:absolute; inset:auto -20% 0 -20%; height:35%;
+  background:radial-gradient(60% 120% at 50% 100%, rgba(161,132,73,.18), transparent 60%);
+}
+
+/* Values grid */
+.values{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1rem;
+}
+@media(max-width:900px){ .values{ grid-template-columns:1fr; } }
+.value{
+  background:#fff;
+  border:1px solid #ece8df;
+  border-radius:var(--radius);
+  padding:1rem 1.1rem;
+  box-shadow:var(--shadow);
+}
+.value h3{
+  margin:.1rem 0 .35rem;
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;
+  position:relative;
+}
+.value h3.use-underline::after{
+  content:""; position:absolute; left:0; bottom:-.35rem; width:40px; height:var(--underline-h);
+  background:linear-gradient(90deg,var(--gold),transparent);
+  border-radius:999px;
+}
+.value p{ color:var(--text); margin:.4rem 0 0; line-height:1.6; }
+
+/* CTA */
+.cta{
+  margin-top:1.5rem; display:flex; gap:.8rem; flex-wrap:wrap;
+}
+.btn{
+  background:var(--gold); color:#fff; border:none;
+  padding:.85rem 1.4rem; border-radius:999px;
+  font-weight:700; cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,.1);
+  transition:background .25s, transform .15s, box-shadow .25s;
+}
+.btn:hover{ background:var(--gold-dark); transform:translateY(-2px); box-shadow:var(--shadow-deep); }
+.btn.secondary{
+  background:#fff; color:var(--ink); border:1px solid #e7e3dc;
+}
+.btn.secondary:hover{ background:#fff; transform:translateY(-2px); }
+
+/* Design Tweaks panel */
+.tweak-toggle{
+  position:fixed; right:18px; bottom:18px; z-index:20;
+  width:52px; height:52px; border-radius:50%;
+  background:var(--gold); color:#fff; border:none; cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,.18);
+  display:grid; place-items:center; font-size:22px; font-weight:700;
+}
+.tweak-panel{
+  position:fixed; right:18px; bottom:78px; z-index:20;
+  width:280px; max-width:90vw;
+  background:#fff; border:1px solid #ece8df; border-radius:16px; box-shadow:var(--shadow-deep);
+  padding:12px 12px 10px;
+  display:none;
+}
+.tweak-panel.open{ display:block; animation:fadeUp .18s ease both; }
+.tweak-panel h4{ margin:.2rem 0 .6rem; font-family:'Playfair Display',serif; }
+.tweak-panel .row2{ display:grid; grid-template-columns:1fr 1fr; gap:.45rem; }
+.tweak-panel .ctrl{
+  border:1px solid #ece8df; border-radius:12px; padding:.5rem .6rem; font-size:.92rem; cursor:pointer; text-align:center;
+  background:#fff;
+}
+.ctrl.active{ border-color:var(--gold); box-shadow:0 0 0 2px rgba(161,132,73,.15) inset; }
+
+/* serif body toggle */
+body.serif{ font-family:'Playfair+Display', serif; } /* playful option */
+
+/* animations */
+@keyframes fadeUp{ from{ opacity:0; transform: translateY(12px) } to{ opacity:1; transform: translateY(0) } }
+
+footer{ text-align:center; padding:2rem; color:#555; opacity:.85; }
 </style>
 </head>
-<body>
+<body class="has-texture">
 <header>
   <div class="header-container">
     <div class="logo">erin’s elegance</div>
@@ -38,13 +189,144 @@ footer{ text-align:center; padding:2rem; color:#555; opacity:.8; }
 </header>
 
 <main>
-  <h1>About Our Service</h1>
-  <div class="card">
-    <p>At Erin’s Elegance, we believe your nail appointment should feel like a deep breath — cozy, calming, and beautifully personal. From natural manicures to luxury pedicures and sculpted enhancements, every service is tailored to you.</p>
-    <p>Located in Callington, Cornwall, we use quality products, gentle techniques, and a warm aesthetic to make your time with us feel special.</p>
-  </div>
+  <section class="hero">
+    <h1>About Our Service</h1>
+    <p>Cozy, natural, and softly elegant — a salon experience designed to make you feel at ease.</p>
+  </section>
+
+  <section class="row">
+    <!-- Story + values -->
+    <div>
+      <div class="card">
+        <h2 style="font-family:'Playfair Display',serif; margin:.1rem 0 .6rem;">Our Story</h2>
+        <p style="color:var(--text); line-height:1.8;">
+          At Erin’s Elegance, we believe your nail appointment should feel like a deep breath — calming, unhurried, and beautifully personal. 
+          From simple manicures to luxury pedicures and sculpted enhancements, every detail is chosen to match your style and comfort.
+        </p>
+        <p style="color:var(--text); line-height:1.8;">
+          We’re proudly based in Callington, Cornwall. Expect gentle techniques, quality products, and that soft, rounded aesthetic you see throughout our brand.
+        </p>
+
+        <div class="values">
+          <div class="value">
+            <h3 class="use-underline">Cozy Care</h3>
+            <p>Warm, welcoming, and never rushed — your appointment is your time.</p>
+          </div>
+          <div class="value">
+            <h3 class="use-underline">Natural Beauty</h3>
+            <p>Soft colors, timeless shapes, and finishes that feel like you.</p>
+          </div>
+          <div class="value">
+            <h3 class="use-underline">Refined Quality</h3>
+            <p>Thoughtful products and techniques for long-lasting, elegant results.</p>
+          </div>
+        </div>
+
+        <div class="cta">
+          <button class="btn" onclick="location.href='services.html'">View Services</button>
+          <button class="btn secondary" onclick="location.href='booking.html'">Book an Appointment</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo / visual -->
+    <aside class="photo" aria-label="Salon aesthetic photo placeholder"></aside>
+  </section>
 </main>
 
-<footer><p>© 2025 Erin’s Elegance. All rights reserved.</p></footer>
+<!-- Design Tweaks (only on About page so you can test looks safely) -->
+<button class="tweak-toggle" aria-label="Design Tweaks" title="Design Tweaks" id="tweakToggle">⚙️</button>
+<div class="tweak-panel" id="tweakPanel" aria-live="polite">
+  <h4>Design Tweaks</h4>
+  <div class="row2" style="margin-bottom:.45rem">
+    <div class="ctrl" data-action="texture">Texture ✓</div>
+    <div class="ctrl" data-action="serif">Serif Body</div>
+  </div>
+  <div class="row2" style="margin-bottom:.45rem">
+    <div class="ctrl" data-action="radius-16">Radius 16</div>
+    <div class="ctrl" data-action="radius-24">Radius 24</div>
+  </div>
+  <div class="row2" style="margin-bottom:.45rem">
+    <div class="ctrl" data-action="shadow-soft">Soft Shadow</div>
+    <div class="ctrl" data-action="shadow-deep">Deeper Shadow</div>
+  </div>
+  <div class="row2">
+    <div class="ctrl" data-action="underline-on">Gold Underline</div>
+    <div class="ctrl" data-action="underline-off">No Underline</div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Erin’s Elegance. All rights reserved.</p>
+</footer>
+
+<script>
+/* Toggle panel */
+const panel = document.getElementById('tweakPanel');
+document.getElementById('tweakToggle').addEventListener('click', ()=> {
+  panel.classList.toggle('open');
+});
+
+/* Controls */
+const cls = (sel)=>document.querySelectorAll(sel);
+const body = document.body;
+const valueHeadings = () => document.querySelectorAll('.value h3');
+
+function setActive(action){
+  document.querySelectorAll('.ctrl').forEach(c=>{
+    if(c.dataset.action===action) c.classList.add('active');
+    else if(
+      (action.startsWith('radius') && c.dataset.action.startsWith('radius')) ||
+      (action.startsWith('shadow') && c.dataset.action.startsWith('shadow')) ||
+      (['underline-on','underline-off'].includes(action) && ['underline-on','underline-off'].includes(c.dataset.action))
+    ){ c.classList.remove('active'); }
+  });
+}
+
+document.querySelectorAll('.ctrl').forEach(ctrl=>{
+  ctrl.addEventListener('click', ()=>{
+    const a = ctrl.dataset.action;
+
+    switch(a){
+      case 'texture':
+        body.classList.toggle('has-texture');
+        ctrl.classList.toggle('active');
+        break;
+      case 'serif':
+        body.classList.toggle('serif');
+        ctrl.classList.toggle('active');
+        break;
+
+      case 'radius-16':
+        document.documentElement.style.setProperty('--radius','16px');
+        setActive('radius-16'); break;
+      case 'radius-24':
+        document.documentElement.style.setProperty('--radius','24px');
+        setActive('radius-24'); break;
+
+      case 'shadow-soft':
+        document.querySelectorAll('.card, .value, .photo').forEach(el=> el.style.boxShadow = getComputedStyle(document.documentElement).getPropertyValue('--shadow'));
+        setActive('shadow-soft'); break;
+      case 'shadow-deep':
+        document.querySelectorAll('.card, .value, .photo').forEach(el=> el.style.boxShadow = getComputedStyle(document.documentElement).getPropertyValue('--shadow-deep'));
+        setActive('shadow-deep'); break;
+
+      case 'underline-on':
+        valueHeadings().forEach(h=> h.classList.add('use-underline'));
+        setActive('underline-on'); break;
+      case 'underline-off':
+        valueHeadings().forEach(h=> h.classList.remove('use-underline'));
+        setActive('underline-off'); break;
+    }
+  });
+});
+
+/* Defaults */
+document.querySelector('.ctrl[data-action="texture"]').classList.add('active');
+document.querySelector('.ctrl[data-action="radius-16"]').classList.add('active');
+document.querySelector('.ctrl[data-action="shadow-soft"]').classList.add('active');
+document.querySelector('.ctrl[data-action="underline-on"]').classList.add('active');
+</script>
+
 </body>
 </html>
