@@ -46,115 +46,44 @@ header {
   font-weight: 600;
 }
 
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 1.5rem;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-  font-family: 'Open Sans', sans-serif;
-}
-
-nav ul li a:hover {
-  color: #a18449;
-}
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.5rem; }
+nav ul li a { text-decoration: none; color: #111; font-weight: 500; }
+nav ul li a:hover { color: #a18449; }
 
 /* MAIN */
-main {
-  max-width: 800px;
-  margin: 12rem auto 4rem;
-  padding: 0 2rem;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
+main { max-width: 800px; margin: 12rem auto 4rem; padding: 0 2rem; text-align: center; position: relative; z-index: 2; }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: #111;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-  animation-delay: 0.5s;
+  font-size: 3rem; margin-bottom: 1rem; color: #111;
+  opacity: 0; transform: translateY(-20px); animation: fadeUp 1s forwards; animation-delay: 0.5s;
 }
+p { font-size: 1.1rem; margin-bottom: 2rem; color: #333; opacity: 0; transform: translateY(-20px); animation: fadeUp 1s forwards; }
 
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #111;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-  animation-delay: 1s;
+button {
+  background-color: #a18449; color: white; border: none; padding: 0.9rem 2rem; border-radius: 50px; font-size: 1rem; cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s; margin: 1rem 0.5rem;
 }
-
-p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: #333;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-}
+button:hover { background-color: #8c703b; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
 .paragraph-bold { font-weight: 600; animation-delay: 1.5s; }
 .paragraph-medium { font-weight: 400; animation-delay: 2s; }
 .paragraph-light { font-weight: 300; animation-delay: 2.5s; }
 
-button {
-  background-color: #a18449;
-  color: white;
-  border: none;
-  padding: 0.9rem 2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s;
-  margin: 1rem 0.5rem;
-}
-
-button:hover {
-  background-color: #8c703b;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
 @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
-/* Gold streak animation */
+/* Gold streaks */
 .gold-line {
-  position: absolute;
-  width: 2px;
-  height: 150px;
-  background: linear-gradient(180deg, #d4af37, transparent);
-  opacity: 0.3;
-  top: -200px;
-  left: 50%;
-  animation: moveLine 10s linear infinite;
+  position: absolute; width: 2px; height: 150px; background: linear-gradient(180deg, #d4af37, transparent);
+  opacity: 0.3; top: -200px; left: 50%; animation: moveLine 10s linear infinite;
 }
-
 @keyframes moveLine {
   0% { transform: translateX(0) translateY(0) rotate(0deg); }
   50% { transform: translateX(200px) translateY(400px) rotate(45deg); }
   100% { transform: translateX(-200px) translateY(800px) rotate(90deg); }
 }
 
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #444;
-  opacity: 0.7;
-}
-
+footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #444; opacity: 0.7; }
 </style>
 </head>
 <body>
@@ -164,9 +93,10 @@ footer {
     <div class="logo">erin’s elegance</div>
     <nav>
       <ul>
-        <!-- Removed direct Booking link -->
-        <li><a href="about.html">About Our Service</a></li>
         <li><a href="services.html">View Services</a></li>
+        <li><a href="about.html">About Our Service</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
       </ul>
     </nav>
   </div>
