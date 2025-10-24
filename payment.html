@@ -2,12 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Payment - Erin’s Elegance</title>
+
+<title>Payment — Erin’s Elegance</title>
+<meta name="description" content="Review your booking details and confirm. Payment is taken in person on the day." />
+<link rel="canonical" href="https://www.erinselegance.com/payment.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Payment — Erin’s Elegance" />
+<meta property="og:description" content="Confirm your booking (pay in person). View terms & conditions." />
+<meta property="og:url" content="https://www.erinselegance.com/payment.html" />
+<meta property="og:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Payment — Erin’s Elegance" />
+<meta name="twitter:description" content="Confirm your booking and pay in person." />
+<meta name="twitter:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
+
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 :root{ --sage:#B8CEC3; --sage-1:#A9C3B8; --sage-2:#CFE0D9; --gold:#a18449; --gold-dark:#8c703b; --ink:#111; --text:#333; }
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,1px,1px);white-space:nowrap;border:0}
 body { margin:0; font-family:'Open Sans',sans-serif; background-color:var(--sage); color:#222; position:relative; overflow-x:hidden; }
 header { background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); position: fixed; width: 100%; top:0; z-index:10; }
 .header-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
@@ -62,11 +81,12 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
 </style>
 </head>
 <body>
+<a href="#main-content" class="sr-only">Skip to content</a>
 
-<header>
+<header role="banner">
 <div class="header-container">
   <div class="logo">erin’s elegance</div>
-  <nav>
+  <nav aria-label="Primary">
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="services.html">View Services</a></li>
@@ -87,11 +107,11 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
   <div class="bg-grain"></div>
 </div>
 
-<main>
+<main id="main-content" role="main">
 <h1>Review & Payment</h1>
 <p>Please review your booking details below and confirm your appointment.</p>
 
-<div id="summary">
+<div id="summary" aria-label="Booking Summary">
   <h3>Your Booking:</h3>
   <ul id="serviceList"></ul>
   <div class="total" id="totalCost">Total: £0</div>
@@ -100,12 +120,12 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
   <p id="customerDetails"></p>
 </div>
 
-<div class="payment-options">
-  <div class="payment-option active" id="payInPerson">
+<div class="payment-options" aria-label="Payment Options">
+  <div class="payment-option active" id="payInPerson" aria-selected="true">
     <span>💳 Pay in person</span>
     <small>Please bring a method of payment with you.</small>
   </div>
-  <div class="payment-option disabled">
+  <div class="payment-option disabled" aria-disabled="true">
     <span>🅿️ Pay with PayPal</span>
   </div>
 </div>
@@ -114,13 +134,25 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
   By confirming, you agree to our <a href="terms.html">Terms &amp; Conditions</a>.
 </p>
 
-<button id="confirmBtn">Confirm Booking</button>
-<div id="statusMessage">Submitting your booking...</div>
+<button id="confirmBtn" type="button">Confirm Booking</button>
+<div id="statusMessage" role="status" aria-live="polite">Submitting your booking...</div>
 </main>
 
-<footer>
+<footer role="contentinfo">
 <p>© 2025 erin’s elegance. all rights reserved.</p>
 </footer>
+
+<!-- Breadcrumb JSON-LD -->
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"BreadcrumbList",
+ "itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://www.erinselegance.com/"},
+  {"@type":"ListItem","position":2,"name":"Payment","item":"https://www.erinselegance.com/payment.html"}
+ ]
+}
+</script>
 
 <script>
 const params = new URLSearchParams(window.location.search);
@@ -170,15 +202,4 @@ confirmBtn.addEventListener("click", () => {
   fetch("https://formspree.io/f/xdkwjqyl", { method: "POST", body: formData, headers: { 'Accept': 'application/json' } })
   .then(response => {
     if (response.ok) {
-      statusMessage.textContent = "Booking confirmed! Redirecting...";
-      setTimeout(() => window.location.href = "thankspage.html", 1200);
-    } else { throw new Error("Formspree submission failed."); }
-  })
-  .catch(error => {
-    statusMessage.textContent = "There was a problem submitting your booking. Please try again.";
-    confirmBtn.disabled = false; console.error(error);
-  });
-});
-</script>
-</body>
-</html>
+      statusMessage.textContent = "Booking confirmed! Redire
