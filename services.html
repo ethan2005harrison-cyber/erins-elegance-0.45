@@ -2,12 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Services - Erin’s Elegance</title>
+
+<title>Services — Erin’s Elegance</title>
+<meta name="description" content="Explore manicures, pedicures, acrylics, and builder gel at Erin’s Elegance in Callington. Add to basket and book easily." />
+<link rel="canonical" href="https://www.erinselegance.com/services.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Services — Erin’s Elegance" />
+<meta property="og:description" content="Manicures, pedicures, acrylics, builder gel — cozy and elegant. Add to basket and book." />
+<meta property="og:url" content="https://www.erinselegance.com/services.html" />
+<meta property="og:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Services — Erin’s Elegance" />
+<meta name="twitter:description" content="Explore our nail services and add to your basket." />
+<meta name="twitter:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
+
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 :root{ --sage:#B8CEC3; --sage-1:#A9C3B8; --sage-2:#CFE0D9; --gold:#a18449; --gold-dark:#8c703b; --ink:#111; --text:#333; }
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,1px,1px);white-space:nowrap;border:0}
 body { margin:0; font-family:'Open Sans',sans-serif; background-color:var(--sage); color:#222; overflow-x:hidden; position:relative; }
 /* HEADER */
 header { background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 10; }
@@ -27,6 +46,7 @@ h2 { font-family:'Playfair Display', serif; font-size:2rem; margin-top:2rem; mar
 .service-card p { margin:0.5rem 0; }
 button.add-btn { background:var(--gold); color:#fff; border:none; padding:0.6rem 1.5rem; border-radius:50px; cursor:pointer; transition: background 0.3s, transform 0.2s; margin-top:0.5rem; }
 button.add-btn:hover { background:var(--gold-dark); transform:translateY(-2px); }
+button.add-btn:focus{outline:2px solid #a18449; outline-offset:2px}
 
 /* Basket */
 #basket { background:#fff; border-radius:16px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-top:3rem; text-align:left; }
@@ -34,9 +54,11 @@ button.add-btn:hover { background:var(--gold-dark); transform:translateY(-2px); 
 #basket ul { list-style:none; padding:0; margin:0.5rem 0; }
 #basket li { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; border-bottom:1px solid #eee; }
 .remove-btn { background:none; border:none; color:var(--gold); font-weight:bold; cursor:pointer; font-size:1.1rem; margin-left:0.5rem; }
+.remove-btn:focus{outline:2px solid #a18449; outline-offset:2px}
 #total { font-weight:600; margin-top:0.5rem; text-align:right; color:var(--gold); font-family:'Playfair Display', serif; }
 button.continue { background:var(--gold); color:#fff; border:none; padding:1rem 2rem; border-radius:50px; cursor:pointer; margin-top:1rem; transition: background 0.3s, transform 0.2s; }
 button.continue:hover { background:var(--gold-dark); transform:translateY(-2px); }
+button.continue:focus{outline:2px solid #a18449; outline-offset:2px}
 
 /* Added popup toast */
 #addedPopup {
@@ -71,11 +93,12 @@ button.continue:hover { background:var(--gold-dark); transform:translateY(-2px);
 </style>
 </head>
 <body>
+<a href="#main-content" class="sr-only">Skip to content</a>
 
-<header>
+<header role="banner">
 <div class="header-container">
   <div class="logo">erin’s elegance</div>
-  <nav>
+  <nav aria-label="Primary">
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -95,22 +118,22 @@ button.continue:hover { background:var(--gold-dark); transform:translateY(-2px);
   <div class="bg-grain"></div>
 </div>
 
-<main>
+<main id="main-content" role="main">
 <h1>Our Services</h1>
 
 <h2>Manicures</h2>
 <div class="services-container">
   <div class="service-card" data-name="Basic Manicure" data-price="15">
     <p><strong>Basic Manicure</strong></p><p>Simple pampering for your hands.</p><p>£15</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
   <div class="service-card" data-name="Manicure with Polish" data-price="30">
     <p><strong>Manicure with Polish</strong></p><p>Includes polish of your choice.</p><p>£30</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
   <div class="service-card" data-name="Luxury Manicure" data-price="40">
     <p><strong>Luxury Manicure</strong></p><p>The full pampering experience.</p><p>£40</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
 </div>
 
@@ -118,15 +141,15 @@ button.continue:hover { background:var(--gold-dark); transform:translateY(-2px);
 <div class="services-container">
   <div class="service-card" data-name="Basic Pedicure" data-price="30">
     <p><strong>Basic Pedicure</strong></p><p>Simple pampering for your feet.</p><p>£30</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
   <div class="service-card" data-name="Pedicure with Polish" data-price="35">
     <p><strong>Pedicure with Polish</strong></p><p>Includes polish of your choice.</p><p>£35</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
   <div class="service-card" data-name="Luxury Pedicure" data-price="40">
     <p><strong>Luxury Pedicure</strong></p><p>Ultimate spa treatment for your feet.</p><p>£40</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
 </div>
 
@@ -134,27 +157,39 @@ button.continue:hover { background:var(--gold-dark); transform:translateY(-2px);
 <div class="services-container">
   <div class="service-card" data-name="Full Set Acrylics" data-price="40">
     <p><strong>Full Set Acrylics</strong></p><p>Long-lasting elegant nails.</p><p>£40</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
   <div class="service-card" data-name="Acrylic Infills" data-price="30">
     <p><strong>Acrylic Infills</strong></p><p>Refresh your acrylic nails.</p><p>£30</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
   <div class="service-card" data-name="Builder Gel Full Set" data-price="40">
     <p><strong>Builder Gel Full Set</strong></p><p>Durable and elegant gel nails.</p><p>£40</p>
-    <button class="add-btn">Add to Basket</button>
+    <button type="button" class="add-btn">Add to Basket</button>
   </div>
 </div>
 
-<div id="basket">
+<div id="basket" aria-live="polite" aria-label="Basket">
   <h3>Your Basket</h3>
   <ul id="basketList"></ul>
   <div id="total">Total: £0</div>
-  <button class="continue" id="continueBtn">Continue to Booking</button>
+  <button type="button" class="continue" id="continueBtn">Continue to Booking</button>
 </div>
 
-<div id="addedPopup">Added to basket ✓</div>
+<div id="addedPopup" role="status" aria-live="polite">Added to basket ✓</div>
 </main>
+
+<!-- Breadcrumb JSON-LD -->
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"BreadcrumbList",
+ "itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://www.erinselegance.com/"},
+  {"@type":"ListItem","position":2,"name":"Services","item":"https://www.erinselegance.com/services.html"}
+ ]
+}
+</script>
 
 <script>
 const basketList = document.getElementById("basketList");
@@ -168,7 +203,9 @@ function updateBasket() {
     const li = document.createElement("li");
     li.textContent = `${item.name} - £${item.price}`;
     const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
     removeBtn.textContent = "×"; removeBtn.className = "remove-btn";
+    removeBtn.setAttribute("aria-label", `Remove ${item.name}`);
     removeBtn.onclick = () => { basketItems.splice(index, 1); updateBasket(); };
     li.appendChild(removeBtn);
     basketList.appendChild(li);
@@ -192,6 +229,5 @@ document.getElementById("continueBtn").addEventListener("click", () => {
   window.location.href = `booking.html?${params}`;
 });
 </script>
-
 </body>
 </html>
