@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>erin’s elegance</title>
+
+<title>Erin’s Elegance — Elegant Nails, Effortless Beauty</title>
+<meta name="description" content="Cozy, natural nail salon in Callington, Cornwall. Manicures, pedicures, acrylics, builder gel. Book online." />
+<link rel="canonical" href="https://www.erinselegance.com/" />
+<meta name="theme-color" content="#B8CEC3" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Erin’s Elegance — Elegant Nails, Effortless Beauty" />
+<meta property="og:description" content="Cozy, natural, soft aesthetic. Book manicures, pedicures, acrylics, builder gel in Callington." />
+<meta property="og:url" content="https://www.erinselegance.com/" />
+<meta property="og:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Erin’s Elegance — Elegant Nails, Effortless Beauty" />
+<meta name="twitter:description" content="Cozy, natural nail treatments in Callington, Cornwall. Book online." />
+<meta name="twitter:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
+
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
@@ -15,6 +37,8 @@
   --sage-2:#CFE0D9;
   --gold:#a18449; --gold-dark:#8c703b; --ink:#111; --text:#333;
 }
+
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,1px,1px);white-space:nowrap;border:0}
 
 body {
   margin: 0; font-family: 'Open Sans', sans-serif; background-color: var(--sage);
@@ -41,6 +65,7 @@ button {
   transition: background-color 0.3s, box-shadow 0.3s; margin: 1rem 0.6rem;
 }
 button:hover { background-color: var(--gold-dark); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+button:focus{outline:2px solid #a18449; outline-offset:2px}
 
 .paragraph-bold { font-weight: 600; animation-delay: 1.5s; }
 .paragraph-medium { font-weight: 400; animation-delay: 2s; }
@@ -80,11 +105,12 @@ footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #444; opac
 </style>
 </head>
 <body>
+<a href="#main-content" class="sr-only">Skip to content</a>
 
-<header>
+<header role="banner">
   <div class="header-container">
     <div class="logo">erin’s elegance</div>
-    <nav>
+    <nav aria-label="Primary">
       <ul>
         <li><a href="services.html">View Services</a></li>
         <li><a href="about.html">About Our Service</a></li>
@@ -104,12 +130,12 @@ footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #444; opac
   <div class="bg-grain"></div>
 </div>
 
-<main>
+<main id="main-content" role="main">
   <h1>erin’s elegance</h1>
   <p>Elegant Nails, Effortless Beauty</p>
 
-  <button onclick="location.href='services.html'">View Services</button>
-  <button onclick="location.href='about.html'">About Our Service</button>
+  <button type="button" onclick="location.href='services.html'">View Services</button>
+  <button type="button" onclick="location.href='about.html'">About Our Service</button>
 
   <div>
     <p class="paragraph-bold">Express your personality with every manicure.</p>
@@ -118,10 +144,36 @@ footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #444; opac
   </div>
 </main>
 
-<footer>
+<footer role="contentinfo">
   <p>© 2025 erin’s elegance. all rights reserved.</p>
   <p>16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
 </footer>
 
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"NailSalon",
+  "name":"Erin’s Elegance",
+  "image":"https://www.erinselegance.com/assets/og-image.jpg",
+  "url":"https://www.erinselegance.com/",
+  "telephone":"+44",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"16 Werrington Drive",
+    "addressLocality":"Callington",
+    "addressRegion":"Cornwall",
+    "postalCode":"PL17 7TF",
+    "addressCountry":"GB"
+  },
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"}
+  ],
+  "sameAs":[
+    "https://instagram.com/erinselegance",
+    "https://facebook.com/erinselegance"
+  ]
+}
+</script>
 </body>
 </html>
