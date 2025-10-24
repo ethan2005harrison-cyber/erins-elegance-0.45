@@ -52,7 +52,7 @@ main { max-width: 640px; margin: 12rem auto 4rem; padding:0 2rem; text-align:cen
 h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; }
 p.lead { font-size:1.1rem; color:var(--text); margin-bottom:1.5rem; }
 
-/* Basket */
+/* Card / Basket */
 .card {
   background:var(--card);
   border-radius:16px;
@@ -69,7 +69,7 @@ p.lead { font-size:1.1rem; color:var(--text); margin-bottom:1.5rem; }
 /* Form */
 form { display:flex; flex-direction:column; gap:1rem; text-align:left; }
 label { font-weight:600; }
-input, textarea, select {
+input, textarea {
   padding:.85rem 1rem;
   border-radius:12px;
   border:1px solid #ccc;
@@ -80,20 +80,20 @@ input, textarea, select {
   background:#fff;
   transition:border-color .3s, box-shadow .3s;
 }
-input:focus, textarea:focus, select:focus {
+input:focus, textarea:focus {
   outline:none; border-color:var(--gold);
   box-shadow:0 0 8px rgba(161,132,73,.35);
 }
 .warning {
-  color:#d4af37; /* gold text */
+  color:#d4af37;
   font-size:.9rem;
   display:none;
   margin-top:-.4rem;
 }
 
-/* Time carousel (Booksy style) */
-.time-wrap { margin-top:.5rem; }
-.time-carousel {
+/* Carousels (Booksy style) */
+.carousel-wrap { margin-top:.5rem; }
+.carousel {
   display:flex;
   gap:.6rem;
   overflow-x:auto;
@@ -105,9 +105,10 @@ input:focus, textarea:focus, select:focus {
   border:1px solid #e7e3dc;
   user-select:none;
 }
-.time-carousel::-webkit-scrollbar { height:8px; }
-.time-carousel::-webkit-scrollbar-thumb { background:#c9c2b5; border-radius:8px; }
-.time-btn {
+.carousel::-webkit-scrollbar { height:8px; }
+.carousel::-webkit-scrollbar-thumb { background:#c9c2b5; border-radius:8px; }
+
+.chip {
   flex:0 0 auto;
   padding:.6rem 1rem;
   border-radius:999px;
@@ -116,9 +117,10 @@ input:focus, textarea:focus, select:focus {
   cursor:pointer;
   font-weight:600;
   transition: transform .15s, background .25s, color .25s, border-color .25s;
+  white-space:nowrap;
 }
-.time-btn:hover { transform:translateY(-2px); border-color:var(--gold); }
-.time-btn.selected { background:var(--gold); border-color:var(--gold); color:#fff; }
+.chip:hover { transform:translateY(-2px); border-color:var(--gold); }
+.chip.selected { background:var(--gold); border-color:var(--gold); color:#fff; }
 
 /* Button */
 button.cta {
@@ -181,17 +183,24 @@ footer { text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.
       <div id="phoneWarning" class="warning">Please fill in this space</div>
     </div>
 
+    <!-- Date carousel -->
     <div>
-      <label for="desiredDate">Desired Appointment Date</label>
-      <input id="desiredDate" name="desiredDate" type="date" required>
+      <label>Preferred Date</label>
+      <div class="carousel-wrap">
+        <div id="dateCarousel" class="carousel" aria-label="Date options (20 days)">
+          <!-- Date chips injected by JS -->
+        </div>
+      </div>
+      <input type="hidden" id="desiredDate" name="desiredDate">
       <div id="dateWarning" class="warning">Appointments must be booked at least 24 hours in advance.</div>
     </div>
 
+    <!-- Time carousel -->
     <div>
       <label>Preferred Time</label>
-      <div class="time-wrap">
-        <div id="timeCarousel" class="time-carousel" aria-label="Time slots (hourly)">
-          <!-- Time buttons injected by JS -->
+      <div class="carousel-wrap">
+        <div id="timeCarousel" class="carousel" aria-label="Time slots (hourly)">
+          <!-- Time chips injected by JS -->
         </div>
       </div>
       <input type="hidden" id="desiredTime" name="desiredTime">
@@ -237,58 +246,88 @@ function updateBasket() {
 }
 updateBasket();
 
-// ===== 24-hour booking restriction (date min = tomorrow) =====
-const dateInput = document.getElementById("desiredDate");
-const nowPlus24 = new Date();
-nowPlus24.setHours(nowPlus24.getHours() + 24);
-dateInput.min = nowPlus24.toISOString().split("T")[0];
-dateInput.addEventListener("keydown", e => e.preventDefault());
+// ===== Utilities =====
+function centerChip(container, chip) {
+  const containerRect = container.getBoundingClientRect();
+  const chipRect = chip.getBoundingClientRect();
+  const offset = (chipRect.left - containerRect.left) - (containerRect.width/2 - chipRect.width/2);
+  container.scrollBy({ left: offset, behavior: 'smooth' });
+}
+function makeDraggableScroll(el){
+  let isDown=false, startX, scrollLeft;
+  el.addEventListener("mousedown", (e)=>{ isDown=true; startX=e.pageX - el.offsetLeft; scrollLeft=el.scrollLeft; });
+  el.addEventListener("mouseleave", ()=>{ isDown=false; });
+  el.addEventListener("mouseup", ()=>{ isDown=false; });
+  el.addEventListener("mousemove", (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - el.offsetLeft; const walk=(x-startX)*1.2; el.scrollLeft=scrollLeft - walk; });
+  // touch scroll is native
+}
 
-// ===== Time Carousel (Booksy style, hourly 9 AM - 6 PM) =====
+// ===== Date carousel (20 days, start = tomorrow for 24h rule) =====
+const dateCarousel = document.getElementById("dateCarousel");
+const desiredDateInput = document.getElementById("desiredDate");
+makeDraggableScroll(dateCarousel);
+
+const now = new Date();
+const tomorrow = new Date(now);
+tomorrow.setDate(now.getDate()+1); // at least 24h ahead (date-wise)
+const daysToShow = 20;
+
+function fmtDateLabel(d){
+  const weekday = d.toLocaleDateString(undefined,{weekday:'short'});
+  const month = d.toLocaleDateString(undefined,{month:'short'});
+  const day = d.getDate();
+  return `${weekday} ${day} ${month}`;
+}
+function toISODate(d){ return d.toISOString().split("T")[0]; }
+
+for(let i=0;i<daysToShow;i++){
+  const d = new Date(tomorrow);
+  d.setDate(tomorrow.getDate()+i);
+  const chip = document.createElement("button");
+  chip.type="button";
+  chip.className="chip";
+  chip.textContent = fmtDateLabel(d);
+  chip.dataset.value = toISODate(d); // submit ISO yyyy-mm-dd
+  chip.addEventListener("click", ()=>{
+    document.querySelectorAll("#dateCarousel .chip.selected").forEach(c=>c.classList.remove("selected"));
+    chip.classList.add("selected");
+    desiredDateInput.value = chip.dataset.value;
+    document.getElementById("dateWarning").style.display = "none";
+    chip.style.transform="translateY(-2px) scale(1.02)";
+    setTimeout(()=>chip.style.transform="",150);
+    centerChip(dateCarousel, chip);
+  });
+  dateCarousel.appendChild(chip);
+}
+// Optionally preselect the first (tomorrow)
+const firstDateChip = dateCarousel.querySelector(".chip");
+if(firstDateChip){ firstDateChip.click(); }
+
+// ===== Time carousel (hourly 9AM–6PM) =====
 const timeCarousel = document.getElementById("timeCarousel");
-const hiddenTime = document.getElementById("desiredTime");
-const timeWarning = document.getElementById("timeWarning");
+const desiredTimeInput = document.getElementById("desiredTime");
+makeDraggableScroll(timeCarousel);
 
-// Create buttons
 for (let hour = 9; hour <= 18; hour++) {
   const displayHour = hour <= 12 ? hour : hour - 12;
   const ampm = hour < 12 ? "AM" : "PM";
   const label = `${displayHour}:00 ${ampm}`;
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "time-btn";
-  btn.textContent = label;
-  btn.dataset.value = label;
-  btn.addEventListener("click", () => {
-    // select state
-    document.querySelectorAll(".time-btn.selected").forEach(b => b.classList.remove("selected"));
-    btn.classList.add("selected");
-    hiddenTime.value = btn.dataset.value;
-    timeWarning.style.display = "none";
-    // gentle nudge animation
-    btn.style.transform = "translateY(-2px) scale(1.02)";
-    setTimeout(()=>btn.style.transform="",150);
+  const chip = document.createElement("button");
+  chip.type="button";
+  chip.className="chip";
+  chip.textContent = label;
+  chip.dataset.value = label;
+  chip.addEventListener("click", ()=>{
+    document.querySelectorAll("#timeCarousel .chip.selected").forEach(c=>c.classList.remove("selected"));
+    chip.classList.add("selected");
+    desiredTimeInput.value = chip.dataset.value;
+    document.getElementById("timeWarning").style.display = "none";
+    chip.style.transform="translateY(-2px) scale(1.02)";
+    setTimeout(()=>chip.style.transform="",150);
+    centerChip(timeCarousel, chip);
   });
-  timeCarousel.appendChild(btn);
+  timeCarousel.appendChild(chip);
 }
-
-// Drag-to-scroll (desktop & mobile)
-let isDown = false, startX, scrollLeft;
-timeCarousel.addEventListener("mousedown", (e) => {
-  isDown = true; timeCarousel.classList.add("dragging");
-  startX = e.pageX - timeCarousel.offsetLeft;
-  scrollLeft = timeCarousel.scrollLeft;
-});
-timeCarousel.addEventListener("mouseleave", ()=>{ isDown = false; timeCarousel.classList.remove("dragging"); });
-timeCarousel.addEventListener("mouseup", ()=>{ isDown = false; timeCarousel.classList.remove("dragging"); });
-timeCarousel.addEventListener("mousemove", (e)=>{
-  if(!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - timeCarousel.offsetLeft;
-  const walk = (x - startX) * 1.2;
-  timeCarousel.scrollLeft = scrollLeft - walk;
-});
-// touch scrolling is native; no extra code needed
 
 // ===== Validation & Submit =====
 const form = document.getElementById("bookingForm");
@@ -298,10 +337,10 @@ form.addEventListener("submit", (e) => {
 
   const email = document.getElementById("email");
   const phone = document.getElementById("phone");
-  const date = document.getElementById("desiredDate");
   const emailWarning = document.getElementById("emailWarning");
   const phoneWarning = document.getElementById("phoneWarning");
   const dateWarning = document.getElementById("dateWarning");
+  const timeWarning = document.getElementById("timeWarning");
 
   emailWarning.style.display = "none";
   phoneWarning.style.display = "none";
@@ -310,13 +349,8 @@ form.addEventListener("submit", (e) => {
 
   if(!email.value.trim()){ emailWarning.style.display = "block"; valid = false; }
   if(!phone.value.trim()){ phoneWarning.style.display = "block"; valid = false; }
-
-  // Enforce 24h: date must be >= tomorrow
-  const selectedDate = new Date(date.value);
-  if(!date.value || selectedDate < nowPlus24){ dateWarning.style.display = "block"; valid = false; }
-
-  // Ensure time selected
-  if(!hiddenTime.value){ timeWarning.style.display = "block"; valid = false; }
+  if(!desiredDateInput.value){ dateWarning.textContent = "Please select a date (24h notice required)."; dateWarning.style.display = "block"; valid = false; }
+  if(!desiredTimeInput.value){ timeWarning.style.display = "block"; valid = false; }
 
   if(!valid) return;
 
@@ -326,9 +360,10 @@ form.addEventListener("submit", (e) => {
   query.append("name", document.getElementById("name").value);
   query.append("email", email.value);
   query.append("phone", phone.value);
-  query.append("desiredDate", date.value);
-  query.append("desiredTime", hiddenTime.value);
+  query.append("desiredDate", desiredDateInput.value);
+  query.append("desiredTime", desiredTimeInput.value);
   query.append("notes", document.getElementById("notes").value);
+
   window.location.href = `payment.html?${query.toString()}`;
 });
 </script>
