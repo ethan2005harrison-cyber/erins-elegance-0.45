@@ -8,11 +8,20 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
+:root{
+  --sage:#D8E3DC;
+  --gold:#a18449;
+  --gold-dark:#8c703b;
+  --ink:#111;
+  --text:#333;
+  --card:#fff;
+}
+
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  background-color: #D8E3DC;
-  color: #222;
+  background-color: var(--sage);
+  color: var(--ink);
   overflow-x: hidden;
 }
 
@@ -33,77 +42,99 @@ header {
   align-items:center;
   padding:1.2rem 2rem;
 }
-.logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
+.logo { font-family:'Playfair Display', serif; font-size:1.5rem; font-weight:600; }
 nav ul { list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
-nav ul li a { text-decoration:none; color:#111; font-weight:500; transition: color 0.3s; }
-nav ul li a:hover { color:#a18449; }
+nav ul li a { text-decoration:none; color:var(--ink); font-weight:500; transition: color .3s; }
+nav ul li a:hover { color:var(--gold); }
 
 /* MAIN */
-main { max-width: 600px; margin: 12rem auto 4rem; padding:0 2rem; text-align:center; }
+main { max-width: 640px; margin: 12rem auto 4rem; padding:0 2rem; text-align:center; }
+h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; }
+p.lead { font-size:1.1rem; color:var(--text); margin-bottom:1.5rem; }
 
-h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; color:#111; }
-p { font-size:1.1rem; color:#333; margin-bottom:1.5rem; }
+/* Basket */
+.card {
+  background:var(--card);
+  border-radius:16px;
+  padding:1rem 1.2rem;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  text-align:left;
+}
+#basket { margin-bottom:2rem; }
+#basket h3 { font-family:'Playfair Display', serif; margin:0 0 .5rem; }
+#basket ul { list-style:none; margin:.5rem 0 0; padding:0; }
+#basket li { display:flex; justify-content:space-between; padding:.35rem 0; border-bottom:1px solid #eee; }
+#basket .total { font-weight:600; text-align:right; margin-top:.5rem; font-family:'Playfair Display', serif; color:var(--gold); }
 
+/* Form */
 form { display:flex; flex-direction:column; gap:1rem; text-align:left; }
-
+label { font-weight:600; }
 input, textarea, select {
-  padding:0.8rem 1rem;
+  padding:.85rem 1rem;
   border-radius:12px;
   border:1px solid #ccc;
   font-size:1rem;
   font-family:'Open Sans', sans-serif;
   width:100%;
   box-sizing:border-box;
+  background:#fff;
+  transition:border-color .3s, box-shadow .3s;
 }
 input:focus, textarea:focus, select:focus {
-  outline:none;
-  border-color:#a18449;
-  box-shadow:0 0 8px rgba(161,132,73,0.4);
+  outline:none; border-color:var(--gold);
+  box-shadow:0 0 8px rgba(161,132,73,.35);
+}
+.warning {
+  color:#d4af37; /* gold text */
+  font-size:.9rem;
+  display:none;
+  margin-top:-.4rem;
 }
 
-label { font-weight:600; margin-top:0.5rem; }
+/* Time carousel (Booksy style) */
+.time-wrap { margin-top:.5rem; }
+.time-carousel {
+  display:flex;
+  gap:.6rem;
+  overflow-x:auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior:smooth;
+  padding:.25rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.6);
+  border:1px solid #e7e3dc;
+  user-select:none;
+}
+.time-carousel::-webkit-scrollbar { height:8px; }
+.time-carousel::-webkit-scrollbar-thumb { background:#c9c2b5; border-radius:8px; }
+.time-btn {
+  flex:0 0 auto;
+  padding:.6rem 1rem;
+  border-radius:999px;
+  border:1px solid #cfc6b4;
+  background:#fff;
+  cursor:pointer;
+  font-weight:600;
+  transition: transform .15s, background .25s, color .25s, border-color .25s;
+}
+.time-btn:hover { transform:translateY(-2px); border-color:var(--gold); }
+.time-btn.selected { background:var(--gold); border-color:var(--gold); color:#fff; }
 
-button {
-  background-color:#a18449;
-  color:white;
+/* Button */
+button.cta {
+  background:var(--gold);
+  color:#fff;
   border:none;
   padding:1rem 2rem;
   border-radius:50px;
   font-size:1rem;
   cursor:pointer;
-  transition:background-color 0.3s, transform 0.2s;
-  margin-top:1rem;
+  transition: background .3s, transform .2s, box-shadow .3s;
+  margin-top:.5rem;
 }
-button:hover { background-color:#8c703b; transform:translateY(-2px); }
+button.cta:hover { background:var(--gold-dark); transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.2); }
 
-#basket {
-  background:#fff;
-  border-radius:16px;
-  padding:1rem;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom:2rem;
-}
-#basket h3 { font-family:'Playfair Display', serif; margin-top:0; color:#111; }
-#basket ul { list-style:none; padding:0; margin:0.5rem 0; }
-#basket li { padding:0.3rem 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between; }
-#basket .total { font-weight:600; text-align:right; margin-top:0.5rem; font-family:'Playfair Display', serif; color:#a18449; }
-
-.warning {
-  color:#a18449;
-  font-size:0.9rem;
-  display:none;
-  margin-top:-0.5rem;
-  margin-bottom:0.5rem;
-}
-
-footer {
-  text-align:center;
-  padding:2rem;
-  font-size:0.9rem;
-  color:#444;
-  opacity:0.7;
-  margin-top:2rem;
-}
+footer { text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.7; margin-top:2rem; }
 </style>
 </head>
 <body>
@@ -122,39 +153,57 @@ footer {
 
 <main>
   <h1>Book Your Appointment</h1>
-  <p>Review your basket and fill in your details. Email & phone are required.</p>
+  <p class="lead">Review your basket and fill in your details. Email & phone are required.</p>
 
-  <div id="basket">
+  <!-- Basket overview -->
+  <section id="basket" class="card">
     <h3>Your Basket</h3>
     <ul id="basketList"></ul>
     <div class="total" id="totalCost">Total: £0</div>
-  </div>
+  </section>
 
-  <form id="bookingForm">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Your Name">
+  <!-- Booking form -->
+  <form id="bookingForm" novalidate>
+    <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your Name">
+    </div>
 
-    <label for="email">Email <span style="color:#a18449">*</span></label>
-    <input type="email" id="email" name="email" placeholder="Email Address">
-    <div id="emailWarning" class="warning">Please fill in this space</div>
+    <div>
+      <label for="email">Email <span style="color:var(--gold)">*</span></label>
+      <input id="email" name="email" type="email" placeholder="Email Address" autocomplete="email">
+      <div id="emailWarning" class="warning">Please fill in this space</div>
+    </div>
 
-    <label for="phone">Phone <span style="color:#a18449">*</span></label>
-    <input type="tel" id="phone" name="phone" placeholder="Phone Number">
-    <div id="phoneWarning" class="warning">Please fill in this space</div>
+    <div>
+      <label for="phone">Phone <span style="color:var(--gold)">*</span></label>
+      <input id="phone" name="phone" type="tel" placeholder="Phone Number" autocomplete="tel">
+      <div id="phoneWarning" class="warning">Please fill in this space</div>
+    </div>
 
-    <label for="desiredDate">Desired Appointment Date</label>
-    <input type="date" id="desiredDate" name="desiredDate" required>
-    <div id="dateWarning" class="warning">Appointments must be booked at least 24 hours in advance.</div>
+    <div>
+      <label for="desiredDate">Desired Appointment Date</label>
+      <input id="desiredDate" name="desiredDate" type="date" required>
+      <div id="dateWarning" class="warning">Appointments must be booked at least 24 hours in advance.</div>
+    </div>
 
-    <label for="desiredTime">Preferred Time</label>
-    <select id="desiredTime" name="desiredTime" required>
-      <option value="">Select a time</option>
-    </select>
+    <div>
+      <label>Preferred Time</label>
+      <div class="time-wrap">
+        <div id="timeCarousel" class="time-carousel" aria-label="Time slots (hourly)">
+          <!-- Time buttons injected by JS -->
+        </div>
+      </div>
+      <input type="hidden" id="desiredTime" name="desiredTime">
+      <div id="timeWarning" class="warning">Please select a time</div>
+    </div>
 
-    <label for="notes">Additional Notes</label>
-    <textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea>
+    <div>
+      <label for="notes">Additional Notes</label>
+      <textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea>
+    </div>
 
-    <button type="submit">Continue to Payment</button>
+    <button class="cta" type="submit">Continue to Payment</button>
   </form>
 </main>
 
@@ -180,7 +229,7 @@ function updateBasket() {
   total = 0;
   basketItems.forEach(item => {
     const li = document.createElement("li");
-    li.textContent = `${item.name} - £${item.price}`;
+    li.innerHTML = `<span>${item.name}</span><span>£${item.price}</span>`;
     basketListElem.appendChild(li);
     total += item.price;
   });
@@ -188,37 +237,68 @@ function updateBasket() {
 }
 updateBasket();
 
-// ===== Time slots 9am - 6pm =====
-const timeSelect = document.getElementById("desiredTime");
-for (let hour = 9; hour <= 18; hour++) {
-  const ampm = hour < 12 ? "AM" : "PM";
-  const displayHour = hour <= 12 ? hour : hour - 12;
-  const option = document.createElement("option");
-  option.value = `${displayHour}:00 ${ampm}`;
-  option.textContent = `${displayHour}:00 ${ampm}`;
-  timeSelect.appendChild(option);
-}
-
-// ===== 24-hour booking restriction =====
+// ===== 24-hour booking restriction (date min = tomorrow) =====
 const dateInput = document.getElementById("desiredDate");
-const today = new Date();
-today.setHours(today.getHours() + 24); // 24 hours from now
-const minDate = today.toISOString().split("T")[0];
-dateInput.min = minDate;
-
-// Prevent typing
+const nowPlus24 = new Date();
+nowPlus24.setHours(nowPlus24.getHours() + 24);
+dateInput.min = nowPlus24.toISOString().split("T")[0];
 dateInput.addEventListener("keydown", e => e.preventDefault());
 
-// ===== Form Validation =====
+// ===== Time Carousel (Booksy style, hourly 9 AM - 6 PM) =====
+const timeCarousel = document.getElementById("timeCarousel");
+const hiddenTime = document.getElementById("desiredTime");
+const timeWarning = document.getElementById("timeWarning");
+
+// Create buttons
+for (let hour = 9; hour <= 18; hour++) {
+  const displayHour = hour <= 12 ? hour : hour - 12;
+  const ampm = hour < 12 ? "AM" : "PM";
+  const label = `${displayHour}:00 ${ampm}`;
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "time-btn";
+  btn.textContent = label;
+  btn.dataset.value = label;
+  btn.addEventListener("click", () => {
+    // select state
+    document.querySelectorAll(".time-btn.selected").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    hiddenTime.value = btn.dataset.value;
+    timeWarning.style.display = "none";
+    // gentle nudge animation
+    btn.style.transform = "translateY(-2px) scale(1.02)";
+    setTimeout(()=>btn.style.transform="",150);
+  });
+  timeCarousel.appendChild(btn);
+}
+
+// Drag-to-scroll (desktop & mobile)
+let isDown = false, startX, scrollLeft;
+timeCarousel.addEventListener("mousedown", (e) => {
+  isDown = true; timeCarousel.classList.add("dragging");
+  startX = e.pageX - timeCarousel.offsetLeft;
+  scrollLeft = timeCarousel.scrollLeft;
+});
+timeCarousel.addEventListener("mouseleave", ()=>{ isDown = false; timeCarousel.classList.remove("dragging"); });
+timeCarousel.addEventListener("mouseup", ()=>{ isDown = false; timeCarousel.classList.remove("dragging"); });
+timeCarousel.addEventListener("mousemove", (e)=>{
+  if(!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - timeCarousel.offsetLeft;
+  const walk = (x - startX) * 1.2;
+  timeCarousel.scrollLeft = scrollLeft - walk;
+});
+// touch scrolling is native; no extra code needed
+
+// ===== Validation & Submit =====
 const form = document.getElementById("bookingForm");
-form.addEventListener("submit", e => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   let valid = true;
 
   const email = document.getElementById("email");
   const phone = document.getElementById("phone");
   const date = document.getElementById("desiredDate");
-  const time = document.getElementById("desiredTime");
   const emailWarning = document.getElementById("emailWarning");
   const phoneWarning = document.getElementById("phoneWarning");
   const dateWarning = document.getElementById("dateWarning");
@@ -226,18 +306,32 @@ form.addEventListener("submit", e => {
   emailWarning.style.display = "none";
   phoneWarning.style.display = "none";
   dateWarning.style.display = "none";
+  timeWarning.style.display = "none";
 
   if(!email.value.trim()){ emailWarning.style.display = "block"; valid = false; }
   if(!phone.value.trim()){ phoneWarning.style.display = "block"; valid = false; }
 
+  // Enforce 24h: date must be >= tomorrow
   const selectedDate = new Date(date.value);
-  const minBookingDate = new Date();
-  minBookingDate.setHours(minBookingDate.getHours() + 24);
-  if(selectedDate < minBookingDate){ dateWarning.style.display = "block"; valid = false; }
+  if(!date.value || selectedDate < nowPlus24){ dateWarning.style.display = "block"; valid = false; }
+
+  // Ensure time selected
+  if(!hiddenTime.value){ timeWarning.style.display = "block"; valid = false; }
 
   if(!valid) return;
 
-  // Pass all info to payment page
+  // Build query -> payment.html
   const query = new URLSearchParams();
   basketItems.forEach(i => query.append("service", `${i.name} - ${i.price}`));
-  query.append("name", document.getElemen
+  query.append("name", document.getElementById("name").value);
+  query.append("email", email.value);
+  query.append("phone", phone.value);
+  query.append("desiredDate", date.value);
+  query.append("desiredTime", hiddenTime.value);
+  query.append("notes", document.getElementById("notes").value);
+  window.location.href = `payment.html?${query.toString()}`;
+});
+</script>
+
+</body>
+</html>
