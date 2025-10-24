@@ -136,6 +136,15 @@ button.cta {
 }
 button.cta:hover { background:var(--gold-dark); transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.2); }
 
+/* Policy note */
+.policy-note {
+  color: var(--gold);
+  font-size: 0.95rem;
+  margin-top: .25rem;
+  margin-bottom: .25rem;
+  text-align: left;
+}
+
 footer { text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.7; margin-top:2rem; }
 </style>
 </head>
@@ -211,6 +220,9 @@ footer { text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.
       <label for="notes">Additional Notes</label>
       <textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea>
     </div>
+
+    <!-- Policy note (NEW) -->
+    <p class="policy-note">Please note: we may need to offer you a different time and date than you request.</p>
 
     <button class="cta" type="submit">Continue to Payment</button>
   </form>
@@ -299,7 +311,7 @@ for(let i=0;i<daysToShow;i++){
   });
   dateCarousel.appendChild(chip);
 }
-// Optionally preselect the first (tomorrow)
+// Preselect first (tomorrow)
 const firstDateChip = dateCarousel.querySelector(".chip");
 if(firstDateChip){ firstDateChip.click(); }
 
