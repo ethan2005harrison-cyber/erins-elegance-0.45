@@ -3,162 +3,235 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Payment - Erin’s Elegance</title>
+<title>Booking - Erin’s Elegance</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-
-body { margin:0; font-family:'Open Sans',sans-serif; background-color:#D8E3DC; color:#222; }
-header { background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); position: fixed; width: 100%; top:0; z-index:10; }
-.header-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
-.logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
-nav ul { list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
-nav ul li a { text-decoration:none; color:#111; font-weight:500; transition: color 0.3s; }
-nav ul li a:hover { color:#a18449; }
-
-main { max-width:600px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; }
-h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; color:#111; }
-p { font-size:1.1rem; color:#333; margin-bottom:2rem; }
-
-#summary { background:#fff; border-radius:16px; padding:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:2rem; text-align:left; }
-#summary h3 { font-family:'Playfair Display', serif; margin-top:0; color:#111; }
-#summary ul { list-style:none; padding:0; margin:0.5rem 0 1rem; }
-#summary ul li { padding:0.3rem 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between; }
-#summary .total { font-weight:600; text-align:right; font-family:'Playfair Display', serif; color:#a18449; }
-
-.payment-options { display:flex; flex-direction:column; gap:1rem; }
-.payment-option { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.2rem; border-radius:12px; border:1px solid #ccc; background:#fff; transition:background 0.3s, border-color 0.3s; }
-.payment-option.active { border-color:#a18449; background:#f7f3ec; }
-.payment-option.disabled { opacity:0.5; cursor:not-allowed; }
-.payment-option.disabled::after { content:"Currently Unavailable"; font-size:0.9rem; color:#a18449; font-weight:600; margin-left:10px; }
-
-.terms-line { margin-top:1rem; font-size:0.95rem; color:#a18449; text-align:center; }
-.terms-line a { color:#8c703b; font-weight:600; text-decoration:none; }
-
-button { background-color:#a18449; color:white; border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1rem; cursor:pointer; margin-top:1rem; transition:background-color 0.3s, transform 0.2s; }
-button:hover { background-color:#8c703b; transform: translateY(-2px); }
-button:disabled { opacity:0.6; cursor:not-allowed; }
-
-#statusMessage { margin-top: 1rem; font-size: 1rem; font-weight: 600; color: #a18449; display: none; text-align: center; }
-
-footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; margin-top:2rem; }
+:root{ --sage:#D8E3DC; --gold:#a18449; --gold-dark:#8c703b; --ink:#111; --text:#333; --card:#fff; --line:#e7e3dc; }
+body{ margin:0; font-family:'Open Sans',sans-serif; background-color:var(--sage); color:var(--ink); overflow-x:hidden; }
+/* HEADER */
+header{ background:rgba(255,255,255,.4); backdrop-filter:blur(10px); position:fixed; width:100%; top:0; z-index:10; }
+.header-container{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
+.logo{ font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:600; }
+nav ul{ list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
+nav ul li a{ text-decoration:none; color:var(--ink); font-weight:500; transition:color .3s; }
+nav ul li a:hover{ color:var(--gold); }
+/* MAIN */
+main{ max-width:640px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; }
+h1{ font-family:'Playfair Display',serif; font-size:2.5rem; margin-bottom:1rem; }
+p.lead{ font-size:1.1rem; color:var(--text); margin-bottom:1.5rem; }
+/* Card/Basket */
+.card{ background:var(--card); border-radius:16px; padding:1rem 1.2rem; box-shadow:0 4px 12px rgba(0,0,0,.1); text-align:left; }
+#basket{ margin-bottom:2rem; } #basket h3{ font-family:'Playfair Display',serif; margin:0 0 .5rem; }
+#basket ul{ list-style:none; margin:.5rem 0 0; padding:0; }
+#basket li{ display:flex; justify-content:space-between; padding:.35rem 0; border-bottom:1px solid #eee; }
+#basket .total{ font-weight:600; text-align:right; margin-top:.5rem; font-family:'Playfair Display',serif; color:var(--gold); }
+/* Form */
+form{ display:flex; flex-direction:column; gap:1rem; text-align:left; }
+label{ font-weight:600; }
+input, textarea{ padding:.85rem 1rem; border-radius:12px; border:1px solid #ccc; font-size:1rem; font-family:'Open Sans',sans-serif; width:100%; box-sizing:border-box; background:#fff; transition:border-color .3s, box-shadow .3s; }
+input:focus, textarea:focus{ outline:none; border-color:var(--gold); box-shadow:0 0 8px rgba(161,132,73,.35); }
+.warning{ color:#d4af37; font-size:.9rem; display:none; margin-top:-.4rem; }
+/* Carousels */
+.carousel-wrap{ margin-top:.5rem; }
+.carousel{ display:flex; gap:.6rem; overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; padding:.25rem; border-radius:14px; background:rgba(255,255,255,.6); border:1px solid var(--line); user-select:none; }
+.carousel::-webkit-scrollbar{ height:8px; }
+.carousel::-webkit-scrollbar-thumb{ background:#c9c2b5; border-radius:8px; }
+.chip{ flex:0 0 auto; padding:.6rem 1rem; border-radius:999px; border:1px solid #cfc6b4; background:#fff; cursor:pointer; font-weight:600; transition:transform .15s, background .25s, color .25s, border-color .25s; white-space:nowrap; }
+.chip:hover{ transform:translateY(-2px); border-color:var(--gold); }
+.chip.selected{ background:var(--gold); border-color:var(--gold); color:#fff; }
+/* Button + note */
+button.cta{ background:var(--gold); color:#fff; border:none; padding:1rem 2rem; border-radius:50px; font-size:1rem; cursor:pointer; transition: background .3s, transform .2s, box-shadow .3s; margin-top:.5rem; }
+button.cta:hover{ background:var(--gold-dark); transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.2); }
+.policy-note{ color: var(--gold); font-size: 0.95rem; margin-top: .25rem; margin-bottom: .25rem; text-align: left; }
+footer{ text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.7; margin-top:2rem; }
 </style>
 </head>
 <body>
-
 <header>
-<div class="header-container">
-  <div class="logo">erin’s elegance</div>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">View Services</a></li>
-      <li><a href="booking.html">Booking</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="terms.html">Terms & Conditions</a></li>
-    </ul>
-  </nav>
-</div>
+  <div class="header-container">
+    <div class="logo">erin’s elegance</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">View Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <main>
-<h1>Review & Payment</h1>
-<p>Please review your booking details below and confirm your appointment.</p>
+  <h1>Book Your Appointment</h1>
+  <p class="lead">Review your basket and fill in your details. Email & phone are required.</p>
 
-<div id="summary">
-  <h3>Your Booking:</h3>
-  <ul id="serviceList"></ul>
-  <div class="total" id="totalCost">Total: £0</div>
+  <section id="basket" class="card">
+    <h3>Your Basket</h3>
+    <ul id="basketList"></ul>
+    <div class="total" id="totalCost">Total: £0</div>
+  </section>
 
-  <h3>Customer Details:</h3>
-  <p id="customerDetails"></p>
-</div>
+  <form id="bookingForm" novalidate>
+    <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your Name">
+    </div>
 
-<div class="payment-options">
-  <div class="payment-option active" id="payInPerson">
-    <span>💳 Pay in person</span>
-    <small>Please bring a method of payment with you.</small>
-  </div>
-  <div class="payment-option disabled">
-    <span>🅿️ Pay with PayPal</span>
-  </div>
-</div>
+    <div>
+      <label for="email">Email <span style="color:#a18449">*</span></label>
+      <input id="email" name="email" type="email" placeholder="Email Address" autocomplete="email">
+      <div id="emailWarning" class="warning">Please fill in this space</div>
+    </div>
 
-<p class="terms-line">
-  By confirming, you agree to our <a href="terms.html">Terms &amp; Conditions</a>.
-</p>
+    <div>
+      <label for="phone">Phone <span style="color:#a18449">*</span></label>
+      <input id="phone" name="phone" type="tel" placeholder="Phone Number" autocomplete="tel">
+      <div id="phoneWarning" class="warning">Please fill in this space</div>
+    </div>
 
-<button id="confirmBtn">Confirm Booking</button>
-<div id="statusMessage">Submitting your booking...</div>
+    <!-- Date carousel -->
+    <div>
+      <label>Preferred Date</label>
+      <div class="carousel-wrap">
+        <div id="dateCarousel" class="carousel" aria-label="Date options (20 days)"></div>
+      </div>
+      <input type="hidden" id="desiredDate" name="desiredDate">
+      <div id="dateWarning" class="warning">Appointments must be booked at least 24 hours in advance.</div>
+    </div>
+
+    <!-- Time carousel -->
+    <div>
+      <label>Preferred Time</label>
+      <div class="carousel-wrap">
+        <div id="timeCarousel" class="carousel" aria-label="Time slots (hourly)"></div>
+      </div>
+      <input type="hidden" id="desiredTime" name="desiredTime">
+      <div id="timeWarning" class="warning">Please select a time</div>
+    </div>
+
+    <div>
+      <label for="notes">Additional Notes</label>
+      <textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea>
+    </div>
+
+    <p class="policy-note">Please note: we may need to offer you a different time and date than you request.</p>
+
+    <button class="cta" type="submit">Continue to Payment</button>
+  </form>
 </main>
 
 <footer>
-<p>© 2025 erin’s elegance. all rights reserved.</p>
+  <p>© 2025 erin’s elegance. all rights reserved.</p>
 </footer>
 
 <script>
-// URL params
+// Basket from URL
 const params = new URLSearchParams(window.location.search);
-const serviceListElem = document.getElementById("serviceList");
+const basketListElem = document.getElementById("basketList");
 const totalCostElem = document.getElementById("totalCost");
-const customerDetailsElem = document.getElementById("customerDetails");
-const statusMessage = document.getElementById("statusMessage");
-const confirmBtn = document.getElementById("confirmBtn");
+let basketItems = []; let total = 0;
 
-let total = 0; let services = [];
 params.getAll("service").forEach(s => {
   const [name, price] = s.split(" - ");
-  const li = document.createElement("li");
-  li.textContent = `${name.trim()} - £${price.trim()}`;
-  serviceListElem.appendChild(li);
-  total += parseInt(price.trim()); services.push({name: name.trim(), price: parseInt(price.trim())});
+  basketItems.push({name: name.trim(), price: parseInt(price.trim())});
 });
-totalCostElem.textContent = `Total: £${total}`;
-
-// Customer info
-const name = params.get("name") || "";
-const email = params.get("email") || "";
-const phone = params.get("phone") || "";
-const desiredDate = params.get("desiredDate") || "";
-const desiredTime = params.get("desiredTime") || "";
-const notes = params.get("notes") || "";
-customerDetailsElem.innerHTML = `
-<strong>Name:</strong> ${name}<br>
-<strong>Email:</strong> ${email}<br>
-<strong>Phone:</strong> ${phone}<br>
-<strong>Date:</strong> ${desiredDate}<br>
-<strong>Time:</strong> ${desiredTime || "Not specified"}<br>
-<strong>Notes:</strong> ${notes || "None"}
-`;
-
-// Formspree submit on confirm
-confirmBtn.addEventListener("click", () => {
-  confirmBtn.disabled = true; statusMessage.style.display = "block"; statusMessage.textContent = "Submitting your booking...";
-  const formData = new FormData();
-  formData.append("Name", name);
-  formData.append("Email", email);
-  formData.append("Phone", phone);
-  formData.append("Desired Date", desiredDate);
-  formData.append("Desired Time", desiredTime);
-  formData.append("Notes", notes);
-  services.forEach(s => formData.append("Service", `${s.name} - £${s.price}`));
-  formData.append("Total", `£${total}`);
-
-  fetch("https://formspree.io/f/xdkwjqyl", {
-    method: "POST",
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  })
-  .then(response => {
-    if (response.ok) {
-      statusMessage.textContent = "Booking confirmed! Redirecting...";
-      setTimeout(() => window.location.href = "thankspage.html", 1200);
-    } else { throw new Error("Formspree submission failed."); }
-  })
-  .catch(error => {
-    statusMessage.textContent = "There was a problem submitting your booking. Please try again.";
-    confirmBtn.disabled = false; console.error(error);
+function updateBasket() {
+  basketListElem.innerHTML = ""; total = 0;
+  basketItems.forEach(item => {
+    const li = document.createElement("li");
+    li.innerHTML = `<span>${item.name}</span><span>£${item.price}</span>`;
+    basketListElem.appendChild(li); total += item.price;
   });
+  totalCostElem.textContent = `Total: £${total}`;
+}
+updateBasket();
+
+// utils
+function centerChip(container, chip) {
+  const containerRect = container.getBoundingClientRect();
+  const chipRect = chip.getBoundingClientRect();
+  const offset = (chipRect.left - containerRect.left) - (containerRect.width/2 - chipRect.width/2);
+  container.scrollBy({ left: offset, behavior: 'smooth' });
+}
+function makeDraggableScroll(el){
+  let isDown=false, startX, scrollLeft;
+  el.addEventListener("mousedown", (e)=>{ isDown=true; startX=e.pageX - el.offsetLeft; scrollLeft=el.scrollLeft; });
+  el.addEventListener("mouseleave", ()=>{ isDown=false; });
+  el.addEventListener("mouseup", ()=>{ isDown=false; });
+  el.addEventListener("mousemove", (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - el.offsetLeft; const walk=(x-startX)*1.2; el.scrollLeft=scrollLeft - walk; });
+}
+
+// date carousel (20 days from tomorrow)
+const dateCarousel = document.getElementById("dateCarousel");
+const desiredDateInput = document.getElementById("desiredDate");
+makeDraggableScroll(dateCarousel);
+
+const now = new Date();
+const tomorrow = new Date(now); tomorrow.setDate(now.getDate()+1);
+const daysToShow = 20;
+function fmtDateLabel(d){ const weekday = d.toLocaleDateString(undefined,{weekday:'short'}); const month = d.toLocaleDateString(undefined,{month:'short'}); return `${weekday} ${d.getDate()} ${month}`; }
+function toISODate(d){ return d.toISOString().split("T")[0]; }
+
+for(let i=0;i<daysToShow;i++){
+  const d = new Date(tomorrow); d.setDate(tomorrow.getDate()+i);
+  const chip = document.createElement("button");
+  chip.type="button"; chip.className="chip"; chip.textContent = fmtDateLabel(d); chip.dataset.value = toISODate(d);
+  chip.addEventListener("click", ()=>{
+    document.querySelectorAll("#dateCarousel .chip.selected").forEach(c=>c.classList.remove("selected"));
+    chip.classList.add("selected"); desiredDateInput.value = chip.dataset.value;
+    document.getElementById("dateWarning").style.display = "none";
+    chip.style.transform="translateY(-2px) scale(1.02)"; setTimeout(()=>chip.style.transform="",150);
+    centerChip(dateCarousel, chip);
+  });
+  dateCarousel.appendChild(chip);
+}
+const firstDateChip = dateCarousel.querySelector(".chip"); if(firstDateChip){ firstDateChip.click(); }
+
+// time carousel (hourly 9–18)
+const timeCarousel = document.getElementById("timeCarousel");
+const desiredTimeInput = document.getElementById("desiredTime");
+makeDraggableScroll(timeCarousel);
+
+for (let hour = 9; hour <= 18; hour++) {
+  const displayHour = hour <= 12 ? hour : hour - 12;
+  const ampm = hour < 12 ? "AM" : "PM";
+  const label = `${displayHour}:00 ${ampm}`;
+  const chip = document.createElement("button");
+  chip.type="button"; chip.className="chip"; chip.textContent = label; chip.dataset.value = label;
+  chip.addEventListener("click", ()=>{
+    document.querySelectorAll("#timeCarousel .chip.selected").forEach(c=>c.classList.remove("selected"));
+    chip.classList.add("selected"); desiredTimeInput.value = chip.dataset.value;
+    document.getElementById("timeWarning").style.display = "none";
+    chip.style.transform="translateY(-2px) scale(1.02)"; setTimeout(()=>chip.style.transform="",150);
+    centerChip(timeCarousel, chip);
+  });
+  timeCarousel.appendChild(chip);
+}
+
+// validation + submit
+const form = document.getElementById("bookingForm");
+form.addEventListener("submit", (e) => {
+  e.preventDefault(); let valid = true;
+  const email = document.getElementById("email"); const phone = document.getElementById("phone");
+  const emailWarning = document.getElementById("emailWarning"); const phoneWarning = document.getElementById("phoneWarning");
+  const dateWarning = document.getElementById("dateWarning"); const timeWarning = document.getElementById("timeWarning");
+  emailWarning.style.display = "none"; phoneWarning.style.display = "none"; dateWarning.style.display = "none"; timeWarning.style.display = "none";
+  if(!email.value.trim()){ emailWarning.style.display = "block"; valid = false; }
+  if(!phone.value.trim()){ phoneWarning.style.display = "block"; valid = false; }
+  if(!desiredDateInput.value){ dateWarning.textContent = "Please select a date (24h notice required)."; dateWarning.style.display = "block"; valid = false; }
+  if(!desiredTimeInput.value){ timeWarning.style.display = "block"; valid = false; }
+  if(!valid) return;
+
+  const query = new URLSearchParams();
+  basketItems.forEach(i => query.append("service", `${i.name} - ${i.price}`));
+  query.append("name", document.getElementById("name").value);
+  query.append("email", email.value);
+  query.append("phone", phone.value);
+  query.append("desiredDate", desiredDateInput.value);
+  query.append("desiredTime", desiredTimeInput.value);
+  query.append("notes", document.getElementById("notes").value);
+  window.location.href = `payment.html?${query.toString()}`;
 });
 </script>
 </body>
