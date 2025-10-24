@@ -7,8 +7,8 @@
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-:root{ --sage:#D8E3DC; --gold:#a18449; --gold-dark:#8c703b; --ink:#111; --text:#333; --card:#fff; --line:#e7e3dc; }
-body{ margin:0; font-family:'Open Sans',sans-serif; background-color:var(--sage); color:var(--ink); overflow-x:hidden; }
+:root{ --sage:#B8CEC3; --sage-1:#A9C3B8; --sage-2:#CFE0D9; --gold:#a18449; --gold-dark:#8c703b; --ink:#111; --text:#333; --card:#fff; --line:#e7e3dc; }
+body{ margin:0; font-family:'Open Sans',sans-serif; background-color:var(--sage); color:var(--ink); overflow-x:hidden; position:relative; }
 /* HEADER */
 header{ background:rgba(255,255,255,.4); backdrop-filter:blur(10px); position:fixed; width:100%; top:0; z-index:10; }
 .header-container{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
@@ -17,7 +17,7 @@ nav ul{ list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
 nav ul li a{ text-decoration:none; color:var(--ink); font-weight:500; transition:color .3s; }
 nav ul li a:hover{ color:var(--gold); }
 /* MAIN */
-main{ max-width:640px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; }
+main{ max-width:640px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; position:relative; z-index:1; }
 h1{ font-family:'Playfair Display',serif; font-size:2.5rem; margin-bottom:1rem; }
 p.lead{ font-size:1.1rem; color:var(--text); margin-bottom:1.5rem; }
 /* Card/Basket */
@@ -44,7 +44,30 @@ input:focus, textarea:focus{ outline:none; border-color:var(--gold); box-shadow:
 button.cta{ background:var(--gold); color:#fff; border:none; padding:1rem 2rem; border-radius:50px; font-size:1rem; cursor:pointer; transition: background .3s, transform .2s, box-shadow .3s; margin-top:.5rem; }
 button.cta:hover{ background:var(--gold-dark); transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.2); }
 .policy-note{ color: var(--gold); font-size: 0.95rem; margin-top: .25rem; margin-bottom: .25rem; text-align: left; }
-footer{ text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.7; margin-top:2rem; }
+/* Footer */
+footer{ text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.7; margin-top:2rem; position:relative; z-index:1; }
+
+/* Animated background */
+.bg-anim { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bg-anim::before { content: ""; position: absolute; inset: 0; background:
+  radial-gradient(1200px 800px at 20% 20%, var(--sage-2), transparent 60%),
+  radial-gradient(1000px 700px at 85% 75%, var(--sage-1), transparent 55%),
+  var(--sage); filter: saturate(105%); }
+.bg-blob { position:absolute; width:40vmax; height:40vmax; border-radius:50%; opacity:.18; mix-blend-mode:multiply;
+  background: radial-gradient(65% 65% at 50% 50%, var(--sage-2), var(--sage-1));
+  transform: translate(-50%,-50%); will-change: transform; animation: blobDrift1 55s ease-in-out infinite; }
+.bg-blob.b2 { width:50vmax; height:50vmax; left:85%; top:80%; opacity:.16; animation: blobDrift2 70s ease-in-out infinite; }
+.bg-blob.b3 { width:45vmax; height:45vmax; left:10%; top:90%; opacity:.14; animation: blobDrift3 62s ease-in-out infinite; }
+.bg-gold { position:absolute; inset:0; background: radial-gradient(1200px 600px at 70% 10%, rgba(161,132,73,.10), transparent 70%), radial-gradient(800px 400px at 15% 85%, rgba(161,132,73,.08), transparent 70%); animation: driftGold 24s linear infinite; }
+.bg-grain { position:absolute; inset:-10%;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.035'/></svg>");
+  background-size:160px 160px; mix-blend-mode:multiply; animation: grainMove 6s steps(2,end) infinite; }
+@keyframes blobDrift1{0%{transform:translate(-50%,-50%) translate3d(0%,0%,0) scale(1)}25%{transform:translate(-50%,-50%) translate3d(3%,-2%,0) scale(1.05)}50%{transform:translate(-50%,-50%) translate3d(-2%,3%,0) scale(1.02)}75%{transform:translate(-50%,-50%) translate3d(2%,2%,0) scale(1.06)}100%{transform:translate(-50%,-50%) translate3d(0%,0%,0) scale(1)}}
+@keyframes blobDrift2{0%{transform:translate(-50%,-50%) translate3d(0%,0%,0) scale(1)}20%{transform:translate(-50%,-50%) translate3d(-2%,3%,0) scale(1.04)}45%{transform:translate(-50%,-50%) translate3d(3%,1%,0) scale(1.06)}70%{transform:translate(-50%,-50%) translate3d(-1%,-3%,0) scale(1.03)}100%{transform:translate(-50%,-50%) translate3d(0%,0%,0) scale(1)}}
+@keyframes blobDrift3{0%{transform:translate(-50%,-50%) translate3d(0%,0%,0) scale(1)}30%{transform:translate(-50%,-50%) translate3d(2%,2%,0) scale(1.05)}60%{transform:translate(-50%,-50%) translate3d(-3%,-1%,0) scale(1.02)}85%{transform:translate(-50%,-50%) translate3d(1%,-2%,0) scale(1.04)}100%{transform:translate(-50%,-50%) translate3d(0%,0%,0) scale(1)}}
+@keyframes driftGold{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-2%,1%,0)}}
+@keyframes grainMove{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(1%,-1%,0)}}
+@media (prefers-reduced-motion: reduce){ .bg-blob,.bg-gold,.bg-grain{animation:none!important} }
 </style>
 </head>
 <body>
@@ -62,6 +85,15 @@ footer{ text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.7
   </div>
 </header>
 
+<!-- Animated background -->
+<div class="bg-anim" aria-hidden="true">
+  <div class="bg-blob" style="left:25%; top:25%;"></div>
+  <div class="bg-blob b2"></div>
+  <div class="bg-blob b3"></div>
+  <div class="bg-gold"></div>
+  <div class="bg-grain"></div>
+</div>
+
 <main>
   <h1>Book Your Appointment</h1>
   <p class="lead">Review your basket and fill in your details. Email & phone are required.</p>
@@ -73,57 +105,32 @@ footer{ text-align:center; padding:2rem; font-size:.9rem; color:#444; opacity:.7
   </section>
 
   <form id="bookingForm" novalidate>
-    <div>
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" placeholder="Your Name">
-    </div>
+    <div><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your Name"></div>
+    <div><label for="email">Email <span style="color:#a18449">*</span></label><input id="email" name="email" type="email" placeholder="Email Address" autocomplete="email"><div id="emailWarning" class="warning">Please fill in this space</div></div>
+    <div><label for="phone">Phone <span style="color:#a18449">*</span></label><input id="phone" name="phone" type="tel" placeholder="Phone Number" autocomplete="tel"><div id="phoneWarning" class="warning">Please fill in this space</div></div>
 
-    <div>
-      <label for="email">Email <span style="color:#a18449">*</span></label>
-      <input id="email" name="email" type="email" placeholder="Email Address" autocomplete="email">
-      <div id="emailWarning" class="warning">Please fill in this space</div>
-    </div>
-
-    <div>
-      <label for="phone">Phone <span style="color:#a18449">*</span></label>
-      <input id="phone" name="phone" type="tel" placeholder="Phone Number" autocomplete="tel">
-      <div id="phoneWarning" class="warning">Please fill in this space</div>
-    </div>
-
-    <!-- Date carousel -->
     <div>
       <label>Preferred Date</label>
-      <div class="carousel-wrap">
-        <div id="dateCarousel" class="carousel" aria-label="Date options (20 days)"></div>
-      </div>
+      <div class="carousel-wrap"><div id="dateCarousel" class="carousel" aria-label="Date options (20 days)"></div></div>
       <input type="hidden" id="desiredDate" name="desiredDate">
       <div id="dateWarning" class="warning">Appointments must be booked at least 24 hours in advance.</div>
     </div>
 
-    <!-- Time carousel -->
     <div>
       <label>Preferred Time</label>
-      <div class="carousel-wrap">
-        <div id="timeCarousel" class="carousel" aria-label="Time slots (hourly)"></div>
-      </div>
+      <div class="carousel-wrap"><div id="timeCarousel" class="carousel" aria-label="Time slots (hourly)"></div></div>
       <input type="hidden" id="desiredTime" name="desiredTime">
       <div id="timeWarning" class="warning">Please select a time</div>
     </div>
 
-    <div>
-      <label for="notes">Additional Notes</label>
-      <textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea>
-    </div>
+    <div><label for="notes">Additional Notes</label><textarea id="notes" name="notes" rows="4" placeholder="Additional Notes"></textarea></div>
 
     <p class="policy-note">Please note: we may need to offer you a different time and date than you request.</p>
-
     <button class="cta" type="submit">Continue to Payment</button>
   </form>
 </main>
 
-<footer>
-  <p>© 2025 erin’s elegance. all rights reserved.</p>
-</footer>
+<footer><p>© 2025 erin’s elegance. all rights reserved.</p></footer>
 
 <script>
 // Basket from URL
@@ -131,107 +138,48 @@ const params = new URLSearchParams(window.location.search);
 const basketListElem = document.getElementById("basketList");
 const totalCostElem = document.getElementById("totalCost");
 let basketItems = []; let total = 0;
-
-params.getAll("service").forEach(s => {
-  const [name, price] = s.split(" - ");
-  basketItems.push({name: name.trim(), price: parseInt(price.trim())});
-});
-function updateBasket() {
-  basketListElem.innerHTML = ""; total = 0;
-  basketItems.forEach(item => {
-    const li = document.createElement("li");
-    li.innerHTML = `<span>${item.name}</span><span>£${item.price}</span>`;
-    basketListElem.appendChild(li); total += item.price;
-  });
-  totalCostElem.textContent = `Total: £${total}`;
-}
+params.getAll("service").forEach(s => { const [n,p] = s.split(" - "); basketItems.push({name:n.trim(), price: parseInt(p.trim())}); });
+function updateBasket(){ basketListElem.innerHTML=""; total=0; basketItems.forEach(i=>{ const li=document.createElement("li"); li.innerHTML=`<span>${i.name}</span><span>£${i.price}</span>`; basketListElem.appendChild(li); total+=i.price; }); totalCostElem.textContent=`Total: £${total}`;}
 updateBasket();
 
 // utils
-function centerChip(container, chip) {
-  const containerRect = container.getBoundingClientRect();
-  const chipRect = chip.getBoundingClientRect();
-  const offset = (chipRect.left - containerRect.left) - (containerRect.width/2 - chipRect.width/2);
-  container.scrollBy({ left: offset, behavior: 'smooth' });
-}
-function makeDraggableScroll(el){
-  let isDown=false, startX, scrollLeft;
-  el.addEventListener("mousedown", (e)=>{ isDown=true; startX=e.pageX - el.offsetLeft; scrollLeft=el.scrollLeft; });
-  el.addEventListener("mouseleave", ()=>{ isDown=false; });
-  el.addEventListener("mouseup", ()=>{ isDown=false; });
-  el.addEventListener("mousemove", (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - el.offsetLeft; const walk=(x-startX)*1.2; el.scrollLeft=scrollLeft - walk; });
-}
+function centerChip(c, chip){ const cr=c.getBoundingClientRect(), rr=chip.getBoundingClientRect(); const off=(rr.left-cr.left)-(cr.width/2-rr.width/2); c.scrollBy({left:off, behavior:'smooth'}); }
+function makeDrag(el){ let down=false,sx,sl; el.addEventListener("mousedown",e=>{down=true; sx=e.pageX-el.offsetLeft; sl=el.scrollLeft;}); el.addEventListener("mouseleave",()=>down=false); el.addEventListener("mouseup",()=>down=false); el.addEventListener("mousemove",e=>{if(!down)return; e.preventDefault(); const x=e.pageX-el.offsetLeft; el.scrollLeft=sl-(x-sx)*1.2;}); }
 
-// date carousel (20 days from tomorrow)
-const dateCarousel = document.getElementById("dateCarousel");
-const desiredDateInput = document.getElementById("desiredDate");
-makeDraggableScroll(dateCarousel);
-
-const now = new Date();
-const tomorrow = new Date(now); tomorrow.setDate(now.getDate()+1);
-const daysToShow = 20;
-function fmtDateLabel(d){ const weekday = d.toLocaleDateString(undefined,{weekday:'short'}); const month = d.toLocaleDateString(undefined,{month:'short'}); return `${weekday} ${d.getDate()} ${month}`; }
-function toISODate(d){ return d.toISOString().split("T")[0]; }
-
-for(let i=0;i<daysToShow;i++){
-  const d = new Date(tomorrow); d.setDate(tomorrow.getDate()+i);
-  const chip = document.createElement("button");
-  chip.type="button"; chip.className="chip"; chip.textContent = fmtDateLabel(d); chip.dataset.value = toISODate(d);
-  chip.addEventListener("click", ()=>{
-    document.querySelectorAll("#dateCarousel .chip.selected").forEach(c=>c.classList.remove("selected"));
-    chip.classList.add("selected"); desiredDateInput.value = chip.dataset.value;
-    document.getElementById("dateWarning").style.display = "none";
-    chip.style.transform="translateY(-2px) scale(1.02)"; setTimeout(()=>chip.style.transform="",150);
-    centerChip(dateCarousel, chip);
-  });
+// date carousel
+const dateCarousel=document.getElementById("dateCarousel"), desiredDateInput=document.getElementById("desiredDate"); makeDrag(dateCarousel);
+const now=new Date(), tomorrow=new Date(now); tomorrow.setDate(now.getDate()+1); const daysToShow=20;
+function fmtDate(d){ return `${d.toLocaleDateString(undefined,{weekday:'short'})} ${d.getDate()} ${d.toLocaleDateString(undefined,{month:'short'})}`; }
+function iso(d){ return d.toISOString().split("T")[0]; }
+for(let i=0;i<daysToShow;i++){ const d=new Date(tomorrow); d.setDate(tomorrow.getDate()+i); const chip=document.createElement("button");
+  chip.type="button"; chip.className="chip"; chip.textContent=fmtDate(d); chip.dataset.value=iso(d);
+  chip.addEventListener("click",()=>{ document.querySelectorAll("#dateCarousel .chip.selected").forEach(c=>c.classList.remove("selected")); chip.classList.add("selected"); desiredDateInput.value=chip.dataset.value; document.getElementById("dateWarning").style.display="none"; chip.style.transform="translateY(-2px) scale(1.02)"; setTimeout(()=>chip.style.transform="",150); centerChip(dateCarousel, chip);});
   dateCarousel.appendChild(chip);
 }
-const firstDateChip = dateCarousel.querySelector(".chip"); if(firstDateChip){ firstDateChip.click(); }
+const fd=dateCarousel.querySelector(".chip"); if(fd){ fd.click(); }
 
-// time carousel (hourly 9–18)
-const timeCarousel = document.getElementById("timeCarousel");
-const desiredTimeInput = document.getElementById("desiredTime");
-makeDraggableScroll(timeCarousel);
-
-for (let hour = 9; hour <= 18; hour++) {
-  const displayHour = hour <= 12 ? hour : hour - 12;
-  const ampm = hour < 12 ? "AM" : "PM";
-  const label = `${displayHour}:00 ${ampm}`;
-  const chip = document.createElement("button");
-  chip.type="button"; chip.className="chip"; chip.textContent = label; chip.dataset.value = label;
-  chip.addEventListener("click", ()=>{
-    document.querySelectorAll("#timeCarousel .chip.selected").forEach(c=>c.classList.remove("selected"));
-    chip.classList.add("selected"); desiredTimeInput.value = chip.dataset.value;
-    document.getElementById("timeWarning").style.display = "none";
-    chip.style.transform="translateY(-2px) scale(1.02)"; setTimeout(()=>chip.style.transform="",150);
-    centerChip(timeCarousel, chip);
-  });
+// time carousel
+const timeCarousel=document.getElementById("timeCarousel"), desiredTimeInput=document.getElementById("desiredTime"); makeDrag(timeCarousel);
+for(let h=9;h<=18;h++){ const disp=h<=12?h:h-12, ampm=h<12?"AM":"PM", label=`${disp}:00 ${ampm}`; const chip=document.createElement("button"); chip.type="button"; chip.className="chip"; chip.textContent=label; chip.dataset.value=label;
+  chip.addEventListener("click",()=>{ document.querySelectorAll("#timeCarousel .chip.selected").forEach(c=>c.classList.remove("selected")); chip.classList.add("selected"); desiredTimeInput.value=chip.dataset.value; document.getElementById("timeWarning").style.display="none"; chip.style.transform="translateY(-2px) scale(1.02)"; setTimeout(()=>chip.style.transform="",150); centerChip(timeCarousel, chip);});
   timeCarousel.appendChild(chip);
 }
 
-// validation + submit
-const form = document.getElementById("bookingForm");
-form.addEventListener("submit", (e) => {
-  e.preventDefault(); let valid = true;
-  const email = document.getElementById("email"); const phone = document.getElementById("phone");
-  const emailWarning = document.getElementById("emailWarning"); const phoneWarning = document.getElementById("phoneWarning");
-  const dateWarning = document.getElementById("dateWarning"); const timeWarning = document.getElementById("timeWarning");
-  emailWarning.style.display = "none"; phoneWarning.style.display = "none"; dateWarning.style.display = "none"; timeWarning.style.display = "none";
-  if(!email.value.trim()){ emailWarning.style.display = "block"; valid = false; }
-  if(!phone.value.trim()){ phoneWarning.style.display = "block"; valid = false; }
-  if(!desiredDateInput.value){ dateWarning.textContent = "Please select a date (24h notice required)."; dateWarning.style.display = "block"; valid = false; }
-  if(!desiredTimeInput.value){ timeWarning.style.display = "block"; valid = false; }
+// submit
+const form=document.getElementById("bookingForm");
+form.addEventListener("submit",(e)=>{ e.preventDefault(); let valid=true;
+  const email=document.getElementById("email"), phone=document.getElementById("phone");
+  const ew=document.getElementById("emailWarning"), pw=document.getElementById("phoneWarning"), dw=document.getElementById("dateWarning"), tw=document.getElementById("timeWarning");
+  ew.style.display=pw.style.display=dw.style.display=tw.style.display="none";
+  if(!email.value.trim()){ ew.style.display="block"; valid=false; }
+  if(!phone.value.trim()){ pw.style.display="block"; valid=false; }
+  if(!desiredDateInput.value){ dw.textContent="Please select a date (24h notice required)."; dw.style.display="block"; valid=false; }
+  if(!desiredTimeInput.value){ tw.style.display="block"; valid=false; }
   if(!valid) return;
-
-  const query = new URLSearchParams();
-  basketItems.forEach(i => query.append("service", `${i.name} - ${i.price}`));
-  query.append("name", document.getElementById("name").value);
-  query.append("email", email.value);
-  query.append("phone", phone.value);
-  query.append("desiredDate", desiredDateInput.value);
-  query.append("desiredTime", desiredTimeInput.value);
-  query.append("notes", document.getElementById("notes").value);
-  window.location.href = `payment.html?${query.toString()}`;
+  const q=new URLSearchParams(); basketItems.forEach(i=>q.append("service",`${i.name} - ${i.price}`));
+  q.append("name",document.getElementById("name").value); q.append("email",email.value); q.append("phone",phone.value);
+  q.append("desiredDate",desiredDateInput.value); q.append("desiredTime",desiredTimeInput.value); q.append("notes",document.getElementById("notes").value);
+  window.location.href=`payment.html?${q.toString()}`;
 });
 </script>
 </body>
