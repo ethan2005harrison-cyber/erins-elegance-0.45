@@ -2,12 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Terms & Conditions — Erin’s Elegance</title>
+<meta name="description" content="Salon policies including bookings, cancellations, late arrivals, payments, refunds, health & safety, privacy." />
+<link rel="canonical" href="https://www.erinselegance.com/terms.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Terms & Conditions — Erin’s Elegance" />
+<meta property="og:description" content="Read our salon policies and terms." />
+<meta property="og:url" content="https://www.erinselegance.com/terms.html" />
+<meta property="og:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Terms & Conditions — Erin’s Elegance" />
+<meta name="twitter:description" content="Salon policies and terms." />
+<meta name="twitter:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
+
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 :root{ --sage:#B8CEC3; --sage-1:#A9C3B8; --sage-2:#CFE0D9; --gold:#a18449; --gold-dark:#8c703b; --ink:#111; --text:#333; --card:#fff; --line:#ece8df; }
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,1px,1px);white-space:nowrap;border:0}
 *{box-sizing:border-box}
 body{ margin:0; font-family:'Open Sans',sans-serif; background:var(--sage); color:var(--ink); position:relative; overflow-x:hidden; }
 /* Header */
@@ -53,10 +71,12 @@ footer{ text-align:center; padding:2rem 1rem; color:#555; opacity:.8; font-size:
 </style>
 </head>
 <body>
-<header>
+<a href="#main-content" class="sr-only">Skip to content</a>
+
+<header role="banner">
   <div class="header-container">
     <div class="logo">erin’s elegance</div>
-    <nav>
+    <nav aria-label="Primary">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html">View Services</a></li>
@@ -77,13 +97,13 @@ footer{ text-align:center; padding:2rem 1rem; color:#555; opacity:.8; font-size:
   <div class="bg-grain"></div>
 </div>
 
-<main>
+<main id="main-content" role="main">
   <div class="hero">
     <h1>Salon Policies & Terms</h1>
     <p>Clear, caring policies that help keep your visit relaxed and seamless.</p>
   </div>
 
-  <section class="section">
+  <section class="section" aria-label="Policies">
     <h2>Erin's Elegance Salon Policies</h2>
     <p>We’re committed to providing a calm, professional experience. Please review the policies below before your appointment.</p>
     <hr class="rule">
@@ -114,6 +134,18 @@ footer{ text-align:center; padding:2rem 1rem; color:#555; opacity:.8; font-size:
   </section>
 </main>
 
-<footer><p>© 2025 Erin’s Elegance. All rights reserved.</p></footer>
+<footer role="contentinfo"><p>© 2025 Erin’s Elegance. All rights reserved.</p></footer>
+
+<!-- Breadcrumb JSON-LD -->
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"BreadcrumbList",
+ "itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://www.erinselegance.com/"},
+  {"@type":"ListItem","position":2,"name":"Terms & Conditions","item":"https://www.erinselegance.com/terms.html"}
+ ]
+}
+</script>
 </body>
 </html>
