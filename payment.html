@@ -59,6 +59,10 @@ button:hover { background-color:#8c703b; transform: translateY(-2px); }
 button:disabled { opacity:0.6; cursor:not-allowed; }
 
 #statusMessage { margin-top: 1rem; font-size: 1rem; font-weight: 600; color: #a18449; display: none; text-align: center; }
+
+/* NEW: tiny privacy note */
+.privacy-note { font-size:0.95rem; color:#555; margin-top:.5rem; }
+
 footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; margin-top:2rem; position:relative; z-index:1; }
 
 /* Animated background */
@@ -134,6 +138,9 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
   By confirming, you agree to our <a href="terms.html">Terms &amp; Conditions</a>.
 </p>
 
+<!-- NEW: privacy statement -->
+<p class="privacy-note">We respect your privacy. Your details are used only for booking and salon-related communication and are never shared with third parties. See our Terms for more.</p>
+
 <button id="confirmBtn" type="button">Confirm Booking</button>
 <div id="statusMessage" role="status" aria-live="polite">Submitting your booking...</div>
 </main>
@@ -202,4 +209,15 @@ confirmBtn.addEventListener("click", () => {
   fetch("https://formspree.io/f/xdkwjqyl", { method: "POST", body: formData, headers: { 'Accept': 'application/json' } })
   .then(response => {
     if (response.ok) {
-      statusMessage.textContent = "Booking confirmed! Redire
+      statusMessage.textContent = "Booking confirmed! Redirecting...";
+      setTimeout(() => window.location.href = "thankspage.html", 1200);
+    } else { throw new Error("Formspree submission failed."); }
+  })
+  .catch(error => {
+    statusMessage.textContent = "There was a problem submitting your booking. Please try again.";
+    confirmBtn.disabled = false; console.error(error);
+  });
+});
+</script>
+</body>
+</html>
