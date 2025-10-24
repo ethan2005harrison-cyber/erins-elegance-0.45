@@ -7,114 +7,41 @@
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-
-:root{
-  --sage:#D8E3DC;
-  --gold:#a18449;
-  --gold-dark:#8c703b;
-  --ink:#111;
-  --text:#333;
-  --card:#fff;
-  --line:#ece8df;
-}
-
+:root{ --sage:#D8E3DC; --gold:#a18449; --gold-dark:#8c703b; --ink:#111; --text:#333; --card:#fff; --line:#ece8df; }
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:'Open Sans',sans-serif;
-  background:var(--sage);
-  color:var(--ink);
-}
-
+body{ margin:0; font-family:'Open Sans',sans-serif; background:var(--sage); color:var(--ink); }
 /* Header */
-header{
-  position:fixed; top:0; left:0; right:0; z-index:10;
-  background:rgba(255,255,255,.45);
-  backdrop-filter:blur(10px);
-}
-.header-container{
-  max-width:1100px; margin:0 auto;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:1.1rem 2rem;
-}
+header{ position:fixed; top:0; left:0; right:0; z-index:10; background:rgba(255,255,255,.45); backdrop-filter:blur(10px); }
+.header-container{ max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:1.1rem 2rem; }
 .logo{ font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; }
 nav ul{ display:flex; gap:1.25rem; list-style:none; margin:0; padding:0; }
 nav a{ text-decoration:none; color:var(--ink); font-weight:600; transition:color .25s }
 nav a:hover{ color:var(--gold) }
-
 /* Main */
 main{ max-width:840px; margin:10.5rem auto 4rem; padding:0 1.5rem; }
 .hero{ text-align:center; margin-bottom:1.5rem; }
 .hero h1{ font-family:'Playfair Display',serif; font-size:2.6rem; margin:.2rem 0 .4rem; }
 .hero p{ color:var(--text); margin:0; }
-
 /* Toolbar */
-.toolbar{
-  display:flex; gap:.75rem; justify-content:flex-end; align-items:center;
-  margin:1rem 0 1.25rem;
-}
-.btn{
-  background:var(--gold); color:#fff; border:none; border-radius:999px;
-  padding:.8rem 1.2rem; font-weight:600; cursor:pointer;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
-  transition:background .25s, transform .15s, box-shadow .25s;
-}
+.toolbar{ display:flex; gap:.75rem; justify-content:flex-end; align-items:center; margin:1rem 0 1.25rem; }
+.btn{ background:var(--gold); color:#fff; border:none; border-radius:999px; padding:.8rem 1.2rem; font-weight:600; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,.08); transition:background .25s, transform .15s, box-shadow .25s; }
 .btn:hover{ background:var(--gold-dark); transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.15); }
-.btn.secondary{
-  background:#fff; color:var(--ink); border:1px solid var(--line);
-}
+.btn.secondary{ background:#fff; color:var(--ink); border:1px solid var(--line); }
 .btn.secondary:hover{ background:#fff; border-color:#ded9cf; transform:translateY(-1px) }
-
-/* Policy cards */
-.section{
-  background:var(--card);
-  border-radius:16px;
-  padding:1.2rem 1.25rem;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
-  margin:.9rem 0;
-  border:1px solid var(--line);
-}
-.section h2{
-  font-family:'Playfair Display',serif;
-  font-size:1.35rem; margin:.1rem 0 .4rem;
-}
+/* Sections */
+.section{ background:var(--card); border-radius:16px; padding:1.2rem 1.25rem; box-shadow:0 4px 12px rgba(0,0,0,.1); margin:.9rem 0; border:1px solid var(--line); }
+.section h2{ font-family:'Playfair Display',serif; font-size:1.35rem; margin:.1rem 0 .4rem; }
 .section p{ margin:.35rem 0; color:var(--text); line-height:1.6; }
-ul.clean{ margin:.4rem 0 .2rem 1.15rem; padding:0; }
-ul.clean li{ margin:.25rem 0; }
-
-/* Agreement box */
-.agreement{
-  margin:1.25rem 0 0;
-  border-top:1px dashed var(--line);
-  padding-top:1rem;
-  color:var(--text);
-  font-size:.98rem;
-}
-.agreement .signline{
-  margin-top:.75rem;
-  display:flex; gap:1rem; align-items:center; flex-wrap:wrap;
-}
-.inline{
-  background:#fff; border:1px solid var(--line); border-radius:10px;
-  padding:.6rem .8rem; min-width:180px;
-}
-
+/* Agreement */
+.agreement{ margin:1.25rem 0 0; border-top:1px dashed var(--line); padding-top:1rem; color:var(--text); font-size:.98rem; }
+.agreement .signline{ margin-top:.75rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+.inline{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:.6rem .8rem; min-width:180px; }
 /* Footer */
-footer{
-  text-align:center; padding:2rem 1rem; color:#555; opacity:.8; font-size:.95rem;
-}
-
-/* Print */
-@media print{
-  header, .toolbar, footer{ display:none !important; }
-  main{ margin:0; max-width:none; }
-  .section{ box-shadow:none; border-color:#ddd; }
-}
+footer{ text-align:center; padding:2rem 1rem; color:#555; opacity:.8; font-size:.95rem; }
+@media print{ header, .toolbar, footer{ display:none !important; } main{ margin:0; max-width:none; } .section{ box-shadow:none; border-color:#ddd; } }
 </style>
 </head>
 <body>
-
 <header>
   <div class="header-container">
     <div class="logo">erin’s elegance</div>
@@ -124,6 +51,7 @@ footer{
         <li><a href="services.html">View Services</a></li>
         <li><a href="booking.html">Booking</a></li>
         <li><a href="about.html">About</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
       </ul>
     </nav>
   </div>
@@ -140,57 +68,22 @@ footer{
     <button class="btn" onclick="window.print()">Print / Save PDF</button>
   </div>
 
-  <!-- Erin's Elegance Salon Policies -->
   <section class="section">
     <h2>Erin's Elegance Salon Policies</h2>
     <p>We’re committed to providing a calm, professional experience. Please review the policies below before your appointment.</p>
   </section>
 
-  <section class="section">
-    <h2>Booking & Appointments</h2>
-    <p>We recommend booking your appointments in advance to secure your preferred time. A valid contact number is required at the time of booking.</p>
-  </section>
-
-  <section class="section">
-    <h2>Cancellations & No-Shows</h2>
-    <p>We kindly request at least 24 hours’ notice for cancellations or rescheduling. No-shows may result in a cancellation fee.</p>
-  </section>
-
-  <section class="section">
-    <h2>Late Arrivals</h2>
-    <p>Clients arriving more than 10 minutes late may need to reschedule or receive a modified service to accommodate the next appointment.</p>
-  </section>
-
-  <section class="section">
-    <h2>Payments</h2>
-    <p>We accept major credit cards, debit cards, and cash. All payments are due at the time of service.</p>
-  </section>
-
-  <section class="section">
-    <h2>Refund Policy</h2>
-    <p>All service sales are final. If you are unsatisfied, please let us know before leaving the salon so we can address your concerns.</p>
-  </section>
-
-  <section class="section">
-    <h2>Health & Safety</h2>
-    <p>For the safety of our clients and team, we reserve the right to refuse service to anyone exhibiting signs of illness.</p>
-  </section>
-
-  <section class="section">
-    <h2>Children & Guests</h2>
-    <p>To ensure a relaxing atmosphere, we kindly ask that only clients receiving services remain in the salon area.</p>
-  </section>
-
-  <section class="section">
-    <h2>Client Data & Privacy</h2>
-    <p>Your personal information is stored securely and used only for appointment bookings, reminders, and salon-related communication. We comply with data protection laws to ensure your information remains private and is never shared without your consent.</p>
-  </section>
-
+  <section class="section"><h2>Booking & Appointments</h2><p>We recommend booking your appointments in advance to secure your preferred time. A valid contact number is required at the time of booking.</p></section>
+  <section class="section"><h2>Cancellations & No-Shows</h2><p>We kindly request at least 24 hours’ notice for cancellations or rescheduling. No-shows may result in a cancellation fee.</p></section>
+  <section class="section"><h2>Late Arrivals</h2><p>Clients arriving more than 10 minutes late may need to reschedule or receive a modified service to accommodate the next appointment.</p></section>
+  <section class="section"><h2>Payments</h2><p>We accept major credit cards, debit cards, and cash. All payments are due at the time of service.</p></section>
+  <section class="section"><h2>Refund Policy</h2><p>All service sales are final. If you are unsatisfied, please let us know before leaving the salon so we can address your concerns.</p></section>
+  <section class="section"><h2>Health & Safety</h2><p>For the safety of our clients and team, we reserve the right to refuse service to anyone exhibiting signs of illness.</p></section>
+  <section class="section"><h2>Children & Guests</h2><p>To ensure a relaxing atmosphere, we kindly ask that only clients receiving services remain in the salon area.</p></section>
+  <section class="section"><h2>Client Data & Privacy</h2><p>Your personal information is stored securely and used only for appointment bookings, reminders, and salon-related communication. We comply with data protection laws to ensure your information remains private and is never shared without your consent.</p></section>
   <section class="section">
     <h2>Client Agreement</h2>
     <p>By signing below, I acknowledge that I have read and agree to Erin's Elegance Salon Policies. I understand and accept the terms regarding bookings, cancellations, payments, and data protection.</p>
-
-    <!-- Optional inline sign fields (static for print; not required to use) -->
     <div class="agreement">
       <div class="signline">
         <div class="inline"><strong>Client Name:</strong> _______________________</div>
@@ -201,9 +94,6 @@ footer{
   </section>
 </main>
 
-<footer>
-  <p>© 2025 Erin’s Elegance. All rights reserved.</p>
-</footer>
-
+<footer><p>© 2025 Erin’s Elegance. All rights reserved.</p></footer>
 </body>
 </html>
