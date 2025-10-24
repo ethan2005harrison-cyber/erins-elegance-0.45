@@ -8,14 +8,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-body {
-  margin:0;
-  font-family:'Open Sans',sans-serif;
-  background-color:#D8E3DC;
-  color:#222;
-}
-
-/* HEADER */
+body { margin:0; font-family:'Open Sans',sans-serif; background-color:#D8E3DC; color:#222; }
 header { background-color: rgba(255,255,255,0.4); backdrop-filter: blur(10px); position: fixed; width: 100%; top:0; z-index:10; }
 .header-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
 .logo { font-family:'Playfair Display', serif; font-size:1.5rem; color:#111; font-weight:600; }
@@ -23,7 +16,6 @@ nav ul { list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
 nav ul li a { text-decoration:none; color:#111; font-weight:500; transition: color 0.3s; }
 nav ul li a:hover { color:#a18449; }
 
-/* MAIN */
 main { max-width:600px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; }
 h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:1rem; color:#111; }
 p { font-size:1.1rem; color:#333; margin-bottom:2rem; }
@@ -40,18 +32,14 @@ p { font-size:1.1rem; color:#333; margin-bottom:2rem; }
 .payment-option.disabled { opacity:0.5; cursor:not-allowed; }
 .payment-option.disabled::after { content:"Currently Unavailable"; font-size:0.9rem; color:#a18449; font-weight:600; margin-left:10px; }
 
-button { background-color:#a18449; color:white; border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1rem; cursor:pointer; margin-top:2rem; transition:background-color 0.3s, transform 0.2s; }
+.terms-line { margin-top:1rem; font-size:0.95rem; color:#a18449; text-align:center; }
+.terms-line a { color:#8c703b; font-weight:600; text-decoration:none; }
+
+button { background-color:#a18449; color:white; border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1rem; cursor:pointer; margin-top:1rem; transition:background-color 0.3s, transform 0.2s; }
 button:hover { background-color:#8c703b; transform: translateY(-2px); }
 button:disabled { opacity:0.6; cursor:not-allowed; }
 
-#statusMessage {
-  margin-top: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #a18449;
-  display: none;
-  text-align: center;
-}
+#statusMessage { margin-top: 1rem; font-size: 1rem; font-weight: 600; color: #a18449; display: none; text-align: center; }
 
 footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:0.7; margin-top:2rem; }
 </style>
@@ -64,8 +52,10 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">View Services</a></li>
       <li><a href="booking.html">Booking</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="terms.html">Terms & Conditions</a></li>
     </ul>
   </nav>
 </div>
@@ -94,6 +84,10 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
   </div>
 </div>
 
+<p class="terms-line">
+  By confirming, you agree to our <a href="terms.html">Terms &amp; Conditions</a>.
+</p>
+
 <button id="confirmBtn">Confirm Booking</button>
 <div id="statusMessage">Submitting your booking...</div>
 </main>
@@ -103,7 +97,7 @@ footer { text-align:center; padding:2rem; font-size:0.9rem; color:#444; opacity:
 </footer>
 
 <script>
-// Grab URL parameters
+// URL params
 const params = new URLSearchParams(window.location.search);
 const serviceListElem = document.getElementById("serviceList");
 const totalCostElem = document.getElementById("totalCost");
@@ -111,16 +105,13 @@ const customerDetailsElem = document.getElementById("customerDetails");
 const statusMessage = document.getElementById("statusMessage");
 const confirmBtn = document.getElementById("confirmBtn");
 
-let total = 0;
-let services = [];
-
+let total = 0; let services = [];
 params.getAll("service").forEach(s => {
   const [name, price] = s.split(" - ");
   const li = document.createElement("li");
   li.textContent = `${name.trim()} - £${price.trim()}`;
   serviceListElem.appendChild(li);
-  total += parseInt(price.trim());
-  services.push({name: name.trim(), price: parseInt(price.trim())});
+  total += parseInt(price.trim()); services.push({name: name.trim(), price: parseInt(price.trim())});
 });
 totalCostElem.textContent = `Total: £${total}`;
 
@@ -131,7 +122,6 @@ const phone = params.get("phone") || "";
 const desiredDate = params.get("desiredDate") || "";
 const desiredTime = params.get("desiredTime") || "";
 const notes = params.get("notes") || "";
-
 customerDetailsElem.innerHTML = `
 <strong>Name:</strong> ${name}<br>
 <strong>Email:</strong> ${email}<br>
@@ -141,12 +131,9 @@ customerDetailsElem.innerHTML = `
 <strong>Notes:</strong> ${notes || "None"}
 `;
 
-// Handle confirm booking
+// Formspree submit on confirm
 confirmBtn.addEventListener("click", () => {
-  confirmBtn.disabled = true;
-  statusMessage.style.display = "block";
-  statusMessage.textContent = "Submitting your booking...";
-
+  confirmBtn.disabled = true; statusMessage.style.display = "block"; statusMessage.textContent = "Submitting your booking...";
   const formData = new FormData();
   formData.append("Name", name);
   formData.append("Email", email);
@@ -165,18 +152,14 @@ confirmBtn.addEventListener("click", () => {
   .then(response => {
     if (response.ok) {
       statusMessage.textContent = "Booking confirmed! Redirecting...";
-      setTimeout(() => window.location.href = "thankspage.html", 1500);
-    } else {
-      throw new Error("Formspree submission failed.");
-    }
+      setTimeout(() => window.location.href = "thankspage.html", 1200);
+    } else { throw new Error("Formspree submission failed."); }
   })
   .catch(error => {
     statusMessage.textContent = "There was a problem submitting your booking. Please try again.";
-    confirmBtn.disabled = false;
-    console.error(error);
+    confirmBtn.disabled = false; console.error(error);
   });
 });
 </script>
-
 </body>
 </html>
