@@ -1,112 +1,25 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About - erin’s elegance</title>
+<title>About — Erin’s Elegance</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-
-body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #D8E3DC;
-  background-image: url('https://www.transparenttextures.com/patterns/linen.png');
-  background-repeat: repeat;
-  background-size: auto;
-  color: #222;
-  overflow-x: hidden;
-}
-
-header {
-  background-color: rgba(255,255,255,0.4);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-}
-
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-}
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  color: #111;
-  font-weight: 600;
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 1.5rem;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-  font-family: 'Open Sans', sans-serif;
-}
-
-nav ul li a:hover {
-  color: #a18449;
-}
-
-main {
-  max-width: 800px;
-  margin: 12rem auto 4rem;
-  padding: 0 2rem;
-  text-align: left;
-}
-
-h1, h2 {
-  font-family: 'Playfair Display', serif;
-  color: #111;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-}
-
-h1 { font-size: 2.5rem; animation-delay: 0.5s; }
-h2 { font-size: 1.8rem; margin-top: 2rem; animation-delay: 1s; }
-
-p {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 1rem;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards;
-  animation-delay: 1.5s;
-}
-
-@keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
-
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #444;
-  opacity: 0.7;
-}
-
-footer p + p {
-  margin-top: 0.3rem;
-}
-
-@media (max-width: 768px) {
-  main { padding: 0 1rem; }
-}
+:root{ --sage:#D8E3DC; --gold:#a18449; --ink:#111; --text:#333; --card:#fff; }
+body{ margin:0; font-family:'Open Sans',sans-serif; background:var(--sage); color:var(--ink); }
+header{ background:rgba(255,255,255,.4); backdrop-filter:blur(10px); position:fixed; width:100%; top:0; z-index:10; }
+.header-container{ max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
+.logo{ font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; }
+nav ul{ list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
+nav ul li a{ text-decoration:none; color:var(--ink); font-weight:600; }
+nav ul li a:hover{ color:var(--gold); }
+main{ max-width:800px; margin:11rem auto 4rem; padding:0 1.5rem; }
+h1{ font-family:'Playfair Display',serif; font-size:2.4rem; margin-bottom:.6rem; }
+.card{ background:var(--card); border-radius:16px; padding:1.25rem 1.4rem; box-shadow:0 4px 12px rgba(0,0,0,.1); }
+p{ color:var(--text); line-height:1.7; }
+footer{ text-align:center; padding:2rem; color:#555; opacity:.8; }
 </style>
 </head>
 <body>
@@ -116,7 +29,9 @@ footer p + p {
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">View Services</a></li>
         <li><a href="booking.html">Booking</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
       </ul>
     </nav>
   </div>
@@ -124,18 +39,12 @@ footer p + p {
 
 <main>
   <h1>About Our Service</h1>
-  <p>Welcome to Erin’s Elegance! We are passionate about all things nails and pride ourselves on creating elegant, personalized nail treatments for every client.</p>
-  <p>Based in Callington, Cornwall, we provide a cozy and professional environment where you can relax while we take care of your nails.</p>
-  
-  <h2>Location & Contact</h2>
-  <p><strong>Address:</strong> 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
-  <p><strong>Email:</strong> erins.elegance1@gmail.com</p>
-  <p>We will contact you to confirm your bookings and ensure you have the perfect nail experience.</p>
+  <div class="card">
+    <p>At Erin’s Elegance, we believe your nail appointment should feel like a deep breath — cozy, calming, and beautifully personal. From natural manicures to luxury pedicures and sculpted enhancements, every service is tailored to you.</p>
+    <p>Located in Callington, Cornwall, we use quality products, gentle techniques, and a warm aesthetic to make your time with us feel special.</p>
+  </div>
 </main>
 
-<footer>
-  <p>© 2025 erin’s elegance. all rights reserved.</p>
-  <p>📍 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
-</footer>
+<footer><p>© 2025 Erin’s Elegance. All rights reserved.</p></footer>
 </body>
 </html>
