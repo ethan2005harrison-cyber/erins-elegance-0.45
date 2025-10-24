@@ -7,22 +7,100 @@
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-:root{ --sage:#D8E3DC; --gold:#a18449; --ink:#111; --text:#333; --card:#fff; }
-body{ margin:0; font-family:'Open Sans',sans-serif; background:var(--sage); color:var(--ink); }
+
+/* Brand + palette (deeper green) */
+:root{
+  --sage:#B8CEC3;     /* deeper base */
+  --sage-1:#A9C3B8;   /* darker accent */
+  --sage-2:#CFE0D9;   /* lighter accent */
+  --gold:#a18449;
+  --gold-dark:#8c703b;
+  --ink:#111;
+  --text:#333;
+  --card:#fff;
+}
+
+/* Base layout */
+body{ margin:0; font-family:'Open Sans',sans-serif; background:var(--sage); color:var(--ink); overflow-x:hidden; position:relative; }
 header{ background:rgba(255,255,255,.4); backdrop-filter:blur(10px); position:fixed; width:100%; top:0; z-index:10; }
 .header-container{ max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
 .logo{ font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; }
 nav ul{ list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
 nav ul li a{ text-decoration:none; color:var(--ink); font-weight:600; }
 nav ul li a:hover{ color:var(--gold); }
-main{ max-width:800px; margin:11rem auto 4rem; padding:0 1.5rem; }
+main{ max-width:800px; margin:11rem auto 4rem; padding:0 1.5rem; position:relative; z-index:1; } /* ensure above bg */
 h1{ font-family:'Playfair Display',serif; font-size:2.4rem; margin-bottom:.6rem; }
 .card{ background:var(--card); border-radius:16px; padding:1.25rem 1.4rem; box-shadow:0 4px 12px rgba(0,0,0,.1); }
 p{ color:var(--text); line-height:1.7; }
-footer{ text-align:center; padding:2rem; color:#555; opacity:.8; }
+footer{ text-align:center; padding:2rem; color:#555; opacity:.8; position:relative; z-index:1; }
+
+/* ---------- Animated background (subtle & reversible) ---------- */
+.bg-anim {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+/* Base wash */
+.bg-anim::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(1200px 800px at 20% 20%, var(--sage-2), transparent 60%),
+    radial-gradient(1000px 700px at 85% 75%, var(--sage-1), transparent 55%),
+    var(--sage);
+  filter: saturate(105%);
+}
+/* Organic blobs */
+.bg-blob {
+  position: absolute; width: 40vmax; height: 40vmax; border-radius: 50%;
+  opacity: .18; mix-blend-mode: multiply;
+  background: radial-gradient(65% 65% at 50% 50%, var(--sage-2), var(--sage-1));
+  animation: floatBlob 26s ease-in-out infinite;
+  transform: translate(-50%, -50%);
+}
+.bg-blob.b2 { width: 50vmax; height: 50vmax; left: 85%; top: 80%; animation-duration: 34s; opacity:.16; }
+.bg-blob.b3 { width: 45vmax; height: 45vmax; left: 10%; top: 90%; animation-duration: 30s; opacity:.14; }
+
+/* Subtle gold shimmer */
+.bg-gold {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(1200px 600px at 70% 10%, rgba(161,132,73,.10), transparent 70%),
+    radial-gradient(800px 400px at 15% 85%, rgba(161,132,73,.08), transparent 70%);
+  animation: driftGold 24s linear infinite;
+}
+
+/* Gentle film grain for warmth */
+.bg-grain {
+  position: absolute; inset: -10%;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
+  <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter>\
+  <rect width='120' height='120' filter='url(%23n)' opacity='0.035'/></svg>");
+  background-size: 160px 160px;
+  mix-blend-mode: multiply;
+  animation: grainMove 6s steps(2,end) infinite;
+}
+
+@keyframes floatBlob {
+  0%   { transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate(-50%, -50%) translate3d(3%, -2%, 0) scale(1.06); }
+  100% { transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1); }
+}
+@keyframes driftGold { 
+  0% { transform: translate3d(0,0,0); } 
+  100% { transform: translate3d(-2%, 1%, 0); }
+}
+@keyframes grainMove {
+  0%,100% { transform: translate3d(0,0,0); }
+  50% { transform: translate3d(1%, -1%, 0); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-blob, .bg-gold, .bg-grain { animation: none !important; }
+}
 </style>
 </head>
 <body>
+
 <header>
   <div class="header-container">
     <div class="logo">erin’s elegance</div>
@@ -37,6 +115,15 @@ footer{ text-align:center; padding:2rem; color:#555; opacity:.8; }
   </div>
 </header>
 
+<!-- Animated background layer (only visual; remove if you want to revert) -->
+<div class="bg-anim" aria-hidden="true">
+  <div class="bg-blob" style="left:25%; top:25%;"></div>
+  <div class="bg-blob b2"></div>
+  <div class="bg-blob b3"></div>
+  <div class="bg-gold"></div>
+  <div class="bg-grain"></div>
+</div>
+
 <main>
   <h1>About Our Service</h1>
   <div class="card">
@@ -46,5 +133,6 @@ footer{ text-align:center; padding:2rem; color:#555; opacity:.8; }
 </main>
 
 <footer><p>© 2025 Erin’s Elegance. All rights reserved.</p></footer>
+
 </body>
 </html>
