@@ -31,14 +31,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
 /* =========================
-   Luxe Dark Green + Gold
+   Luxe Dark Green + Deeper Gold
    ========================= */
 :root{
   --forest:#0f2620;      /* page background */
   --forest-1:#13322a;    /* mid tone */
   --forest-2:#1a4136;    /* light tone */
-  --gold:#d4af37;        /* gold primary */
-  --gold-dark:#b8942f;   /* gold hover */
+  --gold:#c39a2e;        /* deeper gold */
+  --gold-dark:#a47f24;   /* deeper hover */
   --ink:#0e1715;         /* text on white cards */
   --text:#e8dfc4;        /* soft-gold text on dark */
   --card:#ffffff;        /* card backgrounds */
@@ -112,74 +112,83 @@ button:focus{ outline:2px solid var(--gold); outline-offset:2px; }
 
 footer{
   text-align:center; padding:2rem; font-size:.95rem;
-  color: var(--gold); opacity:.85; position:relative; z-index:1;
+  color: var(--gold); opacity:.9; position:relative; z-index:1;
 }
 
 /* =====================================
-   New Animated Background: "Aurora Silk"
-   - Layered gradient ribbons gliding
-   - Subtle gold shimmer overlay
+   NEW Animated Background: Aurora Ribbons v2
+   - Higher contrast & opacity so it’s clearly visible
+   - Two ribbon layers + gold shimmer
    ===================================== */
 .bg-stage{ position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 
-/* Deep base + two moving aurora layers */
+/* Deep base with parallax tilt */
 .aurora-base{
-  position:absolute; inset:0;
+  position:absolute; inset:-2%;
   background:
     radial-gradient(1200px 800px at 20% 20%, var(--forest-2) 0%, transparent 60%),
     radial-gradient(1000px 700px at 85% 75%, var(--forest-1) 0%, transparent 55%),
     var(--forest);
-  filter: saturate(105%);
-}
-.aurora-ribbon,
-.aurora-ribbon::before,
-.aurora-ribbon::after{
-  position:absolute; content:""; inset:-20%;
-  background:
-    conic-gradient(from 0deg at 50% 50%,
-      rgba(10,40,33,0) 0deg,
-      rgba(30,85,70,0.45) 40deg,
-      rgba(40,110,90,0.25) 120deg,
-      rgba(10,40,33,0) 200deg);
-  mix-blend-mode: screen; opacity:.35;
-  animation: drift 38s linear infinite;
-  transform: rotate(12deg);
-}
-.aurora-ribbon::before{
-  animation-duration: 52s; animation-direction: reverse;
-  transform: rotate(-8deg);
-  opacity:.30;
-}
-.aurora-ribbon::after{
-  animation-duration: 64s; animation-direction: normal;
-  transform: rotate(20deg);
-  opacity:.28;
+  filter: saturate(110%);
+  animation: baseTilt 36s ease-in-out infinite;
 }
 
-/* Subtle gold shimmer dust */
+.aurora-ribbon{
+  position:absolute; inset:-25%;
+  background:
+    conic-gradient(from 0deg at 50% 50%,
+      rgba(20,90,75,0) 0deg,
+      rgba(35,120,100,0.70) 60deg,
+      rgba(25,100,85,0.55) 140deg,
+      rgba(20,90,75,0) 220deg);
+  mix-blend-mode: screen;
+  opacity:.50;                    /* increased */
+  transform: rotate(10deg);
+  animation: driftA 40s linear infinite;
+}
+.aurora-ribbon.layer2{
+  inset:-30%;
+  background:
+    conic-gradient(from 30deg at 50% 50%,
+      rgba(15,70,60,0) 0deg,
+      rgba(32,115,95,0.65) 80deg,
+      rgba(22,95,80,0.50) 160deg,
+      rgba(15,70,60,0) 260deg);
+  transform: rotate(-8deg);
+  opacity:.46;                    /* increased */
+  animation: driftB 56s linear infinite;
+}
+
+/* Subtle gold shimmer dust (a touch stronger) */
 .gold-shimmer{
   position:absolute; inset:0;
   background:
-    radial-gradient(2px 2px at 10% 20%, rgba(212,175,55,.18) 30%, transparent 60%),
-    radial-gradient(2px 2px at 80% 35%, rgba(212,175,55,.14) 30%, transparent 60%),
-    radial-gradient(2px 2px at 30% 75%, rgba(212,175,55,.12) 30%, transparent 60%),
-    radial-gradient(2px 2px at 65% 60%, rgba(212,175,55,.10) 30%, transparent 60%);
-  animation: shimmerMove 24s linear infinite;
+    radial-gradient(2.5px 2.5px at 12% 22%, rgba(195,154,46,.22) 30%, transparent 60%),
+    radial-gradient(2.5px 2.5px at 78% 38%, rgba(195,154,46,.18) 30%, transparent 60%),
+    radial-gradient(2.5px 2.5px at 32% 78%, rgba(195,154,46,.16) 30%, transparent 60%),
+    radial-gradient(2.5px 2.5px at 62% 58%, rgba(195,154,46,.14) 30%, transparent 60%);
+  animation: shimmerMove 22s linear infinite;
   mix-blend-mode: screen; pointer-events:none;
 }
 
 /* Grain for tactile feel */
 .bg-grain{
   position:absolute; inset:-12%;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.030'/></svg>");
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.035'/></svg>");
   background-size:160px 160px; mix-blend-mode:multiply;
   animation: grainMove 6s steps(2,end) infinite;
 }
 
-@keyframes drift{
-  0%{ background-position: 0% 0%; }
-  50%{ background-position: 120% 80%; }
-  100%{ background-position: 0% 0%; }
+/* Animations */
+@keyframes driftA{
+  0%{ background-position: 0% 0%; transform: rotate(10deg) translate3d(0,0,0); }
+  50%{ background-position: 120% 80%; transform: rotate(14deg) translate3d(-1%,1%,0); }
+  100%{ background-position: 0% 0%; transform: rotate(10deg) translate3d(0,0,0); }
+}
+@keyframes driftB{
+  0%{ background-position: 100% 0%; transform: rotate(-8deg) translate3d(0,0,0); }
+  50%{ background-position: -20% 80%; transform: rotate(-12deg) translate3d(1%,-1%,0); }
+  100%{ background-position: 100% 0%; transform: rotate(-8deg) translate3d(0,0,0); }
 }
 @keyframes shimmerMove{
   0%{ transform: translate3d(0,0,0) }
@@ -190,11 +199,15 @@ footer{
   0%,100%{ transform: translate3d(0,0,0)}
   50%{ transform: translate3d(1%,-1%,0)}
 }
+@keyframes baseTilt{
+  0%{ transform: rotate(0deg) scale(1); }
+  50%{ transform: rotate(0.6deg) scale(1.01); }
+  100%{ transform: rotate(0deg) scale(1); }
+}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
-  .aurora-ribbon, .aurora-ribbon::before, .aurora-ribbon::after,
-  .gold-shimmer, .bg-grain { animation: none !important; }
+  .aurora-base, .aurora-ribbon, .gold-shimmer, .bg-grain { animation: none !important; }
 }
 </style>
 </head>
@@ -219,6 +232,7 @@ footer{
 <div class="bg-stage" aria-hidden="true">
   <div class="aurora-base"></div>
   <div class="aurora-ribbon"></div>
+  <div class="aurora-ribbon layer2"></div>
   <div class="gold-shimmer"></div>
   <div class="bg-grain"></div>
 </div>
