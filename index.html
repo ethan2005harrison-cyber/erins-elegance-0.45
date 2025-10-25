@@ -23,6 +23,7 @@
 }
 
 *{box-sizing:border-box}
+html,body{height:100%}
 body{
   margin:0; font-family:'Open Sans',sans-serif;
   background: var(--vogue); color: var(--cream);
@@ -88,8 +89,8 @@ main{
   margin: 12rem auto 4rem;
   padding: 0 2rem;
   text-align: center;
-  position: relative;
-  z-index: 2;
+  position: relative;      /* creates local stacking context */
+  z-index: 2;              /* sits above the bg-stage below */
 }
 h1{
   font-family: 'Playfair Display', serif;
@@ -149,8 +150,10 @@ button:hover{
   .insta-link{ font-size:.9rem; padding:.5rem .8rem; }
 }
 
-/* Background (Silk Mirage) */
-.bg-stage{ position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+/* Background (Silk Mirage) — now behind everything */
+.bg-stage{
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
 .bg-tint{
   position:absolute; inset:0;
   background:
@@ -206,13 +209,13 @@ footer {
   </div>
 </header>
 
-<main>
-  <!-- Background -->
-  <div class="bg-stage" aria-hidden="true">
-    <div class="bg-tint"></div>
-    <div class="petals"></div>
-  </div>
+<!-- Background is now outside main and fixed behind everything -->
+<div class="bg-stage" aria-hidden="true">
+  <div class="bg-tint"></div>
+  <div class="petals"></div>
+</div>
 
+<main>
   <h1>erin’s elegance</h1>
   <p class="lead">Elegant Nails, Effortless Beauty</p>
 
