@@ -4,12 +4,10 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <title>About — Erin’s Elegance</title>
-<meta name="description" content="Learn about Erin’s Elegance: our story, our approach, careful hygiene, and the warm, personal experience we’re known for." />
+<meta name="description" content="Erin’s Elegance is a cozy, friendly salon in Cornwall. Learn our story, approach, and what to expect from your visit." />
 <link rel="canonical" href="https://www.erinselegance.com/about.html" />
 <meta name="theme-color" content="#565D4F" />
-
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +29,7 @@
 
 /* Base */
 *{ box-sizing:border-box }
+html,body{ height:100% }
 body{
   margin:0; font-family:'Open Sans',sans-serif;
   background: var(--vogue); color: var(--cream);
@@ -83,6 +82,29 @@ header{
   border-color: rgba(230,213,184,.22);
 }
 
+/* Background (fixed behind) */
+.bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.bg-tint{
+  position:absolute; inset:0; filter:saturate(103%);
+  background:
+    radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
+    radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
+    var(--vogue);
+}
+.petals, .petals::before, .petals::after{
+  position:absolute; inset:-15%; content:"";
+  background:
+    radial-gradient(28% 22% at 20% 30%, rgba(230,213,184,0.12) 0%, rgba(230,213,184,0) 60%),
+    radial-gradient(22% 18% at 70% 65%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(18% 14% at 55% 35%, rgba(230,213,184,0.09) 0%, rgba(230,213,184,0) 60%),
+    radial-gradient(16% 12% at 35% 78%, rgba(230,213,184,0.07) 0%, rgba(230,213,184,0) 60%);
+  filter: blur(8px); opacity:.50; animation: petalsFloat 46s ease-in-out infinite;
+}
+.petals::before{ transform: scale(1.08); opacity:.44; animation: petalsFloatReverse 60s ease-in-out infinite; }
+.petals::after{ transform: scale(1.16); opacity:.38; animation: petalsFloat 74s ease-in-out infinite; }
+@keyframes petalsFloat{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(-2%,1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
+@keyframes petalsFloatReverse{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(2%,-1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
+
 /* Main */
 main{
   max-width: 900px; margin: 12rem auto 4rem; padding: 0 2rem; position:relative; z-index:1;
@@ -103,7 +125,6 @@ h1{
   border: 1px solid var(--line);
   background: rgba(247,243,234,.06);
   box-shadow: 0 10px 28px rgba(0,0,0,.24);
-  transform: translateZ(0); /* enable GPU */
   opacity:0; transform: translateY(10px); animation: fadeUp .7s forwards .4s;
 }
 .figure img{
@@ -129,7 +150,7 @@ h1{
 }
 .section p{ line-height:1.75; margin:.35rem 0; }
 
-/* Small highlight pill */
+/* Pill */
 .pill{
   display:inline-block; margin-top:.6rem;
   padding:.5rem .9rem; border-radius:999px;
@@ -156,29 +177,6 @@ footer{
 /* Animations */
 @keyframes fadeUp{ to { opacity:1; transform: translateY(0); } }
 
-/* Background */
-.bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
-.bg-tint{
-  position:absolute; inset:0; filter:saturate(103%);
-  background:
-    radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
-    radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
-    var(--vogue);
-}
-.petals, .petals::before, .petals::after{
-  position:absolute; inset:-15%; content:"";
-  background:
-    radial-gradient(28% 22% at 20% 30%, rgba(230,213,184,0.12) 0%, rgba(230,213,184,0) 60%),
-    radial-gradient(22% 18% at 70% 65%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%),
-    radial-gradient(18% 14% at 55% 35%, rgba(230,213,184,0.09) 0%, rgba(230,213,184,0) 60%),
-    radial-gradient(16% 12% at 35% 78%, rgba(230,213,184,0.07) 0%, rgba(230,213,184,0) 60%);
-  filter: blur(8px); opacity:.50; animation: petalsFloat 46s ease-in-out infinite;
-}
-.petals::before{ transform: scale(1.08); opacity:.44; animation: petalsFloatReverse 60s ease-in-out infinite; }
-.petals::after{ transform: scale(1.16); opacity:.38; animation: petalsFloat 74s ease-in-out infinite; }
-@keyframes petalsFloat{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(-2%,1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
-@keyframes petalsFloatReverse{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(2%,-1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
-
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   .petals, .petals::before, .petals::after { animation: none !important; }
@@ -189,7 +187,6 @@ footer{
 <header role="banner">
   <div class="header-container">
     <div class="logo">erin’s elegance</div>
-
     <div class="menu">
       <button class="menu-btn" id="menuButton" aria-haspopup="true" aria-expanded="false" aria-controls="primaryMenu">
         <span>Menu</span>
@@ -206,7 +203,7 @@ footer{
   </div>
 </header>
 
-<!-- Background -->
+<!-- Background (behind content) -->
 <div class="bg-stage" aria-hidden="true">
   <div class="bg-tint"></div>
   <div class="petals"></div>
@@ -216,9 +213,8 @@ footer{
   <h1>About Our Service</h1>
   <p class="lead">Erin’s Elegance is a calm corner of Cornwall; a place to relax while your nails are cared for with patience and attention.</p>
 
-  <!-- NEW: Stylish photo block -->
+  <!-- Photo -->
   <figure class="figure">
-    <!-- Put your image file at /assets/about-nails.jpg in your repo -->
     <img src="assets/about-nails.jpg" alt="Soft pink, glossy manicure by Erin’s Elegance" loading="lazy" decoding="async">
     <figcaption class="caption">A soft, glossy pink set — clean shaping, smooth finish, and healthy cuticles.</figcaption>
   </figure>
@@ -231,32 +227,27 @@ footer{
 
   <section class="section">
     <h2>Meet Erin</h2>
-    <p>Erin is friendly, thoughtful, and detail-focused; she loves helping clients feel confident and at ease. Whether you are new to nail care or you visit regularly, you will be greeted with a smile and looked after from start to finish.</p>
+    <p>Erin is friendly, thoughtful, and detail-focused; she loves helping clients feel confident and at ease. Whether you are new to nail care or you visit regularly, you’ll be greeted with a smile and looked after from start to finish.</p>
     <p class="pill">Warm conversation; careful technique; a gentle, personal touch</p>
   </section>
 
   <section class="section">
     <h2>Our Approach</h2>
-    <p>Healthy nails come first. We prep gently, choose reliable products, and share simple aftercare so your nails stay comfortable and look elegant for longer. If you prefer a minimal look or a bolder style, we can guide you to options that suit your taste and routine.</p>
+    <p>Healthy nails come first. We prep gently, choose reliable products, and share simple aftercare so your nails stay comfortable and look elegant for longer. If you prefer a minimal look or a bolder style, we’ll guide you to options that suit your taste and routine.</p>
   </section>
 
   <section class="section">
     <h2>Hygiene & Care</h2>
-    <p>Cleanliness matters. Tools are sanitised between clients; surfaces are cleaned throughout the day; the salon is kept tidy and calm so you can relax. If you are feeling unwell, we can reschedule; your comfort and safety are always the priority.</p>
+    <p>Cleanliness matters. Tools are sanitised between clients; surfaces are cleaned throughout the day; the salon is kept tidy and calm so you can relax. If you’re feeling unwell, we’ll happily reschedule; your comfort and safety are always the priority.</p>
   </section>
 
   <section class="section">
     <h2>Where to Find Us</h2>
-    <p>We are based in Callington, Cornwall. You will receive directions in your confirmation after booking.</p>
+    <p>We’re based in Callington, Cornwall. You’ll receive directions in your confirmation after booking.</p>
     <div class="actions">
       <a class="btn" href="services.html">View Services</a>
       <a class="btn" href="booking.html">Book Now</a>
-      <a class="btn" href="https://instagram.com/erins.elegance" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-          <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.2z"/>
-        </svg>
-        Instagram
-      </a>
+      <a class="btn" href="https://www.instagram.com/erins.elegance?igsh=MTVkcG10Y2lucW11NQ==" target="_blank" rel="noopener">Instagram</a>
     </div>
   </section>
 </main>
@@ -267,27 +258,22 @@ footer{
 </footer>
 
 <script>
-/* Dropdown: robust single instance */
 (function(){
   const btn = document.getElementById('menuButton');
   const panel = document.getElementById('primaryMenu');
   if(!btn || !panel) return;
 
-  const closeMenu = () => { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); };
-  const openMenu  = () => { panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); };
+  function closeMenu(){ panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function openMenu(){ panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
 
   btn.addEventListener('click', (e)=>{
     e.stopPropagation();
     const expanded = btn.getAttribute('aria-expanded') === 'true';
     expanded ? closeMenu() : openMenu();
   });
-
   document.addEventListener('click', (e)=>{
-    if(!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)){
-      closeMenu();
-    }
+    if(!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) closeMenu();
   });
-
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
 })();
 </script>
