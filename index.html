@@ -8,7 +8,7 @@
 <title>Erin’s Elegance — Elegant Nails, Effortless Beauty</title>
 <meta name="description" content="Cozy, elegant nail salon in Callington, Cornwall. Manicures, pedicures, acrylics, builder gel. Book online." />
 <link rel="canonical" href="https://www.erinselegance.com/" />
-<meta name="theme-color" content="#0f2620" />
+<meta name="theme-color" content="#091611" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
@@ -31,18 +31,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
 /* =========================
-   Luxe Dark Green + Deeper Gold
+   Luxe Darker Green + Deeper Gold
    ========================= */
 :root{
-  --forest:#0f2620;      /* page background */
-  --forest-1:#13322a;    /* mid tone */
-  --forest-2:#1a4136;    /* light tone */
+  --forest:#091611;      /* deeper page background */
+  --forest-1:#0b1f19;    /* deeper mid tone */
+  --forest-2:#103027;    /* deeper light tone */
   --gold:#c39a2e;        /* deeper gold (keep) */
   --gold-dark:#a47f24;   /* deeper hover */
   --ink:#0e1715;         /* text on white cards */
-  --text:#e8dfc4;        /* soft-gold text on dark */
-  --card:#ffffff;        /* card backgrounds */
-  --line:#eee7d4;        /* separators */
+  --text:#eadfb8;        /* soft-gold text on darker bg */
+  --card:#ffffff;
+  --line:#eee7d4;
 }
 
 /* A11y utility */
@@ -59,7 +59,7 @@ body{
 
 /* Header */
 header{
-  background-color: rgba(255,255,255,0.10);
+  background-color: rgba(255,255,255,0.08);
   backdrop-filter: blur(10px);
   position: fixed; width: 100%; top: 0; z-index: 10;
 }
@@ -116,9 +116,7 @@ footer{
 }
 
 /* =====================================
-   NEW Animated Background: "Silk Weave"
-   - No blend modes (works on all devices)
-   - Clearly visible motion
+   Animated Background: "Silk Weave" (deeper tones)
    ===================================== */
 .bg-stage{ position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 
@@ -126,10 +124,10 @@ footer{
 .bg-base{
   position:absolute; inset:0;
   background:
-    radial-gradient(1200px 800px at 15% 20%, rgba(26,65,54,0.85) 0%, transparent 60%),
-    radial-gradient(1000px 700px at 85% 80%, rgba(19,50,42,0.9) 0%, transparent 55%),
+    radial-gradient(1200px 800px at 15% 20%, rgba(16,48,39,0.85) 0%, transparent 60%),
+    radial-gradient(1000px 700px at 85% 80%, rgba(11,31,25,0.9) 0%, transparent 55%),
     var(--forest);
-  filter: saturate(108%);
+  filter: saturate(106%);
 }
 
 /* Diagonal silk weave – two animated layers */
@@ -143,12 +141,12 @@ footer{
       rgba(195,154,46,0.00) 65%,
       rgba(195,154,46,0.10) 100%),
     linear-gradient(135deg,
-      rgba(255,255,255,0.05) 0%,
+      rgba(255,255,255,0.04) 0%,
       rgba(255,255,255,0.00) 50%,
-      rgba(255,255,255,0.05) 100%);
+      rgba(255,255,255,0.04) 100%);
   background-size: 280% 280%, 220% 220%;
   background-position: 0% 50%, 100% 50%;
-  opacity: .55;
+  opacity: .50;
   animation: weaveMove 28s ease-in-out infinite;
 }
 .weave.layer2{
@@ -161,12 +159,12 @@ footer{
       rgba(195,154,46,0.00) 75%,
       rgba(195,154,46,0.10) 100%),
     linear-gradient(135deg,
-      rgba(255,255,255,0.05) 0%,
+      rgba(255,255,255,0.04) 0%,
       rgba(255,255,255,0.00) 50%,
-      rgba(255,255,255,0.05) 100%);
+      rgba(255,255,255,0.04) 100%);
   background-size: 260% 260%, 180% 180%;
   background-position: 100% 50%, 0% 50%;
-  opacity: .50;
+  opacity: .46;
   animation: weaveMoveReverse 36s ease-in-out infinite;
 }
 
@@ -175,7 +173,7 @@ footer{
   position:absolute; width:160vmax; height:160vmax;
   left:50%; top:50%; transform: translate(-50%,-50%);
   background:
-    radial-gradient(closest-side, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 70%, rgba(0,0,0,0.28) 100%);
+    radial-gradient(closest-side, rgba(0,0,0,0) 0%, rgba(0,0,0,0.20) 70%, rgba(0,0,0,0.30) 100%);
   border-radius:50%;
   animation: vignetteSpin 90s linear infinite;
   opacity:.6;
@@ -185,12 +183,12 @@ footer{
 .dust{
   position:absolute; inset:0;
   background:
-    radial-gradient(2px 2px at 12% 22%, rgba(195,154,46,.24) 30%, transparent 60%),
+    radial-gradient(2px 2px at 12% 22%, rgba(195,154,46,.22) 30%, transparent 60%),
     radial-gradient(2px 2px at 78% 38%, rgba(195,154,46,.20) 30%, transparent 60%),
     radial-gradient(2px 2px at 32% 78%, rgba(195,154,46,.18) 30%, transparent 60%),
     radial-gradient(2px 2px at 62% 58%, rgba(195,154,46,.16) 30%, transparent 60%);
   animation: dustDrift 30s linear infinite;
-  opacity:.5;
+  opacity:.48;
 }
 
 /* Fine grain */
@@ -250,7 +248,7 @@ footer{
   </div>
 </header>
 
-<!-- Animated background (clearly visible, no blend mode dependency) -->
+<!-- Animated background -->
 <div class="bg-stage" aria-hidden="true">
   <div class="bg-base"></div>
   <div class="weave"></div>
