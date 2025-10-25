@@ -157,14 +157,17 @@ h1{
 .desc{ margin-top:.2rem; opacity:.95; font-size:.98rem; }
 @media (min-width: 720px){ .card{ grid-column: span 6; } }
 
-/* Hide the native checkbox completely (but keep it accessible via label) */
+/* Hide the native checkbox completely (but keep it accessible for screen readers) */
 .select{
   display:flex; align-items:flex-start; gap:.6rem; position: relative;
 }
 .select input{
   position:absolute; opacity:0; pointer-events:none; width:0; height:0; margin:0; padding:0;
 }
-.select label{ cursor:pointer; display:block; }
+/* Make label clicks pass through so the card click handler toggles */
+.select label{
+  cursor:pointer; display:block; pointer-events: none;
+}
 
 /* Date + Time scrollers */
 .picker{
@@ -294,7 +297,7 @@ footer{
       <nav id="primaryMenu" class="menu-panel" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
-        <a href="booking.html">Booking</a>
+        <a href="booking.html" aria-current="page">Booking</a>
         <a href="about.html">About Our Service</a>
         <a href="terms.html">Terms & Conditions</a>
       </nav>
@@ -560,7 +563,6 @@ footer{
   document.querySelectorAll('.card[data-card-for]').forEach(card=>{
     const id = card.getAttribute('data-card-for');
     const input = document.getElementById(id);
-    const label = card.querySelector('label[for="'+id+'"]');
 
     function syncCard(){
       if(input.checked){
@@ -569,15 +571,13 @@ footer{
         card.classList.remove('selected');
       }
     }
-    // Click on card toggles
+    // Click on card toggles (label clicks now also toggle via pointer-events:none)
     card.addEventListener('click', (e)=>{
-      // prevent double toggle when clicking the label (which already toggles the checkbox)
       if(e.target.tagName.toLowerCase() === 'a') return;
-      if(e.target.closest('label')) return; 
       input.checked = !input.checked;
       input.dispatchEvent(new Event('change', { bubbles:true }));
     });
-    // Keep label default toggle but update style on change
+
     input.addEventListener('change', ()=>{ syncCard(); refreshSummary(); });
 
     // Init
