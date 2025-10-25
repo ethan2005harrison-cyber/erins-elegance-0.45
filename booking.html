@@ -164,7 +164,7 @@ h1{
 .select input{
   position:absolute; opacity:0; pointer-events:none; width:0; height:0; margin:0; padding:0;
 }
-/* Make label clicks pass through so the card click handler toggles */
+/* Let label clicks pass through to the card handler */
 .select label{
   cursor:pointer; display:block; pointer-events: none;
 }
@@ -552,48 +552,53 @@ footer{
   })();
 </script>
 
-<!-- Booking logic (no Formspree submission here) -->
+<!-- Booking logic (card click fix in place) -->
 <script>
 (function(){
-  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-name]'));
-  const selectedCount = document.getElementById('selectedCount');
-  const selectedTotal = document.getElementById('selectedTotal');
+  // Collect checkboxes and make entire card toggle
+  const cards = document.querySelectorAll('.card[data-card-for]');
+  const checkboxes = [];
 
-  // Make entire card toggle the invisible checkbox + selected style
-  document.querySelectorAll('.card[data-card-for]').forEach(card=>{
+  cards.forEach(card => {
     const id = card.getAttribute('data-card-for');
     const input = document.getElementById(id);
+    if(!input) return;
 
-    function syncCard(){
-      if(input.checked){
-        card.classList.add('selected');
-      }else{
-        card.classList.remove('selected');
-      }
-    }
-    // Click on card toggles (label clicks now also toggle via pointer-events:none)
-    card.addEventListener('click', (e)=>{
-      if(e.target.tagName.toLowerCase() === 'a') return;
+    checkboxes.push(input);
+
+    // Sync visual state with checkbox
+    const sync = () => {
+      if (input.checked) card.classList.add('selected');
+      else card.classList.remove('selected');
+    };
+
+    // Click anywhere on the card toggles the checkbox
+    card.addEventListener('click', (e) => {
+      // If somehow the actual input gets clicked, let it work normally
+      if (e.target === input) return;
+      // Toggle and emit change to update summary
       input.checked = !input.checked;
-      input.dispatchEvent(new Event('change', { bubbles:true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
     });
 
-    input.addEventListener('change', ()=>{ syncCard(); refreshSummary(); });
-
-    // Init
-    syncCard();
+    input.addEventListener('change', sync);
+    sync();
   });
+
+  // Summary update
+  const selectedCount = document.getElementById('selectedCount');
+  const selectedTotal = document.getElementById('selectedTotal');
 
   function refreshSummary(){
     const selected = checkboxes.filter(c => c.checked);
     const total = selected.reduce((sum,c)=> sum + Number(c.dataset.price||0), 0);
-    selectedCount.textContent = selected.length;
-    selectedTotal.textContent = `£${total}`;
+    if (selectedCount) selectedCount.textContent = selected.length;
+    if (selectedTotal) selectedTotal.textContent = `£${total}`;
   }
   checkboxes.forEach(cb => cb.addEventListener('change', refreshSummary));
   refreshSummary();
 
-  // Build date scroller (next 20 days, skip "today" to enforce >=24h)
+  // Date scroller (next 20 days, earliest = tomorrow to enforce 24h)
   const dateScroller = document.getElementById('dateScroller');
   let chosenDate = null;
 
@@ -619,13 +624,13 @@ footer{
       document.querySelectorAll('#dateScroller .pill[aria-pressed="true"]').forEach(el => el.setAttribute('aria-pressed','false'));
       pill.setAttribute('aria-pressed','true');
       chosenDate = pill.dataset.value;
-      validateDateTime(); // re-validate with chosen time
+      validateDateTime();
     });
 
     dateScroller.appendChild(pill);
   }
 
-  // Build time scroller (09:00–18:00 hourly)
+  // Time scroller (09:00–18:00 hourly)
   const timeScroller = document.getElementById('timeScroller');
   let chosenTime = null;
   for(let h=9; h<=18; h++){
@@ -642,7 +647,7 @@ footer{
       document.querySelectorAll('#timeScroller .pill[aria-pressed="true"]').forEach(el => el.setAttribute('aria-pressed','false'));
       pill.setAttribute('aria-pressed','true');
       chosenTime = pill.dataset.value;
-      validateDateTime(); // ensure >=24h
+      validateDateTime();
     });
 
     timeScroller.appendChild(pill);
