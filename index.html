@@ -8,7 +8,7 @@
 <title>Erin’s Elegance — Elegant Nails, Effortless Beauty</title>
 <meta name="description" content="Cozy, elegant nail salon in Callington, Cornwall. Manicures, pedicures, acrylics, builder gel. Book online." />
 <link rel="canonical" href="https://www.erinselegance.com/" />
-<meta name="theme-color" content="#091611" />
+<meta name="theme-color" content="#252a1c" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
@@ -31,16 +31,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
 /* =========================
-   Luxe Darker Green + Deeper Gold
+   Luxe Green (#252a1c) + Deeper Gold
    ========================= */
 :root{
-  --forest:#091611;      /* deeper page background */
-  --forest-1:#0b1f19;    /* deeper mid tone */
-  --forest-2:#103027;    /* deeper light tone */
-  --gold:#c39a2e;        /* deeper gold (keep) */
-  --gold-dark:#a47f24;   /* deeper hover */
+  --forest:#252a1c;      /* requested green */
+  --forest-1:#1e2417;    /* slightly darker companion */
+  --forest-2:#303621;    /* slightly lighter companion */
+  --gold:#c39a2e;        /* deeper gold */
+  --gold-dark:#a47f24;   /* hover gold */
   --ink:#0e1715;         /* text on white cards */
-  --text:#eadfb8;        /* soft-gold text on darker bg */
+  --text:#e9e1c4;        /* soft warm text on dark */
   --card:#ffffff;
   --line:#eee7d4;
 }
@@ -116,7 +116,7 @@ footer{
 }
 
 /* =====================================
-   Animated Background: "Silk Weave" (deeper tones)
+   Animated Background: "Silk Weave" tuned to #252a1c
    ===================================== */
 .bg-stage{ position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 
@@ -124,10 +124,10 @@ footer{
 .bg-base{
   position:absolute; inset:0;
   background:
-    radial-gradient(1200px 800px at 15% 20%, rgba(16,48,39,0.85) 0%, transparent 60%),
-    radial-gradient(1000px 700px at 85% 80%, rgba(11,31,25,0.9) 0%, transparent 55%),
+    radial-gradient(1100px 760px at 15% 22%, rgba(48,54,33,0.85) 0%, transparent 60%),
+    radial-gradient(950px 660px at 85% 78%, rgba(30,36,23,0.9) 0%, transparent 55%),
     var(--forest);
-  filter: saturate(106%);
+  filter: saturate(104%);
 }
 
 /* Diagonal silk weave – two animated layers */
@@ -137,16 +137,16 @@ footer{
     linear-gradient(135deg,
       rgba(195,154,46,0.10) 0%,
       rgba(195,154,46,0.00) 35%,
-      rgba(195,154,46,0.12) 50%,
+      rgba(195,154,46,0.13) 50%,
       rgba(195,154,46,0.00) 65%,
       rgba(195,154,46,0.10) 100%),
     linear-gradient(135deg,
-      rgba(255,255,255,0.04) 0%,
+      rgba(255,255,255,0.045) 0%,
       rgba(255,255,255,0.00) 50%,
-      rgba(255,255,255,0.04) 100%);
+      rgba(255,255,255,0.045) 100%);
   background-size: 280% 280%, 220% 220%;
   background-position: 0% 50%, 100% 50%;
-  opacity: .50;
+  opacity: .52;
   animation: weaveMove 28s ease-in-out infinite;
 }
 .weave.layer2{
@@ -155,16 +155,16 @@ footer{
     linear-gradient(135deg,
       rgba(195,154,46,0.10) 0%,
       rgba(195,154,46,0.00) 45%,
-      rgba(195,154,46,0.14) 60%,
+      rgba(195,154,46,0.15) 60%,
       rgba(195,154,46,0.00) 75%,
       rgba(195,154,46,0.10) 100%),
     linear-gradient(135deg,
-      rgba(255,255,255,0.04) 0%,
+      rgba(255,255,255,0.045) 0%,
       rgba(255,255,255,0.00) 50%,
-      rgba(255,255,255,0.04) 100%);
+      rgba(255,255,255,0.045) 100%);
   background-size: 260% 260%, 180% 180%;
   background-position: 100% 50%, 0% 50%;
-  opacity: .46;
+  opacity: .48;
   animation: weaveMoveReverse 36s ease-in-out infinite;
 }
 
