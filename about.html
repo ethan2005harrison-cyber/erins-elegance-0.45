@@ -1,221 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Our Service - erin’s elegance</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background-color: #D8E3DC;
-      background-image: url('https://www.transparenttextures.com/patterns/linen.png');
-      background-repeat: repeat;
-      color: #222;
-      overflow-x: hidden;
-      position: relative;
-    }
+<title>About — Erin’s Elegance</title>
+<meta name="description" content="Learn about Erin’s Elegance: our story, our approach, careful hygiene, and the warm, personal experience we’re known for." />
+<link rel="canonical" href="https://www.erinselegance.com/about.html" />
+<meta name="theme-color" content="#565D4F" />
 
-    /* HEADER */
-    header {
-      background-color: rgba(255,255,255,0.4);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 10;
-    }
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #111;
-      font-weight: 600;
-    }
+/* Palette */
+:root{
+  --vogue:#565D4F;        /* Vintage Vogue background */
+  --vogue-dark:#4b5246;
+  --vogue-light:#626a5b;
 
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 1.5rem;
-    }
-    nav ul li { position: relative; }
-    nav ul li a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      font-family: 'Open Sans', sans-serif;
-    }
-    nav ul li a:hover { color: #a18449; }
+  --champagne:#E6D5B8;    /* accents/buttons */
+  --cream:#F7F3EA;        /* creamy text */
+  --charcoal:#2C2C2C;     /* text on light */
+  --line:rgba(230,213,184,.35);
+}
 
-    /* MAIN */
-    main {
-      max-width: 800px;
-      margin: 12rem auto 4rem;
-      padding: 0 2rem;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
+/* Base */
+*{ box-sizing:border-box }
+body{
+  margin:0; font-family:'Open Sans',sans-serif;
+  background: var(--vogue); color: var(--cream);
+  overflow-x:hidden; position:relative;
+}
 
-    main h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      color: #111;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 0.5s;
-    }
+/* Header + dropdown */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:20;
+  background: rgba(247,243,234,0.08); backdrop-filter: blur(10px);
+}
+.header-container{
+  max-width:1200px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.1rem 2rem;
+}
+.logo{
+  font-family:'Playfair Display',serif; font-weight:600; font-size:1.6rem;
+  color:var(--cream); letter-spacing:.3px;
+}
+.menu{ position:relative; }
+.menu-btn{
+  background: rgba(230,213,184,.15);
+  border: 1px solid rgba(230,213,184,.35);
+  color: var(--cream); border-radius: 999px;
+  padding: .6rem 1rem; font-weight:600; cursor:pointer;
+  display:flex; align-items:center; gap:.6rem;
+  transition: background .25s, border-color .25s, transform .15s;
+}
+.menu-btn:hover{ background: rgba(230,213,184,.22); transform: translateY(-1px); }
+.menu-btn:focus{ outline:2px solid rgba(230,213,184,.6); outline-offset:2px; }
+.menu-btn svg{ width:18px; height:18px; }
+.menu-panel{
+  position:absolute; right:0; top: calc(100% + .6rem);
+  min-width: 220px; padding:.6rem;
+  background: rgba(22,24,21,.72); backdrop-filter: blur(10px);
+  border:1px solid rgba(230,213,184,.28); border-radius:16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.28);
+  opacity:0; transform: translateY(-6px); pointer-events:none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.menu-panel.open{ opacity:1; transform: translateY(0); pointer-events:auto; }
+.menu-panel a{
+  display:block; padding:.75rem .9rem; border-radius:12px;
+  color:var(--cream); text-decoration:none; font-weight:600;
+  border:1px solid transparent;
+}
+.menu-panel a:hover{
+  background: rgba(230,213,184,.12);
+  border-color: rgba(230,213,184,.22);
+}
 
-    main p {
-      font-size: 1.2rem;
-      margin-bottom: 1.2rem;
-      color: #333;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-    }
+/* Main */
+main{
+  max-width: 900px; margin: 12rem auto 4rem; padding: 0 2rem; position:relative; z-index:1;
+}
+h1{
+  font-family:'Playfair Display',serif; font-size:2.6rem; margin:.2rem 0 .6rem;
+  opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .2s;
+}
+.lead{
+  opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .35s;
+  margin-bottom: 1.4rem; opacity:.95;
+}
 
-    .fade1 { animation-delay: 1s; }
-    .fade2 { animation-delay: 1.3s; }
-    .fade3 { animation-delay: 1.6s; }
+/* Photo frame */
+.figure{
+  margin: 1rem auto 1.6rem; max-width: 780px;
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(247,243,234,.06);
+  box-shadow: 0 10px 28px rgba(0,0,0,.24);
+  transform: translateZ(0); /* enable GPU */
+  opacity:0; transform: translateY(10px); animation: fadeUp .7s forwards .4s;
+}
+.figure img{
+  display:block; width:100%; height:auto;
+  aspect-ratio: 4/3; object-fit: cover;
+  transition: transform .6s ease;
+}
+.figure:hover img{ transform: scale(1.02); }
+.caption{
+  padding:.75rem 1rem; font-size:.95rem; opacity:.9;
+  border-top:1px solid var(--line);
+}
 
-    /* SHOWCASE CARD */
-    .showcase {
-      margin: 2.2rem auto 0;
-      max-width: 560px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1.9s;
-    }
+/* Content cards */
+.section{
+  background: rgba(247,243,234,.08);
+  border:1px solid var(--line); border-radius:18px;
+  padding: 1.2rem 1.2rem; margin: 1rem 0 1.2rem;
+  opacity:0; transform: translateY(12px); animation: fadeUp .7s forwards .45s;
+}
+.section h2{
+  font-family:'Playfair Display',serif; margin:.1rem 0 .6rem; font-size:1.4rem;
+}
+.section p{ line-height:1.75; margin:.35rem 0; }
 
-    .photo-card {
-      position: relative;
-      background: #fff;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-      border: 1px solid rgba(0,0,0,0.06);
-    }
+/* Small highlight pill */
+.pill{
+  display:inline-block; margin-top:.6rem;
+  padding:.5rem .9rem; border-radius:999px;
+  background: rgba(230,213,184,.12);
+  border:1px solid var(--line); font-weight:600;
+}
 
-    /* subtle gold accent corner */
-    .photo-card::after {
-      content: "";
-      position: absolute;
-      top: 0; right: 0;
-      width: 120px; height: 6px;
-      background: linear-gradient(90deg, #d4c39a, #a18449);
-      opacity: 0.9;
-    }
+/* CTA buttons */
+.actions{ margin-top:1.2rem; display:flex; gap:.8rem; flex-wrap:wrap }
+button, .btn{
+  background: var(--champagne); color: var(--charcoal);
+  border:none; padding: .95rem 2.1rem; border-radius: 50px;
+  font-weight:600; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.18);
+  transition: transform .15s, box-shadow .3s, opacity .2s; text-decoration:none; display:inline-flex; align-items:center; gap:.6rem;
+}
+button:hover, .btn:hover{ transform: translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.22); }
 
-    .photo-card img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+/* Footer */
+footer{
+  text-align:center; padding:2rem; font-size:.95rem;
+  color: var(--cream); opacity:.9; position:relative; z-index:1;
+}
 
-    .caption {
-      padding: 0.9rem 1.1rem 1.1rem;
-      text-align: left;
-      background: #fff;
-    }
-    .caption h3 {
-      margin: 0 0 0.35rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: #111;
-    }
-    .caption p {
-      margin: 0;
-      font-size: 0.98rem;
-      color: #555;
-      opacity: 0.9;
-      animation: none; /* keep caption static */
-    }
+/* Animations */
+@keyframes fadeUp{ to { opacity:1; transform: translateY(0); } }
 
-    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
+/* Background */
+.bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.bg-tint{
+  position:absolute; inset:0; filter:saturate(103%);
+  background:
+    radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
+    radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
+    var(--vogue);
+}
+.petals, .petals::before, .petals::after{
+  position:absolute; inset:-15%; content:"";
+  background:
+    radial-gradient(28% 22% at 20% 30%, rgba(230,213,184,0.12) 0%, rgba(230,213,184,0) 60%),
+    radial-gradient(22% 18% at 70% 65%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(18% 14% at 55% 35%, rgba(230,213,184,0.09) 0%, rgba(230,213,184,0) 60%),
+    radial-gradient(16% 12% at 35% 78%, rgba(230,213,184,0.07) 0%, rgba(230,213,184,0) 60%);
+  filter: blur(8px); opacity:.50; animation: petalsFloat 46s ease-in-out infinite;
+}
+.petals::before{ transform: scale(1.08); opacity:.44; animation: petalsFloatReverse 60s ease-in-out infinite; }
+.petals::after{ transform: scale(1.16); opacity:.38; animation: petalsFloat 74s ease-in-out infinite; }
+@keyframes petalsFloat{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(-2%,1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
+@keyframes petalsFloatReverse{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(2%,-1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #444;
-      opacity: 0.7;
-    }
-
-    @media (max-width: 768px) {
-      main h1 { font-size: 2rem; }
-      .caption h3 { font-size: 1.1rem; }
-      .caption p  { font-size: 0.95rem; }
-    }
-  </style>
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .petals, .petals::before, .petals::after { animation: none !important; }
+}
+</style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="header-container">
-      <div class="logo">erin’s elegance</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="booking.html">Booking</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="policies.html">Policies</a></li>
-        </ul>
+<header role="banner">
+  <div class="header-container">
+    <div class="logo">erin’s elegance</div>
+
+    <div class="menu">
+      <button class="menu-btn" id="menuButton" aria-haspopup="true" aria-expanded="false" aria-controls="primaryMenu">
+        <span>Menu</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
+      </button>
+      <nav id="primaryMenu" class="menu-panel" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="booking.html">Booking</a>
+        <a href="about.html" aria-current="page">About Our Service</a>
+        <a href="terms.html">Terms & Conditions</a>
       </nav>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <h1>About Our Service</h1>
-    <p class="fade1">Located in beautiful Callington, Cornwall, Erin’s Elegance brings a cozy and personal touch to every appointment.</p>
-    <p class="fade2">Erin is passionate about all things nails, providing classic manicures, pedicures, acrylics, and bespoke treatments with care and style.</p>
-    <p class="fade3">Contact us at <strong>erins.elegance1@gmail.com</strong> for any questions or to schedule your next appointment.</p>
+<!-- Background -->
+<div class="bg-stage" aria-hidden="true">
+  <div class="bg-tint"></div>
+  <div class="petals"></div>
+</div>
 
-    <!-- SHOWCASE PHOTO -->
-    <div class="showcase">
-      <div class="photo-card">
-        <!-- If the image is in /images, keep this src; if it's in the same folder, change to src="./nails-1.jpg" -->
-        <img src="images/nails-1.jpg" alt="Soft pink coffin-shaped manicure by Erin’s Elegance">
-        <div class="caption">
-          <h3>Soft pink elegance</h3>
-          <p>A clean, glossy finish with a natural, flattering tone — simple, chic, and timeless.</p>
-        </div>
-      </div>
-    </div>
+<main role="main">
+  <h1>About Our Service</h1>
+  <p class="lead">Erin’s Elegance is a calm corner of Cornwall; a place to relax while your nails are cared for with patience and attention.</p>
 
-    <p style="margin-top:1.8rem; opacity:0; transform:translateY(20px); animation:fadeUp 1s 2.2s forwards;">
-      📍 16 Werrington Drive, Callington, Cornwall, PL17 7TF
-    </p>
+  <!-- NEW: Stylish photo block -->
+  <figure class="figure">
+    <!-- Put your image file at /assets/about-nails.jpg in your repo -->
+    <img src="assets/about-nails.jpg" alt="Soft pink, glossy manicure by Erin’s Elegance" loading="lazy" decoding="async">
+    <figcaption class="caption">A soft, glossy pink set — clean shaping, smooth finish, and healthy cuticles.</figcaption>
+  </figure>
 
-    <div style="margin-top:1rem;">
-      <a href="index.html" style="display:inline-block;background:#a18449;color:#fff;text-decoration:none;padding:.9rem 2rem;border-radius:50px;font-family:'Playfair Display',serif;transition:background .3s;">
-        Back to Home
+  <section class="section">
+    <h2>Our Story</h2>
+    <p>We started with a simple goal: beautiful results, kind service, and an atmosphere that feels cozy and welcoming. Appointments are never rushed; we keep the space relaxed so you can settle in, breathe, and leave feeling refreshed.</p>
+    <p>From classic manicures to longer pamper sessions, we favour soft shapes, natural finishes, and timeless colours that fit easily into everyday life.</p>
+  </section>
+
+  <section class="section">
+    <h2>Meet Erin</h2>
+    <p>Erin is friendly, thoughtful, and detail-focused; she loves helping clients feel confident and at ease. Whether you are new to nail care or you visit regularly, you will be greeted with a smile and looked after from start to finish.</p>
+    <p class="pill">Warm conversation; careful technique; a gentle, personal touch</p>
+  </section>
+
+  <section class="section">
+    <h2>Our Approach</h2>
+    <p>Healthy nails come first. We prep gently, choose reliable products, and share simple aftercare so your nails stay comfortable and look elegant for longer. If you prefer a minimal look or a bolder style, we can guide you to options that suit your taste and routine.</p>
+  </section>
+
+  <section class="section">
+    <h2>Hygiene & Care</h2>
+    <p>Cleanliness matters. Tools are sanitised between clients; surfaces are cleaned throughout the day; the salon is kept tidy and calm so you can relax. If you are feeling unwell, we can reschedule; your comfort and safety are always the priority.</p>
+  </section>
+
+  <section class="section">
+    <h2>Where to Find Us</h2>
+    <p>We are based in Callington, Cornwall. You will receive directions in your confirmation after booking.</p>
+    <div class="actions">
+      <a class="btn" href="services.html">View Services</a>
+      <a class="btn" href="booking.html">Book Now</a>
+      <a class="btn" href="https://instagram.com/erins.elegance" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+          <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.2z"/>
+        </svg>
+        Instagram
       </a>
     </div>
-  </main>
+  </section>
+</main>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 erin’s elegance. all rights reserved.</p>
-    <p>📍 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
-  </footer>
+<footer role="contentinfo">
+  <p>© 2025 erin’s elegance. all rights reserved.</p>
+  <p>16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
+</footer>
+
+<script>
+/* Dropdown: robust single instance */
+(function(){
+  const btn = document.getElementById('menuButton');
+  const panel = document.getElementById('primaryMenu');
+  if(!btn || !panel) return;
+
+  const closeMenu = () => { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); };
+  const openMenu  = () => { panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); };
+
+  btn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    expanded ? closeMenu() : openMenu();
+  });
+
+  document.addEventListener('click', (e)=>{
+    if(!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)){
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
+})();
+</script>
 </body>
 </html>
