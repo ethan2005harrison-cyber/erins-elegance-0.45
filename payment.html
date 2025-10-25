@@ -54,7 +54,7 @@
       letter-spacing:.3px;
     }
 
-    /* Dropdown menu (consistent with other pages) */
+    /* Dropdown menu */
     .menu{ position:relative; }
     .menu-btn{
       background: rgba(230,213,184,.15);
@@ -90,7 +90,7 @@
       border-color: rgba(230,213,184,.22);
     }
 
-    /* Background behind content */
+    /* Background behind everything */
     .bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
     .bg-tint{
       position:absolute; inset:0; filter:saturate(103%);
@@ -320,7 +320,7 @@
   </footer>
 
   <script>
-    // Dropdown logic (kept consistent)
+    // Dropdown logic
     (function(){
       const btn = document.getElementById('menuButton');
       const panel = document.getElementById('primaryMenu');
@@ -338,10 +338,8 @@
       document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
     })();
 
-    // ===== Payment summary + Formspree submission =====
+    // Build summary from URL params (unchanged behaviour)
     const params = new URLSearchParams(window.location.search);
-
-    // Services may arrive as ?service=Name-Price repeated; also support comma strings
     const serviceListEl = document.getElementById("serviceList");
     const totalCostEl = document.getElementById("totalCost");
 
@@ -355,7 +353,6 @@
     serviceListEl.innerHTML = "";
 
     services.forEach(s => {
-      // Accept "Name - £Price" or "Name - Price"
       let name = s, priceNum = 0;
       if (s.includes("-")) {
         const parts = s.split("-");
@@ -371,51 +368,9 @@
 
     totalCostEl.textContent = `Total: £${total.toFixed(2)}`;
 
-    // On confirm, send a Formspree submission with currency + payment method note
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdkwjqyl";
-
-    document.getElementById("confirmBtn").addEventListener("click", async () => {
-      // Compile full payload
-      const formattedTotal = `£${total.toFixed(2)}`; // includes currency
-      const servicesString = services.length ? services.join("; ") : "No services listed";
-
-      const fd = new FormData();
-      // Booking details that may have been passed from booking.html
-      fd.append("Name", params.get("name") || "");
-      fd.append("Email", params.get("email") || "");
-      fd.append("Phone", params.get("phone") || "");
-      fd.append("Desired Date", params.get("desiredDate") || params.get("date") || "");
-      fd.append("Desired Time", params.get("desiredTime") || params.get("time") || "");
-      fd.append("Additional Notes", params.get("notes") || "");
-
-      // Services + totals
-      fd.append("Services", servicesString);
-      fd.append("Total (GBP)", formattedTotal);
-      fd.append("Currency", "GBP");
-
-      // Explicit payment note
-      fd.append("Payment Method", "Pay in person on appointment day");
-      fd.append("Payment Status", "To be paid in person");
-
-      // Optional: a clearer email subject in Formspree
-      fd.append("_subject", "New booking request — Pay in person (GBP)");
-
-      try {
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: "POST",
-          body: fd,
-          headers: { "Accept": "application/json" }
-        });
-
-        if (res.ok) {
-          // Go to thanks page after successful submission
-          window.location.href = "thankspage.html";
-        } else {
-          alert("Sorry, your booking couldn’t be submitted. Please try again in a moment.");
-        }
-      } catch (err) {
-        alert("Network error submitting your booking. Please check your connection and try again.");
-      }
+    // Reverted: Confirm just navigates to thankspage.html (no Formspree here)
+    document.getElementById("confirmBtn").addEventListener("click", () => {
+      window.location.href = "thankspage.html";
     });
   </script>
 </body>
