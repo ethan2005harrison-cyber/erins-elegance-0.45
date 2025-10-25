@@ -100,7 +100,6 @@ p.lead{
   opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .4s;
   margin-bottom: 1.6rem; opacity:.95;
 }
-
 .card{
   background: rgba(247,243,234,0.08);
   border:1px solid var(--line); border-radius:18px;
@@ -108,7 +107,7 @@ p.lead{
   max-width: 640px;
 }
 
-/* Buttons & links */
+/* Buttons */
 .actions{ margin-top:1.1rem; display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
 button, .btn{
   background: var(--champagne); color: var(--charcoal);
@@ -118,22 +117,25 @@ button, .btn{
 }
 button:hover, .btn:hover{ transform: translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.22); }
 
-/* Subtle Instagram link */
-.insta-wrap{
-  margin-top: .6rem;
-  opacity: .9;
+/* Floating Instagram pill (bottom-right) */
+.insta-fab{
+  position: fixed; right: 20px; bottom: 20px; z-index: 30;
 }
 .insta-link{
   display:inline-flex; align-items:center; gap:.5rem;
-  color: var(--cream);
-  text-decoration: none;
-  border-bottom: 1px dashed rgba(230,213,184,.45);
-  padding-bottom: 2px;
-  transition: opacity .2s, border-color .2s;
-  font-weight:600;
-  font-size:.98rem;
+  color: var(--cream); text-decoration:none;
+  padding:.55rem .85rem; border-radius:999px;
+  background: rgba(22,24,21,.6);
+  border:1px solid rgba(230,213,184,.35);
+  backdrop-filter: blur(8px);
+  font-weight:600; font-size:.95rem; opacity:.9;
+  transition: opacity .2s, transform .15s, box-shadow .3s;
 }
-.insta-link:hover{ opacity:1; border-color: rgba(230,213,184,.8); }
+.insta-link:hover{ opacity:1; transform: translateY(-1px); box-shadow:0 8px 18px rgba(0,0,0,.25); }
+@media (max-width:520px){
+  .insta-fab{ right: 14px; bottom: 14px; }
+  .insta-link{ font-size:.9rem; padding:.5rem .8rem; }
+}
 
 /* Background (Silk Mirage) */
 .bg-stage{ position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -210,15 +212,15 @@ footer {
     <a class="btn" href="index.html">Back to Home</a>
     <a class="btn" href="services.html">View Services</a>
   </div>
-
-  <!-- Subtle Instagram link -->
-  <div class="insta-wrap">
-    <a class="insta-link" href="https://www.instagram.com/erins.elegance?igsh=MTVkcG10Y2lucW11NQ==" target="_blank" rel="noopener">
-      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.2z"/></svg>
-      <span>Follow us on Instagram</span>
-    </a>
-  </div>
 </main>
+
+<!-- Floating Instagram pill (bottom-right) -->
+<div class="insta-fab">
+  <a class="insta-link" href="https://www.instagram.com/erins.elegance?igsh=MTVkcG10Y2lucW11NQ==" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.2z"/></svg>
+    <span>Follow us on Instagram</span>
+  </a>
+</div>
 
 <footer>
   <p>© 2025 erin’s elegance. all rights reserved.</p>
