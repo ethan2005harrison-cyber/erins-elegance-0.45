@@ -37,10 +37,10 @@
   --forest:#252a1c;      /* requested green */
   --forest-1:#1e2417;    /* slightly darker companion */
   --forest-2:#303621;    /* slightly lighter companion */
-  --gold:#c39a2e;        /* deeper gold */
+  --gold:#c39a2e;        /* deeper gold (buttons) */
   --gold-dark:#a47f24;   /* hover gold */
-  --ink:#0e1715;         /* text on white cards */
-  --text:#e9e1c4;        /* soft warm text on dark */
+  --ink:#111111;         /* black text for headings/nav/logo/footer */
+  --text:#e9e1c4;        /* soft warm text on dark for body copy */
   --card:#ffffff;
   --line:#eee7d4;
 }
@@ -70,14 +70,14 @@ header{
 }
 .logo{
   font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:600;
-  color: var(--gold);
+  color: var(--ink);          /* changed from gold to black */
 }
 nav ul{ list-style:none; margin:0; padding:0; display:flex; gap:1.5rem; }
 nav ul li a{
-  text-decoration:none; font-weight:600; color: var(--gold);
+  text-decoration:none; font-weight:600; color: var(--ink);  /* black links */
   transition: color .25s;
 }
-nav ul li a:hover{ color: var(--gold-dark); }
+nav ul li a:hover{ color: #333; } /* subtle hover */
 
 /* Main */
 main{
@@ -86,7 +86,7 @@ main{
 }
 h1{
   font-family:'Playfair Display',serif; font-size:3rem; margin-bottom:1rem;
-  color: var(--gold);
+  color: var(--ink);          /* black heading */
   opacity: 0; transform: translateY(-18px);
   animation: fadeUp 0.9s forwards 0.25s;
 }
@@ -96,7 +96,7 @@ p{
   animation: fadeUp 0.9s forwards 0.45s;
 }
 button{
-  background: var(--gold); color:#111; border:none;
+  background: var(--gold); color:#111; border:none;   /* gold buttons kept */
   padding: 1.05rem 2.4rem; border-radius: 50px; font-size: 1.05rem;
   cursor:pointer; transition: background .3s, box-shadow .3s, transform .15s;
   margin: 1rem .6rem;
@@ -112,7 +112,8 @@ button:focus{ outline:2px solid var(--gold); outline-offset:2px; }
 
 footer{
   text-align:center; padding:2rem; font-size:.95rem;
-  color: var(--gold); opacity:.9; position:relative; z-index:1;
+  color: var(--ink);          /* black footer text */
+  opacity:.9; position:relative; z-index:1;
 }
 
 /* =====================================
