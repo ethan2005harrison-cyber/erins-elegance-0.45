@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>erin’s elegance</title>
+<title>Thank You — Erin’s Elegance</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -14,8 +14,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
 :root{
-  --vogue:#565D4F;        /* Vintage Vogue */
-  --vogue-dark:#4b5246;
+  --vogue:#565D4F;
   --champagne:#E6D5B8;
   --cream:#F7F3EA;
   --charcoal:#2C2C2C;
@@ -23,7 +22,6 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
 body{
   margin:0; font-family:'Open Sans',sans-serif;
   background: var(--vogue); color: var(--cream);
@@ -85,50 +83,39 @@ header{
 
 /* Main */
 main{
-  max-width: 800px;
+  max-width: 720px;
   margin: 12rem auto 4rem;
   padding: 0 2rem;
   text-align: center;
-  position: relative;      /* creates local stacking context */
-  z-index: 2;              /* sits above the bg-stage below */
+  position: relative;
+  z-index: 2;
 }
 h1{
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  margin-bottom: .4rem;
-  color: var(--cream);
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards .3s;
+  font-family:'Playfair Display',serif;
+  font-size: 2.4rem;
+  margin-bottom: .6rem;
+  opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .2s;
 }
 p.lead{
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: var(--cream);
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeUp 1s forwards .55s;
+  opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .4s;
+  margin-bottom: 1.6rem; opacity:.95;
+}
+.card{
+  background: rgba(247,243,234,0.08);
+  border:1px solid var(--line); border-radius:18px;
+  padding: 1.2rem 1.2rem; margin: 0 auto 1rem; text-align:left;
+  max-width: 640px;
 }
 
 /* Buttons */
-.actions{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
-button{
-  background-color: var(--champagne);
-  color: var(--charcoal);
-  border: none;
-  padding: 1rem 2.2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s, transform .15s;
-  margin: .25rem .25rem;
-  font-weight:600;
-  box-shadow:0 6px 18px rgba(0,0,0,.18);
+.actions{ margin-top:1.1rem; display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
+button, .btn{
+  background: var(--champagne); color: var(--charcoal);
+  border:none; padding: .95rem 2.1rem; border-radius: 50px;
+  font-weight:600; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.18);
+  transition: transform .15s, box-shadow .3s, opacity .2s; text-decoration:none; display:inline-flex; align-items:center; gap:.6rem;
 }
-button:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
-}
+button:hover, .btn:hover{ transform: translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.22); }
 
 /* Floating Instagram pill (bottom-right) */
 .insta-fab{
@@ -150,10 +137,8 @@ button:hover{
   .insta-link{ font-size:.9rem; padding:.5rem .8rem; }
 }
 
-/* Background (Silk Mirage) — now behind everything */
-.bg-stage{
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-}
+/* Background (Silk Mirage) */
+.bg-stage{ position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .bg-tint{
   position:absolute; inset:0;
   background:
@@ -199,7 +184,7 @@ footer {
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
       </button>
       <nav id="primaryMenu" class="menu-panel" aria-label="Primary">
-        <a href="index.html" aria-current="page">Home</a>
+        <a href="index.html">Home</a>
         <a href="services.html">Services</a>
         <a href="booking.html">Booking</a>
         <a href="about.html">About Our Service</a>
@@ -209,20 +194,23 @@ footer {
   </div>
 </header>
 
-<!-- Background is now outside main and fixed behind everything -->
-<div class="bg-stage" aria-hidden="true">
-  <div class="bg-tint"></div>
-  <div class="petals"></div>
-</div>
-
 <main>
-  <h1>erin’s elegance</h1>
-  <p class="lead">Elegant Nails, Effortless Beauty</p>
+  <!-- Background -->
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-tint"></div>
+    <div class="petals"></div>
+  </div>
+
+  <h1>Thank you</h1>
+  <p class="lead">Your booking request has been received. We’ll confirm your appointment by email or phone.</p>
+
+  <div class="card">
+    <p><strong>What happens next?</strong> We’ll review your request and get back to you with a confirmation and any details you might need. If you have a question in the meantime, just reply to your confirmation email.</p>
+  </div>
 
   <div class="actions">
-    <button onclick="location.href='services.html'">View Services</button>
-    <button onclick="location.href='about.html'">About Our Service</button>
-    <button onclick="location.href='booking.html'">Book Now</button>
+    <a class="btn" href="index.html">Back to Home</a>
+    <a class="btn" href="services.html">View Services</a>
   </div>
 </main>
 
