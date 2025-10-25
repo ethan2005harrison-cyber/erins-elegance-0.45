@@ -17,13 +17,12 @@
 
 /* Palette */
 :root{
-  --vogue:#565D4F;        /* Vintage Vogue background */
+  --vogue:#565D4F;
   --vogue-dark:#4b5246;
   --vogue-light:#626a5b;
-
-  --champagne:#E6D5B8;    /* accents/buttons */
-  --cream:#F7F3EA;        /* creamy text */
-  --charcoal:#2C2C2C;     /* text on light */
+  --champagne:#E6D5B8;
+  --cream:#F7F3EA;
+  --charcoal:#2C2C2C;
   --line:rgba(230,213,184,.35);
 }
 
@@ -150,13 +149,7 @@ h1{
 }
 .section p{ line-height:1.75; margin:.35rem 0; }
 
-/* Pill */
-.pill{
-  display:inline-block; margin-top:.6rem;
-  padding:.5rem .9rem; border-radius:999px;
-  background: rgba(230,213,184,.12);
-  border:1px solid var(--line); font-weight:600;
-}
+/* (pill style kept in CSS for consistency, but no pill content on the page) */
 
 /* CTA buttons */
 .actions{ margin-top:1.2rem; display:flex; gap:.8rem; flex-wrap:wrap }
@@ -228,7 +221,7 @@ footer{
   <section class="section">
     <h2>Meet Erin</h2>
     <p>Erin is friendly, thoughtful, and detail-focused; she loves helping clients feel confident and at ease. Whether you are new to nail care or you visit regularly, you’ll be greeted with a smile and looked after from start to finish.</p>
-    <p class="pill">Warm conversation; careful technique; a gentle, personal touch</p>
+    <!-- Removed the pill line here -->
   </section>
 
   <section class="section">
