@@ -1,204 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Payment — Erin’s Elegance</title>
-<meta name="description" content="Review your booking details and confirm your appointment." />
-<link rel="canonical" href="https://www.erinselegance.com/payment.html" />
-<meta name="theme-color" content="#565D4F" />
-<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-:root{ --vogue:#565D4F; --champagne:#E6D5B8; --cream:#F7F3EA; --charcoal:#2C2C2C; --line:rgba(230,213,184,.35); }
-*{box-sizing:border-box}
-body{ margin:0; font-family:'Open Sans',sans-serif; background:var(--vogue); color:var(--cream); overflow-x:hidden; position:relative; }
-header{ background:rgba(247,243,234,0.08); backdrop-filter:blur(10px); position:fixed; width:100%; top:0; z-index:20; }
-.header-container{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.1rem 2rem; }
-.logo{ font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:600; color:var(--cream); }
-.menu{ position:relative; }
-.menu-btn{ background:rgba(230,213,184,.15); color:var(--cream); border:1px solid rgba(230,213,184,.35); border-radius:999px; padding:.6rem 1rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:.6rem; transition:background .25s, transform .15s; }
-.menu-btn:hover{ background:rgba(230,213,184,.22); transform:translateY(-1px); }
-.menu-btn:focus{ outline:2px solid rgba(230,213,184,.6); outline-offset:2px; }
-.menu-panel{ position:absolute; right:0; top:calc(100% + .6rem); background:rgba(22,24,21,.72); backdrop-filter:blur(10px); border:1px solid rgba(230,213,184,.28); border-radius:16px; min-width:220px; padding:.6rem; box-shadow:0 12px 28px rgba(0,0,0,.28); opacity:0; transform:translateY(-6px); pointer-events:none; transition:opacity .2s, transform .2s; }
-.menu-panel.open{ opacity:1; transform:translateY(0); pointer-events:auto; }
-.menu-panel a{ display:block; padding:.75rem .9rem; border-radius:12px; text-decoration:none; color:var(--cream); font-weight:600; }
-.menu-panel a:hover{ background:rgba(230,213,184,.12); border-color:rgba(230,213,184,.22); }
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment - erin’s elegance</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-main{ max-width:700px; margin:12rem auto 4rem; padding:0 2rem; position:relative; z-index:1; text-align:center; }
-h1{ font-family:'Playfair Display',serif; font-size:2.5rem; margin-bottom:1rem; }
-p{ opacity:.95; }
+    :root{
+      --vogue:#565D4F;
+      --champagne:#E6D5B8;
+      --cream:#F7F3EA;
+      --charcoal:#2C2C2C;
+      --line:rgba(230,213,184,.35);
+    }
 
-.summary{ background:#fff0; border:1px solid var(--line); border-radius:16px; padding:1.5rem; text-align:left; margin:1.4rem 0 2rem; }
-.summary h3{ font-family:'Playfair Display',serif; margin:0 0 .8rem; }
-.summary ul{ list-style:none; padding:0; margin:.4rem 0 1rem; }
-.summary li{ padding:.35rem 0; border-bottom:1px solid rgba(230,213,184,.22); }
-.total{ text-align:right; font-weight:700; font-family:'Playfair Display',serif; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: var(--vogue);
+      color: var(--cream);
+      overflow-x: hidden;
+      position: relative;
+    }
 
-.payment-options{ display:flex; flex-direction:column; gap:1rem; text-align:left; }
-.pay{ display:flex; align-items:center; justify-content:space-between; background:rgba(247,243,234,.08); border:1px solid var(--line); border-radius:12px; padding:1rem 1.2rem; }
-.pay.active{ border-color:var(--champagne); background:rgba(230,213,184,.10); }
-.pay.disabled{ opacity:.5; position:relative; }
-.pay.disabled::after{ content:"Currently Unavailable"; font-size:.9rem; color:var(--champagne); font-weight:600; margin-left:.5rem; }
+    header {
+      background-color: rgba(247,243,234,0.08);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 20;
+    }
 
-.note{ margin-top:1rem; opacity:.92; font-size:.95rem; background:rgba(230,213,184,.12); border:1px solid var(--line); border-radius:12px; padding:.8rem 1rem; }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 2rem;
+    }
 
-button{ background:var(--champagne); color:var(--charcoal); border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1rem; font-weight:600; cursor:pointer; margin-top:1.6rem; box-shadow:0 6px 18px rgba(0,0,0,.18); transition:transform .15s, box-shadow .3s, opacity .2s; }
-button:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.22); }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--cream);
+      font-weight: 600;
+      letter-spacing:.3px;
+    }
 
-.privacy{ margin-top:1rem; font-size:.92rem; opacity:.9; }
-.privacy a{ color:var(--champagne); font-weight:700; text-decoration:none; border-bottom:1px dashed rgba(230,213,184,.6); }
-.privacy a:hover{ opacity:.9; }
+    /* Dropdown menu (consistent with other pages) */
+    .menu{ position:relative; }
+    .menu-btn{
+      background: rgba(230,213,184,.15);
+      color: var(--cream);
+      border: 1px solid rgba(230,213,184,.35);
+      border-radius: 999px;
+      padding: .6rem 1rem;
+      font-weight:600; cursor:pointer;
+      display:flex; align-items:center; gap:.6rem;
+      transition: background .25s, border-color .25s, transform .15s;
+    }
+    .menu-btn:hover{ background: rgba(230,213,184,.22); transform: translateY(-1px); }
+    .menu-btn:focus{ outline:2px solid rgba(230,213,184,.6); outline-offset:2px; }
+    .menu-btn svg{ width:18px; height:18px; }
+    .menu-panel{
+      position:absolute; right:0; top: calc(100% + .6rem);
+      background: rgba(22,24,21,.72);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(230,213,184,.28);
+      border-radius: 16px; min-width: 220px; padding:.6rem;
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+      opacity:0; transform: translateY(-6px); pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .menu-panel.open{ opacity:1; transform: translateY(0); pointer-events:auto; }
+    .menu-panel a{
+      display:block; padding:.75rem .9rem; border-radius: 12px;
+      text-decoration:none; color: var(--cream); font-weight:600;
+      border:1px solid transparent;
+    }
+    .menu-panel a:hover{
+      background: rgba(230,213,184,.12);
+      border-color: rgba(230,213,184,.22);
+    }
 
-footer{ text-align:center; padding:2rem; font-size:.95rem; color:var(--cream); opacity:.9; position:relative; z-index:1; }
+    /* Background behind content */
+    .bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+    .bg-tint{
+      position:absolute; inset:0; filter:saturate(103%);
+      background:
+        radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
+        radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
+        var(--vogue);
+    }
+    .petals, .petals::before, .petals::after{
+      position:absolute; inset:-15%; content:"";
+      background:
+        radial-gradient(28% 22% at 20% 30%, rgba(230,213,184,0.12) 0%, rgba(230,213,184,0) 60%),
+        radial-gradient(22% 18% at 70% 65%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(18% 14% at 55% 35%, rgba(230,213,184,0.09) 0%, rgba(230,213,184,0) 60%),
+        radial-gradient(16% 12% at 35% 78%, rgba(230,213,184,0.07) 0%, rgba(230,213,184,0) 60%);
+      filter: blur(8px); opacity:.50; animation: petalsFloat 46s ease-in-out infinite;
+    }
+    .petals::before{ transform: scale(1.08); opacity:.44; animation: petalsFloatReverse 60s ease-in-out infinite; }
+    .petals::after{ transform: scale(1.16); opacity:.38; animation: petalsFloat 74s ease-in-out infinite; }
+    @keyframes petalsFloat{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(-2%,1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
+    @keyframes petalsFloatReverse{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(2%,-1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
+    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
-/* Silk Mirage background */
-.bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
-.bg-tint{ position:absolute; inset:0; background:
-  radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,.36) 0%, transparent 60%),
-  radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,.42) 0%, transparent 55%),
-  var(--vogue); filter:saturate(103%); }
-.petals, .petals::before, .petals::after{ position:absolute; inset:-15%; content:""; background:
-  radial-gradient(28% 22% at 20% 30%, rgba(230,213,184,.12) 0%, rgba(230,213,184,0) 60%),
-  radial-gradient(22% 18% at 70% 65%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 60%),
-  radial-gradient(18% 14% at 55% 35%, rgba(230,213,184,.09) 0%, rgba(230,213,184,0) 60%),
-  radial-gradient(16% 12% at 35% 78%, rgba(230,213,184,.07) 0%, rgba(230,213,184,0) 60%);
-  filter:blur(8px); opacity:.50; animation:petalsFloat 46s ease-in-out infinite; }
-.petals::before{ transform:scale(1.08); opacity:.44; animation:petalsFloatReverse 60s ease-in-out infinite; }
-.petals::after{ transform:scale(1.16); opacity:.38; animation:petalsFloat 74s ease-in-out infinite; }
-.bg-vignette{ position:absolute; width:160vmax; height:160vmax; left:50%; top:50%; transform:translate(-50%,-50%); border-radius:50%; background:
-  radial-gradient(closest-side, rgba(0,0,0,0) 0%, rgba(0,0,0,.16) 70%, rgba(0,0,0,.26) 100%); opacity:.46; animation:vignetteSpin 120s linear infinite; }
-.bg-grain{ position:absolute; inset:-12%; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.028'/></svg>"); background-size:160px 160px; }
-@keyframes petalsFloat{ 0%{transform:translate3d(0,0,0)} 50%{transform:translate3d(-2%,1.2%,0)} 100%{transform:translate3d(0,0,0)} }
-@keyframes petalsFloatReverse{ 0%{transform:translate3d(0,0,0)} 50%{transform:translate3d(2%,-1.2%,0)} 100%{transform:translate3d(0,0,0)} }
-@keyframes vignetteSpin{ 0%{ transform:translate(-50%,-50%) rotate(0);} 50%{ transform:translate(-50%,-50%) rotate(180deg);} 100%{ transform:translate(-50%,-50%) rotate(360deg);} }
-@media (prefers-reduced-motion: reduce){ .petals, .petals::before, .petals::after, .bg-vignette{ animation:none!important; } }
-</style>
+    main {
+      max-width: 600px;
+      margin: 12rem auto 4rem;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.5s;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--cream);
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1s;
+    }
+
+    .summary {
+      background: rgba(247,243,234,0.08);
+      border:1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1.2s;
+    }
+
+    .summary h3 {
+      font-family: 'Playfair Display', serif;
+      margin-top: 0;
+      color: var(--cream);
+    }
+
+    .summary ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .summary ul li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(230,213,184,.12);
+      font-size: 1rem;
+    }
+
+    .summary .total {
+      font-weight: 600;
+      margin-top: 1rem;
+      text-align: right;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 1.6s;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(247,243,234,0.08);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--line);
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .payment-option.active {
+      border-color: var(--champagne);
+      background: rgba(247,243,234,0.12);
+    }
+
+    .payment-option.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .payment-option.disabled::after {
+      content: "Currently Unavailable";
+      font-size: 0.9rem;
+      color: var(--champagne);
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    button {
+      background-color: var(--champagne);
+      color: var(--charcoal);
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: background-color 0.3s ease, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards;
+      animation-delay: 2s;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+    }
+
+    button:hover {
+      background-color: #e0cba4;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+
+    .address {
+      margin-top: 2.5rem;
+      font-size: 0.95rem;
+      color: var(--cream);
+      opacity: 0.9;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: var(--cream);
+      opacity: 0.9;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div class="header-container">
-    <div class="logo">erin’s elegance</div>
-    <div class="menu">
-      <button class="menu-btn" id="menuButton" aria-haspopup="true" aria-expanded="false" aria-controls="primaryMenu">
-        <span>Menu</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
-      </button>
-      <nav id="primaryMenu" class="menu-panel" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="booking.html">Booking</a>
-        <a href="about.html">About Our Service</a>
-        <a href="terms.html">Terms & Conditions</a>
-      </nav>
+  <header>
+    <div class="header-container">
+      <div class="logo">erin’s elegance</div>
+      <div class="menu">
+        <button class="menu-btn" id="menuButton" aria-haspopup="true" aria-expanded="false" aria-controls="primaryMenu">
+          <span>Menu</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
+        </button>
+        <nav id="primaryMenu" class="menu-panel" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="booking.html">Booking</a>
+          <a href="about.html">About Our Service</a>
+          <a href="terms.html">Terms & Conditions</a>
+        </nav>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<div class="bg-stage" aria-hidden="true">
-  <div class="bg-tint"></div><div class="petals"></div><div class="bg-vignette"></div><div class="bg-grain"></div>
-</div>
-
-<main>
-  <h1>Review & Payment</h1>
-  <p>Please review your booking details and confirm your appointment.</p>
-
-  <div class="summary" id="summaryBox">
-    <h3>Your Selected Services</h3>
-    <ul id="serviceList"></ul>
-    <div class="total" id="totalCost">Total: £0</div>
+  <!-- Background behind everything -->
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-tint"></div>
+    <div class="petals"></div>
   </div>
 
-  <div class="payment-options">
-    <div class="pay active" id="payInPerson"><span>💳 Pay in person</span><small> Please bring a method of payment with you.</small></div>
-    <div class="pay disabled"><span>🅿️ Pay with PayPal</span></div>
-  </div>
+  <main>
+    <h1>Review & Payment</h1>
+    <p>Please review your booking details and choose your payment option below.</p>
 
-  <p class="note">We’ll confirm your appointment by email/text. If your requested slot isn’t available, we’ll offer the closest alternative.</p>
+    <div class="summary" id="summaryBox">
+      <h3>Your Selected Services:</h3>
+      <ul id="serviceList"></ul>
+      <div class="total" id="totalCost">Total: £0.00</div>
+    </div>
 
-  <button id="confirmBtn">Confirm Booking</button>
+    <div class="payment-options">
+      <div class="payment-option active" id="payInPerson">
+        <span>💳 Pay in person</span>
+        <small>Please bring a method of payment with you.</small>
+      </div>
+      <div class="payment-option disabled">
+        <span>🅿️ Pay with PayPal</span>
+      </div>
+    </div>
 
-  <p class="privacy">We respect your privacy — we only use your details to manage your appointment. See our <a href="terms.html">Terms &amp; Conditions</a>.</p>
-</main>
+    <button id="confirmBtn">Confirm Booking</button>
 
-<footer>
-  <p>© 2025 erin’s elegance. all rights reserved.</p>
-  <p>16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
-</footer>
+    <div class="address">
+      <p><strong>Address:</strong> 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
+      <p style="opacity:.85;font-size:.92rem;">We don’t share your details with anyone. Your information is used only to arrange and confirm your appointment.</p>
+    </div>
+  </main>
 
-<!-- Hidden Formspree form -->
-<form id="fsForm" action="https://formspree.io/f/xdkwjqyl" method="POST" style="display:none;">
-  <input name="name" id="fs_name">
-  <input name="email" id="fs_email">
-  <input name="phone" id="fs_phone">
-  <input name="desiredDate" id="fs_date">
-  <input name="desiredTime" id="fs_time">
-  <input name="notes" id="fs_notes">
-  <input name="total" id="fs_total">
-  <input name="services" id="fs_services">
-  <input type="hidden" name="_subject" value="New booking — Erin’s Elegance">
-</form>
+  <footer>
+    <p>© 2025 erin’s elegance. all rights reserved.</p>
+  </footer>
 
-<script>
-(function(){
-  // Dropdown
-  const btn=document.getElementById('menuButton'); const panel=document.getElementById('primaryMenu');
-  function closeMenu(){ panel.classList.remove('open'); btn?.setAttribute('aria-expanded','false'); }
-  function openMenu(){ panel.classList.add('open'); btn?.setAttribute('aria-expanded','true'); }
-  btn?.addEventListener('click',()=>{ const ex=btn.getAttribute('aria-expanded')==='true'; ex?closeMenu():openMenu(); });
-  document.addEventListener('click',(e)=>{ if(panel && !panel.contains(e.target) && e.target!==btn && !btn?.contains(e.target)) closeMenu(); });
-  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeMenu(); });
+  <script>
+    // Dropdown logic (kept consistent)
+    (function(){
+      const btn = document.getElementById('menuButton');
+      const panel = document.getElementById('primaryMenu');
+      if(!btn || !panel) return;
+      const closeMenu = () => { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); };
+      const openMenu  = () => { panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); };
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        expanded ? closeMenu() : openMenu();
+      });
+      document.addEventListener('click', (e)=>{
+        if(!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)){ closeMenu(); }
+      });
+      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
+    })();
 
-  // Load params from booking.html
-  const params = new URLSearchParams(window.location.search);
-  const services = params.getAll('service'); // "Name - price"
-  const serviceList = document.getElementById('serviceList');
-  const totalCost = document.getElementById('totalCost');
+    // ===== Payment summary + Formspree submission =====
+    const params = new URLSearchParams(window.location.search);
 
-  let total = 0;
-  services.forEach(s=>{
-    const [name, price] = s.split('-');
-    const li = document.createElement('li');
-    li.textContent = `${name.trim()} — £${(price||'0').trim()}`;
-    serviceList.appendChild(li);
-    total += parseInt(price||'0',10);
-  });
-  totalCost.textContent = `Total: £${total}`;
+    // Services may arrive as ?service=Name-Price repeated; also support comma strings
+    const serviceListEl = document.getElementById("serviceList");
+    const totalCostEl = document.getElementById("totalCost");
 
-  // Populate hidden Formspree form
-  function fillForm(){
-    document.getElementById('fs_name').value  = params.get('name') || '';
-    document.getElementById('fs_email').value = params.get('email') || '';
-    document.getElementById('fs_phone').value = params.get('phone') || '';
-    document.getElementById('fs_date').value  = params.get('desiredDate') || '';
-    document.getElementById('fs_time').value  = params.get('desiredTime') || '';
-    document.getElementById('fs_notes').value = params.get('notes') || '';
-    document.getElementById('fs_total').value = total.toString();
-    document.getElementById('fs_services').value = services.join(', ');
-  }
-
-  document.getElementById('confirmBtn').addEventListener('click', async ()=>{
-    fillForm();
-    const form = document.getElementById('fsForm');
-
-    // Submit via fetch to show smoother UX; fallback to form.submit() on error
-    try{
-      const formData = new FormData(form);
-      const resp = await fetch(form.action, { method:'POST', body: formData, headers: { 'Accept':'application/json' } });
-      if(resp.ok){
-        window.location.href = 'thankspage.html';
-      } else {
-        // Fallback submit (some blockers interfere with fetch)
-        form.submit();
-      }
-    }catch(e){
-      form.submit();
+    let services = params.getAll("service");
+    if (services.length === 0) {
+      const s = params.get("services");
+      if (s) services = s.split(",").map(v => v.trim()).filter(Boolean);
     }
-  });
-})();
-</script>
+
+    let total = 0;
+    serviceListEl.innerHTML = "";
+
+    services.forEach(s => {
+      // Accept "Name - £Price" or "Name - Price"
+      let name = s, priceNum = 0;
+      if (s.includes("-")) {
+        const parts = s.split("-");
+        name = parts[0].trim();
+        const raw = (parts[1] || "").replace(/[£,\s]/g,"");
+        priceNum = parseFloat(raw) || 0;
+      }
+      const li = document.createElement("li");
+      li.textContent = `${name} — £${priceNum.toFixed(2)}`;
+      serviceListEl.appendChild(li);
+      total += priceNum;
+    });
+
+    totalCostEl.textContent = `Total: £${total.toFixed(2)}`;
+
+    // On confirm, send a Formspree submission with currency + payment method note
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdkwjqyl";
+
+    document.getElementById("confirmBtn").addEventListener("click", async () => {
+      // Compile full payload
+      const formattedTotal = `£${total.toFixed(2)}`; // includes currency
+      const servicesString = services.length ? services.join("; ") : "No services listed";
+
+      const fd = new FormData();
+      // Booking details that may have been passed from booking.html
+      fd.append("Name", params.get("name") || "");
+      fd.append("Email", params.get("email") || "");
+      fd.append("Phone", params.get("phone") || "");
+      fd.append("Desired Date", params.get("desiredDate") || params.get("date") || "");
+      fd.append("Desired Time", params.get("desiredTime") || params.get("time") || "");
+      fd.append("Additional Notes", params.get("notes") || "");
+
+      // Services + totals
+      fd.append("Services", servicesString);
+      fd.append("Total (GBP)", formattedTotal);
+      fd.append("Currency", "GBP");
+
+      // Explicit payment note
+      fd.append("Payment Method", "Pay in person on appointment day");
+      fd.append("Payment Status", "To be paid in person");
+
+      // Optional: a clearer email subject in Formspree
+      fd.append("_subject", "New booking request — Pay in person (GBP)");
+
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: "POST",
+          body: fd,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (res.ok) {
+          // Go to thanks page after successful submission
+          window.location.href = "thankspage.html";
+        } else {
+          alert("Sorry, your booking couldn’t be submitted. Please try again in a moment.");
+        }
+      } catch (err) {
+        alert("Network error submitting your booking. Please check your connection and try again.");
+      }
+    });
+  </script>
 </body>
 </html>
