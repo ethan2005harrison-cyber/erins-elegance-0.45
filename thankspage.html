@@ -22,6 +22,7 @@
 }
 
 *{box-sizing:border-box}
+html,body{height:100%}
 body{
   margin:0; font-family:'Open Sans',sans-serif;
   background: var(--vogue); color: var(--cream);
@@ -88,7 +89,7 @@ main{
   padding: 0 2rem;
   text-align: center;
   position: relative;
-  z-index: 2;
+  z-index: 2; /* sits above background */
 }
 h1{
   font-family:'Playfair Display',serif;
@@ -137,8 +138,10 @@ button:hover, .btn:hover{ transform: translateY(-2px); box-shadow:0 10px 24px rg
   .insta-link{ font-size:.9rem; padding:.5rem .8rem; }
 }
 
-/* Background (Silk Mirage) */
-.bg-stage{ position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+/* Background (Silk Mirage) — fixed behind everything */
+.bg-stage{
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
 .bg-tint{
   position:absolute; inset:0;
   background:
@@ -194,15 +197,15 @@ footer {
   </div>
 </header>
 
-<main>
-  <!-- Background -->
-  <div class="bg-stage" aria-hidden="true">
-    <div class="bg-tint"></div>
-    <div class="petals"></div>
-  </div>
+<!-- Background now fixed behind content -->
+<div class="bg-stage" aria-hidden="true">
+  <div class="bg-tint"></div>
+  <div class="petals"></div>
+</div>
 
+<main>
   <h1>Thank you</h1>
-  <p class="lead">Your booking request has been received. We’ll confirm your appointment by email or phone.</p>
+  <p class="lead">Your booking request has been received; we’ll confirm your appointment by email or phone.</p>
 
   <div class="card">
     <p><strong>What happens next?</strong> We’ll review your request and get back to you with a confirmation and any details you might need. If you have a question in the meantime, just reply to your confirmation email.</p>
