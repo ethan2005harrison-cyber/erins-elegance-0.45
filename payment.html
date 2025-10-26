@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Payment - erin’s elegance</title>
+  <title>Payment — erin’s elegance</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
     :root{
-      --vogue:#565D4F;
+      --vogue:#565D4F;        /* Vintage Vogue */
       --champagne:#E6D5B8;
       --cream:#F7F3EA;
       --charcoal:#2C2C2C;
@@ -90,7 +90,7 @@
       border-color: rgba(230,213,184,.22);
     }
 
-    /* Background behind everything */
+    /* Background */
     .bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
     .bg-tint{
       position:absolute; inset:0; filter:saturate(103%);
@@ -115,7 +115,7 @@
     @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
     main {
-      max-width: 600px;
+      max-width: 640px;
       margin: 12rem auto 4rem;
       padding: 0 2rem;
       text-align: center;
@@ -252,6 +252,12 @@
       font-family: 'Open Sans', sans-serif;
     }
 
+    .small {
+      font-size: .92rem;
+      opacity: .9;
+      margin-top: .6rem;
+    }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -281,7 +287,7 @@
     </div>
   </header>
 
-  <!-- Background behind everything -->
+  <!-- Background -->
   <div class="bg-stage" aria-hidden="true">
     <div class="bg-tint"></div>
     <div class="petals"></div>
@@ -311,7 +317,7 @@
 
     <div class="address">
       <p><strong>Address:</strong> 16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
-      <p style="opacity:.85;font-size:.92rem;">We don’t share your details with anyone. Your information is used only to arrange and confirm your appointment.</p>
+      <p class="small">We don’t share your details with anyone. Your information is used only to arrange and confirm your appointment.</p>
     </div>
   </main>
 
@@ -320,6 +326,10 @@
   </footer>
 
   <script>
+    /* === Config === */
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0AI5Ow3gzvCNq9qju1oIx35LdFKN-5NoIevOIRMVHcQVDIgf62huPMTw199ZVPqY2/exec";
+    const FORMSPREE_URL = "https://formspree.io/f/xdkwjqyl";
+
     /* Dropdown logic */
     (function(){
       const btn = document.getElementById('menuButton');
@@ -368,19 +378,23 @@
 
     totalCostEl.textContent = `Total: £${total.toFixed(2)}`;
 
-    /* === Only block the slot when Confirm is clicked === */
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0AI5Ow3gzvCNq9qju1oIx35LdFKN-5NoIevOIRMVHcQVDIgf62huPMTw199ZVPqY2/exec";
+    const payload = {
+      name: params.get("name") || "",
+      email: params.get("email") || "",
+      phone: params.get("phone") || "",
+      date: params.get("desiredDate") || params.get("date") || "",
+      time: params.get("desiredTime") || params.get("time") || "",
+      services: services.join("; "),
+      notes: params.get("notes") || ""
+    };
 
-    function buildPayloadFromParams(){
-      return {
-        name: params.get("name") || "",
-        email: params.get("email") || "",
-        phone: params.get("phone") || "",
-        date: params.get("desiredDate") || params.get("date") || "",
-        time: params.get("desiredTime") || params.get("time") || "",
-        services: services.join("; "),
-        notes: params.get("notes") || ""
-      };
+    /* Availability re-check before posting */
+    async function isStillAvailable(dateStr, timeStr){
+      const res = await fetch(`${SCRIPT_URL}?date=${encodeURIComponent(dateStr)}`);
+      if(!res.ok) return true; // fail-open
+      const data = await res.json();
+      const list = Array.isArray(data.booked) ? data.booked : [];
+      return !list.includes(timeStr);
     }
 
     async function postBookingToSheet(payload){
@@ -389,7 +403,40 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      return res.ok;
+      if(!res.ok){
+        let msg = "";
+        try { msg = await res.text(); } catch(e){}
+        throw new Error(msg || `HTTP ${res.status}`);
+      }
+      const data = await res.json().catch(()=>({ok:true}));
+      if(!data.ok) throw new Error(data.error || "Unknown error");
+      return true;
+    }
+
+    /* Send a lightweight notification to Formspree (non-blocking) */
+    async function notifyFormspree(payload, total){
+      const body = {
+        _subject: "New Booking — Erin’s Elegance",
+        Name: payload.name,
+        Email: payload.email,
+        Phone: payload.phone,
+        Date: payload.date,
+        Time: payload.time,
+        Services: payload.services,
+        Notes: payload.notes,
+        Total: `£${Number(total).toFixed(2)}`,
+        PaymentMethod: "Pay in person (on the day)"
+      };
+      try{
+        await fetch(FORMSPREE_URL, {
+          method: "POST",
+          headers: { "Accept": "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+      }catch(err){
+        // Don't block the booking if email notify fails
+        console.warn("Formspree notify failed:", err);
+      }
     }
 
     const confirmBtn = document.getElementById("confirmBtn");
@@ -399,12 +446,28 @@
       confirmBtn.textContent = "Confirming…";
 
       try {
-        const ok = await postBookingToSheet(buildPayloadFromParams());
-        // Even if ok is false, you could still proceed; but we'll keep it strict:
-        if (!ok) throw new Error("Sheet save failed");
+        if(!payload.date || !payload.time){
+          throw new Error("Missing date or time. Please go back and pick both.");
+        }
+        if(services.length === 0){
+          throw new Error("No services selected. Please go back and choose at least one service.");
+        }
+
+        const okAvail = await isStillAvailable(payload.date, payload.time);
+        if(!okAvail){
+          alert("Sorry — that time has just been taken. Please pick another time.");
+          window.location.href = `booking.html?date=${encodeURIComponent(payload.date)}`;
+          return;
+        }
+
+        await postBookingToSheet(payload);      // 1) Save to Google Sheet
+        await notifyFormspree(payload, total);  // 2) Fire Formspree email (non-blocking)
+
         window.location.href = "thankspage.html";
       } catch (e) {
-        alert("Sorry, we couldn’t confirm your booking just now. Please try again.");
+        console.error(e);
+        alert("We couldn’t confirm your booking right now.\n\n" +
+              (e && e.message ? e.message : "Please try again."));
         confirmBtn.disabled = false;
         confirmBtn.textContent = oldText;
       }
