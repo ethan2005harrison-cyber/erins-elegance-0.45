@@ -8,263 +8,54 @@
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
-
-    :root{
-      --vogue:#565D4F;        /* Vintage Vogue */
-      --champagne:#E6D5B8;
-      --cream:#F7F3EA;
-      --charcoal:#2C2C2C;
-      --line:rgba(230,213,184,.35);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background: var(--vogue);
-      color: var(--cream);
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    header {
-      background-color: rgba(247,243,234,0.08);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 20;
-    }
-
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 2rem;
-    }
-
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--cream);
-      font-weight: 600;
-      letter-spacing:.3px;
-    }
-
-    /* Dropdown menu */
+    :root{ --vogue:#565D4F; --champagne:#E6D5B8; --cream:#F7F3EA; --charcoal:#2C2C2C; --line:rgba(230,213,184,.35); }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{ margin:0; font-family:'Open Sans',sans-serif; background:var(--vogue); color:var(--cream); overflow-x:hidden; position:relative; }
+    header{ background:rgba(247,243,234,.08); backdrop-filter:blur(10px); position:fixed; width:100%; top:0; z-index:20; }
+    .header-container{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1.1rem 2rem; }
+    .logo{ font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--cream); font-weight:600; letter-spacing:.3px; }
     .menu{ position:relative; }
-    .menu-btn{
-      background: rgba(230,213,184,.15);
-      color: var(--cream);
-      border: 1px solid rgba(230,213,184,.35);
-      border-radius: 999px;
-      padding: .6rem 1rem;
-      font-weight:600; cursor:pointer;
-      display:flex; align-items:center; gap:.6rem;
-      transition: background .25s, border-color .25s, transform .15s;
-    }
-    .menu-btn:hover{ background: rgba(230,213,184,.22); transform: translateY(-1px); }
-    .menu-btn:focus{ outline:2px solid rgba(230,213,184,.6); outline-offset:2px; }
-    .menu-btn svg{ width:18px; height:18px; }
-    .menu-panel{
-      position:absolute; right:0; top: calc(100% + .6rem);
-      background: rgba(22,24,21,.72);
-      backdrop-filter: blur(10px);
-      border:1px solid rgba(230,213,184,.28);
-      border-radius: 16px; min-width: 220px; padding:.6rem;
-      box-shadow: 0 12px 28px rgba(0,0,0,.28);
-      opacity:0; transform: translateY(-6px); pointer-events:none;
-      transition: opacity .2s ease, transform .2s ease;
-    }
-    .menu-panel.open{ opacity:1; transform: translateY(0); pointer-events:auto; }
-    .menu-panel a{
-      display:block; padding:.75rem .9rem; border-radius: 12px;
-      text-decoration:none; color: var(--cream); font-weight:600;
-      border:1px solid transparent;
-    }
-    .menu-panel a:hover{
-      background: rgba(230,213,184,.12);
-      border-color: rgba(230,213,184,.22);
-    }
-
-    /* Background */
+    .menu-btn{ background:rgba(230,213,184,.15); color:var(--cream); border:1px solid rgba(230,213,184,.35); border-radius:999px; padding:.6rem 1rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:.6rem; transition:background .25s,border-color .25s,transform .15s; }
+    .menu-btn:hover{ background:rgba(230,213,184,.22); transform:translateY(-1px) }
+    .menu-btn:focus{ outline:2px solid rgba(230,213,184,.6); outline-offset:2px }
+    .menu-btn svg{ width:18px;height:18px }
+    .menu-panel{ position:absolute; right:0; top:calc(100% + .6rem); background:rgba(22,24,21,.72); backdrop-filter:blur(10px); border:1px solid rgba(230,213,184,.28); border-radius:16px; min-width:220px; padding:.6rem; box-shadow:0 12px 28px rgba(0,0,0,.28); opacity:0; transform:translateY(-6px); pointer-events:none; transition:opacity .2s, transform .2s; }
+    .menu-panel.open{ opacity:1; transform:translateY(0); pointer-events:auto }
+    .menu-panel a{ display:block; padding:.75rem .9rem; border-radius:12px; text-decoration:none; color:var(--cream); font-weight:600; border:1px solid transparent; }
+    .menu-panel a:hover{ background:rgba(230,213,184,.12); border-color:rgba(230,213,184,.22) }
     .bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
-    .bg-tint{
-      position:absolute; inset:0; filter:saturate(103%);
-      background:
-        radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
-        radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
-        var(--vogue);
-    }
-    .petals, .petals::before, .petals::after{
-      position:absolute; inset:-15%; content:"";
-      background:
-        radial-gradient(28% 22% at 20% 30%, rgba(230,213,184,0.12) 0%, rgba(230,213,184,0) 60%),
-        radial-gradient(22% 18% at 70% 65%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%),
-        radial-gradient(18% 14% at 55% 35%, rgba(230,213,184,0.09) 0%, rgba(230,213,184,0) 60%),
-        radial-gradient(16% 12% at 35% 78%, rgba(230,213,184,0.07) 0%, rgba(230,213,184,0) 60%);
-      filter: blur(8px); opacity:.50; animation: petalsFloat 46s ease-in-out infinite;
-    }
-    .petals::before{ transform: scale(1.08); opacity:.44; animation: petalsFloatReverse 60s ease-in-out infinite; }
-    .petals::after{ transform: scale(1.16); opacity:.38; animation: petalsFloat 74s ease-in-out infinite; }
-    @keyframes petalsFloat{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(-2%,1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
-    @keyframes petalsFloatReverse{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(2%,-1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
-    @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
-
-    main {
-      max-width: 640px;
-      margin: 12rem auto 4rem;
-      padding: 0 2rem;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 0.5s;
-    }
-
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      color: var(--cream);
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1s;
-    }
-
-    .summary {
-      background: rgba(247,243,234,0.08);
-      border:1px solid var(--line);
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1.2s;
-    }
-
-    .summary h3 {
-      font-family: 'Playfair Display', serif;
-      margin-top: 0;
-      color: var(--cream);
-    }
-
-    .summary ul {
-      list-style: none;
-      padding: 0;
-      margin: 0.5rem 0 1rem;
-    }
-
-    .summary ul li {
-      padding: 0.3rem 0;
-      border-bottom: 1px solid rgba(230,213,184,.12);
-      font-size: 1rem;
-    }
-
-    .summary .total {
-      font-weight: 600;
-      margin-top: 1rem;
-      text-align: right;
-      font-family: 'Playfair Display', serif;
-    }
-
-    .payment-options {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 1.6s;
-    }
-
-    .payment-option {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(247,243,234,0.08);
-      border-radius: 12px;
-      padding: 1rem 1.2rem;
-      border: 1px solid var(--line);
-      transition: border-color 0.3s, background 0.3s;
-    }
-
-    .payment-option.active {
-      border-color: var(--champagne);
-      background: rgba(247,243,234,0.12);
-    }
-
-    .payment-option.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .payment-option.disabled::after {
-      content: "Currently Unavailable";
-      font-size: 0.9rem;
-      color: var(--champagne);
-      font-weight: 600;
-      margin-left: 10px;
-    }
-
-    button {
-      background-color: var(--champagne);
-      color: var(--charcoal);
-      border: none;
-      padding: 1rem 2.5rem;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 2rem;
-      transition: background-color 0.3s ease, box-shadow 0.3s;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards;
-      animation-delay: 2s;
-      font-weight:600;
-      box-shadow:0 6px 18px rgba(0,0,0,.18);
-    }
-
-    button:hover {
-      background-color: #e0cba4;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
-    }
-
-    .address {
-      margin-top: 2.5rem;
-      font-size: 0.95rem;
-      color: var(--cream);
-      opacity: 0.9;
-      font-family: 'Open Sans', sans-serif;
-    }
-
-    .small {
-      font-size: .92rem;
-      opacity: .9;
-      margin-top: .6rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: var(--cream);
-      opacity: 0.9;
-    }
+    .bg-tint{ position:absolute; inset:0; filter:saturate(103%); background:
+      radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
+      radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
+      var(--vogue); }
+    .petals,.petals::before,.petals::after{ position:absolute; inset:-15%; content:""; background:
+      radial-gradient(28% 22% at 20% 30%, rgba(230,213,184,0.12) 0%, rgba(230,213,184,0) 60%),
+      radial-gradient(22% 18% at 70% 65%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%),
+      radial-gradient(18% 14% at 55% 35%, rgba(230,213,184,0.09) 0%, rgba(230,213,184,0) 60%),
+      radial-gradient(16% 12% at 35% 78%, rgba(230,213,184,0.07) 0%, rgba(230,213,184,0) 60%); filter:blur(8px); opacity:.5; animation:petalsFloat 46s ease-in-out infinite; }
+    .petals::before{ transform:scale(1.08); opacity:.44; animation:petalsFloatReverse 60s ease-in-out infinite }
+    .petals::after{ transform:scale(1.16); opacity:.38; animation:petalsFloat 74s ease-in-out infinite }
+    @keyframes petalsFloat{ 0%{transform:translate3d(0,0,0)} 50%{transform:translate3d(-2%,1.2%,0)} 100%{transform:translate3d(0,0,0)} }
+    @keyframes petalsFloatReverse{ 0%{transform:translate3d(0,0,0)} 50%{transform:translate3d(2%,-1.2%,0)} 100%{transform:translate3d(0,0,0)} }
+    @keyframes fadeUp{ to{opacity:1; transform:translateY(0)} }
+    main{ max-width:640px; margin:12rem auto 4rem; padding:0 2rem; text-align:center; position:relative; z-index:2; }
+    h1{ font-family:'Playfair Display',serif; font-size:2.5rem; margin-bottom:1rem; opacity:0; transform:translateY(-20px); animation:fadeUp 1s forwards; animation-delay:.5s; }
+    p{ font-size:1.1rem; margin-bottom:2rem; color:var(--cream); opacity:0; transform:translateY(-20px); animation:fadeUp 1s forwards; animation-delay:1s; }
+    .summary{ background:rgba(247,243,234,0.08); border:1px solid var(--line); border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,.1); padding:1.5rem; margin-bottom:2rem; text-align:left; opacity:0; transform:translateY(-20px); animation:fadeUp 1s forwards; animation-delay:1.2s; }
+    .summary h3{ font-family:'Playfair Display',serif; margin-top:0; color:var(--cream) }
+    .summary ul{ list-style:none; padding:0; margin:.5rem 0 1rem }
+    .summary ul li{ padding:.3rem 0; border-bottom:1px solid rgba(230,213,184,.12); font-size:1rem }
+    .summary .total{ font-weight:600; margin-top:1rem; text-align:right; font-family:'Playfair Display',serif }
+    .payment-options{ display:flex; flex-direction:column; gap:1rem; opacity:0; transform:translateY(-20px); animation:fadeUp 1s forwards; animation-delay:1.6s; }
+    .payment-option{ display:flex; align-items:center; justify-content:space-between; background:rgba(247,243,234,0.08); border-radius:12px; padding:1rem 1.2rem; border:1px solid var(--line); transition:border-color .3s, background .3s; }
+    .payment-option.active{ border-color:var(--champagne); background:rgba(247,243,234,0.12) }
+    .payment-option.disabled{ opacity:.5; cursor:not-allowed }
+    .payment-option.disabled::after{ content:"Currently Unavailable"; font-size:.9rem; color:var(--champagne); font-weight:600; margin-left:10px }
+    button{ background-color:var(--champagne); color:var(--charcoal); border:none; padding:1rem 2.5rem; border-radius:50px; font-size:1rem; cursor:pointer; margin-top:2rem; transition:background-color .3s, box-shadow .3s; opacity:0; transform:translateY(-20px); animation:fadeUp 1s forwards; animation-delay:2s; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,.18) }
+    button:hover{ background-color:#e0cba4; box-shadow:0 10px 24px rgba(0,0,0,.22) }
+    .address{ margin-top:2.5rem; font-size:.95rem; color:var(--cream); opacity:.9; font-family:'Open Sans',sans-serif }
+    .small{ font-size:.92rem; opacity:.9; margin-top:.6rem }
+    footer{ text-align:center; padding:2rem; font-size:.9rem; color:var(--cream); opacity:.9 }
   </style>
 </head>
 <body>
@@ -287,7 +78,6 @@
     </div>
   </header>
 
-  <!-- Background -->
   <div class="bg-stage" aria-hidden="true">
     <div class="bg-tint"></div>
     <div class="petals"></div>
@@ -326,29 +116,19 @@
   </footer>
 
   <script>
-    /* === Config === */
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0AI5Ow3gzvCNq9qju1oIx35LdFKN-5NoIevOIRMVHcQVDIgf62huPMTw199ZVPqY2/exec";
     const FORMSPREE_URL = "https://formspree.io/f/xdkwjqyl";
 
-    /* Dropdown logic */
     (function(){
-      const btn = document.getElementById('menuButton');
-      const panel = document.getElementById('primaryMenu');
-      if(!btn || !panel) return;
-      const closeMenu = () => { panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); };
-      const openMenu  = () => { panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); };
-      btn.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        expanded ? closeMenu() : openMenu();
-      });
-      document.addEventListener('click', (e)=>{
-        if(!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)){ closeMenu(); }
-      });
-      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
+      const btn=document.getElementById('menuButton'), panel=document.getElementById('primaryMenu');
+      if(!btn||!panel) return;
+      const close=()=>{panel.classList.remove('open'); btn.setAttribute('aria-expanded','false');};
+      const open =()=>{panel.classList.add('open'); btn.setAttribute('aria-expanded','true');};
+      btn.addEventListener('click',e=>{e.stopPropagation(); (btn.getAttribute('aria-expanded')==='true')?close():open();});
+      document.addEventListener('click',e=>{ if(!panel.contains(e.target)&&!btn.contains(e.target)) close(); });
+      document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
     })();
 
-    /* Build summary from URL params */
     const params = new URLSearchParams(window.location.search);
     const serviceListEl = document.getElementById("serviceList");
     const totalCostEl = document.getElementById("totalCost");
@@ -359,9 +139,7 @@
       if (s) services = s.split(",").map(v => v.trim()).filter(Boolean);
     }
 
-    let total = 0;
-    serviceListEl.innerHTML = "";
-
+    let total = 0; serviceListEl.innerHTML = "";
     services.forEach(s => {
       let name = s, priceNum = 0;
       if (s.includes("-")) {
@@ -375,7 +153,6 @@
       serviceListEl.appendChild(li);
       total += priceNum;
     });
-
     totalCostEl.textContent = `Total: £${total.toFixed(2)}`;
 
     const payload = {
@@ -388,7 +165,6 @@
       notes: params.get("notes") || ""
     };
 
-    /* Availability re-check before posting */
     async function isStillAvailable(dateStr, timeStr){
       const res = await fetch(`${SCRIPT_URL}?date=${encodeURIComponent(dateStr)}`);
       if(!res.ok) return true; // fail-open
@@ -397,33 +173,29 @@
       return !list.includes(timeStr);
     }
 
-    async function postBookingToSheet(payload){
-      const res = await fetch(SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      if(!res.ok){
-        let msg = "";
-        try { msg = await res.text(); } catch(e){}
-        throw new Error(msg || `HTTP ${res.status}`);
-      }
-      const data = await res.json().catch(()=>({ok:true}));
-      if(!data.ok) throw new Error(data.error || "Unknown error");
+    // POST to Apps Script as x-www-form-urlencoded (no headers → no preflight)
+    async function postBookingToSheetForm(payload){
+      const form = new URLSearchParams();
+      form.append('name', payload.name);
+      form.append('email', payload.email);
+      form.append('phone', payload.phone);
+      form.append('date', payload.date);
+      form.append('time', payload.time);
+      form.append('services', payload.services);
+      form.append('notes', payload.notes);
+
+      const res = await fetch(SCRIPT_URL, { method: "POST", body: form }); // no headers
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      // We don't need the response body; success status is enough
       return true;
     }
 
-    /* Send a lightweight notification to Formspree (non-blocking) */
     async function notifyFormspree(payload, total){
       const body = {
         _subject: "New Booking — Erin’s Elegance",
-        Name: payload.name,
-        Email: payload.email,
-        Phone: payload.phone,
-        Date: payload.date,
-        Time: payload.time,
-        Services: payload.services,
-        Notes: payload.notes,
+        Name: payload.name, Email: payload.email, Phone: payload.phone,
+        Date: payload.date, Time: payload.time,
+        Services: payload.services, Notes: payload.notes,
         Total: `£${Number(total).toFixed(2)}`,
         PaymentMethod: "Pay in person (on the day)"
       };
@@ -433,25 +205,15 @@
           headers: { "Accept": "application/json", "Content-Type": "application/json" },
           body: JSON.stringify(body)
         });
-      }catch(err){
-        // Don't block the booking if email notify fails
-        console.warn("Formspree notify failed:", err);
-      }
+      }catch(err){ console.warn("Formspree notify failed:", err); }
     }
 
     const confirmBtn = document.getElementById("confirmBtn");
     confirmBtn.addEventListener("click", async () => {
-      confirmBtn.disabled = true;
-      const oldText = confirmBtn.textContent;
-      confirmBtn.textContent = "Confirming…";
-
+      confirmBtn.disabled = true; const old = confirmBtn.textContent; confirmBtn.textContent = "Confirming…";
       try {
-        if(!payload.date || !payload.time){
-          throw new Error("Missing date or time. Please go back and pick both.");
-        }
-        if(services.length === 0){
-          throw new Error("No services selected. Please go back and choose at least one service.");
-        }
+        if(!payload.date || !payload.time) throw new Error("Missing date or time. Please go back and pick both.");
+        if(services.length === 0) throw new Error("No services selected. Please go back and choose at least one service.");
 
         const okAvail = await isStillAvailable(payload.date, payload.time);
         if(!okAvail){
@@ -460,16 +222,14 @@
           return;
         }
 
-        await postBookingToSheet(payload);      // 1) Save to Google Sheet
-        await notifyFormspree(payload, total);  // 2) Fire Formspree email (non-blocking)
+        await postBookingToSheetForm(payload); // Simple form POST — no CORS preflight
+        await notifyFormspree(payload, total); // Email notify (non-blocking)
 
         window.location.href = "thankspage.html";
       } catch (e) {
         console.error(e);
-        alert("We couldn’t confirm your booking right now.\n\n" +
-              (e && e.message ? e.message : "Please try again."));
-        confirmBtn.disabled = false;
-        confirmBtn.textContent = oldText;
+        alert("We couldn’t confirm your booking right now.\n\n" + (e?.message || "Please try again."));
+        confirmBtn.disabled = false; confirmBtn.textContent = old;
       }
     });
   </script>
