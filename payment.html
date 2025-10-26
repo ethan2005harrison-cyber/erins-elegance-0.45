@@ -320,7 +320,7 @@
   </footer>
 
   <script>
-    // Dropdown logic
+    /* Dropdown logic */
     (function(){
       const btn = document.getElementById('menuButton');
       const panel = document.getElementById('primaryMenu');
@@ -338,7 +338,7 @@
       document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
     })();
 
-    // Build summary from URL params (unchanged behaviour)
+    /* Build summary from URL params */
     const params = new URLSearchParams(window.location.search);
     const serviceListEl = document.getElementById("serviceList");
     const totalCostEl = document.getElementById("totalCost");
@@ -368,9 +368,46 @@
 
     totalCostEl.textContent = `Total: £${total.toFixed(2)}`;
 
-    // Reverted: Confirm just navigates to thankspage.html (no Formspree here)
-    document.getElementById("confirmBtn").addEventListener("click", () => {
-      window.location.href = "thankspage.html";
+    /* === Only block the slot when Confirm is clicked === */
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0AI5Ow3gzvCNq9qju1oIx35LdFKN-5NoIevOIRMVHcQVDIgf62huPMTw199ZVPqY2/exec";
+
+    function buildPayloadFromParams(){
+      return {
+        name: params.get("name") || "",
+        email: params.get("email") || "",
+        phone: params.get("phone") || "",
+        date: params.get("desiredDate") || params.get("date") || "",
+        time: params.get("desiredTime") || params.get("time") || "",
+        services: services.join("; "),
+        notes: params.get("notes") || ""
+      };
+    }
+
+    async function postBookingToSheet(payload){
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      return res.ok;
+    }
+
+    const confirmBtn = document.getElementById("confirmBtn");
+    confirmBtn.addEventListener("click", async () => {
+      confirmBtn.disabled = true;
+      const oldText = confirmBtn.textContent;
+      confirmBtn.textContent = "Confirming…";
+
+      try {
+        const ok = await postBookingToSheet(buildPayloadFromParams());
+        // Even if ok is false, you could still proceed; but we'll keep it strict:
+        if (!ok) throw new Error("Sheet save failed");
+        window.location.href = "thankspage.html";
+      } catch (e) {
+        alert("Sorry, we couldn’t confirm your booking just now. Please try again.");
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = oldText;
+      }
     });
   </script>
 </body>
