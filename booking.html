@@ -4,80 +4,53 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>Book an Appointment — Erin’s Elegance</title>
-<meta name="description" content="Book your appointment at Erin’s Elegance. Select services, pick a date and time, and share your details." />
-<link rel="canonical" href="https://www.erinselegance.com/booking.html" />
-<meta name="theme-color" content="#565D4F" />
-
-<!-- Social cards -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Book an Appointment — Erin’s Elegance" />
-<meta property="og:description" content="Select services, choose your preferred date and time, and confirm your booking." />
-<meta property="og:url" content="https://www.erinselegance.com/booking.html" />
-<meta property="og:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Book an Appointment — Erin’s Elegance" />
-<meta name="twitter:description" content="Select services, choose your preferred date and time, and confirm your booking." />
-<meta name="twitter:image" content="https://www.erinselegance.com/assets/og-image.jpg" />
-
+<title>Booking — erin’s elegance</title>
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-/* =========================
-   Palette & Base
-   ========================= */
 :root{
-  --vogue:#565D4F;        /* Vintage Vogue background */
+  --vogue:#565D4F;        /* Vintage Vogue */
   --vogue-dark:#4b5246;
-  --vogue-light:#626a5b;
-
-  --champagne:#E6D5B8;    /* accents/buttons */
-  --cream:#F7F3EA;        /* creamy text on dark / light cards */
-  --charcoal:#2C2C2C;     /* text on light cards */
+  --champagne:#E6D5B8;
+  --cream:#F7F3EA;
+  --charcoal:#2C2C2C;
   --line:rgba(230,213,184,.35);
-  --error:#E6D5B8;        /* gold-toned error text */
+  --gold:#E6D5B8;
 }
 
-/* A11y utility */
-.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,1px,1px);white-space:nowrap;border:0}
-
-*{box-sizing:border-box}
+/* Base */
+*{ box-sizing:border-box }
+html,body{ height:100% }
 body{
   margin:0; font-family:'Open Sans',sans-serif;
-  background: var(--vogue);
-  color: var(--cream);
+  background: var(--vogue); color: var(--cream);
   overflow-x:hidden; position:relative;
 }
 
-/* Header with dropdown */
+/* Header + dropdown */
 header{
-  background: rgba(247,243,234,0.08);
-  backdrop-filter: blur(10px);
-  position: fixed; width: 100%; top: 0; z-index: 20;
+  position:fixed; top:0; left:0; right:0; z-index:20;
+  background: rgba(247,243,234,0.08); backdrop-filter: blur(10px);
 }
 .header-container{
-  max-width: 1200px; margin: 0 auto;
-  display:flex; justify-content:space-between; align-items:center;
-  padding: 1.1rem 2rem;
+  max-width:1200px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.1rem 2rem;
 }
 .logo{
-  font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:600;
-  color: var(--cream);
-  letter-spacing:.3px;
+  font-family:'Playfair Display',serif; font-weight:600; font-size:1.6rem;
+  color:var(--cream); letter-spacing:.3px;
 }
 .menu{ position:relative; }
 .menu-btn{
   background: rgba(230,213,184,.15);
-  color: var(--cream);
   border: 1px solid rgba(230,213,184,.35);
-  border-radius: 999px;
-  padding: .6rem 1rem;
-  font-weight:600; cursor:pointer;
+  color: var(--cream); border-radius: 999px;
+  padding: .6rem 1rem; font-weight:600; cursor:pointer;
   display:flex; align-items:center; gap:.6rem;
   transition: background .25s, border-color .25s, transform .15s;
 }
@@ -86,18 +59,17 @@ header{
 .menu-btn svg{ width:18px; height:18px; }
 .menu-panel{
   position:absolute; right:0; top: calc(100% + .6rem);
-  background: rgba(22,24,21,.72);
-  backdrop-filter: blur(10px);
-  border:1px solid rgba(230,213,184,.28);
-  border-radius: 16px; min-width: 220px; padding:.6rem;
+  min-width: 220px; padding:.6rem;
+  background: rgba(22,24,21,.72); backdrop-filter: blur(10px);
+  border:1px solid rgba(230,213,184,.28); border-radius:16px;
   box-shadow: 0 12px 28px rgba(0,0,0,.28);
   opacity:0; transform: translateY(-6px); pointer-events:none;
   transition: opacity .2s ease, transform .2s ease;
 }
 .menu-panel.open{ opacity:1; transform: translateY(0); pointer-events:auto; }
 .menu-panel a{
-  display:block; padding:.75rem .9rem; border-radius: 12px;
-  text-decoration:none; color: var(--cream); font-weight:600;
+  display:block; padding:.75rem .9rem; border-radius:12px;
+  color:var(--cream); text-decoration:none; font-weight:600;
   border:1px solid transparent;
 }
 .menu-panel a:hover{
@@ -105,149 +77,14 @@ header{
   border-color: rgba(230,213,184,.22);
 }
 
-/* Main */
-main{
-  max-width: 1100px; margin: 12rem auto 4rem;
-  padding: 0 2rem; position: relative; z-index: 1;
-}
-h1{
-  font-family:'Playfair Display',serif; font-size:2.6rem; margin:.2rem 0 0.8rem;
-  color: var(--cream);
-  opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .2s;
-}
-.lead{
-  opacity:.92; margin-bottom:1.8rem;
-  opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .35s;
-}
-
-/* Summary pill */
-.summary{
-  display:flex; align-items:center; gap:.8rem; flex-wrap:wrap;
-  background: rgba(247,243,234,0.08);
-  border:1px solid var(--line); border-radius: 16px;
-  padding:.8rem 1rem; margin: 0 0 1.2rem;
-}
-.summary .dot{ width:8px; height:8px; border-radius:50%; background: var(--champagne); display:inline-block; }
-.summary strong{ font-family:'Playfair Display',serif; }
-
-/* Sections */
-.section{
-  margin: 1.6rem 0 2.2rem;
-  opacity:0; transform: translateY(16px); animation: fadeUp .8s forwards .45s;
-}
-.section h2{
-  font-family:'Playfair Display',serif; font-size:1.6rem; margin:0 0 .8rem;
-  color: var(--cream);
-}
-.grid{
-  display:grid; grid-template-columns: repeat(12,1fr); gap:1rem;
-}
-.card{
-  grid-column: span 12;
-  background: rgba(247,243,234,0.08);
-  border:1px solid var(--line); border-radius:18px;
-  padding:1rem; display:flex; gap:1rem; align-items:flex-start;
-  transition: transform .15s, box-shadow .3s, background .3s, border-color .3s;
-  cursor: pointer; /* whole card is clickable */
-}
-.card:hover{ transform: translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.22); background: rgba(247,243,234,0.10); }
-.card.selected{ border-color: var(--champagne); background: rgba(230,213,184,.10); box-shadow: 0 0 0 2px rgba(230,213,184,.22) inset; }
-.title{ font-weight:700; color:var(--cream); }
-.price{ margin-left:auto; font-family:'Playfair Display',serif; color:var(--champagne); font-weight:600; }
-.desc{ margin-top:.2rem; opacity:.95; font-size:.98rem; }
-@media (min-width: 720px){ .card{ grid-column: span 6; } }
-
-/* Hide the native checkbox completely (but keep it accessible for screen readers) */
-.select{
-  display:flex; align-items:flex-start; gap:.6rem; position: relative;
-}
-.select input{
-  position:absolute; opacity:0; pointer-events:none; width:0; height:0; margin:0; padding:0;
-}
-/* Let label clicks pass through to the card handler */
-.select label{
-  cursor:pointer; display:block; pointer-events: none;
-}
-
-/* Date + Time scrollers */
-.picker{
-  margin: 1.6rem 0 2.2rem;
-  background: rgba(247,243,234,0.08);
-  border:1px solid var(--line); border-radius:18px; padding:1rem;
-}
-.picker h3{
-  font-family:'Playfair Display',serif; margin:.2rem 0 1rem; font-size:1.2rem;
-}
-.scroller{
-  display:flex; gap:.6rem; overflow-x:auto; padding-bottom:.2rem; scroll-snap-type:x proximity;
-}
-.scroller::-webkit-scrollbar{ height:8px }
-.scroller::-webkit-scrollbar-thumb{ background: rgba(230,213,184,.25); border-radius:999px }
-.pill{
-  flex:0 0 auto; scroll-snap-align:center;
-  padding:.7rem 1rem; border-radius:999px; border:1px solid var(--line);
-  background: rgba(230,213,184,.12); color: var(--cream); font-weight:600; cursor:pointer;
-  transition: background .2s, transform .1s, border-color .2s, opacity .2s;
-}
-.pill:hover{ transform: translateY(-1px); background: rgba(230,213,184,.18); }
-.pill[aria-pressed="true"]{ background: var(--champagne); color: var(--charcoal); border-color: transparent; }
-
-/* Form fields */
-.form{
-  margin-top:1.6rem;
-  background: rgba(247,243,234,0.08);
-  border:1px solid var(--line); border-radius:18px; padding:1rem;
-}
-.row{ display:grid; grid-template-columns:1fr; gap:1rem; }
-@media (min-width: 720px){ .row{ grid-template-columns:1fr 1fr; } }
-label{ display:block; font-weight:600; margin-bottom:.35rem; }
-input[type="text"], input[type="email"], input[type="tel"], textarea{
-  width:100%; padding:.9rem 1rem; border-radius:12px; border:1px solid var(--line);
-  background: rgba(22,24,21,.35); color: var(--cream); font-size:1rem;
-  transition: border-color .2s, box-shadow .2s, background .2s;
-}
-textarea{ min-height:110px; resize:vertical; }
-input:focus, textarea:focus{ outline:none; border-color: var(--champagne); box-shadow:0 0 0 3px rgba(230,213,184,.18); }
-.error{ margin-top:.4rem; font-size:.9rem; color: var(--error); display:none; }
-
-/* Info note */
-.note{
-  margin-top:1rem; opacity:.92; font-size:.95rem;
-  background: rgba(230,213,184,.12); border:1px solid var(--line);
-  border-radius:12px; padding:.8rem 1rem;
-}
-
-/* Button */
-.actions{ text-align:center; margin-top:1.4rem; }
-button.primary{
-  background: var(--champagne); color: var(--charcoal);
-  border:none; padding: 1.05rem 2.5rem; border-radius: 50px; font-size: 1.05rem;
-  cursor:pointer; transition: transform .15s, box-shadow .3s, opacity .2s;
-  font-weight:600; box-shadow: 0 6px 18px rgba(0,0,0,.18);
-}
-button.primary:hover{ transform: translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.22); opacity:.95; }
-button.primary:focus{ outline:2px solid rgba(230,213,184,.7); outline-offset:2px; }
-
-/* Animations */
-@keyframes fadeUp{ to{ opacity:1; transform: translateY(0);} }
-
-/* Footer */
-footer{
-  text-align:center; padding:2rem; font-size:.95rem;
-  color: var(--cream); opacity:.9; position:relative; z-index:1;
-}
-
-/* ================================
-   Silk Mirage background (Vintage Vogue)
-   ================================ */
-.bg-stage{ position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+/* Background behind content */
+.bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
 .bg-tint{
-  position:absolute; inset:0;
+  position:absolute; inset:0; filter:saturate(103%);
   background:
     radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
     radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
     var(--vogue);
-  filter: saturate(103%);
 }
 .petals, .petals::before, .petals::after{
   position:absolute; inset:-15%; content:"";
@@ -260,35 +97,115 @@ footer{
 }
 .petals::before{ transform: scale(1.08); opacity:.44; animation: petalsFloatReverse 60s ease-in-out infinite; }
 .petals::after{ transform: scale(1.16); opacity:.38; animation: petalsFloat 74s ease-in-out infinite; }
-.bg-vignette{
-  position:absolute; width:160vmax; height:160vmax; left:50%; top:50%; transform: translate(-50%,-50%);
-  border-radius:50%;
-  background: radial-gradient(closest-side, rgba(0,0,0,0) 0%, rgba(0,0,0,0.16) 70%, rgba(0,0,0,0.26) 100%);
-  opacity:.46; animation: vignetteSpin 120s linear infinite;
-}
-.bg-grain{
-  position:absolute; inset:-12%;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.028'/></svg>");
-  background-size:160px 160px;
-}
 @keyframes petalsFloat{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(-2%,1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
 @keyframes petalsFloatReverse{ 0%{ transform: translate3d(0,0,0) } 50%{ transform: translate3d(2%,-1.2%,0) } 100%{ transform: translate3d(0,0,0) } }
-@keyframes vignetteSpin{ 0%{ transform: translate(-50%,-50%) rotate(0deg); } 50%{ transform: translate(-50%,-50%) rotate(180deg); } 100%{ transform: translate(-50%,-50%) rotate(360deg); } }
+@keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .petals, .petals::before, .petals::after, .bg-vignette { animation: none !important; }
+/* Main */
+main{
+  max-width: 900px; margin: 12rem auto 4rem; padding: 0 2rem; position:relative; z-index:2;
+}
+h1{
+  font-family:'Playfair Display',serif; font-size:2.6rem; margin:.2rem 0 .6rem;
+  opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .2s;
+}
+.lead{
+  opacity:0; transform: translateY(-14px); animation: fadeUp .8s forwards .35s;
+  margin-bottom: 1.4rem; opacity:.95;
+}
+
+/* Basket/overview */
+.summary{
+  background: rgba(247,243,234,.08);
+  border:1px solid var(--line); border-radius:16px;
+  padding:1rem 1.2rem; margin-bottom:1.2rem;
+}
+.summary h3{
+  font-family:'Playfair Display',serif; margin:.2rem 0 .6rem;
+}
+.summary .tags{ display:flex; gap:.5rem; flex-wrap:wrap; }
+.tag{
+  background: rgba(247,243,234,.08);
+  border:1px solid var(--line);
+  color: var(--cream);
+  border-radius:999px; padding:.35rem .7rem; font-weight:600; font-size:.95rem;
+}
+.total{ font-family:'Playfair Display',serif; text-align:right; margin-top:.6rem; }
+
+/* Services list */
+.services{
+  display:grid; gap:.8rem; grid-template-columns:1fr;
+}
+.service-card{
+  display:flex; justify-content:space-between; align-items:center; gap:1rem;
+  background: rgba(247,243,234,.08);
+  border:1px solid var(--line); border-radius:16px; padding:1rem 1.1rem;
+  cursor:pointer; transition: transform .15s, box-shadow .3s, border-color .2s;
+}
+.service-card:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.22); }
+.service-card.selected{ border-color: var(--champagne); background: rgba(247,243,234,.12); }
+.service-info h4{ margin:.1rem 0 .25rem; font-family:'Playfair Display',serif; }
+.service-info p{ margin:0; opacity:.9; }
+.price{ font-weight:700 }
+
+/* Date + Time pickers */
+.form-grid{ display:grid; gap:1rem; grid-template-columns:1fr; margin-top:1rem; }
+.field{
+  background: rgba(247,243,234,.08); border:1px solid var(--line);
+  border-radius:16px; padding:1rem 1.1rem;
+}
+.field label{ font-weight:700; display:block; margin-bottom:.35rem; }
+.input, textarea{
+  width:100%; padding:.8rem 1rem; border-radius:12px; border:1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.04); color: var(--cream); font-size:1rem;
+}
+.input:focus, textarea:focus{ outline:2px solid var(--champagne); border-color: var(--champagne); }
+
+/* Time carousel */
+.time-row{
+  display:flex; gap:.5rem; overflow-x:auto; padding:.25rem; scroll-snap-type:x mandatory;
+}
+.time-btn{
+  scroll-snap-align: start;
+  white-space:nowrap;
+  padding:.65rem 1rem; border-radius:999px;
+  background: rgba(247,243,234,.08);
+  border:1px solid var(--line); color:var(--cream);
+  font-weight:600; cursor:pointer; transition: transform .1s, box-shadow .2s;
+}
+.time-btn:hover{ transform: translateY(-1px); box-shadow:0 8px 18px rgba(0,0,0,.2); }
+.time-btn.selected{ outline:2px solid var(--champagne); }
+.time-btn.disabled{ opacity:.45; pointer-events:none; }
+
+/* Errors */
+.error{ color: var(--champagne); margin-top:.4rem; font-weight:700; display:none; }
+
+/* Note above submit */
+.note{ margin-top:.5rem; opacity:.95 }
+
+/* Submit button */
+.actions{ margin-top:1.2rem; display:flex; justify-content:center }
+button.primary{
+  background: var(--champagne); color: var(--charcoal);
+  border:none; padding: 1rem 2.2rem; border-radius:50px; font-weight:700;
+  cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.18);
+  transition: transform .15s, box-shadow .3s;
+}
+button.primary:hover{ transform: translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.22); }
+
+/* Footer */
+footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
+
+/* Responsive */
+@media (min-width: 720px){
+  .form-grid{ grid-template-columns:1fr 1fr; }
 }
 </style>
 </head>
 <body>
-<a href="#content" class="sr-only">Skip to content</a>
-
-<header role="banner">
+<header>
   <div class="header-container">
     <div class="logo">erin’s elegance</div>
-
-    <!-- Dropdown navigation -->
     <div class="menu">
       <button class="menu-btn" id="menuButton" aria-haspopup="true" aria-expanded="false" aria-controls="primaryMenu">
         <span>Menu</span>
@@ -309,445 +226,327 @@ footer{
 <div class="bg-stage" aria-hidden="true">
   <div class="bg-tint"></div>
   <div class="petals"></div>
-  <div class="bg-vignette"></div>
-  <div class="bg-grain"></div>
 </div>
 
-<main id="content" role="main">
+<main>
   <h1>Book Your Appointment</h1>
-  <p class="lead">Choose your services, then pick a date and time that suits you.</p>
+  <p class="lead">Choose your services, pick a date and time, then enter your details. We’ll confirm by email or phone.</p>
 
-  <!-- Selected summary -->
-  <div class="summary" id="summaryBar" aria-live="polite">
-    <span class="dot"></span>
-    <span><strong id="selectedCount">0</strong> selected</span>
-    <span>•</span>
-    <span>Total: <strong id="selectedTotal">£0</strong></span>
+  <!-- Basket/Overview -->
+  <div class="summary" id="summaryBox">
+    <h3>Your Selection</h3>
+    <div class="tags" id="selectedTags"></div>
+    <div class="total" id="totalDisplay">Total: £0.00</div>
   </div>
 
-  <!-- Services: Manicures -->
-  <section class="section">
-    <h2>Manicures</h2>
-    <div class="grid">
-      <article class="card" data-card-for="svc-m1">
-        <div class="select">
-          <input type="checkbox" id="svc-m1" data-name="Classic Manicure" data-price="15">
-          <label for="svc-m1">
-            <div class="title">Classic Manicure</div>
-            <div class="desc">Nail shaping, cuticle care, and nourishing finish for naturally neat hands.</div>
-          </label>
-        </div>
-        <div class="price">£15</div>
-      </article>
+  <!-- Services (full-card clickable) -->
+  <section class="services" id="servicesList" aria-label="Services">
+    <!-- Examples — add/edit as you like -->
+    <div class="service-card" data-name="Classic Manicure" data-price="15">
+      <div class="service-info">
+        <h4>Classic Manicure</h4>
+        <p>Nail tidy, shaping, and cuticle care — a clean, polished finish.</p>
+      </div>
+      <div class="price">£15</div>
+    </div>
 
-      <article class="card" data-card-for="svc-m2">
-        <div class="select">
-          <input type="checkbox" id="svc-m2" data-name="Manicure with Polish" data-price="30">
-          <label for="svc-m2">
-            <div class="title">Manicure with Polish</div>
-            <div class="desc">Classic tidy plus a glossy colour of your choice for a polished look.</div>
-          </label>
-        </div>
-        <div class="price">£30</div>
-      </article>
+    <div class="service-card" data-name="Gel / Shellac" data-price="30">
+      <div class="service-info">
+        <h4>Gel / Shellac</h4>
+        <p>High-gloss colour with durable wear.</p>
+      </div>
+      <div class="price">£30</div>
+    </div>
 
-      <article class="card" data-card-for="svc-m3">
-        <div class="select">
-          <input type="checkbox" id="svc-m3" data-name="Luxury Manicure" data-price="40">
-          <label for="svc-m3">
-            <div class="title">Luxury Manicure</div>
-            <div class="desc">The full pampering experience — extra hydration and a soothing massage.</div>
-          </label>
-        </div>
-        <div class="price">£40</div>
-      </article>
+    <div class="service-card" data-name="Luxury Manicure" data-price="40">
+      <div class="service-info">
+        <h4>Luxury Manicure</h4>
+        <p>The full pampering experience.</p>
+      </div>
+      <div class="price">£40</div>
+    </div>
+
+    <div class="service-card" data-name="Classic Pedicure" data-price="30">
+      <div class="service-info">
+        <h4>Classic Pedicure</h4>
+        <p>Shape, buff, and refresh for comfortable, neat feet.</p>
+      </div>
+      <div class="price">£30</div>
+    </div>
+
+    <div class="service-card" data-name="Luxury Pedicure" data-price="40">
+      <div class="service-info">
+        <h4>Luxury Pedicure</h4>
+        <p>Ultimate spa treatment for your feet.</p>
+      </div>
+      <div class="price">£40</div>
+    </div>
+
+    <div class="service-card" data-name="Nail Art (from)" data-price="10">
+      <div class="service-info">
+        <h4>Nail Art (from)</h4>
+        <p>Simple accents to statement designs; priced per design.</p>
+      </div>
+      <div class="price">£10</div>
     </div>
   </section>
-
-  <!-- Services: Pedicures -->
-  <section class="section">
-    <h2>Pedicures</h2>
-    <div class="grid">
-      <article class="card" data-card-for="svc-p1">
-        <div class="select">
-          <input type="checkbox" id="svc-p1" data-name="Classic Pedicure" data-price="30">
-          <label for="svc-p1">
-            <div class="title">Classic Pedicure</div>
-            <div class="desc">Shape, cuticle tidy, and moisturise to refresh tired feet.</div>
-          </label>
-        </div>
-        <div class="price">£30</div>
-      </article>
-
-      <article class="card" data-card-for="svc-p2">
-        <div class="select">
-          <input type="checkbox" id="svc-p2" data-name="Pedicure with Polish" data-price="35">
-          <label for="svc-p2">
-            <div class="title">Pedicure with Polish</div>
-            <div class="desc">Everything in the classic, finished with your chosen colour.</div>
-          </label>
-        </div>
-        <div class="price">£35</div>
-      </article>
-
-      <article class="card" data-card-for="svc-p3">
-        <div class="select">
-          <input type="checkbox" id="svc-p3" data-name="Luxury Pedicure" data-price="40">
-          <label for="svc-p3">
-            <div class="title">Luxury Pedicure</div>
-            <div class="desc">Ultimate spa treatment for your feet — intensive care and relaxation.</div>
-          </label>
-        </div>
-        <div class="price">£40</div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Services: Builder Gel -->
-  <section class="section">
-    <h2>Builder Gel</h2>
-    <div class="grid">
-      <article class="card" data-card-for="svc-b1">
-        <div class="select">
-          <input type="checkbox" id="svc-b1" data-name="Builder Gel Full Set" data-price="40">
-          <label for="svc-b1">
-            <div class="title">Builder Gel Full Set</div>
-            <div class="desc">A resilient overlay for added strength and a smooth, elegant finish.</div>
-          </label>
-        </div>
-        <div class="price">£40</div>
-      </article>
-
-      <article class="card" data-card-for="svc-b2">
-        <div class="select">
-          <input type="checkbox" id="svc-b2" data-name="Builder Gel Infills" data-price="30">
-          <label for="svc-b2">
-            <div class="title">Builder Gel Infills</div>
-            <div class="desc">Refresh and rebalance your builder gel to keep nails flawless.</div>
-          </label>
-        </div>
-        <div class="price">£30</div>
-      </article>
-
-      <article class="card" data-card-for="svc-b3">
-        <div class="select">
-          <input type="checkbox" id="svc-b3" data-name="Builder Gel Removal" data-price="25">
-          <label for="svc-b3">
-            <div class="title">Builder Gel Removal</div>
-            <div class="desc">Gentle soak-off and tidy to keep natural nails healthy.</div>
-          </label>
-        </div>
-        <div class="price">£25</div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Services: Acrylics -->
-  <section class="section">
-    <h2>Acrylics</h2>
-    <div class="grid">
-      <article class="card" data-card-for="svc-a1">
-        <div class="select">
-          <input type="checkbox" id="svc-a1" data-name="Full Set Acrylics" data-price="40">
-          <label for="svc-a1">
-            <div class="title">Full Set Acrylics</div>
-            <div class="desc">Durable enhancements shaped to your preferred length and style.</div>
-          </label>
-        </div>
-        <div class="price">£40</div>
-      </article>
-
-      <article class="card" data-card-for="svc-a2">
-        <div class="select">
-          <input type="checkbox" id="svc-a2" data-name="Acrylic Infills" data-price="30">
-          <label for="svc-a2">
-            <div class="title">Acrylic Infills</div>
-            <div class="desc">Maintenance to fill growth and keep your set looking fresh.</div>
-          </label>
-        </div>
-        <div class="price">£30</div>
-      </article>
-
-      <article class="card" data-card-for="svc-a3">
-        <div class="select">
-          <input type="checkbox" id="svc-a3" data-name="Acrylic Removal" data-price="25">
-          <label for="svc-a3">
-            <div class="title">Acrylic Removal</div>
-            <div class="desc">Professional removal and nail tidy to protect the natural nail.</div>
-          </label>
-        </div>
-        <div class="price">£25</div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Date & Time pickers -->
-  <div class="picker" id="datePicker">
-    <h3>Select Date</h3>
-    <div class="scroller" id="dateScroller" role="tablist" aria-label="Choose a date (next 20 days)"></div>
-  </div>
-
-  <div class="picker" id="timePicker">
-    <h3>Select Time</h3>
-    <div class="scroller" id="timeScroller" role="tablist" aria-label="Choose a time (09:00–18:00)"></div>
-  </div>
 
   <!-- Details -->
-  <div class="form">
-    <div class="row">
-      <div>
-        <label for="name">Name</label>
-        <input id="name" type="text" placeholder="Your full name">
-        <div class="error" id="err-name">Please fill in this space.</div>
+  <form id="bookingForm" novalidate>
+    <div class="form-grid">
+      <div class="field">
+        <label for="desiredDate">Desired Date</label>
+        <input class="input" type="date" id="desiredDate" name="desiredDate" required />
+        <div class="error" id="dateError">Please select a date at least 24 hours from now.</div>
       </div>
-      <div>
-        <label for="email">Email <span aria-hidden="true">*</span></label>
-        <input id="email" type="email" placeholder="you@example.com" required>
-        <div class="error" id="err-email">Please fill in this space.</div>
+
+      <div class="field">
+        <label>Desired Time</label>
+        <input type="hidden" id="desiredTime" name="desiredTime" />
+        <div id="timeButtons" class="time-row" aria-label="Time options (hourly)"></div>
+        <div class="error" id="timeError">Please choose a time.</div>
       </div>
-      <div>
-        <label for="phone">Phone <span aria-hidden="true">*</span></label>
-        <input id="phone" type="tel" placeholder="07… or +44…" required>
-        <div class="error" id="err-phone">Please fill in this space.</div>
+
+      <div class="field">
+        <label for="name">Your Name</label>
+        <input class="input" type="text" id="name" name="name" placeholder="Full name" />
       </div>
-      <div>
+
+      <div class="field">
+        <label for="email">Email <span style="opacity:.8">(required)</span></label>
+        <input class="input" type="email" id="email" name="email" required placeholder="you@example.com" />
+        <div class="error" id="emailError">Please fill in this space.</div>
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone <span style="opacity:.8">(required)</span></label>
+        <input class="input" type="tel" id="phone" name="phone" required placeholder="07…" />
+        <div class="error" id="phoneError">Please fill in this space.</div>
+      </div>
+
+      <div class="field" style="grid-column:1 / -1">
         <label for="notes">Additional Notes</label>
-        <textarea id="notes" placeholder="Anything you’d like us to know?"></textarea>
+        <textarea id="notes" name="notes" rows="4" placeholder="Anything we should know?"></textarea>
       </div>
     </div>
 
-    <p class="note">We may have to offer you a different time and date than you request.</p>
+    <p class="note"><em>We may have to offer you a different time and date than you request.</em></p>
 
     <div class="actions">
-      <button class="primary" id="continueBtn">Continue to Payment</button>
+      <button type="submit" class="primary">Continue to Payment</button>
     </div>
-  </div>
+  </form>
 </main>
 
-<footer role="contentinfo">
+<footer>
   <p>© 2025 erin’s elegance. all rights reserved.</p>
-  <p>16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
 </footer>
 
-<!-- Dropdown script -->
 <script>
-  (function(){
-    const btn = document.getElementById('menuButton');
-    const panel = document.getElementById('primaryMenu');
+/* ====== Config: your Google Apps Script URL ====== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0AI5Ow3gzvCNq9qju1oIx35LdFKN-5NoIevOIRMVHcQVDIgf62huPMTw199ZVPqY2/exec";
 
-    function closeMenu(){ panel.classList.remove('open'); btn?.setAttribute('aria-expanded','false'); }
-    function openMenu(){ panel.classList.add('open'); btn?.setAttribute('aria-expanded','true'); }
-
-    if(btn){
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        expanded ? closeMenu() : openMenu();
-      });
-    }
-
-    document.addEventListener('click', (e) => {
-      if(panel && !panel.contains(e.target) && e.target !== btn && !btn?.contains(e.target)) closeMenu();
-    });
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeMenu(); });
-  })();
-</script>
-
-<!-- Booking logic (card click fix in place) -->
-<script>
+/* ====== Dropdown menu ====== */
 (function(){
-  // Collect checkboxes and make entire card toggle
-  const cards = document.querySelectorAll('.card[data-card-for]');
-  const checkboxes = [];
-
-  cards.forEach(card => {
-    const id = card.getAttribute('data-card-for');
-    const input = document.getElementById(id);
-    if(!input) return;
-
-    checkboxes.push(input);
-
-    // Sync visual state with checkbox
-    const sync = () => {
-      if (input.checked) card.classList.add('selected');
-      else card.classList.remove('selected');
-    };
-
-    // Click anywhere on the card toggles the checkbox
-    card.addEventListener('click', (e) => {
-      // If somehow the actual input gets clicked, let it work normally
-      if (e.target === input) return;
-      // Toggle and emit change to update summary
-      input.checked = !input.checked;
-      input.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-
-    input.addEventListener('change', sync);
-    sync();
+  const btn = document.getElementById('menuButton');
+  const panel = document.getElementById('primaryMenu');
+  if(!btn || !panel) return;
+  function closeMenu(){ panel.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function openMenu(){ panel.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  btn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    expanded ? closeMenu() : openMenu();
   });
-
-  // Summary update
-  const selectedCount = document.getElementById('selectedCount');
-  const selectedTotal = document.getElementById('selectedTotal');
-
-  function refreshSummary(){
-    const selected = checkboxes.filter(c => c.checked);
-    const total = selected.reduce((sum,c)=> sum + Number(c.dataset.price||0), 0);
-    if (selectedCount) selectedCount.textContent = selected.length;
-    if (selectedTotal) selectedTotal.textContent = `£${total}`;
-  }
-  checkboxes.forEach(cb => cb.addEventListener('change', refreshSummary));
-  refreshSummary();
-
-  // Date scroller (next 20 days, earliest = tomorrow to enforce 24h)
-  const dateScroller = document.getElementById('dateScroller');
-  let chosenDate = null;
-
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const start = new Date(today);
-  start.setDate(today.getDate() + 1); // earliest selectable = tomorrow
-
-  for(let i=0;i<20;i++){
-    const d = new Date(start);
-    d.setDate(start.getDate() + i);
-
-    const label = d.toLocaleDateString(undefined, { weekday:'short', day:'numeric', month:'short' });
-    const pill = document.createElement('button');
-    pill.className = 'pill';
-    pill.type = 'button';
-    pill.setAttribute('role','tab');
-    pill.setAttribute('aria-pressed','false');
-    pill.textContent = label;
-    pill.dataset.value = d.toISOString().split('T')[0];
-
-    pill.addEventListener('click',()=>{
-      document.querySelectorAll('#dateScroller .pill[aria-pressed="true"]').forEach(el => el.setAttribute('aria-pressed','false'));
-      pill.setAttribute('aria-pressed','true');
-      chosenDate = pill.dataset.value;
-      validateDateTime();
-    });
-
-    dateScroller.appendChild(pill);
-  }
-
-  // Time scroller (09:00–18:00 hourly)
-  const timeScroller = document.getElementById('timeScroller');
-  let chosenTime = null;
-  for(let h=9; h<=18; h++){
-    const timeLabel = `${String(h).padStart(2,'0')}:00`;
-    const pill = document.createElement('button');
-    pill.className = 'pill';
-    pill.type = 'button';
-    pill.setAttribute('role','tab');
-    pill.setAttribute('aria-pressed','false');
-    pill.textContent = timeLabel;
-    pill.dataset.value = timeLabel;
-
-    pill.addEventListener('click',()=>{
-      document.querySelectorAll('#timeScroller .pill[aria-pressed="true"]').forEach(el => el.setAttribute('aria-pressed','false'));
-      pill.setAttribute('aria-pressed','true');
-      chosenTime = pill.dataset.value;
-      validateDateTime();
-    });
-
-    timeScroller.appendChild(pill);
-  }
-
-  // Fields + inline errors
-  const nameEl = document.getElementById('name');
-  const emailEl = document.getElementById('email');
-  const phoneEl = document.getElementById('phone');
-  const notesEl = document.getElementById('notes');
-
-  const errName = document.getElementById('err-name');
-  const errEmail = document.getElementById('err-email');
-  const errPhone = document.getElementById('err-phone');
-
-  function show(el){ el.style.display = 'block'; }
-  function hide(el){ el.style.display = 'none'; }
-
-  function validateRequired(){
-    let ok = true;
-    if(nameEl.value.trim().length === 0){ show(errName); ok=false; } else hide(errName);
-    if(emailEl.value.trim().length === 0){ show(errEmail); ok=false; } else hide(errEmail);
-    if(phoneEl.value.trim().length === 0){ show(errPhone); ok=false; } else hide(errPhone);
-    return ok;
-  }
-
-  // Enforce >=24h between now and selected date+time (browser local time)
-  function validateDateTime(){
-    if(!chosenDate || !chosenTime) return true;
-    const dt = new Date(chosenDate + 'T' + chosenTime + ':00');
-
-    const now = new Date();
-    const min = new Date(now.getTime() + 24*60*60*1000); // +24h
-
-    const isValid = dt.getTime() >= min.getTime();
-    document.querySelectorAll('#timeScroller .pill[aria-pressed="true"]').forEach(el => {
-      el.style.opacity = isValid ? '1' : '.55';
-      el.style.boxShadow = isValid ? '' : '0 0 0 2px rgba(230,213,184,.35) inset';
-    });
-    return isValid;
-  }
-
-  // Continue -> payment.html (no Formspree here)
-  document.getElementById('continueBtn').addEventListener('click', ()=>{
-    const reqOK = validateRequired();
-    const dateOK = validateDateTime();
-
-    // Must select at least one service
-    const selected = checkboxes.filter(c => c.checked);
-    if(selected.length === 0){
-      const bar = document.getElementById('summaryBar');
-      bar.style.transform = 'scale(1.015)';
-      bar.style.boxShadow = '0 0 0 3px rgba(230,213,184,.18)';
-      setTimeout(()=>{ bar.style.transform=''; bar.style.boxShadow=''; }, 320);
-      return;
-    }
-    if(!reqOK || !chosenDate || !chosenTime || !dateOK){
-      if(!chosenDate){
-        document.getElementById('datePicker').style.boxShadow = '0 0 0 3px rgba(230,213,184,.18)';
-        setTimeout(()=>{ document.getElementById('datePicker').style.boxShadow=''; }, 320);
-      }
-      if(!chosenTime || !dateOK){
-        document.getElementById('timePicker').style.boxShadow = '0 0 0 3px rgba(230,213,184,.18)';
-        setTimeout(()=>{ document.getElementById('timePicker').style.boxShadow=''; }, 320);
-      }
-      return;
-    }
-
-    const servicesParams = [];
-    let total = 0;
-    selected.forEach(c => {
-      const name = c.dataset.name;
-      const price = Number(c.dataset.price||0);
-      servicesParams.push(['service', `${name} - ${price}`]);
-      total += price;
-    });
-
-    const params = new URLSearchParams();
-    params.set('name', nameEl.value.trim());
-    params.set('email', emailEl.value.trim());
-    params.set('phone', phoneEl.value.trim());
-    params.set('desiredDate', chosenDate);
-    params.set('desiredTime', chosenTime);
-    params.set('notes', notesEl.value.trim());
-    params.set('total', total);
-    servicesParams.forEach(([k,v]) => params.append(k, v));
-
-    window.location.href = `payment.html?${params.toString()}`;
-  });
-
-  // Hide errors on input
-  [nameEl, emailEl, phoneEl].forEach(el=>{
-    el.addEventListener('input', ()=>{
-      if(el.value.trim().length > 0){
-        const target = el.id === 'name' ? errName : el.id === 'email' ? errEmail : errPhone;
-        target && (target.style.display = 'none');
-      }
-    });
-  });
+  document.addEventListener('click', (e)=>{ if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
 })();
+
+/* ====== Services selection & basket ====== */
+let selected = []; // {name, price}
+const servicesList = document.getElementById('servicesList');
+const selectedTags = document.getElementById('selectedTags');
+const totalDisplay = document.getElementById('totalDisplay');
+
+function renderBasket(){
+  selectedTags.innerHTML = "";
+  let total = 0;
+  selected.forEach(s=>{
+    total += s.price;
+    const el = document.createElement('span');
+    el.className = 'tag';
+    el.textContent = `${s.name} — £${s.price.toFixed(2)}`;
+    selectedTags.appendChild(el);
+  });
+  totalDisplay.textContent = `Total: £${total.toFixed(2)}`;
+}
+
+servicesList.querySelectorAll('.service-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    const name = card.dataset.name;
+    const price = parseFloat(card.dataset.price||"0");
+    const idx = selected.findIndex(s=>s.name===name && s.price===price);
+    if(idx>=0){
+      selected.splice(idx,1);
+      card.classList.remove('selected');
+    }else{
+      selected.push({name, price});
+      card.classList.add('selected');
+    }
+    renderBasket();
+  });
+});
+
+/* ====== Time buttons (hourly 09–18) with gray-out ====== */
+const timeContainer = document.getElementById('timeButtons');
+const hiddenTime = document.getElementById('desiredTime');
+
+function buildTimeButtons(disabledTimes = []){
+  timeContainer.innerHTML = "";
+  for(let h=9; h<=18; h++){
+    const hh = String(h).padStart(2,'0');
+    const label = `${hh}:00`;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = label;
+    btn.className = 'time-btn';
+    if(disabledTimes.includes(label)){
+      btn.classList.add('disabled');
+      btn.setAttribute('aria-disabled','true');
+    }
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('disabled')) return;
+      document.querySelectorAll('.time-btn.selected').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      hiddenTime.value = label;
+      document.getElementById('timeError').style.display = 'none';
+    });
+    timeContainer.appendChild(btn);
+  }
+}
+
+/* ====== Fetch booked times for date ====== */
+async function refreshTimesForDate(dateStr){
+  try{
+    const res = await fetch(`${SCRIPT_URL}?date=${encodeURIComponent(dateStr)}`);
+    const data = await res.json();
+    const booked = Array.isArray(data.booked) ? data.booked : [];
+    buildTimeButtons(booked);
+  }catch(err){
+    console.warn('Could not load booked times', err);
+    buildTimeButtons([]); // show all times enabled if error
+  }
+}
+
+/* ====== 24h rule on date ====== */
+const dateInput = document.getElementById('desiredDate');
+function setDateMin24h(){
+  const now = new Date();
+  const min = new Date(now.getTime() + 24*60*60*1000); // +24h
+  const yyyy = min.getFullYear();
+  const mm = String(min.getMonth()+1).padStart(2,'0');
+  const dd = String(min.getDate()).padStart(2,'0');
+  dateInput.min = `${yyyy}-${mm}-${dd}`;
+}
+setDateMin24h();
+
+/* Initialize time row on load and on date changes */
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Build initial empty times
+  buildTimeButtons([]);
+  // If date has default value, fetch; else set to tomorrow by default
+  if(!dateInput.value){
+    dateInput.value = dateInput.min; // set to earliest allowed
+  }
+  refreshTimesForDate(dateInput.value);
+});
+
+dateInput.addEventListener('change', ()=>{
+  hiddenTime.value = '';
+  document.getElementById('timeError').style.display = 'none';
+  refreshTimesForDate(dateInput.value);
+});
+
+/* ====== Form validation + submit to payment.html ====== */
+const form = document.getElementById('bookingForm');
+
+function showError(id, show){
+  const el = document.getElementById(id);
+  el.style.display = show ? 'block' : 'none';
+}
+
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+
+  // Basic validation
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const dateVal = dateInput.value;
+  const timeVal = hiddenTime.value;
+
+  let ok = true;
+
+  // 24h rule check
+  const chosen = new Date(`${dateVal}T${(timeVal||'09:00')}:00`);
+  const now = new Date();
+  const ms24h = 24*60*60*1000;
+  if((chosen - now) < ms24h){
+    showError('dateError', true);
+    ok = false;
+  }else{
+    showError('dateError', false);
+  }
+
+  if(!timeVal){
+    showError('timeError', true);
+    ok = false;
+  }else{
+    showError('timeError', false);
+  }
+
+  if(!email){
+    showError('emailError', true);
+    ok = false;
+  }else{
+    showError('emailError', false);
+  }
+
+  if(!phone){
+    showError('phoneError', true);
+    ok = false;
+  }else{
+    showError('phoneError', false);
+  }
+
+  if(selected.length === 0){
+    // Optional: force at least one service; if you don't want this, remove this block.
+    alert('Please select at least one service.');
+    ok = false;
+  }
+
+  if(!ok) return;
+
+  // Build querystring for payment.html
+  const servicesParam = selected.map(s => `${s.name} - ${s.price.toFixed(2)}`);
+  const total = selected.reduce((sum,s)=>sum+s.price,0);
+
+  const params = new URLSearchParams({
+    name: document.getElementById('name').value.trim(),
+    email,
+    phone,
+    desiredDate: dateVal,
+    desiredTime: timeVal,
+    notes: document.getElementById('notes').value.trim(),
+    total: total.toFixed(2)
+  });
+
+  // Add multiple service params
+  servicesParam.forEach(s => params.append('service', s));
+
+  // Navigate to payment
+  window.location.href = `payment.html?${params.toString()}`;
+});
 </script>
 </body>
 </html>
+
