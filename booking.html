@@ -14,12 +14,10 @@
 
 :root{
   --vogue:#565D4F;        /* Vintage Vogue */
-  --vogue-dark:#4b5246;
   --champagne:#E6D5B8;
   --cream:#F7F3EA;
   --charcoal:#2C2C2C;
   --line:rgba(230,213,184,.35);
-  --gold:#E6D5B8;
 }
 
 /* Base */
@@ -77,7 +75,7 @@ header{
   border-color: rgba(230,213,184,.22);
 }
 
-/* Background behind content */
+/* Background */
 .bg-stage{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
 .bg-tint{
   position:absolute; inset:0; filter:saturate(103%);
@@ -103,7 +101,7 @@ header{
 
 /* Main */
 main{
-  max-width: 900px; margin: 12rem auto 4rem; padding: 0 2rem; position:relative; z-index:2;
+  max-width: 1000px; margin: 12rem auto 4rem; padding: 0 2rem; position:relative; z-index:2;
 }
 h1{
   font-family:'Playfair Display',serif; font-size:2.6rem; margin:.2rem 0 .6rem;
@@ -132,20 +130,29 @@ h1{
 }
 .total{ font-family:'Playfair Display',serif; text-align:right; margin-top:.6rem; }
 
-/* Services list */
+/* Section headings */
+.section-title{
+  margin: 1.6rem 0 .6rem;
+  font-family:'Playfair Display',serif;
+  border-left: 4px solid var(--champagne);
+  padding-left:.6rem;
+}
+
+/* Services grid */
 .services{
-  display:grid; gap:.8rem; grid-template-columns:1fr;
+  display:grid; gap:.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 .service-card{
   display:flex; justify-content:space-between; align-items:center; gap:1rem;
   background: rgba(247,243,234,.08);
   border:1px solid var(--line); border-radius:16px; padding:1rem 1.1rem;
-  cursor:pointer; transition: transform .15s, box-shadow .3s, border-color .2s;
+  cursor:pointer; transition: transform .15s, box-shadow .3s, border-color .2s, background .2s;
 }
 .service-card:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.22); }
 .service-card.selected{ border-color: var(--champagne); background: rgba(247,243,234,.12); }
 .service-info h4{ margin:.1rem 0 .25rem; font-family:'Playfair Display',serif; }
-.service-info p{ margin:0; opacity:.9; }
+.service-info p{ margin:0; opacity:.9; font-size:.95rem; }
 .price{ font-weight:700 }
 
 /* Date + Time pickers */
@@ -239,9 +246,9 @@ footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
     <div class="total" id="totalDisplay">Total: £0.00</div>
   </div>
 
-  <!-- Services (full-card clickable) -->
-  <section class="services" id="servicesList" aria-label="Services">
-    <!-- Examples — add/edit as you like -->
+  <!-- Services: Manicures -->
+  <h3 class="section-title">Manicures</h3>
+  <section class="services" id="manicures">
     <div class="service-card" data-name="Classic Manicure" data-price="15">
       <div class="service-info">
         <h4>Classic Manicure</h4>
@@ -249,7 +256,6 @@ footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
       </div>
       <div class="price">£15</div>
     </div>
-
     <div class="service-card" data-name="Gel / Shellac" data-price="30">
       <div class="service-info">
         <h4>Gel / Shellac</h4>
@@ -257,7 +263,6 @@ footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
       </div>
       <div class="price">£30</div>
     </div>
-
     <div class="service-card" data-name="Luxury Manicure" data-price="40">
       <div class="service-info">
         <h4>Luxury Manicure</h4>
@@ -265,7 +270,11 @@ footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
       </div>
       <div class="price">£40</div>
     </div>
+  </section>
 
+  <!-- Services: Pedicures -->
+  <h3 class="section-title">Pedicures</h3>
+  <section class="services" id="pedicures">
     <div class="service-card" data-name="Classic Pedicure" data-price="30">
       <div class="service-info">
         <h4>Classic Pedicure</h4>
@@ -273,7 +282,6 @@ footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
       </div>
       <div class="price">£30</div>
     </div>
-
     <div class="service-card" data-name="Luxury Pedicure" data-price="40">
       <div class="service-info">
         <h4>Luxury Pedicure</h4>
@@ -281,11 +289,57 @@ footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
       </div>
       <div class="price">£40</div>
     </div>
+  </section>
 
+  <!-- Services: Enhancements -->
+  <h3 class="section-title">Enhancements</h3>
+  <section class="services" id="enhancements">
+    <div class="service-card" data-name="Full Set Acrylics" data-price="40">
+      <div class="service-info">
+        <h4>Full Set Acrylics</h4>
+        <p>Fresh, durable length and shape tailored to you.</p>
+      </div>
+      <div class="price">£40</div>
+    </div>
+    <div class="service-card" data-name="Acrylic Infills" data-price="30">
+      <div class="service-info">
+        <h4>Acrylic Infills</h4>
+        <p>Refresh and rebalance for lasting wear.</p>
+      </div>
+      <div class="price">£30</div>
+    </div>
+    <div class="service-card" data-name="Acrylic Removal" data-price="25">
+      <div class="service-info">
+        <h4>Acrylic Removal</h4>
+        <p>Gentle removal with nail care.</p>
+      </div>
+      <div class="price">£25</div>
+    </div>
+    <div class="service-card" data-name="Builder Gel Full Set" data-price="40">
+      <div class="service-info">
+        <h4>Builder Gel Full Set</h4>
+        <p>Strength and structure with a natural look.</p>
+      </div>
+      <div class="price">£40</div>
+    </div>
+    <div class="service-card" data-name="Builder Gel Infills" data-price="30">
+      <div class="service-info">
+        <h4>Builder Gel Infills</h4>
+        <p>Maintain strength and shape between sets.</p>
+      </div>
+      <div class="price">£30</div>
+    </div>
+    <div class="service-card" data-name="Builder Gel Removal" data-price="25">
+      <div class="service-info">
+        <h4>Builder Gel Removal</h4>
+        <p>Gentle removal with nourishing finish.</p>
+      </div>
+      <div class="price">£25</div>
+    </div>
     <div class="service-card" data-name="Nail Art (from)" data-price="10">
       <div class="service-info">
         <h4>Nail Art (from)</h4>
-        <p>Simple accents to statement designs; priced per design.</p>
+        <p>From subtle accents to statement designs.</p>
       </div>
       <div class="price">£10</div>
     </div>
@@ -364,7 +418,6 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0AI5Ow3gzvCNq9qju1
 
 /* ====== Services selection & basket ====== */
 let selected = []; // {name, price}
-const servicesList = document.getElementById('servicesList');
 const selectedTags = document.getElementById('selectedTags');
 const totalDisplay = document.getElementById('totalDisplay');
 
@@ -381,7 +434,8 @@ function renderBasket(){
   totalDisplay.textContent = `Total: £${total.toFixed(2)}`;
 }
 
-servicesList.querySelectorAll('.service-card').forEach(card=>{
+// Full-card clickable toggles
+document.querySelectorAll('.service-card').forEach(card=>{
   card.addEventListener('click', ()=>{
     const name = card.dataset.name;
     const price = parseFloat(card.dataset.price||"0");
@@ -452,12 +506,8 @@ setDateMin24h();
 
 /* Initialize time row on load and on date changes */
 document.addEventListener('DOMContentLoaded', ()=>{
-  // Build initial empty times
-  buildTimeButtons([]);
-  // If date has default value, fetch; else set to tomorrow by default
-  if(!dateInput.value){
-    dateInput.value = dateInput.min; // set to earliest allowed
-  }
+  // Set date default to earliest allowed for convenience
+  if(!dateInput.value){ dateInput.value = dateInput.min; }
   refreshTimesForDate(dateInput.value);
 });
 
@@ -478,7 +528,7 @@ function showError(id, show){
 form.addEventListener('submit', (e)=>{
   e.preventDefault();
 
-  // Basic validation
+  // Validate
   const email = document.getElementById('email').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const dateVal = dateInput.value;
@@ -489,37 +539,15 @@ form.addEventListener('submit', (e)=>{
   // 24h rule check
   const chosen = new Date(`${dateVal}T${(timeVal||'09:00')}:00`);
   const now = new Date();
-  const ms24h = 24*60*60*1000;
-  if((chosen - now) < ms24h){
-    showError('dateError', true);
-    ok = false;
-  }else{
-    showError('dateError', false);
-  }
+  if((chosen - now) < 24*60*60*1000){
+    showError('dateError', true); ok = false;
+  }else{ showError('dateError', false); }
 
-  if(!timeVal){
-    showError('timeError', true);
-    ok = false;
-  }else{
-    showError('timeError', false);
-  }
-
-  if(!email){
-    showError('emailError', true);
-    ok = false;
-  }else{
-    showError('emailError', false);
-  }
-
-  if(!phone){
-    showError('phoneError', true);
-    ok = false;
-  }else{
-    showError('phoneError', false);
-  }
+  if(!timeVal){ showError('timeError', true); ok = false; } else { showError('timeError', false); }
+  if(!email){ showError('emailError', true); ok = false; } else { showError('emailError', false); }
+  if(!phone){ showError('phoneError', true); ok = false; } else { showError('phoneError', false); }
 
   if(selected.length === 0){
-    // Optional: force at least one service; if you don't want this, remove this block.
     alert('Please select at least one service.');
     ok = false;
   }
@@ -540,13 +568,12 @@ form.addEventListener('submit', (e)=>{
     total: total.toFixed(2)
   });
 
-  // Add multiple service params
   servicesParam.forEach(s => params.append('service', s));
 
-  // Navigate to payment
   window.location.href = `payment.html?${params.toString()}`;
 });
 </script>
 </body>
 </html>
+
 
