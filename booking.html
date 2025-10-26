@@ -204,6 +204,19 @@ button.primary:hover{ transform: translateY(-2px); box-shadow:0 10px 24px rgba(0
 /* Footer */
 footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
 
+/* Shimmer skeleton for time row */
+.time-row.loading { position: relative; min-height: 48px; }
+.time-row .skeleton-chip{
+  display:inline-block; height:38px; width:84px; margin-right:.5rem;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.1s linear infinite;
+  border: 1px solid rgba(230,213,184,.22);
+  opacity:.75;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
 /* Responsive */
 @media (min-width: 720px){
   .form-grid{ grid-template-columns:1fr 1fr; }
@@ -398,10 +411,10 @@ footer{ text-align:center; padding:2rem; color:var(--cream); opacity:.9 }
 </footer>
 
 <script>
-/* ====== Config: your Google Apps Script URL ====== */
+/* ===== Config ===== */
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0AI5Ow3gzvCNq9qju1oIx35LdFKN-5NoIevOIRMVHcQVDIgf62huPMTw199ZVPqY2/exec";
 
-/* ====== Dropdown menu ====== */
+/* ===== Dropdown ===== */
 (function(){
   const btn = document.getElementById('menuButton');
   const panel = document.getElementById('primaryMenu');
@@ -417,7 +430,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0AI5Ow3gzvCNq9qju1
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
 })();
 
-/* ====== Services selection & basket ====== */
+/* ===== Services selection & basket ===== */
 let selected = []; // {name, price}
 const selectedTags = document.getElementById('selectedTags');
 const totalDisplay = document.getElementById('totalDisplay');
@@ -435,85 +448,124 @@ function renderBasket(){
   totalDisplay.textContent = `Total: £${total.toFixed(2)}`;
 }
 
-// Full-card clickable toggles
 document.querySelectorAll('.service-card').forEach(card=>{
   card.addEventListener('click', ()=>{
     const name = card.dataset.name;
     const price = parseFloat(card.dataset.price||"0");
     const idx = selected.findIndex(s=>s.name===name && s.price===price);
-    if(idx>=0){
-      selected.splice(idx,1);
-      card.classList.remove('selected');
-    }else{
-      selected.push({name, price});
-      card.classList.add('selected');
-    }
+    if(idx>=0){ selected.splice(idx,1); card.classList.remove('selected'); }
+    else{ selected.push({name, price}); card.classList.add('selected'); }
     renderBasket();
   });
 });
 
-/* ====== Time buttons (hourly 09–18) with gray-out + client cache ====== */
+/* ===== Time UI with shimmer skeleton ===== */
 const timeContainer = document.getElementById('timeButtons');
 const hiddenTime = document.getElementById('desiredTime');
-const bookedCache = {}; // date -> ["09:00",...]
+const bookedCache = {};           // { [date]: [ "09:00", ... ] }
+let latestRequestToken = 0;       // race-safety
 
-function setTimeLoading(isLoading){
-  if(isLoading){
-    timeContainer.style.opacity = .6;
-    timeContainer.setAttribute('aria-busy','true');
-  }else{
-    timeContainer.style.opacity = 1;
-    timeContainer.removeAttribute('aria-busy');
+function hoursList(){ const a=[]; for(let h=9;h<=18;h++) a.push(String(h).padStart(2,'0')+':00'); return a; }
+
+/* Skeleton helpers */
+function showTimeSkeleton(){
+  timeContainer.classList.add('loading');
+  timeContainer.setAttribute('aria-busy','true');
+  timeContainer.innerHTML = '';
+  const count = 6;
+  for (let i = 0; i < count; i++){
+    const sk = document.createElement('span');
+    sk.className = 'skeleton-chip';
+    timeContainer.appendChild(sk);
   }
 }
+function hideTimeSkeleton(){
+  timeContainer.classList.remove('loading');
+  timeContainer.removeAttribute('aria-busy');
+}
 
-function buildTimeButtons(disabledTimes = []){
+/* Build all time buttons (enabled), preserve selection if possible */
+function drawAllTimes(enabledSelection = hiddenTime.value){
+  const times = hoursList();
   timeContainer.innerHTML = "";
-  for(let h=9; h<=18; h++){
-    const hh = String(h).padStart(2,'0');
-    const label = `${hh}:00`;
+  for(const label of times){
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.textContent = label;
     btn.className = 'time-btn';
-    if(disabledTimes.includes(label)){
-      btn.classList.add('disabled');
-      btn.setAttribute('aria-disabled','true');
-    }
+    if (label === enabledSelection) btn.classList.add('selected');
     btn.addEventListener('click', ()=>{
       if(btn.classList.contains('disabled')) return;
       document.querySelectorAll('.time-btn.selected').forEach(b=>b.classList.remove('selected'));
       btn.classList.add('selected');
       hiddenTime.value = label;
-      document.getElementById('timeError').style.display = 'none';
+      const te = document.getElementById('timeError'); if (te) te.style.display = 'none';
     });
     timeContainer.appendChild(btn);
   }
 }
 
-async function refreshTimesForDate(dateStr){
-  // Instant if cached
-  if (bookedCache[dateStr]) { buildTimeButtons(bookedCache[dateStr]); return; }
-  setTimeLoading(true);
+/* Disable only the booked times (don’t wipe current selection unless now blocked) */
+function applyBooked(disabledTimes){
+  const btns = Array.from(timeContainer.querySelectorAll('.time-btn'));
+  for(const btn of btns){
+    const label = btn.textContent.trim();
+    if(disabledTimes.includes(label)){
+      btn.classList.add('disabled'); btn.setAttribute('aria-disabled','true');
+      if(btn.classList.contains('selected')){
+        btn.classList.remove('selected');
+        hiddenTime.value = '';
+      }
+    }else{
+      btn.classList.remove('disabled'); btn.removeAttribute('aria-disabled');
+    }
+  }
+}
+
+/* Loading controller: use skeleton only when we don't have cache yet */
+function setTimeLoading(isLoading, useSkeleton){
+  if (isLoading && useSkeleton) showTimeSkeleton();
+  if (!isLoading) hideTimeSkeleton();
+}
+
+/* Fetch booked for a date with race safety + client cache */
+async function fetchBooked(dateStr){
+  if (bookedCache[dateStr]) return bookedCache[dateStr];
+  const token = ++latestRequestToken;
+  setTimeLoading(true, true); // show skeleton only when uncached
   try{
     const res = await fetch(`${SCRIPT_URL}?date=${encodeURIComponent(dateStr)}&ts=${Date.now()}`);
     const data = await res.json();
     const booked = Array.isArray(data.booked) ? data.booked : [];
+    if (token !== latestRequestToken) return booked; // old response
     bookedCache[dateStr] = booked;
-    buildTimeButtons(booked);
-  }catch(err){
-    console.warn('Could not load booked times', err);
-    buildTimeButtons([]); // don't block user if fetch fails
+    return booked;
+  }catch(e){
+    console.warn('Booked fetch failed', e);
+    return [];
   }finally{
-    setTimeLoading(false);
+    if (token === latestRequestToken) setTimeLoading(false);
   }
 }
 
-/* ====== 24h rule on date ====== */
+/* Prefetch helper (quietly fills cache) */
+function prefetchDate(dateStr){
+  if (bookedCache[dateStr]) return;
+  fetch(`${SCRIPT_URL}?date=${encodeURIComponent(dateStr)}&ts=${Date.now()}`)
+    .then(r=>r.json())
+    .then(d=>{ if(d && Array.isArray(d.booked)) bookedCache[dateStr] = d.booked; })
+    .catch(()=>{});
+}
+
+/* Keep the Apps Script “warm” */
+setInterval(()=>{ fetch(`${SCRIPT_URL}?debug=ping&ts=${Date.now()}`).catch(()=>{}); }, 240000); // 4 mins
+
+/* ===== 24h rule + init ===== */
 const dateInput = document.getElementById('desiredDate');
+
 function setDateMin24h(){
   const now = new Date();
-  const min = new Date(now.getTime() + 24*60*60*1000); // +24h
+  const min = new Date(now.getTime() + 24*60*60*1000);
   const yyyy = min.getFullYear();
   const mm = String(min.getMonth()+1).padStart(2,'0');
   const dd = String(min.getDate()).padStart(2,'0');
@@ -521,33 +573,54 @@ function setDateMin24h(){
 }
 setDateMin24h();
 
-/* ====== Init: support ?date= prefill, prefetch tomorrow ====== */
-document.addEventListener('DOMContentLoaded', ()=>{
+function toYMD(d){
+  const yyyy = d.getFullYear(), mm = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+document.addEventListener('DOMContentLoaded', async ()=>{
   const url = new URL(window.location.href);
   const qpDate = url.searchParams.get('date');
-  if(qpDate){
-    dateInput.value = qpDate;
-    if(dateInput.value < dateInput.min) dateInput.value = dateInput.min; // respect 24h rule
-  }else if(!dateInput.value){
-    dateInput.value = dateInput.min;
+  if(qpDate){ dateInput.value = qpDate < dateInput.min ? dateInput.min : qpDate; }
+  else if(!dateInput.value){ dateInput.value = dateInput.min; }
+
+  // If cached, draw immediately; otherwise show skeleton first
+  if (bookedCache[dateInput.value]) {
+    drawAllTimes();
+    applyBooked(bookedCache[dateInput.value]);
+  } else {
+    showTimeSkeleton();
   }
-  refreshTimesForDate(dateInput.value);
+  const booked = await fetchBooked(dateInput.value);
+  drawAllTimes();
+  applyBooked(booked);
 
-  // Prefetch tomorrow to make flipping feel instant
-  const d = new Date(dateInput.value);
-  d.setDate(d.getDate()+1);
-  const yyyy = d.getFullYear(), mm = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
-  const tomorrow = `${yyyy}-${mm}-${dd}`;
-  refreshTimesForDate(tomorrow);
+  // Prefetch +/- 3 days for snappy navigation
+  const base = new Date(dateInput.value);
+  for (let off = -3; off <= 3; off++){
+    if (off === 0) continue;
+    const d = new Date(base); d.setDate(d.getDate()+off);
+    if (toYMD(d) >= dateInput.min) prefetchDate(toYMD(d));
+  }
 });
 
-dateInput.addEventListener('change', ()=>{
+dateInput.addEventListener('change', async ()=>{
   hiddenTime.value = '';
-  document.getElementById('timeError').style.display = 'none';
-  refreshTimesForDate(dateInput.value);
+  const te = document.getElementById('timeError'); if (te) te.style.display = 'none';
+
+  // Use cache if present, else skeleton → then fetch → draw
+  if (bookedCache[dateInput.value]) {
+    drawAllTimes();
+    applyBooked(bookedCache[dateInput.value]);
+  } else {
+    showTimeSkeleton();
+  }
+  const booked = await fetchBooked(dateInput.value);
+  drawAllTimes();
+  applyBooked(booked);
 });
 
-/* ====== Form validation + submit to payment.html ====== */
+/* ===== Form validation + continue to payment ===== */
 const form = document.getElementById('bookingForm');
 
 function showError(id, show){
@@ -564,41 +637,26 @@ form.addEventListener('submit', (e)=>{
   const timeVal = hiddenTime.value;
 
   let ok = true;
-
-  // 24h rule check (use chosen time if available; fallback 09:00)
   const chosen = new Date(`${dateVal}T${(timeVal||'09:00')}:00`);
   const now = new Date();
-  if((chosen - now) < 24*60*60*1000){
-    showError('dateError', true); ok = false;
-  }else{ showError('dateError', false); }
-
+  if((chosen - now) < 24*60*60*1000){ showError('dateError', true); ok = false; } else { showError('dateError', false); }
   if(!timeVal){ showError('timeError', true); ok = false; } else { showError('timeError', false); }
   if(!email){ showError('emailError', true); ok = false; } else { showError('emailError', false); }
   if(!phone){ showError('phoneError', true); ok = false; } else { showError('phoneError', false); }
-
-  if(selected.length === 0){
-    alert('Please select at least one service.');
-    ok = false;
-  }
-
+  if(selected.length === 0){ alert('Please select at least one service.'); ok = false; }
   if(!ok) return;
 
-  // Build querystring for payment.html
   const servicesParam = selected.map(s => `${s.name} - ${s.price.toFixed(2)}`);
   const total = selected.reduce((sum,s)=>sum+s.price,0);
 
   const params = new URLSearchParams({
     name: document.getElementById('name').value.trim(),
-    email,
-    phone,
-    desiredDate: dateVal,
-    desiredTime: timeVal,
+    email, phone,
+    desiredDate: dateVal, desiredTime: timeVal,
     notes: document.getElementById('notes').value.trim(),
     total: total.toFixed(2)
   });
-
   servicesParam.forEach(s => params.append('service', s));
-
   window.location.href = `payment.html?${params.toString()}`;
 });
 </script>
