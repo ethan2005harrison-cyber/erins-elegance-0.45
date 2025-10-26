@@ -171,6 +171,7 @@ h1{
 /* Time carousel */
 .time-row{
   display:flex; gap:.5rem; overflow-x:auto; padding:.25rem; scroll-snap-type:x mandatory;
+  transition: opacity .2s ease;
 }
 .time-btn{
   scroll-snap-align: start;
@@ -451,9 +452,20 @@ document.querySelectorAll('.service-card').forEach(card=>{
   });
 });
 
-/* ====== Time buttons (hourly 09–18) with gray-out ====== */
+/* ====== Time buttons (hourly 09–18) with gray-out + client cache ====== */
 const timeContainer = document.getElementById('timeButtons');
 const hiddenTime = document.getElementById('desiredTime');
+const bookedCache = {}; // date -> ["09:00",...]
+
+function setTimeLoading(isLoading){
+  if(isLoading){
+    timeContainer.style.opacity = .6;
+    timeContainer.setAttribute('aria-busy','true');
+  }else{
+    timeContainer.style.opacity = 1;
+    timeContainer.removeAttribute('aria-busy');
+  }
+}
 
 function buildTimeButtons(disabledTimes = []){
   timeContainer.innerHTML = "";
@@ -479,16 +491,21 @@ function buildTimeButtons(disabledTimes = []){
   }
 }
 
-/* ====== Fetch booked times for date ====== */
 async function refreshTimesForDate(dateStr){
+  // Instant if cached
+  if (bookedCache[dateStr]) { buildTimeButtons(bookedCache[dateStr]); return; }
+  setTimeLoading(true);
   try{
-    const res = await fetch(`${SCRIPT_URL}?date=${encodeURIComponent(dateStr)}`);
+    const res = await fetch(`${SCRIPT_URL}?date=${encodeURIComponent(dateStr)}&ts=${Date.now()}`);
     const data = await res.json();
     const booked = Array.isArray(data.booked) ? data.booked : [];
+    bookedCache[dateStr] = booked;
     buildTimeButtons(booked);
   }catch(err){
     console.warn('Could not load booked times', err);
-    buildTimeButtons([]); // show all times enabled if error
+    buildTimeButtons([]); // don't block user if fetch fails
+  }finally{
+    setTimeLoading(false);
   }
 }
 
@@ -504,11 +521,24 @@ function setDateMin24h(){
 }
 setDateMin24h();
 
-/* Initialize time row on load and on date changes */
+/* ====== Init: support ?date= prefill, prefetch tomorrow ====== */
 document.addEventListener('DOMContentLoaded', ()=>{
-  // Set date default to earliest allowed for convenience
-  if(!dateInput.value){ dateInput.value = dateInput.min; }
+  const url = new URL(window.location.href);
+  const qpDate = url.searchParams.get('date');
+  if(qpDate){
+    dateInput.value = qpDate;
+    if(dateInput.value < dateInput.min) dateInput.value = dateInput.min; // respect 24h rule
+  }else if(!dateInput.value){
+    dateInput.value = dateInput.min;
+  }
   refreshTimesForDate(dateInput.value);
+
+  // Prefetch tomorrow to make flipping feel instant
+  const d = new Date(dateInput.value);
+  d.setDate(d.getDate()+1);
+  const yyyy = d.getFullYear(), mm = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+  const tomorrow = `${yyyy}-${mm}-${dd}`;
+  refreshTimesForDate(tomorrow);
 });
 
 dateInput.addEventListener('change', ()=>{
@@ -528,7 +558,6 @@ function showError(id, show){
 form.addEventListener('submit', (e)=>{
   e.preventDefault();
 
-  // Validate
   const email = document.getElementById('email').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const dateVal = dateInput.value;
@@ -536,7 +565,7 @@ form.addEventListener('submit', (e)=>{
 
   let ok = true;
 
-  // 24h rule check
+  // 24h rule check (use chosen time if available; fallback 09:00)
   const chosen = new Date(`${dateVal}T${(timeVal||'09:00')}:00`);
   const now = new Date();
   if((chosen - now) < 24*60*60*1000){
@@ -575,5 +604,3 @@ form.addEventListener('submit', (e)=>{
 </script>
 </body>
 </html>
-
-
