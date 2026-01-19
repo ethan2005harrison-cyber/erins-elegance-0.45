@@ -5,22 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Erin’s Elegance</title>
 
-  <!-- Favicon -->
   <link rel="icon" href="assets/Logo.png" type="image/png">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* BRAND */
-      --logo-green: #567454;   /* exact logo */
-      --bg-green:   #6F8A6E;   /* lighter same tone */
-      --gold:       #D6B874;
-      --cream:      #F5F2EA;
-      --charcoal:   #1F1F1F;
+      --green: #567454;
+      --green-light: #6F8A6E;
+      --cream: #F5F2EA;
+      --gold: #D6B874;
+      --dark: #1F1F1F;
     }
 
     *{ box-sizing: border-box; }
@@ -28,41 +25,37 @@
     body{
       margin: 0;
       font-family: 'Open Sans', sans-serif;
-      color: var(--cream);
-      background:
-        radial-gradient(1200px 800px at 20% 20%, rgba(255,255,255,0.10), transparent 60%),
-        radial-gradient(900px 600px at 80% 80%, rgba(0,0,0,0.10), transparent 55%),
-        var(--bg-green);
+      background: var(--cream);
+      color: var(--dark);
     }
 
     /* HEADER */
     header{
+      background: var(--green);
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(111,138,110,0.88);
-      backdrop-filter: blur(6px);
       z-index: 10;
     }
 
     .header-inner{
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1.3rem 2rem;
+      padding: 1.4rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .logo img{
-      height: 64px;
+      height: 68px;
       width: auto;
     }
 
     nav a{
       color: var(--cream);
       text-decoration: none;
-      margin-left: 1.6rem;
+      margin-left: 1.8rem;
       font-weight: 600;
     }
 
@@ -78,8 +71,8 @@
     }
 
     .hero-logo{
-      max-width: 500px;
-      margin: 0 auto 2.6rem;
+      max-width: 520px;
+      margin: 0 auto 2.8rem;
     }
 
     .hero-logo img{
@@ -90,49 +83,49 @@
     .tagline{
       font-size: 1.25rem;
       margin-bottom: 3rem;
-      opacity: 0.95;
+      color: var(--green);
     }
 
     .buttons{
       display: flex;
       justify-content: center;
-      gap: 1.2rem;
+      gap: 1.3rem;
       flex-wrap: wrap;
     }
 
     .buttons a{
-      background: var(--gold);
-      color: var(--charcoal);
-      padding: 1.05rem 2.6rem;
+      background: var(--green);
+      color: var(--cream);
+      padding: 1.1rem 2.7rem;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.22);
-      transition: transform .15s ease, box-shadow .2s ease;
+      transition: background .2s ease, transform .15s ease;
+    }
+
+    .buttons a.secondary{
+      background: var(--gold);
+      color: var(--dark);
     }
 
     .buttons a:hover{
       transform: translateY(-2px);
-      box-shadow: 0 10px 26px rgba(0,0,0,0.28);
     }
 
     /* FOOTER */
     footer{
+      margin-top: 6rem;
+      background: var(--green-light);
+      color: var(--cream);
       text-align: center;
-      padding: 4rem 1rem;
+      padding: 3rem 1rem;
       font-size: 0.9rem;
-      opacity: 0.9;
     }
 
-    /* MOBILE */
     @media(max-width: 600px){
       nav{ display: none; }
-
-      .logo img{ height: 52px; }
-
+      .logo img{ height: 54px; }
       .hero-logo{ max-width: 360px; }
-
-      main{ padding-top: 170px; }
     }
   </style>
 </head>
@@ -162,15 +155,14 @@
 
   <div class="buttons">
     <a href="services.html">View Services</a>
-    <a href="about.html">About Our Service</a>
-    <a href="booking.html">Book Now</a>
+    <a href="booking.html" class="secondary">Book Now</a>
   </div>
 </main>
 
 <footer>
   <p>© 2025 Erin’s Elegance. All rights reserved.</p>
-  <p>16 Werrington Drive, Callington, Cornwall, PL17 7TF</p>
 </footer>
 
 </body>
 </html>
+
