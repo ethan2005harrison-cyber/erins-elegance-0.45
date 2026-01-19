@@ -15,22 +15,24 @@
 
   <style>
     :root{
-      /* EXACT LOGO GREEN */
-      --brand-green: #567454;
-      --gold: #D6B874;
-      --cream: #F4F2EA;
-      --charcoal: #1F1F1F;
+      /* BRAND */
+      --logo-green: #567454;   /* exact logo */
+      --bg-green:   #6F8A6E;   /* lighter same tone */
+      --gold:       #D6B874;
+      --cream:      #F5F2EA;
+      --charcoal:   #1F1F1F;
     }
 
-    *{
-      box-sizing: border-box;
-    }
+    *{ box-sizing: border-box; }
 
     body{
       margin: 0;
       font-family: 'Open Sans', sans-serif;
-      background: var(--brand-green);
       color: var(--cream);
+      background:
+        radial-gradient(1200px 800px at 20% 20%, rgba(255,255,255,0.10), transparent 60%),
+        radial-gradient(900px 600px at 80% 80%, rgba(0,0,0,0.10), transparent 55%),
+        var(--bg-green);
     }
 
     /* HEADER */
@@ -38,7 +40,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(86,116,84,0.92); /* SAME GREEN, TRANSPARENT */
+      background: rgba(111,138,110,0.88);
       backdrop-filter: blur(6px);
       z-index: 10;
     }
@@ -46,14 +48,14 @@
     .header-inner{
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1.4rem 2rem;
+      padding: 1.3rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .logo img{
-      height: 68px; /* BIGGER FOR READABILITY */
+      height: 64px;
       width: auto;
     }
 
@@ -71,13 +73,13 @@
 
     /* HERO */
     main{
-      padding-top: 200px;
+      padding-top: 190px;
       text-align: center;
     }
 
     .hero-logo{
-      max-width: 520px; /* VERY CLEAR TEXT */
-      margin: 0 auto 2.8rem;
+      max-width: 500px;
+      margin: 0 auto 2.6rem;
     }
 
     .hero-logo img{
@@ -86,8 +88,8 @@
     }
 
     .tagline{
-      font-size: 1.3rem;
-      margin-bottom: 3.2rem;
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
       opacity: 0.95;
     }
 
@@ -105,13 +107,13 @@
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.22);
       transition: transform .15s ease, box-shadow .2s ease;
     }
 
     .buttons a:hover{
       transform: translateY(-2px);
-      box-shadow: 0 10px 26px rgba(0,0,0,0.32);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.28);
     }
 
     /* FOOTER */
@@ -124,21 +126,13 @@
 
     /* MOBILE */
     @media(max-width: 600px){
-      nav{
-        display: none;
-      }
+      nav{ display: none; }
 
-      .logo img{
-        height: 52px;
-      }
+      .logo img{ height: 52px; }
 
-      .hero-logo{
-        max-width: 360px;
-      }
+      .hero-logo{ max-width: 360px; }
 
-      main{
-        padding-top: 170px;
-      }
+      main{ padding-top: 170px; }
     }
   </style>
 </head>
