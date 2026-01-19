@@ -15,10 +15,11 @@
 
   <style>
     :root{
-      --sage: #6B7B63;
-      --sage-dark: #5C6A55;
+      /* MATCHED TO LOGO */
+      --olive: #5F6E63;
+      --olive-dark: #505E55;
       --gold: #D6B874;
-      --cream: #F6F3EB;
+      --cream: #F5F2EA;
       --charcoal: #1F1F1F;
     }
 
@@ -29,8 +30,11 @@
     body{
       margin: 0;
       font-family: 'Open Sans', sans-serif;
-      background: var(--sage);
       color: var(--cream);
+      background:
+        radial-gradient(1200px 800px at 20% 20%, rgba(255,255,255,0.08), transparent 60%),
+        radial-gradient(1000px 700px at 80% 80%, rgba(0,0,0,0.18), transparent 55%),
+        var(--olive);
     }
 
     /* HEADER */
@@ -38,7 +42,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(246,243,235,0.08);
+      background: rgba(245,242,234,0.08);
       backdrop-filter: blur(10px);
       z-index: 10;
     }
@@ -46,14 +50,14 @@
     .header-inner{
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem 2rem;
+      padding: 1.2rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .logo img{
-      height: 44px;
+      height: 60px; /* BIGGER */
       width: auto;
     }
 
@@ -71,13 +75,13 @@
 
     /* HERO */
     main{
-      padding-top: 140px;
+      padding-top: 170px;
       text-align: center;
     }
 
     .hero-logo{
-      max-width: 320px;
-      margin: 0 auto 2rem;
+      max-width: 440px; /* MUCH BIGGER */
+      margin: 0 auto 2.4rem;
     }
 
     .hero-logo img{
@@ -86,8 +90,9 @@
     }
 
     .tagline{
-      font-size: 1.2rem;
-      margin-bottom: 2.5rem;
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+      opacity: 0.95;
     }
 
     .buttons{
@@ -100,21 +105,23 @@
     .buttons a{
       background: var(--gold);
       color: var(--charcoal);
-      padding: 1rem 2.2rem;
+      padding: 1rem 2.4rem;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+      transition: transform .15s ease, box-shadow .2s ease;
     }
 
     .buttons a:hover{
       transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.28);
     }
 
     /* FOOTER */
     footer{
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 3.5rem 1rem;
       font-size: 0.9rem;
       opacity: 0.85;
     }
@@ -123,6 +130,14 @@
     @media(max-width: 600px){
       nav{
         display: none;
+      }
+
+      .logo img{
+        height: 48px;
+      }
+
+      .hero-logo{
+        max-width: 320px;
       }
     }
   </style>
