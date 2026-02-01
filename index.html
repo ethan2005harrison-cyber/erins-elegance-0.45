@@ -1,214 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>erin’s elegance</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>erin’s elegance</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-:root{
-  --vogue:#565D4F;
-  --vogue-dark:#4b5246;
-  --champagne:#E6D5B8;
-  --cream:#F7F3EA;
-  --charcoal:#2C2C2C;
-  --line:rgba(230,213,184,.35);
-}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap');
 
-*{box-sizing:border-box}
-html,body{height:100%}
+    :root{
+      --vogue:#565D4F;
+      --vogue-dark:#4b5246;
+      --champagne:#E6D5B8;
+      --cream:#F7F3EA;
+      --charcoal:#2C2C2C;
+    }
 
-body{
-  margin:0;
-  font-family:'Open Sans',sans-serif;
-  background: var(--vogue);
-  color: var(--cream);
-  overflow-x:hidden;
-}
+    *{box-sizing:border-box}
+    html,body{height:100%}
 
-/* ================= HEADER ================= */
+    body{
+      margin:0;
+      font-family:'Open Sans',sans-serif;
+      background: var(--vogue);
+      color: var(--cream);
+      overflow-x:hidden;
+    }
 
-header{
-  background: rgba(247,243,234,0.08);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 20;
-}
+    /* HEADER */
+    header{
+      background: rgba(247,243,234,0.08);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 20;
+    }
 
-.header-container{
-  max-width: 1200px;
-  margin: 0 auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding: 1.1rem 2rem;
-}
+    .header-container{
+      max-width: 1200px;
+      margin: 0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 1.1rem 2rem;
+    }
 
-/* LOGO IMAGE */
-.logo img{
-  height: 48px;            /* 👈 main size */
-  width: auto;
-  display: block;
-}
+    .logo{
+      font-family:'Playfair Display',serif;
+      font-size:1.6rem;
+      font-weight:600;
+      color: var(--cream);
+    }
 
-@media (max-width:520px){
-  .logo img{
-    height: 40px;
-  }
-}
+    /* MENU */
+    .menu{ position:relative; }
 
-/* ================= MENU ================= */
+    .menu-btn{
+      background: rgba(230,213,184,.15);
+      color: var(--cream);
+      border: 1px solid rgba(230,213,184,.35);
+      border-radius: 999px;
+      padding: .6rem 1rem;
+      font-weight:600;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+    }
 
-.menu{ position:relative; }
+    .menu-panel{
+      position:absolute;
+      right:0;
+      top: calc(100% + .6rem);
+      background: rgba(22,24,21,.72);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(230,213,184,.28);
+      border-radius: 16px;
+      min-width: 220px;
+      padding:.6rem;
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+      opacity:0;
+      transform: translateY(-6px);
+      pointer-events:none;
+      transition:.2s;
+    }
 
-.menu-btn{
-  background: rgba(230,213,184,.15);
-  color: var(--cream);
-  border: 1px solid rgba(230,213,184,.35);
-  border-radius: 999px;
-  padding: .6rem 1rem;
-  font-weight:600;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:.6rem;
-}
+    .menu-panel.open{
+      opacity:1;
+      transform: translateY(0);
+      pointer-events:auto;
+    }
 
-.menu-panel{
-  position:absolute;
-  right:0;
-  top: calc(100% + .6rem);
-  background: rgba(22,24,21,.72);
-  backdrop-filter: blur(10px);
-  border:1px solid rgba(230,213,184,.28);
-  border-radius: 16px;
-  min-width: 220px;
-  padding:.6rem;
-  box-shadow: 0 12px 28px rgba(0,0,0,.28);
-  opacity:0;
-  transform: translateY(-6px);
-  pointer-events:none;
-}
+    .menu-panel a{
+      display:block;
+      padding:.75rem .9rem;
+      border-radius: 12px;
+      text-decoration:none;
+      color: var(--cream);
+      font-weight:600;
+    }
 
-.menu-panel.open{
-  opacity:1;
-  transform: translateY(0);
-  pointer-events:auto;
-}
+    /* HERO */
+    main{
+      max-width: 900px;
+      margin: 12rem auto 4rem;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
 
-.menu-panel a{
-  display:block;
-  padding:.75rem .9rem;
-  border-radius: 12px;
-  text-decoration:none;
-  color: var(--cream);
-  font-weight:600;
-}
+    .hero-logo{
+      width: min(620px, 90vw);
+      height: auto;
+      margin: 0 auto 1.2rem;
+      display:block;
+      opacity:0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards .3s;
+    }
 
-/* ================= MAIN ================= */
+    .lead{
+      font-size: 1.1rem;
+      margin-bottom: 2.2rem;
+      opacity:0;
+      transform: translateY(-20px);
+      animation: fadeUp 1s forwards .55s;
+    }
 
-main{
-  max-width: 800px;
-  margin: 12rem auto 4rem;
-  padding: 0 2rem;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
+    .actions{
+      display:flex;
+      gap:.8rem;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
 
-/* HERO LOGO */
-.hero-logo{
-  margin-bottom: 1.2rem;
-}
+    button{
+      background-color: var(--champagne);
+      color: var(--charcoal);
+      border: none;
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+    }
 
-.hero-logo img{
-  height: 110px;           /* 👈 big hero logo */
-  width: auto;
-}
+    button:hover{
+      transform: translateY(-2px);
+    }
 
-@media (max-width:520px){
-  .hero-logo img{
-    height: 90px;
-  }
-}
+    /* BACKGROUND */
+    .bg-stage{
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events:none;
+    }
 
-p.lead{
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: var(--cream);
-}
+    .bg-tint{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
+        radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
+        var(--vogue);
+    }
 
-/* ================= BUTTONS ================= */
+    @keyframes fadeUp{
+      to{ opacity:1; transform: translateY(0); }
+    }
 
-.actions{
-  display:flex;
-  gap:.8rem;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-button{
-  background-color: var(--champagne);
-  color: var(--charcoal);
-  border: none;
-  padding: 1rem 2.2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight:600;
-}
-
-/* ================= BACKGROUND ================= */
-
-.bg-stage{
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.bg-tint{
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(1100px 760px at 18% 22%, rgba(98,106,91,0.36) 0%, transparent 60%),
-    radial-gradient(1000px 700px at 82% 78%, rgba(75,82,70,0.42) 0%, transparent 55%),
-    var(--vogue);
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.95rem;
-  color: var(--cream);
-  opacity: 0.9;
-}
-</style>
+    /* FOOTER */
+    footer{
+      text-align:center;
+      padding:2rem;
+      font-size:.95rem;
+      opacity:.9;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
   <div class="header-container">
-    <div class="logo">
-      <img src="assets/Logo.png" alt="Erin’s Elegance logo">
-    </div>
+    <div class="logo">erin’s elegance</div>
 
     <div class="menu">
       <button class="menu-btn" id="menuButton">
-        <span>Menu</span>
-        ☰
+        Menu
       </button>
 
       <nav id="primaryMenu" class="menu-panel">
@@ -227,9 +216,7 @@ footer{
 </div>
 
 <main>
-  <div class="hero-logo">
-    <img src="assets/Logo.png" alt="Erin’s Elegance logo">
-  </div>
+  <img src="assets/Logo.png" alt="Erin’s Elegance logo" class="hero-logo">
 
   <p class="lead">Elegant Nails, Effortless Beauty</p>
 
@@ -246,11 +233,18 @@ footer{
 </footer>
 
 <script>
-(function(){
   const btn = document.getElementById('menuButton');
   const panel = document.getElementById('primaryMenu');
-  btn.addEventListener('click', ()=> panel.classList.toggle('open'));
-})();
+
+  btn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if(!panel.contains(e.target) && e.target !== btn){
+      panel.classList.remove('open');
+    }
+  });
 </script>
 
 </body>
