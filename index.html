@@ -47,16 +47,9 @@
       max-width: 1200px;
       margin: 0 auto;
       display:flex;
-      justify-content:space-between;
+      justify-content:flex-end;
       align-items:center;
       padding: 1.1rem 2rem;
-    }
-
-    .logo{
-      font-family:'Playfair Display',serif;
-      font-size:1.6rem;
-      font-weight:600;
-      color: var(--cream);
     }
 
     /* MENU */
@@ -120,19 +113,11 @@
     .hero-logo{
       width: min(620px, 90vw);
       height: auto;
-      margin: 0 auto 1.2rem;
+      margin: 0 auto 2.4rem;
       display:block;
       opacity:0;
       transform: translateY(-20px);
       animation: fadeUp 1s forwards .3s;
-    }
-
-    .lead{
-      font-size: 1.1rem;
-      margin-bottom: 2.2rem;
-      opacity:0;
-      transform: translateY(-20px);
-      animation: fadeUp 1s forwards .55s;
     }
 
     .actions{
@@ -193,12 +178,8 @@
 
 <header>
   <div class="header-container">
-    <div class="logo">erin’s elegance</div>
-
     <div class="menu">
-      <button class="menu-btn" id="menuButton">
-        Menu
-      </button>
+      <button class="menu-btn" id="menuButton">Menu</button>
 
       <nav id="primaryMenu" class="menu-panel">
         <a href="index.html">Home</a>
@@ -217,8 +198,6 @@
 
 <main>
   <img src="assets/Logo.png" alt="Erin’s Elegance logo" class="hero-logo">
-
-  <p class="lead">Elegant Nails, Effortless Beauty</p>
 
   <div class="actions">
     <button onclick="location.href='services.html'">View Services</button>
