@@ -50,28 +50,11 @@
       display:flex;
       justify-content:flex-end;
       align-items:center;
-      padding: .8rem 1.5rem;
+      padding: .6rem 1.2rem;
     }
 
     /* MENU */
     .menu{ position:relative; }
-
-    .menu-btn{
-      background: transparent;
-      color: var(--green);
-      border: 1px solid var(--gold);
-      border-radius: 999px;
-      padding: .5rem 1.1rem;
-      font-size: .95rem;
-      font-weight:600;
-      cursor:pointer;
-      box-shadow:none;
-    }
-
-    .menu-btn:hover{
-      background: rgba(184,147,90,.12);
-      transform:none;
-    }
 
     .menu-panel{
       position:absolute;
@@ -80,7 +63,7 @@
       background: var(--cream);
       border:1px solid var(--gold);
       border-radius: 16px;
-      min-width: 220px;
+      min-width: 210px;
       padding:.5rem;
       box-shadow: 0 12px 28px rgba(31,53,36,.15);
       opacity:0;
@@ -97,11 +80,12 @@
 
     .menu-panel a{
       display:block;
-      padding:.7rem .9rem;
+      padding:.65rem .9rem;
       border-radius: 12px;
       text-decoration:none;
       color: var(--green);
       font-weight:600;
+      font-size:.95rem;
     }
 
     .menu-panel a:hover{
@@ -116,16 +100,27 @@
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding: 4.5rem 1.5rem 1rem;
+      padding: 3.5rem 1.2rem .5rem;
     }
 
     .hero-logo{
-      width: min(460px, 85vw);
-      max-height: 48vh;
+      width: min(360px, 80vw);
+      max-height: 38vh;
       object-fit: contain;
       height: auto;
-      margin: 0 auto 1.2rem;
+      margin: 0 auto .8rem;
       display:block;
+
+      /* softly fades the very edges of the image so no box shows */
+      -webkit-mask-image:
+        linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
+        linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
+        linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+      mask-composite: intersect;
+
       opacity:0;
       transform: translateY(-20px);
       animation: fadeUp 1s forwards .3s;
@@ -133,18 +128,19 @@
 
     .actions{
       display:flex;
-      gap:.7rem;
+      gap:.6rem;
       justify-content:center;
       flex-wrap:wrap;
     }
 
+    /* ALL BUTTONS (including Menu) */
     button{
       background-color: var(--green);
       color: var(--cream);
       border: 1px solid var(--green);
-      padding: .8rem 1.8rem;
+      padding: .65rem 1.4rem;
       border-radius: 50px;
-      font-size: .95rem;
+      font-size: .9rem;
       cursor: pointer;
       font-weight:600;
       box-shadow:0 4px 14px rgba(31,53,36,.18);
@@ -164,13 +160,13 @@
     /* FOOTER */
     footer{
       text-align:center;
-      padding:.8rem 1rem 1rem;
-      font-size:.85rem;
+      padding:.6rem 1rem .8rem;
+      font-size:.8rem;
       color: var(--green);
       opacity:.85;
     }
 
-    footer p{ margin:.15rem 0; }
+    footer p{ margin:.1rem 0; }
   </style>
 </head>
 
